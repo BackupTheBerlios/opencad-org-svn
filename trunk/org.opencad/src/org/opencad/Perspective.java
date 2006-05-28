@@ -11,10 +11,7 @@ public class Perspective implements IPerspectiveFactory {
 		layout.setEditorAreaVisible(false);
 		
 		layout.addStandaloneView(NavigationView.ID,  false, IPageLayout.LEFT, 0.25f, editorArea);
-		IFolderLayout folder = layout.createFolder("messages", IPageLayout.TOP, 0.5f, editorArea);
-		folder.addPlaceholder(View.ID + ":*");
-		folder.addView(View.ID);
-		
+		layout.addView("org.eclipse.swt.examples.openglview.view", IPageLayout.LEFT, 0.5f, editorArea);
 		layout.getViewLayout(NavigationView.ID).setCloseable(false);
 	}
 }

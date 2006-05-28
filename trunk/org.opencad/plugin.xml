@@ -93,5 +93,15 @@
          </property>
       </product>
    </extension>
+      <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            category="org.eclipse.swt.opengl.examples"
+            class="org.eclipse.swt.examples.openglview.view.GLView"
+            icon="icons/sample2.gif"
+            id="org.eclipse.swt.examples.openglview.view"
+            name="%viewName"/>
+   </extension>
 
 </plugin>

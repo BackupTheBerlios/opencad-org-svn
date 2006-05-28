@@ -31,6 +31,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     private IWorkbenchAction aboutAction;
     private IWorkbenchAction newWindowAction;
     private OpenViewAction openViewAction;
+    private OpenViewAction xopenViewAction;
     private Action messagePopupAction;
     
 
@@ -56,6 +57,9 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         
         openViewAction = new OpenViewAction(window, "Open Another Message View", View.ID);
         register(openViewAction);
+
+        xopenViewAction = new OpenViewAction(window, "Open Open GL Chart", "org.eclipse.swt.examples.openglview.view");
+        register(xopenViewAction);
         
         messagePopupAction = new MessagePopupAction("Open Message", window);
         register(messagePopupAction);
@@ -75,6 +79,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         fileMenu.add(new Separator());
         fileMenu.add(messagePopupAction);
         fileMenu.add(openViewAction);
+        fileMenu.add(xopenViewAction);
         fileMenu.add(new Separator());
         fileMenu.add(exitAction);
         
@@ -86,6 +91,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         IToolBarManager toolbar = new ToolBarManager(SWT.FLAT | SWT.RIGHT);
         coolBar.add(new ToolBarContributionItem(toolbar, "main"));   
         toolbar.add(openViewAction);
+        toolbar.add(xopenViewAction);
         toolbar.add(messagePopupAction);
     }
 }

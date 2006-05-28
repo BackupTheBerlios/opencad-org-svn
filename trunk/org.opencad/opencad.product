@@ -4,7 +4,7 @@
 <product name="OpenCad.org" id="org.opencad.product" application="org.opencad.application" useFeatures="false">
 
    <aboutInfo>
-      <image path="/org.opencad/opencad-logo.gif"/>
+      <image path="opencad-logo.gif"/>
       <text>
          %aboutText
       </text>
@@ -12,18 +12,7 @@
 
    <configIni use="default"/>
 
-   <launcherArgs>
-   </launcherArgs>
-
    <windowImages i16="icons/sample2.gif"/>
-
-
-   <launcher name="opencad.org">
-      <solaris/>
-      <win useIco="false">
-         <bmp/>
-      </win>
-   </launcher>
 
 
    <plugins>
@@ -40,6 +29,8 @@
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.jface"/>
+      <plugin id="org.eclipse.opengl"/>
+      <plugin id="org.eclipse.opengl.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>

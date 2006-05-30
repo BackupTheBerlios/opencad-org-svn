@@ -37,8 +37,7 @@ public class Corner extends Model {
 	 * 
 	 * @see org.opencad.model.Model#drawModel()
 	 */
-	@Override
-	void drawModel() {
+	public void drawModel() {
 		// TODO Auto-generated method stub
 	}
 	/*
@@ -46,29 +45,20 @@ public class Corner extends Model {
 	 * 
 	 * @see org.opencad.model.Model#drawSchematic()
 	 */
-	@Override
-	void drawSchematic() {
+	public void drawSchematic() {
+		GL.glColor3d(0d, 1d, 0d);
 		GL.glPushMatrix();
 		GL.glTranslated(x, y, 0);
 		{
 			GL.glBegin(GL.GL_QUADS);
 			{
-				GL.glVertex2d(-1.0d, +1.0d);
-				GL.glVertex2d(+1.0d, +1.0d);
-				GL.glVertex2d(+1.0d, -1.0d);
-				GL.glVertex2d(-1.0d, -1.0d);
+				GL.glVertex2d(-0.1d, +0.1d);
+				GL.glVertex2d(+0.1d, +0.1d);
+				GL.glVertex2d(+0.1d, -0.1d);
+				GL.glVertex2d(-0.1d, -0.1d);
 			}
 			GL.glEnd();
 		}
 		GL.glPopMatrix();
-	}
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.opencad.model.Model#initGL()
-	 */
-	@Override
-	void initGL() {
-		// TODO Auto-generated method stub
 	}
 }

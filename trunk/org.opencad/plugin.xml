@@ -44,16 +44,23 @@
                name="aboutImage"
                value="opencad-logo.gif">
          </property>
+         <property
+               name="windowImages"
+               value="icons/sample2.gif"/>
       </product>
    </extension>
       <extension
          point="org.eclipse.ui.views">
       <view
             allowMultiple="true"
-            category="org.eclipse.swt.opengl.examples"
-            class="org.opencad.scene.PerspectiveGLView"
-            id="org.opencad.perspective"
-            name="Perspective"/>
+            category="org.opencad.views.opengl"
+            class="org.opencad.scene.DefaultGLView"
+            id="org.opencad.views.modelling"
+            name="Modelling"/>
+      <view
+            class="org.opencad.scene.PreviewGLView"
+            id="org.opencad.views.preview"
+            name="Preview"/>
    </extension>
 
 </plugin>

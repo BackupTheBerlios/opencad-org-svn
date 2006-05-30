@@ -15,7 +15,6 @@ public abstract class Model {
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
-	abstract void drawModel();
-	abstract void drawSchematic();
-	abstract void initGL();
+	abstract public void drawModel();
+	abstract public void drawSchematic();
 }

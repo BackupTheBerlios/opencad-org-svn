@@ -26,9 +26,9 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	// when fillActionBars is called with FILL_PROXY.
 	private IWorkbenchAction exitAction;
 	private IWorkbenchAction aboutAction;
-	private OpenViewAction xopenViewAction;
-	private OpenViewAction yopenViewAction;
-
+	private AddCornerAction addCornerAction;
+	private AddWallAction addWallAction;
+	
 	public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
 	}
@@ -42,10 +42,10 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		register(exitAction);
 		aboutAction = ActionFactory.ABOUT.create(window);
 		register(aboutAction);
-		xopenViewAction = new OpenViewAction(window, "Perspective", "org.opencad.perspective");
-		register(xopenViewAction);
-		yopenViewAction = new OpenViewAction(window, "Ortho", "org.opencad.ortho");
-		register(yopenViewAction);
+		addCornerAction = new AddCornerAction();
+		register(addCornerAction);
+		addWallAction = new AddWallAction();
+		register(addWallAction);
 	}
 	protected void fillMenuBar(IMenuManager menuBar) {
 		MenuManager fileMenu = new MenuManager("&File", IWorkbenchActionConstants.M_FILE);
@@ -55,8 +55,8 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		menuBar.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
 		menuBar.add(helpMenu);
 		// File
-		fileMenu.add(xopenViewAction);
-		fileMenu.add(yopenViewAction);
+		fileMenu.add(addCornerAction);
+		fileMenu.add(addWallAction);
 		fileMenu.add(new Separator());
 		fileMenu.add(exitAction);
 		// Help
@@ -65,7 +65,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	protected void fillCoolBar(ICoolBarManager coolBar) {
 		IToolBarManager toolbar = new ToolBarManager(SWT.FLAT | SWT.RIGHT);
 		coolBar.add(new ToolBarContributionItem(toolbar, "main"));
-		toolbar.add(xopenViewAction);
-		toolbar.add(yopenViewAction);
+		toolbar.add(addCornerAction);
+		toolbar.add(addWallAction);
 	}
 }

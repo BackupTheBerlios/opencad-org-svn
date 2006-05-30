@@ -37,8 +37,8 @@ public class Wall extends Model {
 	 * 
 	 * @see org.opencad.model.Model#drawModel()
 	 */
-	@Override
-	void drawModel() {
+	public void drawModel() {
+		GL.glColor3d(0.8d, 0.8d, 0.8d);
 		GL.glPushMatrix();
 		GL.glTranslated(alpha.getX(), alpha.getY(), 0);
 		GL.glRotated(getAngle(), 0d, 0d, 1d);
@@ -72,8 +72,8 @@ public class Wall extends Model {
 	 * 
 	 * @see org.opencad.model.Model#drawSchematic()
 	 */
-	@Override
-	void drawSchematic() {
+	public void drawSchematic() {
+		GL.glColor3d(1d, 0d, 0d);
 		GL.glPushMatrix();
 		GL.glTranslated(alpha.getX(), alpha.getY(), 0);
 		GL.glRotated(getAngle(), 0d, 0d, 1d);
@@ -81,22 +81,13 @@ public class Wall extends Model {
 			GL.glBegin(GL.GL_QUADS);
 			{
 				double length = getLength();
-				GL.glVertex2d(-1.0d, +1.0d);
-				GL.glVertex2d(length - 1.0d, +1.0d);
-				GL.glVertex2d(+1.0d, -1.0d);
-				GL.glVertex2d(length - 1.0d, -1.0d);
+				GL.glVertex2d(+0.1d, +0.1d);
+				GL.glVertex2d(length - 0.1d, +0.1d);
+				GL.glVertex2d(length - 0.1d, -0.1d);
+				GL.glVertex2d(+0.1d, -0.1d);
 			}
 			GL.glEnd();
 		}
 		GL.glPopMatrix();
-	}
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.opencad.model.Model#initGL()
-	 */
-	@Override
-	void initGL() {
-		// TODO Auto-generated method stub
 	}
 }

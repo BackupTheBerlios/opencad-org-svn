@@ -20,53 +20,10 @@
       </perspective>
    </extension>
    <extension
-         point="org.eclipse.ui.views">
-      <view
-            name="Message"
-            allowMultiple="true"
-            icon="icons/sample2.gif"
-            class="org.opencad.View"
-            id="org.opencad.view">
-      </view>
-      <view
-            name="Mailboxes"
-            allowMultiple="true"
-            icon="icons/sample3.gif"
-            class="org.opencad.NavigationView"
-            id="org.opencad.navigationView">
-      </view>
-   </extension>
-   <extension
          point="org.eclipse.ui.commands">
-      <category
-            name="Mail"
-            id="org.opencad.category">
-      </category>
-      <command
-            name="Open Mailbox"
-            description="Opens a mailbox"
-            categoryId="org.opencad.category"
-            id="org.opencad.open">
-      </command>
-      <command
-            name="Open Message Dialog"
-            description="Open a message dialog"
-            categoryId="org.opencad.category"
-            id="org.opencad.openMessage">
-      </command>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
-      <key
-            commandId="org.opencad.open"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="CTRL+2">
-      </key>
-      <key
-            commandId="org.opencad.openMessage"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="CTRL+3">
-      </key>
       <key
             commandId="org.eclipse.ui.file.exit"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
@@ -84,10 +41,6 @@
                value="%aboutText">
          </property>
          <property
-               name="windowImages"
-               value="icons/sample2.gif">
-         </property>
-         <property
                name="aboutImage"
                value="opencad-logo.gif">
          </property>
@@ -98,10 +51,9 @@
       <view
             allowMultiple="true"
             category="org.eclipse.swt.opengl.examples"
-            class="org.eclipse.swt.examples.openglview.view.GLView"
-            icon="icons/sample2.gif"
-            id="org.eclipse.swt.examples.openglview.view"
-            name="%viewName"/>
+            class="org.opencad.scene.PerspectiveGLView"
+            id="org.opencad.perspective"
+            name="Perspective"/>
    </extension>
 
 </plugin>

@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %win32FragmentName
+Bundle-SymbolicName: org.eclipse.opengl.win32.x86
+Bundle-Version: 0.5.0
+Bundle-Vendor: %providerName
+Fragment-Host: org.eclipse.opengl;bundle-version="0.5.0"
+Bundle-Localization: plugin
+Eclipse-PlatformFilter: (& (osgi.os=win32) (osgi.arch=x86))

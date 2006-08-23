@@ -15,6 +15,8 @@ import org.eclipse.opengl.GLU;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Rectangle;
@@ -35,8 +37,25 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class GLEditor extends EditorPart {
-	
+
 	GLCanvas glCanvas;
+
+	/**
+	 * IN GL Units, the top coordinate that is to be displayed at the top of the
+	 * viewport
+	 */
+	double topAnchor;
+
+	/**
+	 * IN GL Units, the left coordinate thate is to be displayed at the left of
+	 * the viewport
+	 */
+	double leftAnchor;
+
+	/**
+	 * In GL Units, the exact size of the drawing shown on screen.
+	 */
+	double scale;
 
 	public GLEditor() {
 		super();
@@ -57,23 +76,22 @@ public class GLEditor extends EditorPart {
 		// TODO Auto-generated method stub
 
 	}
-	
-	float x = 0;
-	
-	void renderGLCanvas() {
-	    GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-	    GL.glLoadIdentity();
-	    GL.glTranslatef(0.0f, 0.0f, -6.0f);
-	    GL.glRotatef(x++, 1, 0, 0);
-	    GL.glBegin(GL.GL_QUADS);
-	    GL.glVertex3f(-1.0f, 1.0f, 0.0f);
-	    GL.glVertex3f(1.0f, 1.0f, 0.0f);
-	    GL.glVertex3f(1.0f, -1.0f, 0.0f);
-	    GL.glVertex3f(-1.0f, -1.0f, 0.0f);
-	    GL.glEnd();
+
+	void glDraw() {
+		GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+		GL.glLoadIdentity();
+
+		GL.glBegin(GL.GL_QUADS);
+		{
+			GL.glVertex3f(-1.0f, 1.0f, 0.0f);
+			GL.glVertex3f(1.0f, 1.0f, 0.0f);
+			GL.glVertex3f(1.0f, -1.0f, 0.0f);
+			GL.glVertex3f(-1.0f, -1.0f, 0.0f);
+		}
+		GL.glEnd();
 	}
 
-	void initGLCanvas() {
+	void glInit() {
 		GL.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		GL.glColor3f(0.0f, 0.0f, 0.0f);
 		GL.glClearDepth(1.0f);
@@ -81,15 +99,24 @@ public class GLEditor extends EditorPart {
 		GL.glHint(GL.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
 	}
 
-	void resizeGLCanvas() {
-		Rectangle rect = glCanvas.getClientArea();
-		int width = rect.width;
-		int height = Math.max(rect.height, 1);
-		GL.glViewport(0, 0, width, height);
+	void setupProjection(int width, int height) {
+		int reference = Math.max(width, height);
+		double px2gl = scale / reference;
+		double left = leftAnchor;
+		double right = left + width * px2gl;
+		double bottom = topAnchor;
+		double top = bottom + height * px2gl;
+		GLU.gluOrtho2D(left, right, bottom, top);
+	}
+
+	void handleResize() {
+		Rectangle size = glCanvas.getClientArea();
 		GL.glMatrixMode(GL.GL_PROJECTION);
 		GL.glLoadIdentity();
-		float aspect = (float) width / (float) height;
-		GLU.gluPerspective(45.0f, aspect, 0.5f, 400.0f);
+		{
+			GL.glViewport(0, 0, size.width, size.height);
+			setupProjection(size.width, size.height);
+		}
 		GL.glMatrixMode(GL.GL_MODELVIEW);
 		GL.glLoadIdentity();
 	}
@@ -101,7 +128,6 @@ public class GLEditor extends EditorPart {
 					.getContents();
 			DocumentBuilder parser = factory.newDocumentBuilder();
 			Document document = parser.parse(inputStream);
-			//
 			Element model = document.getDocumentElement();
 			NodeList anchors = model.getElementsByTagName("anchor");
 			for (int i = 0; i < anchors.getLength(); i++) {
@@ -126,7 +152,7 @@ public class GLEditor extends EditorPart {
 			throws PartInitException {
 		setSite(site);
 		setInput(input);
-		parseFile(input);
+		// parseFile(input);
 	}
 
 	@Override
@@ -140,7 +166,29 @@ public class GLEditor extends EditorPart {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	void doDraw() {
+		synchronized (GL.class) {
+			glCanvas.setCurrent();
+			glDraw();
+			glCanvas.swapBuffers();
+		}
+	}
+	
+	void doResize() {
+		synchronized (GL.class) {
+			glCanvas.setCurrent();
+			handleResize();
+		}
+	}
 
+	void doInit() {
+		synchronized (GL.class) {
+			glCanvas.setCurrent();
+			glInit();
+		}
+	}
+	
 	@Override
 	public void createPartControl(Composite parent) {
 		GLData data = new GLData();
@@ -148,19 +196,41 @@ public class GLEditor extends EditorPart {
 		glCanvas = new GLCanvas(parent, SWT.NO_BACKGROUND, data);
 		glCanvas.addPaintListener(new PaintListener() {
 			public void paintControl(PaintEvent e) {
-				glCanvas.setCurrent();
-				renderGLCanvas();
-				glCanvas.swapBuffers();
+				doDraw();
+			}
+		});
+		glCanvas.addKeyListener(new KeyListener() {
+			public void keyPressed(KeyEvent e) {
+				switch (e.keyCode) {
+				case SWT.ARROW_LEFT:
+					leftAnchor -= 0.1;
+					break;
+				case SWT.ARROW_RIGHT:
+					leftAnchor += 0.1;
+					break;
+				case SWT.ARROW_UP:
+					topAnchor += 0.1;
+					break;
+				case SWT.ARROW_DOWN:
+					topAnchor -= 0.1;
+					break;
+				}
+				doResize();
+				doDraw();
+			}
+
+			public void keyReleased(KeyEvent e) {
 			}
 		});
 		glCanvas.addControlListener(new ControlAdapter() {
 			public void controlResized(ControlEvent e) {
-				glCanvas.setCurrent();
-				resizeGLCanvas();
+				doResize();
 			}
 		});
-		glCanvas.setCurrent();
-		initGLCanvas();
+		topAnchor = -2;
+		leftAnchor = -2;
+		scale = 4;
+		doInit();
 	}
 
 	@Override

@@ -16,12 +16,18 @@ import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.MouseTrackListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.opengl.GLCanvas;
 import org.eclipse.swt.opengl.GLData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
@@ -50,9 +56,15 @@ public class GLEditor extends EditorPart {
 	double leftAnchor;
 
 	/**
-	 * In GL Units, the exact size of the drawing shown on screen.
+	 * In GL Units, max(width, height) of the drawing shown on screen.
 	 */
 	double scale;
+
+	private int zoomSpeed;
+
+	private int panSpeed;
+
+	protected double maxScale;
 
 	public GLEditor() {
 		super();
@@ -78,6 +90,37 @@ public class GLEditor extends EditorPart {
 		GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 		GL.glLoadIdentity();
 
+		GL.glColor3d(1., 0., 0.);
+		GL.glBegin(GL.GL_QUADS);
+		{
+			GL.glVertex3f(-1.0f, 1.0f, 0.0f);
+			GL.glVertex3f(1.0f, 1.0f, 0.0f);
+			GL.glVertex3f(1.0f, -1.0f, 0.0f);
+			GL.glVertex3f(-1.0f, -1.0f, 0.0f);
+		}
+		GL.glEnd();
+		GL.glTranslatef(1.5f, 0f, 0.4f);
+		GL.glColor3d(1., 1., 0.);
+		GL.glBegin(GL.GL_QUADS);
+		{
+			GL.glVertex3f(-1.0f, 1.0f, 0.0f);
+			GL.glVertex3f(1.0f, 1.0f, 0.0f);
+			GL.glVertex3f(1.0f, -1.0f, 0.0f);
+			GL.glVertex3f(-1.0f, -1.0f, 0.0f);
+		}
+		GL.glEnd();
+		GL.glTranslatef(1.5f, 0f, -0.2f);
+		GL.glColor3d(0., 1., 0.);
+		GL.glBegin(GL.GL_QUADS);
+		{
+			GL.glVertex3f(-1.0f, 1.0f, 0.0f);
+			GL.glVertex3f(1.0f, 1.0f, 0.0f);
+			GL.glVertex3f(1.0f, -1.0f, 0.0f);
+			GL.glVertex3f(-1.0f, -1.0f, 0.0f);
+		}
+		GL.glEnd();
+		GL.glTranslatef(0f, 1.5f, 0.1f);
+		GL.glColor3d(0., 0., 1.);
 		GL.glBegin(GL.GL_QUADS);
 		{
 			GL.glVertex3f(-1.0f, 1.0f, 0.0f);
@@ -96,23 +139,30 @@ public class GLEditor extends EditorPart {
 		GL.glHint(GL.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
 	}
 
-	void setupProjection(int width, int height) {
-		int reference = Math.max(width, height);
-		double px2gl = scale / reference;
-		double left = leftAnchor;
-		double right = left + width * px2gl;
-		double bottom = topAnchor;
-		double top = bottom + height * px2gl;
+	void setupProjection() {
+		Point size = glCanvas.getSize();
+		double px2gl = px2gl();
+		double glX = size.x * px2gl;
+		double glY = size.y * px2gl;
+		double left = leftAnchor - glX / 2;
+		double right = left + glX;
+		double bottom = topAnchor - glY / 2;
+		double top = bottom + glY;
 		GLU.gluOrtho2D(left, right, bottom, top);
+	}
+	
+	double px2gl() {
+		Point size = glCanvas.getSize();
+		return scale / Math.min(size.x, size.y);
 	}
 
 	void handleResize() {
-		Rectangle size = glCanvas.getClientArea();
+		Point size = glCanvas.getSize();
 		GL.glMatrixMode(GL.GL_PROJECTION);
 		GL.glLoadIdentity();
 		{
-			GL.glViewport(0, 0, size.width, size.height);
-			setupProjection(size.width, size.height);
+			GL.glViewport(0, 0, size.x, size.y);
+			setupProjection();
 		}
 		GL.glMatrixMode(GL.GL_MODELVIEW);
 		GL.glLoadIdentity();
@@ -163,7 +213,7 @@ public class GLEditor extends EditorPart {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	void doDraw() {
 		synchronized (GL.class) {
 			glCanvas.setCurrent();
@@ -171,7 +221,7 @@ public class GLEditor extends EditorPart {
 			glCanvas.swapBuffers();
 		}
 	}
-	
+
 	void doResize() {
 		synchronized (GL.class) {
 			glCanvas.setCurrent();
@@ -186,6 +236,11 @@ public class GLEditor extends EditorPart {
 		}
 	}
 	
+	void doRefresh() {
+		doResize();
+		doDraw();		
+	}
+
 	@Override
 	public void createPartControl(Composite parent) {
 		GLData data = new GLData();
@@ -196,24 +251,31 @@ public class GLEditor extends EditorPart {
 				doDraw();
 			}
 		});
+		glCanvas.addListener(SWT.MouseWheel, new Listener() {
+			public void handleEvent(Event event) {
+				double factor = (double) event.count / zoomSpeed;
+				scale = scale * (1 + factor);
+				doRefresh();
+			}
+		});
 		glCanvas.addKeyListener(new KeyListener() {
 			public void keyPressed(KeyEvent e) {
+				double nudge = panSpeed * px2gl();
 				switch (e.keyCode) {
 				case SWT.ARROW_LEFT:
-					leftAnchor -= 0.1;
+					leftAnchor -= nudge;
 					break;
 				case SWT.ARROW_RIGHT:
-					leftAnchor += 0.1;
+					leftAnchor += nudge;
 					break;
 				case SWT.ARROW_UP:
-					topAnchor += 0.1;
+					topAnchor += nudge;
 					break;
 				case SWT.ARROW_DOWN:
-					topAnchor -= 0.1;
+					topAnchor -= nudge;
 					break;
 				}
-				doResize();
-				doDraw();
+				doRefresh();
 			}
 
 			public void keyReleased(KeyEvent e) {
@@ -224,14 +286,18 @@ public class GLEditor extends EditorPart {
 				doResize();
 			}
 		});
-		topAnchor = -2;
-		leftAnchor = -2;
+		topAnchor = 0;
+		leftAnchor = 0;
 		scale = 4;
+		zoomSpeed = 10;
+		panSpeed = 10;
+		maxScale = 0.5;
 		doInit();
 	}
 
 	@Override
 	public void setFocus() {
+		glCanvas.setFocus();
 	}
 
 }

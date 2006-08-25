@@ -64,6 +64,8 @@ public class GLEditor extends EditorPart {
 
 	private int panSpeed;
 
+	protected double minScale;
+
 	protected double maxScale;
 
 	public GLEditor() {
@@ -139,11 +141,10 @@ public class GLEditor extends EditorPart {
 		GL.glHint(GL.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
 	}
 
-	void setupProjection() {
-		Point size = glCanvas.getSize();
-		double px2gl = px2gl();
-		double glX = size.x * px2gl;
-		double glY = size.y * px2gl;
+	void setupProjection(Rectangle size) {
+		double px2gl = px2gl(size);
+		double glX = size.width * px2gl;
+		double glY = size.height * px2gl;
 		double left = leftAnchor - glX / 2;
 		double right = left + glX;
 		double bottom = topAnchor - glY / 2;
@@ -151,18 +152,17 @@ public class GLEditor extends EditorPart {
 		GLU.gluOrtho2D(left, right, bottom, top);
 	}
 	
-	double px2gl() {
-		Point size = glCanvas.getSize();
-		return scale / Math.min(size.x, size.y);
+	double px2gl(Rectangle size) {
+		return scale / Math.min(size.width, size.height);
 	}
 
 	void handleResize() {
-		Point size = glCanvas.getSize();
+		Rectangle size = glCanvas.getClientArea();
 		GL.glMatrixMode(GL.GL_PROJECTION);
 		GL.glLoadIdentity();
 		{
-			GL.glViewport(0, 0, size.x, size.y);
-			setupProjection();
+			GL.glViewport(0, 0, size.width, size.height);
+			setupProjection(size);
 		}
 		GL.glMatrixMode(GL.GL_MODELVIEW);
 		GL.glLoadIdentity();
@@ -254,13 +254,20 @@ public class GLEditor extends EditorPart {
 		glCanvas.addListener(SWT.MouseWheel, new Listener() {
 			public void handleEvent(Event event) {
 				double factor = (double) event.count / zoomSpeed;
-				scale = scale * (1 + factor);
+				double newScale = scale * (1 + factor);
+				if (newScale > maxScale || newScale < minScale) return;
+				Rectangle size = glCanvas.getClientArea();
+				double oldpx2gl = px2gl(size);
+				scale = newScale;
+				double dpx2gl = px2gl(size) - oldpx2gl;
+				leftAnchor -= (event.x - (double) size.width / 2) * dpx2gl;
+				topAnchor += (event.y - (double) size.height / 2) * dpx2gl;
 				doRefresh();
 			}
 		});
 		glCanvas.addKeyListener(new KeyListener() {
 			public void keyPressed(KeyEvent e) {
-				double nudge = panSpeed * px2gl();
+				double nudge = panSpeed * px2gl(glCanvas.getClientArea());
 				switch (e.keyCode) {
 				case SWT.ARROW_LEFT:
 					leftAnchor -= nudge;
@@ -291,7 +298,8 @@ public class GLEditor extends EditorPart {
 		scale = 4;
 		zoomSpeed = 10;
 		panSpeed = 10;
-		maxScale = 0.5;
+		minScale = 0.5;
+		maxScale = 100;
 		doInit();
 	}
 

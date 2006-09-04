@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Core Plug-in
 Bundle-SymbolicName: org.opencad.core; singleton:=true
 Bundle-Version: 1.0.0
-Bundle-Activator: org.opencad.core.Activator
+Bundle-Activator: org.opencad.ui.Activator
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -11,5 +11,5 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.opengl,
  org.eclipse.core.resources
 Eclipse-LazyStart: true
-Export-Package: org.opencad.core,
- org.opencad.core.editors
+Export-Package: org.opencad.ui,
+ org.opencad.ui.editors

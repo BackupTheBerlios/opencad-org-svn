@@ -3,21 +3,42 @@
 <plugin>
   <extension id="application" point="org.eclipse.core.runtime.applications">
     <application>
-      <run class="org.opencad.core.Application"/>
+      <run class="org.opencad.ui.Application"/>
     </application>
   </extension>
   <extension point="org.eclipse.ui.perspectives">
       <perspective
         name="OpenCad.org"
-        class="org.opencad.core.Perspective"
+        class="org.opencad.ui.Perspective"
         id="org.opencad.core.perspective"/>
   </extension>
   <extension point="org.eclipse.ui.editors">
      <editor
-           class="org.opencad.core.editors.GLEditor"
+           class="org.opencad.ui.editors.GLEditor"
            extensions="ocm"
-           icon="icons/sample.gif"
+           icon="icons/overview_obj.gif"
            id="org.opencad.core.editors.GLEditor"
            name="OpenGL Editor"/>
+  </extension>
+  <extension
+        point="org.eclipse.ui.editorActions">
+     <editorContribution
+           id="org.opencad.core.addWallContribution"
+           targetID="org.opencad.core.editors.GLEditor">
+        <action
+              class="org.opencad.walls.AddWallActionDelegate"
+              icon="icons/plugin_config_obj.gif"
+              id="org.opencad.core.addWallAction"
+              label="New Wall"
+              style="push"
+              toolbarPath="GLEditor"/>
+        <action
+              class="org.opencad.corners.AddCornerActionDelegate"
+              icon="icons/build_var_obj.gif"
+              id="org.opencad.core.AddCornerAction"
+              label="New Corner"
+              style="push"
+              toolbarPath="GLEditor"/>
+     </editorContribution>
   </extension>
 </plugin>

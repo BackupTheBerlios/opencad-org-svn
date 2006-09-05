@@ -1,7 +1,6 @@
 package org.opencad.ui.editors.state;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
@@ -10,6 +9,8 @@ import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
+import org.opencad.ui.behaviour.Hoverable;
+import org.opencad.ui.behaviour.Selectable;
 import org.opencad.ui.editors.GLEditor;
 
 public class NavigationState extends GLEditorState implements
@@ -44,15 +45,26 @@ public class NavigationState extends GLEditorState implements
   boolean drag = false;
 
   public void mouseMove(MouseEvent e) {
+    Rectangle size = glEditor.getCanvasClientArea();
+    double px2gl = glEditor.px2gl(size);
+    boolean refresh = false;
+    double glx = (e.x - (double) size.width / 2) * px2gl
+        + glEditor.getLeftAnchor();
+    double gly = ((double) size.height / 2 - e.y) * px2gl
+        + glEditor.getTopAnchor();
+
+    refresh = refresh || glEditor.getModel().informHoverables(glx, gly);
+
     if (drag) {
-      Rectangle size = glEditor.getCanvasClientArea();
-      double px2gl = glEditor.px2gl(size);
       glEditor.setLeftAnchor(glEditor.getLeftAnchor() - (double) (e.x - startX)
           * px2gl);
       glEditor.setTopAnchor(glEditor.getTopAnchor() + (double) (e.y - startY)
           * px2gl);
       startX = e.x;
       startY = e.y;
+      refresh = true;
+    }
+    if (refresh) {
       glEditor.doRefresh();
     }
   }
@@ -99,10 +111,27 @@ public class NavigationState extends GLEditorState implements
   }
 
   public void mouseDown(MouseEvent e) {
+    Selectable selection = null;
     if (e.button == 1) {
-      drag = true;
-      startX = e.x;
-      startY = e.y;
+      Rectangle size = glEditor.getCanvasClientArea();
+      double px2gl = glEditor.px2gl(size);
+      double glx = (e.x - (double) size.width / 2) * px2gl
+          + glEditor.getLeftAnchor();
+      double gly = ((double) size.height / 2 - e.y) * px2gl
+          + glEditor.getTopAnchor();
+      Hoverable hoverable = glEditor.getModel().trapHoverable(glx, gly);
+      if (hoverable != null && hoverable instanceof Selectable) {
+        Selectable newSelection = (Selectable) hoverable;
+        if (selection != null) {
+          selection.setSelected(false, glEditor);
+        }
+        newSelection.setSelected(true, glEditor);
+        selection = newSelection;
+      } else {
+        drag = true;
+        startX = e.x;
+        startY = e.y;
+      }
     }
   }
 

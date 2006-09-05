@@ -11,11 +11,17 @@ public class CornerEditorRenderer implements EditorRenderable {
   private Corner corner;
 
   private double outerRadius = 0.04d;
+
   private double innerRadius = 0.02d;
 
   public void glRender() {
     double x = corner.getX();
     double y = corner.getY();
+    if (corner.isHover()) {
+      GL.glColor3d(1d, 0d, 0d);
+    } else {
+      GL.glColor3d(0d, 0d, 0d);
+    }
     GL.glBegin(GL.GL_LINES);
     {
       GL.glVertex2d(x - outerRadius, y);
@@ -26,16 +32,13 @@ public class CornerEditorRenderer implements EditorRenderable {
       GL.glVertex2d(x, y - outerRadius);
       GL.glVertex2d(x, y + innerRadius);
       GL.glVertex2d(x, y + outerRadius);
-      
+
+    }
+    GL.glEnd();
+    GL.glBegin(GL.GL_POLYGON);
+    {
       GL.glVertex2d(x - innerRadius, y);
       GL.glVertex2d(x, y - innerRadius);
-
-      GL.glVertex2d(x - innerRadius, y);
-      GL.glVertex2d(x, y + innerRadius);
-
-      GL.glVertex2d(x + innerRadius, y);
-      GL.glVertex2d(x, y - innerRadius);
-
       GL.glVertex2d(x + innerRadius, y);
       GL.glVertex2d(x, y + innerRadius);
     }

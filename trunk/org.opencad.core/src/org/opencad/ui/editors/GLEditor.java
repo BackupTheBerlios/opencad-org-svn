@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.opengl.GL;
@@ -105,22 +106,26 @@ public class GLEditor extends EditorPart {
     double arrowHeight = 0.07d;
 
     double segmentHeight = 1d - arrowHeight;
+    GL.glColor3d(0d, 0.1d, 0.5d);
     GL.glBegin(GL.GL_LINES);
     {
       GL.glVertex2d(-arrowHeight, 0d);
       GL.glVertex2d(segmentHeight, 0d);
-      GL.glVertex2d(1d, 0d);
-      GL.glVertex2d(segmentHeight, -arrowWidth);
-      GL.glVertex2d(1d, 0d);
-      GL.glVertex2d(segmentHeight, arrowWidth);
-      GL.glVertex2d(segmentHeight, -arrowWidth);
-      GL.glVertex2d(segmentHeight, arrowWidth);
-
       GL.glVertex2d(0d, -arrowHeight);
       GL.glVertex2d(0d, segmentHeight);
-      GL.glVertex2d(-arrowWidth, segmentHeight);
-      GL.glVertex2d(0d, 1d);
-      GL.glVertex2d(arrowWidth, segmentHeight);
+    }
+    GL.glEnd();
+
+    GL.glBegin(GL.GL_POLYGON);
+    {
+      GL.glVertex2d(1d, 0d);
+      GL.glVertex2d(segmentHeight, -arrowWidth);
+      GL.glVertex2d(segmentHeight, arrowWidth);
+    }
+    GL.glEnd();
+
+    GL.glBegin(GL.GL_POLYGON);
+    {
       GL.glVertex2d(0d, 1d);
       GL.glVertex2d(-arrowWidth, segmentHeight);
       GL.glVertex2d(arrowWidth, segmentHeight);
@@ -132,6 +137,7 @@ public class GLEditor extends EditorPart {
     int gridCount = 100;
     int gridSize = 10;
     int twiceGrid = 2 * gridCount;
+    GL.glColor3d(0.8d, 0.8d, 0.8d);
     GL.glPushMatrix();
     {
       GL.glTranslated(0d, -gridSize, 0d);
@@ -167,13 +173,10 @@ public class GLEditor extends EditorPart {
     GL.glLoadIdentity();
     GL.glPushMatrix();
     {
-      GL.glColor3d(0.3d, 0.3d, 0.3d);
       GL.glTranslated(0d, 0d, -0.1d);
       drawAnchor();
-      GL.glColor3d(0.6d, 0.6d, 0.6d);
       GL.glTranslated(0d, 0d, -0.1d);
       drawGrid();
-      GL.glColor3d(0d, 0d, 0d);
     }
     GL.glPopMatrix();
     model.render(EditorRenderable.class);
@@ -218,7 +221,9 @@ public class GLEditor extends EditorPart {
     model = null;
     try {
       FileEditorInput fei = (FileEditorInput) input;
-      InputStream is = fei.getFile().getContents();
+      IFile file = fei.getFile();
+      this.setPartName(file.getName());
+      InputStream is = file.getContents();
       ObjectInputStream ois = new ObjectInputStream(is);
       model = (Model) ois.readObject();
     } catch (CoreException e) {
@@ -231,7 +236,6 @@ public class GLEditor extends EditorPart {
     if (model == null) {
       model = new Model();
     }
-    System.out.println(model.toString());
   }
 
   @Override
@@ -320,7 +324,7 @@ public class GLEditor extends EditorPart {
 
   public void stateChanged(GLEditorState state) {
     switch (state.getStatus()) {
-      case GLEditorState.FRESH:
+      case FRESH:
         if (!stateStack.isEmpty()) {
           GLEditorState first = stateStack.getFirst();
           first.sleep();
@@ -332,7 +336,7 @@ public class GLEditor extends EditorPart {
           state.run();
         }
       break;
-      case GLEditorState.TERMINATED:
+      case TERMINATED:
         if (!stateStack.isEmpty() && stateStack.getFirst() == state) {
           stateStack.removeFirst();
           removeListeners(state);
@@ -342,6 +346,9 @@ public class GLEditor extends EditorPart {
           stateStack.getFirst().run();
         }
       break;
+    }
+    if (!stateStack.isEmpty()) {
+      System.out.println("State is now " + stateStack.getFirst().getClass());
     }
   }
 

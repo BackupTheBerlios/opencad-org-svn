@@ -2,7 +2,6 @@ package org.opencad.model.rendering;
 
 import org.opencad.model.modelling.Model;
 import org.opencad.rendering.EditorRenderable;
-import org.opencad.rendering.Primitive;
 
 public class ModelEditorRenderer implements EditorRenderable {
 
@@ -11,9 +10,7 @@ public class ModelEditorRenderer implements EditorRenderable {
   private Model model;
 
   public void glRender() {
-    for (Primitive primitive : model.getPrimitives()) {
-      primitive.render(EditorRenderable.class);
-    }
+    model.renderPrimitives(EditorRenderable.class);
   }
 
   public ModelEditorRenderer(Model model) {

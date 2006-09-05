@@ -26,14 +26,14 @@
            id="org.opencad.core.addWallContribution"
            targetID="org.opencad.core.editors.GLEditor">
         <action
-              class="org.opencad.walls.AddWallActionDelegate"
+              class="org.opencad.walls.ui.AddWallActionDelegate"
               icon="icons/plugin_config_obj.gif"
               id="org.opencad.core.addWallAction"
               label="New Wall"
               style="push"
               toolbarPath="GLEditor"/>
         <action
-              class="org.opencad.corners.AddCornerActionDelegate"
+              class="org.opencad.corners.ui.AddCornerActionDelegate"
               icon="icons/build_var_obj.gif"
               id="org.opencad.core.AddCornerAction"
               label="New Corner"

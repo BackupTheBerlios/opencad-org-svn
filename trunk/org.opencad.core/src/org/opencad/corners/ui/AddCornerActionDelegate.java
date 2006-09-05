@@ -5,7 +5,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorActionDelegate;
 import org.eclipse.ui.IEditorPart;
 import org.opencad.corners.modelling.Corner;
-import org.opencad.model.modelling.Model;
 import org.opencad.ui.editors.GLEditor;
 
 public class AddCornerActionDelegate implements IEditorActionDelegate {
@@ -28,7 +27,7 @@ public class AddCornerActionDelegate implements IEditorActionDelegate {
   public void run(IAction action) {
     state.freshen();
     Corner corner = new Corner(0d, 0d);
-    editor.getModel().getPrimitives().add(corner);
+    editor.getModel().addPrimitive(corner);
     editor.getModel().setDirty(true);
     state.setCorner(corner);
     action.setEnabled(false);

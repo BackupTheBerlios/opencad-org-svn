@@ -7,17 +7,14 @@ import org.eclipse.swt.events.MouseTrackListener;
 import org.eclipse.swt.widgets.Listener;
 import org.opencad.ui.editors.GLEditor;
 
+
 public abstract class GLEditorState {
 
-  public static final int FRESH = 0;
+  public enum Status {
+    FRESH, RUNNING, SLEEPING, TERMINATED
+  }
 
-  public static final int RUNNING = 1;
-
-  public static final int SLEEPING = 2;
-
-  public static final int TERMINATED = 4;
-
-  private int status;
+  private Status status;
 
   protected GLEditor glEditor;
 
@@ -33,7 +30,7 @@ public abstract class GLEditorState {
     glEditor.stateChanged(this);
   }
 
-  public int getStatus() {
+  public Status getStatus() {
     return this.status;
   }
 
@@ -63,19 +60,19 @@ public abstract class GLEditorState {
   }
 
   public void freshen() {
-    this.status = FRESH;
+    this.status = Status.FRESH;
   }
 
   public void run() {
-    this.status = RUNNING;
+    this.status = Status.RUNNING;
   }
 
   public void sleep() {
-    this.status = SLEEPING;
+    this.status = Status.SLEEPING;
   }
 
   public void terminate() {
-    this.status = TERMINATED;
+    this.status = Status.TERMINATED;
   }
 
 }

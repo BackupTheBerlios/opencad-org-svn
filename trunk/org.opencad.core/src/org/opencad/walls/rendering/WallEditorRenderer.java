@@ -15,6 +15,7 @@ public class WallEditorRenderer implements EditorRenderable {
   }
 
   public void glRender() {
+    GL.glColor3d(0d, 0d, 0d);
     GL.glBegin(GL.GL_LINES);
     {
       GL.glVertex2d(wall.getStartingCorner().getX(), wall.getStartingCorner()

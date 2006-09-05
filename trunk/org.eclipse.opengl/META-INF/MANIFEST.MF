@@ -7,4 +7,3 @@ Bundle-Vendor: %providerName
 Bundle-ClassPath: ogl.jar
 Bundle-Localization: plugin
 Export-Package: org.eclipse.opengl
-Eclipse-AutoStart: true

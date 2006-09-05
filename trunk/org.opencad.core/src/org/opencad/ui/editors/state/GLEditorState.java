@@ -9,65 +9,73 @@ import org.opencad.ui.editors.GLEditor;
 
 public abstract class GLEditorState {
 
-	public static final int FRESH = 0;
+  public static final int FRESH = 0;
 
-	public static final int RUNNING = 1;
+  public static final int RUNNING = 1;
 
-	public static final int SLEEPING = 2;
+  public static final int SLEEPING = 2;
 
-	public static final int TERMINATED = 4;
+  public static final int TERMINATED = 4;
 
-	private int status;
+  private int status;
 
-	private GLEditor glEditor;
+  protected GLEditor glEditor;
 
-	protected void notifyEditor() {
-		glEditor.stateChanged(this);
-	}
+  public final GLEditor getGlEditor() {
+    return glEditor;
+  }
 
-	public int getStatus() {
-		return this.status;
-	}
+  public final void setGlEditor(GLEditor glEditor) {
+    this.glEditor = glEditor;
+  }
 
-	public GLEditorState(GLEditor glEditor) {
-		this.glEditor = glEditor;
-		freshen();
-	}
+  public void notifyEditor() {
+    glEditor.stateChanged(this);
+  }
 
-	public KeyListener getKeyListener() {
-		return null;
-	}
+  public int getStatus() {
+    return this.status;
+  }
 
-	public MouseListener getMouseListener() {
-		return null;
-	}
+  public GLEditorState(GLEditor glEditor) {
+    this.glEditor = glEditor;
+    freshen();
+  }
 
-	public MouseMoveListener getMouseMoveListener() {
-		return null;
-	}
+  public KeyListener getKeyListener() {
+    return null;
+  }
 
-	public MouseTrackListener getMouseTrackListener() {
-		return null;
-	}
+  public MouseListener getMouseListener() {
+    return null;
+  }
 
-	public Listener getMouseWheelListener() {
-		return null;
-	}
+  public MouseMoveListener getMouseMoveListener() {
+    return null;
+  }
 
-	public void freshen() {
-		this.status = FRESH;
-	}
+  public MouseTrackListener getMouseTrackListener() {
+    return null;
+  }
 
-	public void run() {
-		this.status = RUNNING;
-	}
+  public Listener getMouseWheelListener() {
+    return null;
+  }
 
-	public void sleep() {
-		this.status = SLEEPING;
-	}
+  public void freshen() {
+    this.status = FRESH;
+  }
 
-	public void terminate() {
-		this.status = TERMINATED;
-	}
+  public void run() {
+    this.status = RUNNING;
+  }
+
+  public void sleep() {
+    this.status = SLEEPING;
+  }
+
+  public void terminate() {
+    this.status = TERMINATED;
+  }
 
 }

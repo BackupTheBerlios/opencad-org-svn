@@ -4,7 +4,7 @@ import org.opencad.ui.editors.GLEditor;
 
 public interface Selectable {
 
-  public void setSelected(boolean selected, GLEditor editor);
+	public void setSelected(boolean selected, GLEditor editor);
 
-  public boolean isSelected();
+	public boolean isSelected();
 }

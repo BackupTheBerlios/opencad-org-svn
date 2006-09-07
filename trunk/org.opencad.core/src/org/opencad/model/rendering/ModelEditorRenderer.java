@@ -5,16 +5,16 @@ import org.opencad.rendering.EditorRenderable;
 
 public class ModelEditorRenderer implements EditorRenderable {
 
-  private static final long serialVersionUID = 7804020005397184408L;
+	private static final long serialVersionUID = 7804020005397184408L;
 
-  private Model model;
+	private Model model;
 
-  public void glRender() {
-    model.renderPrimitives(EditorRenderable.class);
-  }
+	public void glRender() {
+		model.renderPrimitives(EditorRenderable.class);
+	}
 
-  public ModelEditorRenderer(Model model) {
-    this.model = model;
-  }
+	public ModelEditorRenderer(Model model) {
+		this.model = model;
+	}
 
 }

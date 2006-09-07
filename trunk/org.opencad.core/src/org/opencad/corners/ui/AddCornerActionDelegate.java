@@ -28,7 +28,7 @@ public class AddCornerActionDelegate implements IEditorActionDelegate {
     state.freshen();
     Corner corner = new Corner(0d, 0d);
     editor.getModel().addPrimitive(corner);
-    editor.getModel().setDirty(true);
+    editor.setDirty(true);
     state.setCorner(corner);
     action.setEnabled(false);
     editor.stateChanged(state);

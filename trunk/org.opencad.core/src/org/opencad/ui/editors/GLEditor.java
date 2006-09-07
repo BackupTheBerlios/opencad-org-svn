@@ -62,6 +62,8 @@ public class GLEditor extends EditorPart {
   protected double maxScale;
 
   private Model model;
+  
+  private boolean dirty;
 
   public Rectangle getCanvasClientArea() {
     return glCanvas.getClientArea();
@@ -85,7 +87,7 @@ public class GLEditor extends EditorPart {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     try {
       ObjectOutputStream oos = new ObjectOutputStream(baos);
-      model.setDirty(false);
+      setDirty(false);
       oos.writeObject(model);
       oos.close();
       ByteArrayInputStream is = new ByteArrayInputStream(baos.toByteArray());
@@ -249,7 +251,12 @@ public class GLEditor extends EditorPart {
 
   @Override
   public boolean isDirty() {
-    return model.isDirty();
+    return dirty;
+  }
+  
+  public void setDirty(boolean dirty) {
+	  this.dirty = dirty;
+	  firePropertyChange(PROP_DIRTY);
   }
 
   @Override

@@ -54,6 +54,7 @@ public class PickupCornerState extends GLEditorState implements MouseListener,
             if (hoverable != wall.getStartingCorner()) {
               wall.setEndingCorner((Corner) hoverable);
               glEditor.getModel().addPrimitive(wall);
+              glEditor.setDirty(true);
               this.action.setEnabled(true);
               terminate();
               notifyEditor();

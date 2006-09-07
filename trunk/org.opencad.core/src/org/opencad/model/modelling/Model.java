@@ -32,20 +32,10 @@ public class Model extends Primitive {
     return hoverables;
   }
 
-  private boolean dirty;
-
-  public void setDirty(boolean dirty) {
-    this.dirty = dirty;
-  }
-
-  public boolean isDirty() {
-    return dirty;
-  }
 
   public Model() {
     primitives = new LinkedList<Primitive>();
     hoverables = new LinkedList<Hoverable>();
-    dirty = false;
     addRenderer(new ModelEditorRenderer(this));
   }
 

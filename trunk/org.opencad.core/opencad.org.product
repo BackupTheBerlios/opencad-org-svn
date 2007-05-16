@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.1"?>
+
+<product name="OpenCad.org" id="org.opencad.core.product" application="org.eclipse.ui.ide.workbench" useFeatures="false">
+
+   <aboutInfo>
+      <text>
+         OpenCad.org
+Build, not draw
+
+Copyright © Silviu-Georgian Aprozeanu. Distributed under the GPL.
+      </text>
+   </aboutInfo>
+
+   <configIni use="default"/>
+
+   <launcherArgs>
+   </launcherArgs>
+
+   <windowImages/>
+
+   <splash
+      location="org.opencad.core"
+      startupProgressRect="410,410,420,10"
+      startupMessageRect="0,0,0,10"
+      startupForegroundColor="FFFFFF" />
+   <launcher name="OpenCad.org">
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <intro introId="org.eclipse.ui.intro.universal"/>
+
+   <plugins>
+      <plugin id="com.ibm.icu"/>
+      <plugin id="org.apache.lucene"/>
+      <plugin id="org.eclipse.ant.core"/>
+      <plugin id="org.eclipse.core.commands"/>
+      <plugin id="org.eclipse.core.contenttype"/>
+      <plugin id="org.eclipse.core.expressions"/>
+      <plugin id="org.eclipse.core.filesystem"/>
+      <plugin id="org.eclipse.core.filesystem.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.core.resources"/>
+      <plugin id="org.eclipse.core.resources.compatibility" fragment="true"/>
+      <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.core.runtime.compatibility"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
+      <plugin id="org.eclipse.core.variables"/>
+      <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.preferences"/>
+      <plugin id="org.eclipse.equinox.registry"/>
+      <plugin id="org.eclipse.help"/>
+      <plugin id="org.eclipse.help.appserver"/>
+      <plugin id="org.eclipse.help.base"/>
+      <plugin id="org.eclipse.help.ui"/>
+      <plugin id="org.eclipse.jface"/>
+      <plugin id="org.eclipse.opengl"/>
+      <plugin id="org.eclipse.opengl.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.platform"/>
+      <plugin id="org.eclipse.swt"/>
+      <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.ui"/>
+      <plugin id="org.eclipse.ui.cheatsheets"/>
+      <plugin id="org.eclipse.ui.forms"/>
+      <plugin id="org.eclipse.ui.ide"/>
+      <plugin id="org.eclipse.ui.intro"/>
+      <plugin id="org.eclipse.ui.intro.universal"/>
+      <plugin id="org.eclipse.ui.views"/>
+      <plugin id="org.eclipse.ui.workbench"/>
+      <plugin id="org.eclipse.update.configurator"/>
+      <plugin id="org.eclipse.update.core"/>
+      <plugin id="org.eclipse.update.core.linux" fragment="true"/>
+      <plugin id="org.eclipse.update.ui"/>
+      <plugin id="org.opencad.core"/>
+   </plugins>
+
+</product>

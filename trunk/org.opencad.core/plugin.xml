@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-  <extension id="application" point="org.eclipse.core.runtime.applications">
-    <application>
-      <run class="org.opencad.ui.Application"/>
-    </application>
-  </extension>
-  <extension point="org.eclipse.ui.perspectives">
-      <perspective
-        name="OpenCad.org"
-        class="org.opencad.ui.Perspective"
-        id="org.opencad.core.perspective"/>
-  </extension>
   <extension point="org.eclipse.ui.editors">
      <editor
            class="org.opencad.ui.editors.GLEditor"
@@ -40,5 +29,31 @@
               style="push"
               toolbarPath="GLEditor"/>
      </editorContribution>
+  </extension>
+  <extension
+        id="product"
+        point="org.eclipse.core.runtime.products">
+     <product
+           application="org.eclipse.ui.ide.workbench"
+           name="OpenCad.org">
+        <property
+              name="windowImages"
+              value="eclipse.gif,eclipse32.gif,eclipse48.gif,eclipse.png,eclipse32.png"/>
+        <property
+              name="aboutText"
+              value="%productBlurb"/>
+        <property
+              name="aboutImage"
+              value="eclipse_lg.gif"/>
+        <property
+              name="startupForegroundColor"
+              value="FFFFFF"/>
+        <property
+              name="startupProgressRect"
+              value="410,410,420,10"/>
+        <property
+              name="startupMessageRect"
+              value="0,0,0,10"/>
+     </product>
   </extension>
 </plugin>

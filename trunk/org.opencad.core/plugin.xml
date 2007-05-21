@@ -37,14 +37,8 @@
            application="org.eclipse.ui.ide.workbench"
            name="OpenCad.org">
         <property
-              name="windowImages"
-              value="eclipse.gif,eclipse32.gif,eclipse48.gif,eclipse.png,eclipse32.png"/>
-        <property
               name="aboutText"
-              value="%productBlurb"/>
-        <property
-              name="aboutImage"
-              value="eclipse_lg.gif"/>
+              value="OpenCad.org&#x0A;Build, not draw&#x0A;&#x0A;Copyright © 2007 Silviu-Georgian Aprozeanu"/>
         <property
               name="startupForegroundColor"
               value="FFFFFF"/>

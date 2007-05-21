@@ -8,7 +8,7 @@
          OpenCad.org
 Build, not draw
 
-Copyright © Silviu-Georgian Aprozeanu. Distributed under the GPL.
+Copyright © 2007 Silviu-Georgian Aprozeanu
       </text>
    </aboutInfo>
 
@@ -21,9 +21,7 @@ Copyright © Silviu-Georgian Aprozeanu. Distributed under the GPL.
 
    <splash
       location="org.opencad.core"
-      startupProgressRect="410,410,420,10"
-      startupMessageRect="0,0,0,10"
-      startupForegroundColor="FFFFFF" />
+      startupProgressRect="0,10,420,10" />
    <launcher name="OpenCad.org">
       <solaris/>
       <win useIco="false">
@@ -31,10 +29,10 @@ Copyright © Silviu-Georgian Aprozeanu. Distributed under the GPL.
       </win>
    </launcher>
 
-   <intro introId="org.eclipse.ui.intro.universal"/>
 
    <plugins>
       <plugin id="com.ibm.icu"/>
+      <plugin id="org.apache.ant"/>
       <plugin id="org.apache.lucene"/>
       <plugin id="org.eclipse.ant.core"/>
       <plugin id="org.eclipse.core.commands"/>

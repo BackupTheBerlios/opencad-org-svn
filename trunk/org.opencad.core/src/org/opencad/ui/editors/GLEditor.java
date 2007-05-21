@@ -2,6 +2,7 @@ package org.opencad.ui.editors;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -240,6 +241,9 @@ public class GLEditor extends EditorPart {
 			InputStream is = file.getContents();
 			ObjectInputStream ois = new ObjectInputStream(is);
 			model = (Model) ois.readObject();
+		} catch (EOFException e) {
+			Logger.getLogger("GLEditor").info(
+					"EOF while reading file, probably new file");
 		} catch (CoreException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

@@ -83,13 +83,13 @@ public class PickupCornerState extends GLEditorState implements MouseListener,
 				switch (cornerType) {
 				case STARTING:
 					wall.setStartingCorner((Corner) hoverable);
+					glEditor.getModel().addPrimitive(wall);
 					terminate();
 					notifyEditor();
 					break;
 				case ENDING:
 					if (hoverable != wall.getStartingCorner()) {
 						wall.setEndingCorner((Corner) hoverable);
-						glEditor.getModel().addPrimitive(wall);
 						glEditor.setDirty(true);
 						this.action.setEnabled(true);
 						terminate();

@@ -14,8 +14,17 @@ import org.opencad.walls.modelling.Wall;
 public class PickupCornerState extends GLEditorState implements MouseListener,
 		MouseMoveListener {
 
-	public enum CornerType {
-		STARTING, ENDING
+	public enum CornerType implements CornerSetter {
+		STARTING {
+			public void changeCornerOf(Wall wall, Corner corner) {
+				wall.setStartingCorner(corner);
+			}
+		},
+		ENDING {
+			public void changeCornerOf(Wall wall, Corner corner) {
+				wall.setEndingCorner(corner);
+			}
+		}
 	}
 
 	Wall wall;
@@ -23,6 +32,25 @@ public class PickupCornerState extends GLEditorState implements MouseListener,
 	CornerType cornerType;
 
 	private IAction action;
+
+	Corner babyCorner = null;
+
+	Corner getBabyCorner(double x, double y) {
+		if (babyCorner == null) {
+			babyCorner = new Corner(x, y);
+			glEditor.getModel().addPrimitive(babyCorner);
+		} else {
+			babyCorner.setX(x);
+			babyCorner.setY(y);
+		}
+		return babyCorner;
+	}
+
+	Corner giveBirth() {
+		Corner corner = babyCorner;
+		babyCorner = null;
+		return corner;
+	}
 
 	public PickupCornerState(GLEditor glEditor, Wall wall, CornerType cornerType) {
 		super(glEditor);
@@ -42,8 +70,16 @@ public class PickupCornerState extends GLEditorState implements MouseListener,
 				+ glEditor.getTopAnchor();
 		glEditor.getModel().informHoverables(glx, gly);
 		if (e.button == 1) {
-			Hoverable hoverable = glEditor.getModel().trapHoverable(glx, gly);
+			Hoverable hoverable = glEditor.getModel().trapHoverable(glx, gly,
+					babyCorner);
+			if (hoverable == null) {
+				hoverable = babyCorner;
+			}
 			if (hoverable != null && hoverable instanceof Corner) {
+				if (hoverable != babyCorner) {
+					glEditor.getModel().removePrimitive(babyCorner);
+				}
+				giveBirth();
 				switch (cornerType) {
 				case STARTING:
 					wall.setStartingCorner((Corner) hoverable);
@@ -76,9 +112,9 @@ public class PickupCornerState extends GLEditorState implements MouseListener,
 				+ glEditor.getLeftAnchor();
 		double gly = ((double) size.height / 2 - e.y) * px2gl
 				+ glEditor.getTopAnchor();
-		if (glEditor.getModel().informHoverables(glx, gly)) {
-			glEditor.doRefresh();
-		}
+		cornerType.changeCornerOf(wall, getBabyCorner(glx, gly));
+		glEditor.getModel().informHoverables(glx, gly);
+		glEditor.doRefresh();
 	}
 
 	public final Wall getWall() {

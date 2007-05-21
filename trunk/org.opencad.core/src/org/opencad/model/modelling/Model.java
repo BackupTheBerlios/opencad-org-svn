@@ -53,10 +53,19 @@ public class Model extends Primitive {
 		return primitives.remove(o);
 	}
 
-	public Hoverable trapHoverable(double x, double y) {
+	public Hoverable trapHoverable(double x, double y, Hoverable... exceptions) {
 		for (Hoverable hoverable : hoverables) {
 			if (hoverable.isHoverCoordinates(x, y)) {
-				return hoverable;
+				boolean excepted = false;
+				for (Hoverable exception : exceptions) {
+					if (exception == hoverable) {
+						excepted = true;
+						break;
+					}
+				}
+				if (!excepted) {
+					return hoverable;
+				}
 			}
 		}
 		return null;

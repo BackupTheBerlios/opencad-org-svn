@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
+import java.util.logging.Logger;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -139,12 +140,17 @@ public class GLEditor extends EditorPart {
 	void drawGrid() {
 		int gridCount = 100;
 		int gridSize = 10;
+		int gridSkip = 4;
 		int twiceGrid = 2 * gridCount;
-		GL.glColor3d(0.8d, 0.8d, 0.8d);
 		GL.glPushMatrix();
 		{
 			GL.glTranslated(0d, -gridSize, 0d);
 			for (int i = 0; i <= twiceGrid; i++) {
+				if (i % gridSkip == 0) {
+					GL.glColor3d(0.7d, 0.7d, 0.7d);
+				} else {
+					GL.glColor3d(0.9d, 0.9d, 0.9d);
+				}
 				GL.glBegin(GL.GL_LINES);
 				{
 					GL.glVertex2d(-gridSize, 0);
@@ -159,6 +165,11 @@ public class GLEditor extends EditorPart {
 		{
 			GL.glTranslated(-gridSize, 0d, 0d);
 			for (int i = 0; i <= twiceGrid; i++) {
+				if (i % gridSkip == 0) {
+					GL.glColor3d(0.7d, 0.7d, 0.7d);
+				} else {
+					GL.glColor3d(0.9d, 0.9d, 0.9d);
+				}
 				GL.glBegin(GL.GL_LINES);
 				{
 					GL.glVertex2d(0, -gridSize);
@@ -177,9 +188,9 @@ public class GLEditor extends EditorPart {
 		GL.glPushMatrix();
 		{
 			GL.glTranslated(0d, 0d, -0.1d);
-			drawAnchor();
-			GL.glTranslated(0d, 0d, -0.1d);
 			drawGrid();
+			GL.glTranslated(0d, 0d, -0.1d);
+			drawAnchor();
 		}
 		GL.glPopMatrix();
 		model.render(EditorRenderable.class);
@@ -357,8 +368,8 @@ public class GLEditor extends EditorPart {
 			break;
 		}
 		if (!stateStack.isEmpty()) {
-			System.out.println("State is now "
-					+ stateStack.getFirst().getClass());
+			Logger.getLogger(this.getClass().getSimpleName()).info(
+					stateStack.getFirst().toString());
 		}
 	}
 

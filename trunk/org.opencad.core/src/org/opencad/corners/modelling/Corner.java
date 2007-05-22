@@ -1,7 +1,6 @@
 package org.opencad.corners.modelling;
 
 import org.opencad.corners.rendering.CornerEditorRenderer;
-import org.opencad.corners.ui.DragCornerState;
 import org.opencad.corners.ui.SelectCornerState;
 import org.opencad.model.modelling.Primitive;
 import org.opencad.model.modelling.PrimitiveTypeRegister;
@@ -17,12 +16,15 @@ public class Corner extends Primitive implements Hoverable, Selectable {
 	static {
 		PrimitiveTypeRegister.registerPrimitiveType(Corner.class);
 	}
-
+	
 	private Double x, y;
 
 	private boolean hover;
 
 	private boolean selected;
+	
+	private double hoverSlack = 0.06d;
+
 
 	public final Double getX() {
 		return x;
@@ -51,7 +53,6 @@ public class Corner extends Primitive implements Hoverable, Selectable {
 	}
 
 	public boolean isHoverCoordinates(double x, double y) {
-		double hoverSlack = 0.02d;
 		return Math.abs(this.x - x) < hoverSlack
 				&& Math.abs(this.y - y) < hoverSlack;
 	}

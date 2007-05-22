@@ -8,12 +8,13 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
-import java.util.logging.Logger;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.opengl.GL;
 import org.eclipse.opengl.GLU;
 import org.eclipse.swt.SWT;
@@ -38,7 +39,7 @@ import org.opencad.ui.behaviour.Selectable;
 import org.opencad.ui.editors.state.GLEditorState;
 import org.opencad.ui.editors.state.NavigationState;
 
-public class GLEditor extends EditorPart {
+public class GLEditor extends EditorPart implements ISelectionChangedListener {
 
 	GLCanvas glCanvas;
 
@@ -78,7 +79,12 @@ public class GLEditor extends EditorPart {
 	}
 
 	public void setSelection(final Selectable selection) {
-		model.setSelection(selection);
+		getSite().getSelectionProvider().removeSelectionChangedListener(this);
+		if (model.setSelection(selection)) {
+			getSite().getSelectionProvider().setSelection(
+					new StructuredSelection(selection));
+		}
+		getSite().getSelectionProvider().addSelectionChangedListener(this);
 		selection.getSelectionState(this).freshen();
 	}
 
@@ -254,8 +260,7 @@ public class GLEditor extends EditorPart {
 			ObjectInputStream ois = new ObjectInputStream(is);
 			model = (Model) ois.readObject();
 		} catch (EOFException e) {
-			Logger.getLogger("GLEditor").info(
-					"EOF while reading file, probably new file");
+			Activator.error("Probably new file", e);
 		} catch (CoreException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -268,6 +273,14 @@ public class GLEditor extends EditorPart {
 		}
 	}
 
+	public void selectionChanged(SelectionChangedEvent event) {
+		Object selection = ((StructuredSelection) event.getSelection())
+				.getFirstElement();
+		if (selection instanceof Selectable) {
+			setSelection((Selectable) selection);
+		}
+	}
+
 	@Override
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
@@ -275,6 +288,8 @@ public class GLEditor extends EditorPart {
 		setInput(input);
 		stateStack = new LinkedList<GLEditorState>();
 		outlinePage = new GLEditorOutlinePage(this);
+		site.setSelectionProvider(outlinePage);
+		site.getSelectionProvider().addSelectionChangedListener(this);
 		parseFile(input);
 	}
 
@@ -384,10 +399,6 @@ public class GLEditor extends EditorPart {
 			}
 			break;
 		}
-		String message = String.format("State is now %s", stateStack.getFirst());
-		Activator.getDefault().getLog().log(
-				new Status(Status.INFO, Activator.PLUGIN_ID, Status.OK,
-						message, null));
 		doRefresh();
 	}
 

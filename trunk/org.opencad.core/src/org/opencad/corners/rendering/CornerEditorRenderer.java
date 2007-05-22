@@ -14,6 +14,8 @@ public class CornerEditorRenderer implements EditorRenderable {
 
 	private double innerRadius = 0.02d;
 
+	private double selectionRadius = 0.06d;
+
 	public void glRender() {
 		double x = corner.getX();
 		double y = corner.getY();
@@ -34,7 +36,6 @@ public class CornerEditorRenderer implements EditorRenderable {
 			GL.glVertex2d(x, y - outerRadius);
 			GL.glVertex2d(x, y + innerRadius);
 			GL.glVertex2d(x, y + outerRadius);
-
 		}
 		GL.glEnd();
 		GL.glBegin(GL.GL_POLYGON);
@@ -45,6 +46,25 @@ public class CornerEditorRenderer implements EditorRenderable {
 			GL.glVertex2d(x, y + innerRadius);
 		}
 		GL.glEnd();
+		if (corner.isSelected()) {
+			GL.glEnable(GL.GL_LINE_STIPPLE);
+			{
+				GL.glLineStipple(1, (short) 0xAAAA);
+				GL.glBegin(GL.GL_LINES);
+				{
+					GL.glVertex2d(x - selectionRadius, y - selectionRadius);
+					GL.glVertex2d(x - selectionRadius, y + selectionRadius);
+					GL.glVertex2d(x + selectionRadius, y - selectionRadius);
+					GL.glVertex2d(x + selectionRadius, y + selectionRadius);
+					GL.glVertex2d(x - selectionRadius, y - selectionRadius);
+					GL.glVertex2d(x + selectionRadius, y - selectionRadius);
+					GL.glVertex2d(x - selectionRadius, y + selectionRadius);
+					GL.glVertex2d(x + selectionRadius, y + selectionRadius);
+				}
+				GL.glEnd();
+			}
+			GL.glDisable(GL.GL_LINE_STIPPLE);
+		}
 	}
 
 	public CornerEditorRenderer(Corner corner) {

@@ -19,7 +19,7 @@ public class GLEditorTreeContentProvider implements ITreeContentProvider,
 
 	public GLEditorTreeContentProvider() {
 	}
-
+	
 	public Object[] getChildren(Object parentElement) {
 		HashSet<Primitive> children = new HashSet<Primitive>();
 		if (parentElement instanceof Class) {
@@ -34,7 +34,9 @@ public class GLEditorTreeContentProvider implements ITreeContentProvider,
 	}
 
 	public Object getParent(Object element) {
-		Logger.getAnonymousLogger().info("?");
+		if (element instanceof Primitive) {
+			return element.getClass();
+		}
 		return null;
 	}
 

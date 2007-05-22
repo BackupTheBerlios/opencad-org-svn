@@ -1,5 +1,6 @@
-	package org.opencad.ui;
+package org.opencad.ui;
 
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -14,12 +15,30 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
-	
+
 	/**
 	 * The constructor
 	 */
 	public Activator() {
 		plugin = this;
+	}
+	
+	private static void log(int status, String message, Exception e) {
+		getDefault().getLog().log(
+				new Status(status, PLUGIN_ID, Status.OK,
+						message, e));
+	}
+
+	public static void info(String message, Exception... e) {
+		log(Status.INFO, message, e.length > 1 ? e[0] : null);
+	}
+
+	public static void warn(String message, Exception... e) {
+		log(Status.WARNING, message, e.length > 1 ? e[0] : null);
+	}
+
+	public static void error(String message, Exception... e) {
+		log(Status.ERROR, message, e.length > 1 ? e[0] : null);
 	}
 
 	/*

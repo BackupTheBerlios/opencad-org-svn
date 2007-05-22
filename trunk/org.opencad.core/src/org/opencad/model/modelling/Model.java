@@ -21,8 +21,9 @@ public class Model extends Primitive {
 		return selection;
 	}
 	
-	public void setSelection(Selectable selection) {
-		if (this.selection != selection) {
+	public boolean setSelection(Selectable selection) {
+		boolean changed = this.selection != selection;
+		if (changed) {
 			if (this.selection != null) {
 				this.selection.setSelected(false);
 			}
@@ -31,6 +32,7 @@ public class Model extends Primitive {
 			selection.setSelected(true);
 		}
 		this.selection = selection;
+		return changed;
 	}
 
 

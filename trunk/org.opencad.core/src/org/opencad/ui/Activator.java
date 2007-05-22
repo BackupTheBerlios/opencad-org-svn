@@ -1,4 +1,4 @@
-package org.opencad.ui;
+	package org.opencad.ui;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -14,7 +14,7 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
-
+	
 	/**
 	 * The constructor
 	 */

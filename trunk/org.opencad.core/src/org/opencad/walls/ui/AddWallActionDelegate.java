@@ -36,9 +36,7 @@ public class AddWallActionDelegate implements IEditorActionDelegate {
 		pickupStartingCornerState.setWall(wall);
 		pickupEndingCornerState.setWall(wall);
 		pickupEndingCornerState.freshen();
-		pickupEndingCornerState.notifyEditor();
 		pickupStartingCornerState.freshen();
-		pickupStartingCornerState.notifyEditor();
 		action.setEnabled(false);
 	}
 

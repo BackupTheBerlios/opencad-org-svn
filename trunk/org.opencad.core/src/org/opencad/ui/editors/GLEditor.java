@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.opengl.GL;
 import org.eclipse.opengl.GLU;
 import org.eclipse.swt.SWT;
@@ -32,6 +33,7 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.opencad.model.modelling.Model;
 import org.opencad.rendering.EditorRenderable;
+import org.opencad.ui.Activator;
 import org.opencad.ui.behaviour.Selectable;
 import org.opencad.ui.editors.state.GLEditorState;
 import org.opencad.ui.editors.state.NavigationState;
@@ -77,10 +79,7 @@ public class GLEditor extends EditorPart {
 
 	public void setSelection(final Selectable selection) {
 		model.setSelection(selection);
-		GLEditorState state = selection.getSelectionState(this);
-		if (state != null) {
-			state.notifyEditor();
-		}
+		selection.getSelectionState(this).freshen();
 	}
 
 	public final Model getModel() {
@@ -385,9 +384,11 @@ public class GLEditor extends EditorPart {
 			}
 			break;
 		}
+		String message = String.format("State is now %s", stateStack.getFirst());
+		Activator.getDefault().getLog().log(
+				new Status(Status.INFO, Activator.PLUGIN_ID, Status.OK,
+						message, null));
 		doRefresh();
-		Logger.getAnonymousLogger().info(
-				String.format("State is now %s", stateStack.getFirst()));
 	}
 
 	@Override

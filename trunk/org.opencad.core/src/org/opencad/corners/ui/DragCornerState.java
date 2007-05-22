@@ -64,7 +64,6 @@ public class DragCornerState extends GLEditorState implements
 	public void mouseUp(MouseEvent e) {
 		started = false;
 		terminate();
-		notifyEditor();
 	}
 
 }

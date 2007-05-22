@@ -15,15 +15,16 @@ public class WallEditorRenderer implements EditorRenderable {
 	}
 
 	public void glRender() {
-		GL.glColor3d(0d, 0d, 0d);
-		GL.glBegin(GL.GL_LINES);
-		{
-			GL.glVertex2d(wall.getStartingCorner().getX(), wall
-					.getStartingCorner().getY());
-			GL.glVertex2d(wall.getEndingCorner().getX(), wall.getEndingCorner()
-					.getY());
+		if (wall.getStartingCorner() != null && wall.getEndingCorner() != null) {
+			GL.glColor3d(0d, 0d, 0d);
+			GL.glBegin(GL.GL_LINES);
+			{
+				GL.glVertex2d(wall.getStartingCorner().getX(), wall
+						.getStartingCorner().getY());
+				GL.glVertex2d(wall.getEndingCorner().getX(), wall
+						.getEndingCorner().getY());
+			}
+			GL.glEnd();
 		}
-		GL.glEnd();
 	}
-
 }

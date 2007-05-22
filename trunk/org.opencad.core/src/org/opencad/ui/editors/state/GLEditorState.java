@@ -35,7 +35,7 @@ public abstract class GLEditorState {
 
 	public GLEditorState(GLEditor glEditor) {
 		this.glEditor = glEditor;
-		freshen();
+		this.status = Status.FRESH;
 	}
 
 	public KeyListener getKeyListener() {
@@ -60,18 +60,22 @@ public abstract class GLEditorState {
 
 	public void freshen() {
 		this.status = Status.FRESH;
+		notifyEditor();
 	}
 
 	public void run() {
 		this.status = Status.RUNNING;
+		notifyEditor();
 	}
 
 	public void sleep() {
 		this.status = Status.SLEEPING;
+		notifyEditor();
 	}
 
 	public void terminate() {
 		this.status = Status.TERMINATED;
+		notifyEditor();
 	}
 
 }

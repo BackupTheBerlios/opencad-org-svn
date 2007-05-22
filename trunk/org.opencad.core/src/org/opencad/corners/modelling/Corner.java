@@ -2,23 +2,27 @@ package org.opencad.corners.modelling;
 
 import org.opencad.corners.rendering.CornerEditorRenderer;
 import org.opencad.corners.ui.DragCornerState;
-import org.opencad.rendering.Primitive;
+import org.opencad.corners.ui.SelectCornerState;
+import org.opencad.model.modelling.Primitive;
+import org.opencad.model.modelling.PrimitiveTypeRegister;
 import org.opencad.ui.behaviour.Hoverable;
 import org.opencad.ui.behaviour.Selectable;
 import org.opencad.ui.editors.GLEditor;
+import org.opencad.ui.editors.state.GLEditorState;
 
 public class Corner extends Primitive implements Hoverable, Selectable {
 
 	private static final long serialVersionUID = -1332083715502519329L;
+	
+	static {
+		PrimitiveTypeRegister.registerPrimitiveType(Corner.class);
+	}
 
 	private Double x, y;
 
 	private boolean hover;
 
 	private boolean selected;
-
-	private static DragCornerState dragCornerState = new DragCornerState(null,
-			null);
 
 	public final Double getX() {
 		return x;
@@ -43,7 +47,7 @@ public class Corner extends Primitive implements Hoverable, Selectable {
 	}
 
 	public String toString() {
-		return x + "," + y;
+		return String.format("%.2f:%.2f", x, y);
 	}
 
 	public boolean isHoverCoordinates(double x, double y) {
@@ -67,13 +71,10 @@ public class Corner extends Primitive implements Hoverable, Selectable {
 	}
 
 	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 
-	public void setSelected(boolean selected, GLEditor editor) {
-		this.selected = selected;
-		dragCornerState.setCorner(this);
-		dragCornerState.setGlEditor(editor);
-		dragCornerState.freshen();
-		dragCornerState.notifyEditor();
+	public GLEditorState getSelectionState(GLEditor editor) {
+		return new SelectCornerState(editor, this);
 	}
 }

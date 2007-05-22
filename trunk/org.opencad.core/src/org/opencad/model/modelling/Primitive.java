@@ -1,7 +1,9 @@
-package org.opencad.rendering;
+package org.opencad.model.modelling;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import org.opencad.rendering.Renderable;
 
 public abstract class Primitive implements Serializable {
 

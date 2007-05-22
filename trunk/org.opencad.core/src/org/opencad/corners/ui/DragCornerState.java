@@ -41,6 +41,7 @@ public class DragCornerState extends GLEditorState implements
 	}
 
 	public void mouseMove(MouseEvent e) {
+		glEditor.setDirty(true);
 		if (started) {
 			Rectangle size = glEditor.getCanvasClientArea();
 			double px2gl = glEditor.px2gl(size);
@@ -63,7 +64,6 @@ public class DragCornerState extends GLEditorState implements
 	public void mouseUp(MouseEvent e) {
 		started = false;
 		terminate();
-		glEditor.setDirty(true);
 		notifyEditor();
 	}
 

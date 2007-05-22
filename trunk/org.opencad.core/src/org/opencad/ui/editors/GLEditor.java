@@ -29,8 +29,10 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.opencad.model.modelling.Model;
 import org.opencad.rendering.EditorRenderable;
+import org.opencad.ui.behaviour.Selectable;
 import org.opencad.ui.editors.state.GLEditorState;
 import org.opencad.ui.editors.state.NavigationState;
 
@@ -67,8 +69,18 @@ public class GLEditor extends EditorPart {
 
 	private boolean dirty;
 
+	private GLEditorOutlinePage outlinePage;
+
 	public Rectangle getCanvasClientArea() {
 		return glCanvas.getClientArea();
+	}
+
+	public void setSelection(final Selectable selection) {
+		model.setSelection(selection);
+		GLEditorState state = selection.getSelectionState(this);
+		if (state != null) {
+			state.notifyEditor();
+		}
 	}
 
 	public final Model getModel() {
@@ -77,6 +89,7 @@ public class GLEditor extends EditorPart {
 
 	public GLEditor() {
 		super();
+
 	}
 
 	public void dispose() {
@@ -262,6 +275,7 @@ public class GLEditor extends EditorPart {
 		setSite(site);
 		setInput(input);
 		stateStack = new LinkedList<GLEditorState>();
+		outlinePage = new GLEditorOutlinePage(this);
 		parseFile(input);
 	}
 
@@ -371,10 +385,9 @@ public class GLEditor extends EditorPart {
 			}
 			break;
 		}
-		if (!stateStack.isEmpty()) {
-			Logger.getLogger(this.getClass().getSimpleName()).info(
-					stateStack.getFirst().toString());
-		}
+		doRefresh();
+		Logger.getAnonymousLogger().info(
+				String.format("State is now %s", stateStack.getFirst()));
 	}
 
 	@Override
@@ -467,4 +480,11 @@ public class GLEditor extends EditorPart {
 		this.zoomSpeed = zoomSpeed;
 	}
 
+	@Override
+	public Object getAdapter(Class adapter) {
+		if (IContentOutlinePage.class.equals(adapter)) {
+			return outlinePage;
+		}
+		return super.getAdapter(adapter);
+	}
 }

@@ -3,9 +3,9 @@ package org.opencad.model.modelling;
 import java.util.LinkedList;
 
 import org.opencad.model.rendering.ModelEditorRenderer;
-import org.opencad.rendering.Primitive;
 import org.opencad.rendering.Renderable;
 import org.opencad.ui.behaviour.Hoverable;
+import org.opencad.ui.behaviour.Selectable;
 
 public class Model extends Primitive {
 
@@ -14,6 +14,25 @@ public class Model extends Primitive {
 	private LinkedList<Primitive> primitives;
 
 	private LinkedList<Hoverable> hoverables;
+	
+	private Selectable selection = null;
+
+	public Selectable getSelection() {
+		return selection;
+	}
+	
+	public void setSelection(Selectable selection) {
+		if (this.selection != selection) {
+			if (this.selection != null) {
+				this.selection.setSelected(false);
+			}
+		}
+		if (selection != null) {
+			selection.setSelected(true);
+		}
+		this.selection = selection;
+	}
+
 
 	public void addPrimitive(Primitive o) {
 		if (o instanceof Hoverable) {
@@ -36,6 +55,10 @@ public class Model extends Primitive {
 		primitives = new LinkedList<Primitive>();
 		hoverables = new LinkedList<Hoverable>();
 		addRenderer(new ModelEditorRenderer(this));
+	}
+	
+	public LinkedList<Primitive> getPrimitives() {
+		return primitives;
 	}
 
 	public String toString() {

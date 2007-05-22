@@ -19,6 +19,8 @@ public class CornerEditorRenderer implements EditorRenderable {
 		double y = corner.getY();
 		if (corner.isHover()) {
 			GL.glColor3d(1d, 0d, 0d);
+		} else if (corner.isSelected()) {
+			GL.glColor3d(0d, 0.5d, 0d);
 		} else {
 			GL.glColor3d(0d, 0d, 0d);
 		}

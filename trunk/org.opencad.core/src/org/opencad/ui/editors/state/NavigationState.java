@@ -113,7 +113,6 @@ public class NavigationState extends GLEditorState implements
 	}
 
 	public void mouseDown(MouseEvent e) {
-		Selectable selection = null;
 		if (e.button == 1) {
 			Rectangle size = glEditor.getCanvasClientArea();
 			double px2gl = glEditor.px2gl(size);
@@ -123,12 +122,7 @@ public class NavigationState extends GLEditorState implements
 					+ glEditor.getTopAnchor();
 			Hoverable hoverable = glEditor.getModel().trapHoverable(glx, gly);
 			if (hoverable != null && hoverable instanceof Selectable) {
-				Selectable newSelection = (Selectable) hoverable;
-				if (selection != null) {
-					selection.setSelected(false, glEditor);
-				}
-				newSelection.setSelected(true, glEditor);
-				selection = newSelection;
+				glEditor.setSelection((Selectable) hoverable);
 			} else {
 				drag = true;
 				startX = e.x;

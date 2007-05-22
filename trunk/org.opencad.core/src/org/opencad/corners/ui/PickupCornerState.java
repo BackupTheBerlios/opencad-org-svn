@@ -1,4 +1,4 @@
-package org.opencad.walls.ui;
+package org.opencad.corners.ui;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.swt.events.MouseEvent;

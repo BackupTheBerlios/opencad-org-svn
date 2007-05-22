@@ -1,4 +1,4 @@
-package org.opencad.walls.ui;
+package org.opencad.corners.ui;
 
 import org.opencad.corners.modelling.Corner;
 import org.opencad.walls.modelling.Wall;

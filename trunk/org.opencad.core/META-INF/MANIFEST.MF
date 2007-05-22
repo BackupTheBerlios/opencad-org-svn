@@ -9,7 +9,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.ui.ide,
  org.eclipse.opengl,
- org.eclipse.core.resources
+ org.eclipse.core.resources,
+ org.eclipse.ui.views
 Eclipse-LazyStart: true
 Export-Package: org.opencad.corners.modelling,
  org.opencad.corners.rendering,

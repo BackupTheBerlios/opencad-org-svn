@@ -12,19 +12,18 @@ import org.opencad.ui.editors.state.GLEditorState;
 public class Corner extends Primitive implements Hoverable, Selectable {
 
 	private static final long serialVersionUID = -1332083715502519329L;
-	
+
 	static {
 		PrimitiveTypeRegister.registerPrimitiveType(Corner.class);
 	}
-	
+
 	private Double x, y;
 
 	private boolean hover;
 
 	private boolean selected;
-	
-	private double hoverSlack = 0.06d;
 
+	private double hoverSlack = 0.06d;
 
 	public final Double getX() {
 		return x;
@@ -42,10 +41,14 @@ public class Corner extends Primitive implements Hoverable, Selectable {
 		this.y = y;
 	}
 
+	public Corner() {
+		addRenderer(new CornerEditorRenderer(this));
+	}
+
 	public Corner(Double x, Double y) {
+		super();
 		this.x = x;
 		this.y = y;
-		addRenderer(new CornerEditorRenderer(this));
 	}
 
 	public String toString() {

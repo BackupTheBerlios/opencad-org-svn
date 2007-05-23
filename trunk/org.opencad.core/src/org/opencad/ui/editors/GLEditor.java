@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 
 import org.eclipse.core.resources.IFile;
@@ -32,6 +33,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.opencad.export.Representation;
 import org.opencad.model.modelling.Model;
 import org.opencad.rendering.EditorRenderable;
 import org.opencad.ui.Activator;
@@ -108,15 +110,19 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(baos);
 			setDirty(false);
-			oos.writeObject(model);
+			oos.writeObject(new Representation(model));
 			oos.close();
 			ByteArrayInputStream is = new ByteArrayInputStream(baos
 					.toByteArray());
 			fileEditorInput.getFile().setContents(is, 0, monitor);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		} catch (CoreException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -157,14 +163,14 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 	}
 
 	void drawGrid() {
-		int gridCount = 100;
-		int gridSize = 10;
-		int gridSkip = 4;
-		int twiceGrid = 2 * gridCount;
+		final int gridCount = 1000;
+		final int gridSkip = 5;
+		final double gridSize = 0.1d;
+
 		GL.glPushMatrix();
 		{
-			GL.glTranslated(0d, -gridSize, 0d);
-			for (int i = 0; i <= twiceGrid; i++) {
+			GL.glTranslated(0d, -gridSize * gridCount, 0d);
+			for (int i = 0; i <= gridCount * 2; i++) {
 				if (i % gridSkip == 0) {
 					GL.glColor3d(0.7d, 0.7d, 0.7d);
 				} else {
@@ -172,18 +178,18 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 				}
 				GL.glBegin(GL.GL_LINES);
 				{
-					GL.glVertex2d(-gridSize, 0);
-					GL.glVertex2d(+gridSize, 0);
+					GL.glVertex2d(-gridSize * gridCount, 0);
+					GL.glVertex2d(+gridSize * gridCount, 0);
 				}
 				GL.glEnd();
-				GL.glTranslated(0d, (double) gridSize / gridCount, 0d);
+				GL.glTranslated(0d, (double) gridSize, 0d);
 			}
 		}
 		GL.glPopMatrix();
 		GL.glPushMatrix();
 		{
-			GL.glTranslated(-gridSize, 0d, 0d);
-			for (int i = 0; i <= twiceGrid; i++) {
+			GL.glTranslated(-gridSize * gridCount, 0d, 0d);
+			for (int i = 0; i <= 2 * gridCount; i++) {
 				if (i % gridSkip == 0) {
 					GL.glColor3d(0.7d, 0.7d, 0.7d);
 				} else {
@@ -191,11 +197,11 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 				}
 				GL.glBegin(GL.GL_LINES);
 				{
-					GL.glVertex2d(0, -gridSize);
-					GL.glVertex2d(0, +gridSize);
+					GL.glVertex2d(0, -gridSize * gridCount);
+					GL.glVertex2d(0, +gridSize * gridCount);
 				}
 				GL.glEnd();
-				GL.glTranslated((double) gridSize / gridCount, 0d, 0d);
+				GL.glTranslated((double) gridSize, 0d, 0d);
 			}
 		}
 		GL.glPopMatrix();
@@ -258,15 +264,23 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 			this.setPartName(file.getName());
 			InputStream is = file.getContents();
 			ObjectInputStream ois = new ObjectInputStream(is);
-			model = (Model) ois.readObject();
+			model = (Model) ((Representation) ois.readObject()).resurect();
 		} catch (EOFException e) {
 			Activator.error("Probably new file", e);
 		} catch (CoreException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (IllegalArgumentException e) {
+			throw new RuntimeException(e);
+		} catch (InstantiationException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e);
 		}
 		if (model == null) {
 			model = new Model();

@@ -1,12 +1,11 @@
-package org.opencad.corners.ui;
+package org.opencad.corners;
 
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.graphics.Rectangle;
-import org.opencad.corners.modelling.Corner;
 import org.opencad.ui.editors.GLEditor;
-import org.opencad.ui.editors.state.GLEditorState;
+import org.opencad.ui.editors.GLEditorState;
 
 public class DragCornerState extends GLEditorState implements
 		MouseMoveListener, MouseListener {

@@ -1,15 +1,14 @@
-package org.opencad.corners.ui;
+package org.opencad.corners;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.graphics.Rectangle;
-import org.opencad.corners.modelling.Corner;
-import org.opencad.ui.behaviour.Hoverable;
 import org.opencad.ui.editors.GLEditor;
-import org.opencad.ui.editors.state.GLEditorState;
-import org.opencad.walls.modelling.Wall;
+import org.opencad.ui.editors.GLEditorState;
+import org.opencad.ui.editors.Hoverable;
+import org.opencad.walls.Wall;
 
 public class PickupCornerState extends GLEditorState implements MouseListener,
 		MouseMoveListener {

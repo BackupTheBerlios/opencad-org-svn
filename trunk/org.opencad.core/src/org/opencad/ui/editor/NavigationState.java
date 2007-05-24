@@ -1,4 +1,4 @@
-package org.opencad.ui.editors;
+package org.opencad.ui.editor;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;

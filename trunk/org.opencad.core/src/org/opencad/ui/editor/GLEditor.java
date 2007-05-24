@@ -1,4 +1,4 @@
-package org.opencad.ui.editors;
+package org.opencad.ui.editor;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,7 +32,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.opencad.corners.Model;
+import org.opencad.modelling.Model;
 import org.opencad.ui.Activator;
 
 public class GLEditor extends EditorPart implements ISelectionChangedListener {

@@ -1,4 +1,4 @@
-package org.opencad.ui.editors;
+package org.opencad.ui.editor;
 
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseListener;

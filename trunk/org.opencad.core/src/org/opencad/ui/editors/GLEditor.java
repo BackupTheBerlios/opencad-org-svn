@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 
 import org.eclipse.core.resources.IFile;
@@ -33,7 +32,6 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.opencad.export.Representation;
 import org.opencad.model.modelling.Model;
 import org.opencad.rendering.EditorRenderable;
 import org.opencad.ui.Activator;
@@ -110,7 +108,7 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(baos);
 			setDirty(false);
-			oos.writeObject(new Representation(model));
+			oos.writeObject(model);
 			oos.close();
 			ByteArrayInputStream is = new ByteArrayInputStream(baos
 					.toByteArray());
@@ -118,10 +116,6 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		} catch (CoreException e) {
-			throw new RuntimeException(e);
-		} catch (InvocationTargetException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -264,7 +258,7 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 			this.setPartName(file.getName());
 			InputStream is = file.getContents();
 			ObjectInputStream ois = new ObjectInputStream(is);
-			model = (Model) ((Representation) ois.readObject()).resurect();
+			model = (Model) ois.readObject();
 		} catch (EOFException e) {
 			Activator.error("Probably new file", e);
 		} catch (CoreException e) {
@@ -274,12 +268,6 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		} catch (IllegalArgumentException e) {
-			throw new RuntimeException(e);
-		} catch (InstantiationException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		} catch (InvocationTargetException e) {
 			throw new RuntimeException(e);
 		}
 		if (model == null) {

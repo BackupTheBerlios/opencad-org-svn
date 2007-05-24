@@ -13,9 +13,9 @@ public class Model extends Primitive {
 
 	private LinkedList<Primitive> primitives;
 
-	private LinkedList<Hoverable> hoverables;
+	private transient LinkedList<Hoverable> hoverables;
 	
-	private Selectable selection = null;
+	private transient Selectable selection = null;
 
 	public Selectable getSelection() {
 		return selection;

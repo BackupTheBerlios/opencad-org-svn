@@ -19,11 +19,11 @@ public class Corner extends Primitive implements Hoverable, Selectable {
 
 	private Double x, y;
 
-	private boolean hover;
+	private transient boolean hover;
 
-	private boolean selected;
+	private transient boolean selected;
 
-	private double hoverSlack = 0.06d;
+	private transient double hoverSlack = 0.06d;
 
 	public final Double getX() {
 		return x;

@@ -8,9 +8,9 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.graphics.Image;
-import org.opencad.modelling.Model;
-import org.opencad.modelling.Primitive;
-import org.opencad.modelling.PrimitiveTypeRegister;
+import org.opencad.corners.Model;
+import org.opencad.corners.Primitive;
+import org.opencad.corners.PrimitiveTypeRegister;
 
 public class GLEditorTreeContentProvider implements ITreeContentProvider,
 		ILabelProvider {

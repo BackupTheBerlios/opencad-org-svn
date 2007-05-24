@@ -1,8 +1,6 @@
 package org.opencad.corners;
 
 import org.eclipse.opengl.GL;
-import org.opencad.modelling.Primitive;
-import org.opencad.modelling.PrimitiveTypeRegister;
 import org.opencad.ui.editors.GLEditor;
 import org.opencad.ui.editors.GLEditorState;
 import org.opencad.ui.editors.Hoverable;

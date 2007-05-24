@@ -2,8 +2,8 @@ package org.opencad.walls;
 
 import org.eclipse.opengl.GL;
 import org.opencad.corners.Corner;
-import org.opencad.modelling.Primitive;
-import org.opencad.modelling.PrimitiveTypeRegister;
+import org.opencad.corners.Primitive;
+import org.opencad.corners.PrimitiveTypeRegister;
 
 public class Wall extends Primitive {
 

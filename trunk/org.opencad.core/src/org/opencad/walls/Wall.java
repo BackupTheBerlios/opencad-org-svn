@@ -1,14 +1,14 @@
-package org.opencad.walls.modelling;
+package org.opencad.walls;
 
-import org.opencad.corners.modelling.Corner;
-import org.opencad.model.modelling.Primitive;
-import org.opencad.model.modelling.PrimitiveTypeRegister;
-import org.opencad.walls.rendering.WallEditorRenderer;
+import org.eclipse.opengl.GL;
+import org.opencad.corners.Corner;
+import org.opencad.modelling.Primitive;
+import org.opencad.modelling.PrimitiveTypeRegister;
 
 public class Wall extends Primitive {
 
 	private static final long serialVersionUID = -8662848078904155699L;
-	
+
 	static {
 		PrimitiveTypeRegister.registerPrimitiveType(Wall.class);
 	}
@@ -34,10 +34,23 @@ public class Wall extends Primitive {
 	public Wall(Corner startingCorner, Corner endingCorner) {
 		this.startingCorner = startingCorner;
 		this.endingCorner = endingCorner;
-		this.addRenderer(new WallEditorRenderer(this));
 	}
 
 	public String toString() {
-		return String.format("%s=%s",startingCorner, endingCorner);
+		return String.format("%s=%s", startingCorner, endingCorner);
+	}
+
+	public void editorRender() {
+		if (getStartingCorner() != null && getEndingCorner() != null) {
+			GL.glColor3d(0d, 0d, 0d);
+			GL.glBegin(GL.GL_LINES);
+			{
+				GL.glVertex2d(getStartingCorner().getX(), getStartingCorner()
+						.getY());
+				GL.glVertex2d(getEndingCorner().getX(), getEndingCorner()
+						.getY());
+			}
+			GL.glEnd();
+		}
 	}
 }

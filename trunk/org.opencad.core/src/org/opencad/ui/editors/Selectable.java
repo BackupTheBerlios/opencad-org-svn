@@ -1,7 +1,5 @@
-package org.opencad.ui.behaviour;
+package org.opencad.ui.editors;
 
-import org.opencad.ui.editors.GLEditor;
-import org.opencad.ui.editors.state.GLEditorState;
 
 
 public interface Selectable {

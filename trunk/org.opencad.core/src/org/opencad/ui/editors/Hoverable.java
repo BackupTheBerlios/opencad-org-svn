@@ -1,4 +1,4 @@
-package org.opencad.ui.behaviour;
+package org.opencad.ui.editors;
 
 public interface Hoverable {
 

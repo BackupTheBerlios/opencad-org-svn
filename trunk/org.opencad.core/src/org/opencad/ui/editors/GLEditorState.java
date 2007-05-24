@@ -1,11 +1,10 @@
-package org.opencad.ui.editors.state;
+package org.opencad.ui.editors;
 
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.MouseTrackListener;
 import org.eclipse.swt.widgets.Listener;
-import org.opencad.ui.editors.GLEditor;
 
 public abstract class GLEditorState {
 

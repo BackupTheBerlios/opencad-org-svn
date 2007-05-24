@@ -32,12 +32,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.opencad.model.modelling.Model;
-import org.opencad.rendering.EditorRenderable;
+import org.opencad.modelling.Model;
 import org.opencad.ui.Activator;
-import org.opencad.ui.behaviour.Selectable;
-import org.opencad.ui.editors.state.GLEditorState;
-import org.opencad.ui.editors.state.NavigationState;
 
 public class GLEditor extends EditorPart implements ISelectionChangedListener {
 
@@ -212,7 +208,7 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 			drawAnchor();
 		}
 		GL.glPopMatrix();
-		model.render(EditorRenderable.class);
+		model.editorRender();
 	}
 
 	void glInit() {

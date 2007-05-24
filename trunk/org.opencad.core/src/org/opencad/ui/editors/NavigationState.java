@@ -1,4 +1,4 @@
-package org.opencad.ui.editors.state;
+package org.opencad.ui.editors;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
@@ -9,9 +9,6 @@ import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
-import org.opencad.ui.behaviour.Hoverable;
-import org.opencad.ui.behaviour.Selectable;
-import org.opencad.ui.editors.GLEditor;
 
 public class NavigationState extends GLEditorState implements
 		MouseMoveListener, Listener, KeyListener, MouseListener {

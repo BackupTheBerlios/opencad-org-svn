@@ -1,0 +1,26 @@
+\documentclass[a4paper]{report}
+\usepackage[cp1250]{inputenc}
+\usepackage[romanian]{babel}
+
+\title{Titlul Lucrãrii}
+\author{Autor}
+\date{Data}
+
+\begin{document}
+	\maketitle
+	\pagenumbering{roman}
+	\tableofcontents
+	\listoffigures
+	\listoftables
+	\begin{abstract}
+		\input{rezumat.tex}	
+	\end{abstract}
+	\pagenumbering{arabic}
+	\chapter{Introducere}
+		\input{introducere.tex}
+	\chapter{Introducere Tehnicã}
+		\input{introducere.tex}
+	\bibliographystyle{plain}
+	\bibliography{thesis}
+\end{document}
+

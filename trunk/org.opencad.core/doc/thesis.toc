@@ -1,0 +1,3 @@
+\select@language {romanian}
+\contentsline {chapter}{\numberline {1}Introducere}{1}
+\contentsline {chapter}{\numberline {2}Introducere Tehnic\u a}{2}

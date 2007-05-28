@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<project name="diploma" default="default">
+	<description>
+            description
+    </description>
+
+	<target name="default">
+		<exec executable="pdfetex">
+			<arg value="-output-format"/>
+			<arg value="pdf"/>
+			<arg value="&amp;latex"/>
+			<arg value="thesis"/>
+		</exec>
+	</target>
+</project>

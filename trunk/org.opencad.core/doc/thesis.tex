@@ -1,26 +1,55 @@
 \documentclass[a4paper]{report}
 \usepackage[cp1250]{inputenc}
 \usepackage[romanian]{babel}
+\usepackage{url}
 
-\title{Titlul Lucrãrii}
-\author{Autor}
-\date{Data}
+\renewcommand{\title}{OpenCad.org}
+\newcommand{\subtitle}{Proiectarea unei aplicaþii CAD pentru arhitecturã}
+\renewcommand{\author}{Silviu-Georgian Aprozeanu}
+\newcommand{\teacher}{prof. dr. ing. Florica Moldoveanu}
 
 \begin{document}
-	\maketitle
+	\begin{titlepage}
+	\null
+	\vfill
+	\begin{center}
+	{\Huge \title{}}
+	
+	{\large \subtitle{}}
+	\end{center}
+	\vfill
+	\begin{flushright}
+		\begin{tabular}{ll}
+			Absolvent & \author{} \\
+			Profesor îndrumãtor & \teacher{}
+		\end{tabular}
+	\end{flushright}
+	\vskip 2cm
+	\begin{center}
+		\small Bucureºti, \today
+	\end{center}
+	\end{titlepage}
 	\pagenumbering{roman}
 	\tableofcontents
-	\listoffigures
 	\listoftables
-	\begin{abstract}
-		\input{rezumat.tex}	
-	\end{abstract}
+	\listoffigures
+	\newpage
 	\pagenumbering{arabic}
 	\chapter{Introducere}
 		\input{introducere.tex}
-	\chapter{Introducere Tehnicã}
-		\input{introducere.tex}
-	\bibliographystyle{plain}
+	\chapter{Obiective}
+		\input{obiective.tex}
+	\chapter{Tehnologii}
+		\input{tehnologii.tex}
+	\chapter{Arhitecturã}
+		\input{arhitectura.tex}
+	\chapter{Implementare}
+		\input{implementare.tex}
+	\chapter{Concluzii}
+		\input{concluzii.tex}
+	\newpage
+	\pagenumbering{roman}
+	\bibliographystyle{alpha}
 	\bibliography{thesis}
 \end{document}
 

@@ -1,0 +1,40 @@
+Proiectul Eclipse îºi are începuturile alãturi de compania IBM de care s-a separat în 2003;
+astãzi este printre cele mai cunoscute proiecte opensource, fiind recunoscut ca un foarte
+popular mediu de dezvoltare de aplicaþii Java ºi nu numai
+\footnote{Existã plugin-uri pentru Eclipse pentru dezvoltarea
+de aplicaþii în toate limbajele de programare populare, cît ºi
+facilitãþi de proiectare a interfeþelor grafice ale aplicaþiilor.
+De asemenea, Eclipse este folosit pentru dezvoltarea de
+aplicaþii J2EE atît la nivel de prezentare cît ºi la nivel de
+baze de date ºi nivel aplicaþie}.
+
+Binecunoscutul mediu de dezvoltare Eclipse este dezvoltat pe baza
+Eclipse Rich Client Platform. Aceasta reprezintã suita minimã de plugin-uri necesare pentru
+dezvoltarea unei aplicaþii "rich client"
+\footnote{eng. \textit{client bogat} -- O aplicaþie desktop
+care beneficiazã de un set de elemente de interfaþã evoluate ("bogate"), care oferã o putere mare
+de abstractizare ºi în acelaºi timp control al funcþionalitãþii programatorului, pãstrînd
+o experienþã de utilizare plãcutã pentru utilizator. În general orice aplicaþie desktop
+care foloseºte elemente de interfaþã predefinite pînã la un anumit punct poate fi
+consideratã ca un rich client.}.
+Deºi platforma este destinatã dezvoltãrii de aplicaþii tip IDE
+\footnote{eng. \textit{Mediu de dezvoltare integrat} -- compus în general dintr-un editor de cod sursã,
+compilator sau interpretor, unelte de compilare automate ºi eventual un depanator},
+prin înlãturarea anumitor componente ale platformei se pot dezvolta orice tip de aplicaþii desktop.
+
+Structura de bazã a acestei platforme poate fi rezumatã astfel\cite{rcpfaq}:
+\begin{table}[h]
+\caption{Structura Eclipse RCP}
+\begin{tabular}[t]{|l|p{9cm}|}
+\hline
+\textbf{Componentã} & \textbf{Descriere}  \\
+\hline
+Eclipse Runtime & Provides the foundational support for plug-ins,
+extension points and extensions (among other facilities).
+The Eclipse runtime is built on top of the OSGi framework.\\
+SWT & 5  \\
+JFace & 5 \\
+Workbench & 5 \\
+\hline
+\end{tabular}
+\end{table}

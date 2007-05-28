@@ -3,7 +3,7 @@
 <plugin>
   <extension point="org.eclipse.ui.editors">
      <editor
-           class="org.opencad.ui.editors.GLEditor"
+           class="org.opencad.ui.editor.GLEditor"
            extensions="ocm"
            icon="icons/overview_obj.gif"
            id="org.opencad.core.editors.GLEditor"
@@ -15,7 +15,7 @@
            id="org.opencad.core.addWallContribution"
            targetID="org.opencad.core.editors.GLEditor">
         <action
-              class="org.opencad.walls.ui.AddWallActionDelegate"
+              class="org.opencad.modelling.walls.AddWallActionDelegate"
               icon="icons/plugin_config_obj.gif"
               id="org.opencad.core.addWallAction"
               label="New Wall"
@@ -36,5 +36,17 @@
               name="startupProgressRect"
               value="0,10,420,10"/>
      </product>
+  </extension>
+  <extension
+        point="org.eclipse.ui.views">
+     <view
+           allowMultiple="false"
+           category="org.opencad.core.viewCategory"
+           class="org.opencad.ui.view.GLView"
+           id="org.opencad.core.glView"
+           name="3D View"/>
+     <category
+           id="org.opencad.core.viewCategory"
+           name="OpenCad.org"/>
   </extension>
 </plugin>

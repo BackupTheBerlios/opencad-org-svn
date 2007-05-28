@@ -30,4 +30,8 @@ public class GLEditorOutlinePage extends ContentOutlinePage {
 		getTreeViewer().addSelectionChangedListener(this);
 		getTreeViewer().setInput(editor.getModel());
 	}
+
+	public GLEditor getEditor() {
+		return editor;
+	}
 }

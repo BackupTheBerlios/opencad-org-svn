@@ -120,7 +120,7 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 	public void doSaveAs() {
 	}
 
-	void drawAnchor() {
+	public static void drawAnchor() {
 		double arrowWidth = 0.01d;
 		double arrowHeight = 0.07d;
 
@@ -152,7 +152,7 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 		GL.glEnd();
 	}
 
-	void drawGrid() {
+	public static void drawGrid() {
 		final int gridCount = 1000;
 		final int gridSkip = 5;
 		final double gridSize = 0.1d;
@@ -214,7 +214,7 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 	void glInit() {
 		GL.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		GL.glColor3f(0.0f, 0.0f, 0.0f);
-		GL.glClearDepth(1.0f);
+		//GL.glClearDepth(1.0f);
 		GL.glEnable(GL.GL_DEPTH_TEST);
 		GL.glHint(GL.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
 	}

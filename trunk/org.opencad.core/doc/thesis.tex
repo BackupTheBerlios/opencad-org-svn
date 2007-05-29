@@ -9,9 +9,7 @@
 \renewcommand{\author}{Silviu-Georgian Aprozeanu}
 \newcommand{\teacher}{prof. dr. ing. Florica Moldoveanu}
 
-\newcommand{\sep}{\hspace{0.01\textwidth}}
-\newcommand{\len}[1]{#1\textwidth}
-\newcommand{\col}[1]{@{\sep{}}p{\len{#1}}@{\sep{}}}
+\newcommand{\col}[1]{@{\hspace{0.01\textwidth}}p{#1\textwidth}@{\hspace{0.01\textwidth}}}
 
 \begin{document}
 	\begin{titlepage}
@@ -20,7 +18,7 @@
 	\begin{center}
 	{\Huge \title{}}
 	
-	{\large \subtitle{}}
+	{\Large \subtitle{}}
 	\end{center}
 	\vfill
 	\begin{flushright}
@@ -55,7 +53,7 @@
 		\input{concluzii.tex}
 	\newpage
 	\pagenumbering{roman}
-	\bibliographystyle{alpha}
+	\bibliographystyle{plain}
 	\bibliography{thesis}
 \end{document}
 

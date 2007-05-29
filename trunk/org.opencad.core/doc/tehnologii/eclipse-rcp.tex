@@ -1,12 +1,6 @@
 Proiectul Eclipse îºi are începuturile alãturi de compania IBM de care s-a separat în 2003;
 astãzi este printre cele mai cunoscute proiecte opensource, fiind recunoscut ca un foarte
-popular mediu de dezvoltare de aplicaþii Java ºi nu numai
-\footnote{Existã plugin-uri pentru Eclipse pentru dezvoltarea
-de aplicaþii în toate limbajele de programare populare, cît ºi
-facilitãþi de proiectare a interfeþelor grafice ale aplicaþiilor.
-De asemenea, Eclipse este folosit pentru dezvoltarea de
-aplicaþii J2EE atît la nivel de prezentare cît ºi la nivel de
-baze de date ºi nivel aplicaþie}.
+popular mediu de dezvoltare de aplicaþii Java ºi nu numai.
 
 Binecunoscutul mediu de dezvoltare Eclipse este dezvoltat pe baza
 Eclipse Rich Client Platform. Aceasta reprezintã suita minimã de plugin-uri necesare pentru
@@ -17,9 +11,7 @@ de abstractizare ºi în acelaºi timp control al funcþionalitãþii programatorului,
 o experienþã de utilizare plãcutã pentru utilizator. În general orice aplicaþie desktop
 care foloseºte elemente de interfaþã predefinite pînã la un anumit punct poate fi
 consideratã ca un rich client.}.
-Deºi platforma este destinatã dezvoltãrii de aplicaþii tip IDE
-\footnote{eng. \textit{Mediu de dezvoltare integrat} -- compus în general dintr-un editor de cod sursã,
-compilator sau interpretor, unelte de compilare automate ºi eventual un depanator},
+Deºi platforma este destinatã dezvoltãrii de aplicaþii tip IDE,
 prin înlãturarea anumitor componente ale platformei se pot dezvolta orice tip de aplicaþii desktop.
 
 Structura de bazã a acestei platforme poate fi rezumatã astfel\cite{rcpfaq}:
@@ -29,12 +21,76 @@ Structura de bazã a acestei platforme poate fi rezumatã astfel\cite{rcpfaq}:
 \hline
 \textbf{Componentã} & \textbf{Descriere}  \\
 \hline
-Eclipse Runtime & Provides the foundational support for plug-ins,
-extension points and extensions (among other facilities).
-The Eclipse runtime is built on top of the OSGi framework.\\
-SWT & 5  \\
-JFace & 5 \\
-Workbench & 5 \\
+Eclipse Runtime & Suport pentru plugin-uri, puncte de extensie ºi extensii.
+Construitã peste framework-ul OSGi\\
+\hline
+SWT &
+Proiectat sã ofere acces eficient ºi portabil la facilitãþile de interfaþã
+utilizator ale sistemului de operare pe care este implementat\\
+\hline
+JFace & 
+Un framework de interfaþã utilizator, construit pest SWT, pentru tratarea multor
+sarcini de programare de interfeþe\\
+\hline
+Workbench & 
+Construit peste toate componentele anterioare, aduce un mediu de lucru ultra scalabil,
+cu interfaþã publicã ce suportã mai multe ferestre pentru administrarea vizualizãrilor,
+editoarelor, perspectivelor,
+acþiunilor, preferinþelor ºi multe altele.
+\\
 \hline
 \end{tabular}
 \end{table}
+
+\subsection{Eclipse Runtime}
+
+Aceastã componentã a Eclipse RCP este cea mai abstractã ºi în acelaºi timp cea mai
+puternicã componentã a sa.
+
+Structura sa de bazã poate fi împãrþitã în\cite{rcpcore}:
+\begin{itemize}
+\item org.eclipse.core.contenttype - Suport pentru definirea ºi
+administrarea tipurilor de fiºiere
+\item org.eclipse.core.expressions - Un limbaj generic de expresii XML folosit în
+definirea punctelor de extensie.
+\item org.eclipse.core.filesystem - Un API generic peste sistemul de fiºiere
+\item org.eclipse.core.jobs - Infrastructurã pentru programare paralelã în Eclipse
+\item org.eclipse.core.resources - Administrarea proiectelor, resurselor ºi fiºierelor
+\item org.eclipse.core.runtime - Istoric a fost baza platformei, acum a fost înlocuit
+de proiectul Equinox
+\end{itemize}
+
+\subsection{SWT}
+SWT\footnote{abrev. \textit{Standard Widget Toolkit}} este una din cele mai populare
+tehnologii dezvoltate de Fundaþia Eclipse.
+Aceastã tehnologie foloseºte la crearea de interfeþe utilizator în mediul de
+dezvoltare Java, oferind programatorului capacitatea de a construi interfeþe utilizator
+portabile între diverse sisteme de operare. În prezent suportã toate sistemele de
+operare uzuale ºi diverse arhitecturi maºinã (e.g. x86, amd64).
+
+Structura sa este similarã cu cea a altor toolkit-uri similare, ca AWT ºi SWING.
+Elementele fundamentale sunt Shell-ul ºi Controlul. Un shell este abstracþia conceptului
+de fereastrã ºi reprezintã în general un container pentru controale. Controalele
+sunt elementele interfeþei utilizator. Butoanele, etichetele, arborii ºi tabelele sunt
+toate controale ºi utilizatorii sunt obiºnuite cu ele din alte programe ale
+desktopului\cite{swt}.
+În principiu orice widget poate fi simplu sau compus (i.e. descendent al clasei Composite)
+ºi întreaga lor ierharhie este controlatã de relaþiile dintre clasele SWT.
+
+Interacþiunile dintre controale ºi utilizator cît ºi controlul tranziþiei stãrilor
+controalelor se face cu ajutorul Evenimentelor. Fiecare modificare de stare a unui
+control (cum ar fi apãsarea pe un buton) este semnalatã de SWT cãtre aplicaþie prin
+declanºarea unui eveniment. Orice Listener (ascultãtor înregistrat pentru un anumit
+eveniment) va primi o notificare (i.e. o metodã declaratã în interfaþa de Listener
+va fi apelatã) ce va conþine evenimentul ce a avut loc. Orice clasã poate deveni
+listener prin implementarea unor interfeþe specifice, SWT oferind astfel o mare
+flexibilitate în cadrul aplicaþiilor care îl folosesc.
+
+Ca ºi în AWT sau SWING, poziþia controalelor este stabilitã cu ajutorul Layout-urilor.
+Un layout reprezintã un set de reguli de poziþionare pentru un control compus ce va
+decide pentru toate controalele incluse cum vor fi ele poziþionate pe ecran. Unele
+layout-uri asociazã anumite date fiecãrui control pentru a reþine poziþia în care va
+fi desenat. Poziþionarea manualã a tuturor controalelor este o problemã complexã ºi
+dacã acel algoritm nu este scris eficient, el poate afecta performaneþele întregii
+aplicaþii. De aceea, SWT oferã niºte seturi predefinite de layout-uri ce serversc
+cele mai comune cazuri întîlnite de programatori.

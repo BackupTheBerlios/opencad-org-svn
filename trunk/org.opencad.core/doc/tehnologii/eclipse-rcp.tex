@@ -15,11 +15,9 @@ Deºi platforma este destinatã dezvoltãrii de aplicaþii tip IDE,
 prin înlãturarea anumitor componente ale platformei se pot dezvolta orice tip de aplicaþii desktop.
 
 Structura de bazã a acestei platforme poate fi rezumatã dupã cum am prezentat în Tabela \ref{table:rcpstruct}.
-\begin{table}[htb]
+\begin{table}[h]
 \caption{Structura Eclipse RCP \cite{rcpfaq} \label{table:rcpstruct}}
 \begin{tabular}{|\col{0.23}|\col{0.73}|}
-\hline
-\textbf{Componentã} & \textbf{Descriere}  \\
 \hline
 Eclipse Runtime & Suport pentru plugin-uri, puncte de extensie ºi extensii.
 Construitã peste framework-ul OSGi\\
@@ -43,22 +41,30 @@ acþiunilor, preferinþelor ºi multe altele.
 \end{table}
 
 \subsection{Eclipse Runtime}
-
 Aceastã componentã a Eclipse RCP este cea mai abstractã ºi în acelaºi timp cea mai
-puternicã componentã a sa.
+puternicã componentã a sa. Structura sa de bazã este descrisã în
+Tabela \ref{table:runtimestruct}.
 
-Structura sa de bazã poate fi împãrþitã în\cite{rcpcore}:
-\begin{itemize}
-\item org.eclipse.core.contenttype - Suport pentru definirea ºi
-administrarea tipurilor de fiºiere
-\item org.eclipse.core.expressions - Un limbaj generic de expresii XML folosit în
-definirea punctelor de extensie.
-\item org.eclipse.core.filesystem - Un API generic peste sistemul de fiºiere
-\item org.eclipse.core.jobs - Infrastructurã pentru programare paralelã în Eclipse
-\item org.eclipse.core.resources - Administrarea proiectelor, resurselor ºi fiºierelor
-\item org.eclipse.core.runtime - Istoric a fost baza platformei, acum a fost înlocuit
-de proiectul Equinox
-\end{itemize}
+\begin{table}[h]
+\caption{Structura Eclipse Runtime \cite{eclipsehelp} \label{table:runtimestruct}}
+\begin{tabular}{|\col{0.38}|\col{0.58}|}
+\hline
+org.eclipse.core.contenttype & Suport pentru definirea ºi
+administrarea tipurilor de fiºiere \\
+\hline
+org.eclipse.core.jobs & Infrastructurã pentru programare paralelã în Eclipse \\
+\hline
+org.eclipse.equinox.registry & Sistemul prin care un plugin publicã alte plugin-uri
+de care depinde ºi defineºte puncte de extensie pentru ca alte plugin-uri sã-i
+îmbogãþeascã funcþionalitatea \\
+\hline
+org.eclipse.equinox.preferences & O infrastructurã prin care un plugin îºi pãstreazã 
+preferinþele în seturi de perechi cheie/valoare modificabile de cãtre utilizator \\
+\hline
+org.eclipse.equinox.common & Administrarea proiectelor, resurselor ºi fiºierelor \\
+\hline
+\end{tabular}
+\end{table}
 
 Equinox este o implementare a specificaþiilor OSGi R4
 \footnote{\url{http://osgi.org/osgi_technology/download_specs.asp?section=2#Release4}}
@@ -76,7 +82,9 @@ dezvoltare Java, oferind programatorului capacitatea de a construi interfeþe uti
 portabile între diverse sisteme de operare. În prezent suportã toate sistemele de
 operare uzuale ºi diverse arhitecturi maºinã (e.g. x86, amd64).
 
-Structura sa este similarã cu cea a altor toolkit-uri similare, ca AWT ºi SWING.
+Structura sa este similarã cu cea a altor toolkit-uri similare, ca AWT
+\footnote{abrev. \textit{Abstract Window Toolkit} -- toolkit-ul IU standard Java
+\url{http://en.wikipedia.org/wiki/Abstract_Windowing_Toolkit}} ºi SWING\footnote{Un toolkit IU independent de platformã \url{http://en.wikipedia.org/wiki/Swing_(Java)}}.
 Elementele fundamentale sunt Shell-ul ºi Controlul. Un shell este abstracþia conceptului
 de fereastrã ºi reprezintã în general un container pentru controale. Controalele
 sunt elementele interfeþei utilizator. Butoanele, etichetele, arborii ºi tabelele sunt
@@ -147,3 +155,35 @@ Text & org.eclipse.jface.text & Un framework de crearea, manipularea, afiºarea º
 \hline
 \end{tabular}
 \end{table}
+
+\subsection{Workbench}
+Aceastã parte a Eclipse RCP reprezintã o colecþie largã de clase ºi interfeþe pentru
+construirea de interfeþe utilizator complexe.
+
+Iatã principalele elemente ce constituie un Workbench.
+
+\subsubsection{Workbench}
+Ca termen strict, se referã la fereastra care conþine întreaga aplicaþie. Defineºte un container
+abstract pentru toate elementele de interfaþã din aplicaþia dezvoltatã cu Eclipse RCP.
+
+\subsubsection{Pagina}
+Reprezintã, în mod intuitiv, toatã partea ferestrei care nu conþine barele de unelte ºi meniul.
+
+\subsubsection{Perspective}
+Folosesc pentru organizarea conþinutului într-o Paginã. O perspectivã defineºte o colecþie de
+Vizualizãri, aºezarea lor ºi acþiunile ce pot fi efectuate pentru o sarcinã a utilizatorului.
+Perspectivele pot fi schimbate de cãtre utilizatorul. Modificarea Perspectivei afecteazã doar
+Vizualizãrile nu ºi Editoarele. \cite{eclipsehelp}
+
+\subsubsection{Vizualizãrile ºi Editoarele}
+Reprezintã extensiile aduse de programator într-o aplicaþie Eclipse RCP. Un editor urmãreºte
+modelul unei maºini de stãri în sensul cã el are o etapã de deschidere, editare ºi o etapã de
+salvare.
+
+În schimb orice modificare a stãrii unei Vizualizãri este salvatã imediat. Vizualizãrile sunt
+folosite la a arãta structura modelului deschis într-un Editor, la a facilita accesul la fiºiere
+ºi la alte resurse ale unui proiect.
+
+Editoarele urmãresc în general modelul unui editor de text clasic ºi oferã aceeaºi funcþionalitate
+însã la un nivel mai abstract, nefiind dependent de o intrare ca fiºier text, nici mãcar ca
+intrarea sã fie orice fel de fiºier.

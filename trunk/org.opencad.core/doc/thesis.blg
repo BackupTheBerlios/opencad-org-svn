@@ -1,45 +1,51 @@
 This is BibTeX, Version 0.99c (Web2C 7.5.4)
 The top-level auxiliary file: thesis.aux
-The style file: alpha.bst
+The style file: plain.bst
 Database file #1: thesis.bib
-You've used 1 entry,
-            2543 wiz_defined-function locations,
-            560 strings with 4613 characters,
-and the built_in function-call counts, 434 in all, are:
-= -- 34
-> -- 35
+Warning--to sort, need author or key in eclipsehelp
+Warning--to sort, need author or key in equinox
+Warning--to sort, need author or key in equinoxfaq
+Warning--to sort, need author or key in jface
+Warning--to sort, need author or key in oglwiki
+You've used 8 entries,
+            2118 wiz_defined-function locations,
+            515 strings with 4794 characters,
+and the built_in function-call counts, 1537 in all, are:
+= -- 123
+> -- 59
 < -- 0
-+ -- 13
-- -- 13
-* -- 32
-:= -- 83
-add.period$ -- 2
-call.type$ -- 1
-change.case$ -- 8
-chr.to.int$ -- 1
-cite$ -- 1
-duplicate$ -- 10
-empty$ -- 26
-format.name$ -- 13
-if$ -- 81
-int.to.chr$ -- 1
-int.to.str$ -- 0
++ -- 26
+- -- 18
+* -- 66
+:= -- 208
+add.period$ -- 11
+call.type$ -- 8
+change.case$ -- 32
+chr.to.int$ -- 0
+cite$ -- 13
+duplicate$ -- 56
+empty$ -- 182
+format.name$ -- 18
+if$ -- 348
+int.to.chr$ -- 0
+int.to.str$ -- 8
 missing$ -- 0
-newline$ -- 8
-num.names$ -- 3
-pop$ -- 13
+newline$ -- 30
+num.names$ -- 6
+pop$ -- 69
 preamble$ -- 1
-purify$ -- 9
+purify$ -- 24
 quote$ -- 0
-skip$ -- 13
+skip$ -- 83
 stack$ -- 0
-substring$ -- 7
-swap$ -- 1
+substring$ -- 40
+swap$ -- 8
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 8
-warning$ -- 0
-while$ -- 3
-width$ -- 2
-write$ -- 12
+type$ -- 32
+warning$ -- 5
+while$ -- 6
+width$ -- 9
+write$ -- 48
+(There were 5 warnings)

@@ -3,6 +3,9 @@
 \contentsline {chapter}{\numberline {2}Obiective}{2}
 \contentsline {chapter}{\numberline {3}Tehnologii}{3}
 \contentsline {section}{\numberline {3.1}Eclipse Rich Client Platform}{3}
-\contentsline {chapter}{\numberline {4}Arhitectur\u a}{4}
-\contentsline {chapter}{\numberline {5}Implementare}{5}
-\contentsline {chapter}{\numberline {6}Concluzii}{6}
+\contentsline {subsection}{\numberline {3.1.1}Eclipse Runtime}{3}
+\contentsline {subsection}{\numberline {3.1.2}SWT}{4}
+\contentsline {subsection}{\numberline {3.1.3}JFace}{5}
+\contentsline {chapter}{\numberline {4}Arhitectur\u a}{7}
+\contentsline {chapter}{\numberline {5}Implementare}{8}
+\contentsline {chapter}{\numberline {6}Concluzii}{9}

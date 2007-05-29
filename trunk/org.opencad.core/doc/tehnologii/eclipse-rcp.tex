@@ -14,9 +14,9 @@ consideratã ca un rich client.}.
 Deºi platforma este destinatã dezvoltãrii de aplicaþii tip IDE,
 prin înlãturarea anumitor componente ale platformei se pot dezvolta orice tip de aplicaþii desktop.
 
-Structura de bazã a acestei platforme poate fi rezumatã astfel\cite{rcpfaq}:
-\begin{table}[h]
-\caption{Structura Eclipse RCP}
+Structura de bazã a acestei platforme poate fi rezumatã dupã cum am prezentat în Tabela \ref{table:rcpstruct}.
+\begin{table}[htb]
+\caption{Structura Eclipse RCP \cite{rcpfaq} \label{table:rcpstruct}}
 \begin{tabular}{|\col{0.23}|\col{0.73}|}
 \hline
 \textbf{Componentã} & \textbf{Descriere}  \\
@@ -60,6 +60,14 @@ definirea punctelor de extensie.
 de proiectul Equinox
 \end{itemize}
 
+Equinox este o implementare a specificaþiilor OSGi R4
+\footnote{\url{http://osgi.org/osgi_technology/download_specs.asp?section=2#Release4}}
+o serie de plugin-uri care implementeazã diverse servicii opþionale OSGi ºi alte
+infrastructuri pentru rularea sistemelor bazate pe OSGi. \cite{equinox}
+
+Equinox produce, printre alte lucruri, implementarea OSGi folositã de Eclipse RCP (ºi
+celelalte proiecte bazate pe Eclipse) ca un model de componente. \cite{equinoxfaq}
+
 \subsection{SWT}
 SWT\footnote{abrev. \textit{Standard Widget Toolkit}} este una din cele mai populare
 tehnologii dezvoltate de Fundaþia Eclipse.
@@ -73,7 +81,7 @@ Elementele fundamentale sunt Shell-ul ºi Controlul. Un shell este abstracþia con
 de fereastrã ºi reprezintã în general un container pentru controale. Controalele
 sunt elementele interfeþei utilizator. Butoanele, etichetele, arborii ºi tabelele sunt
 toate controale ºi utilizatorii sunt obiºnuite cu ele din alte programe ale
-desktopului\cite{swt}.
+desktopului. \cite{swt}
 În principiu orice widget poate fi simplu sau compus (i.e. descendent al clasei Composite)
 ºi întreaga lor ierharhie este controlatã de relaþiile dintre clasele SWT.
 
@@ -94,3 +102,48 @@ fi desenat. Poziþionarea manualã a tuturor controalelor este o problemã complexã
 dacã acel algoritm nu este scris eficient, el poate afecta performaneþele întregii
 aplicaþii. De aceea, SWT oferã niºte seturi predefinite de layout-uri ce serversc
 cele mai comune cazuri întîlnite de programatori.
+
+\subsection{JFace}
+JFace este un toolkit pentru interfeþe utilizator ce conþine clase pentru tratarea
+multora din sarcinile uzuale de programarea interfeþelor utilizator. JFace este independent
+de sistemul de ferestre atît in interfaþa sa pentru programatori cît ºi în implementare,
+ºi este proiectat sã funcþioneze cu SWT fãrã a-i ascunde funcþionalitatea.
+
+JFace include componentele uzuale de toolkit IU, regiºtri de imagine ºi seturi de
+caractere, text, dialog-uri, framework-uri pentru preferinþe ºi wizard-uri
+\footnote{Dialogurile des întîlnite ce automatizeazã diverse sarcini repetitive}
+ ºi raportarea
+progresului pentru sarcini cu duratã mare de execuþie. \cite{jface}
+
+Pachete principale din JFace, care oferã funcþionalitatea de bazã a tehnologiei
+ sunt prezentate în Tabela \ref{table:jfacestruct}
+
+\begin{table}[htb]
+\caption{Structura JFace \cite{jface-art} \label{table:jfacestruct}}
+\begin{tabular}{|\col{0.13}|\col{0.28}|\col{0.53}|}
+\hline
+Ferestre & org.eclipse.jface.window & Facilitãþi de creerea ºi administrarea
+ferestrelor. Interesantã este clasa ApplicationWindow, care aduce un nou nivel de
+abstracþie peste conceptul de fereastrã ºi înglobeazã o buclã program SWT.\\
+\hline
+Vizualizãri & org.eclipse.jface.viewers & Vizualizãri ca ºi TreeViewer sau TableViewer,
+care sunt componente ghidate de model ce folosesc widgeturi SWT ºi adapteazã conþinutul
+modelului la conþinutul widgetului.\\
+\hline
+Dialog-uri & org.eclipse.jface.dialogs & Diverse dialog-uri des folosite.\\
+\hline
+Acþiuni & org.eclipse.jface.actions & Un framework de acþiuni IU similar cu cel gãsit în
+SWING pentru a implementa comportament partajat între douã sau mai multe componente,
+cum ar fi o intrare în meniu ºi un buton de pe bara de instrumente.\\
+\hline
+Wizard-uri & org.eclipse.jface.wizard & Un framework avansat de construcþie a
+ wizard-urilor.\\
+\hline
+Resurse & org.eclipse.jface.resource & Suport pentru administrarea resurselor, cum ar fi
+ imaginile ºi fonturile SWT.\\
+\hline
+Text & org.eclipse.jface.text & Un framework de crearea, manipularea, afiºarea ºi editarea
+ documentelor text.\\
+\hline
+\end{tabular}
+\end{table}

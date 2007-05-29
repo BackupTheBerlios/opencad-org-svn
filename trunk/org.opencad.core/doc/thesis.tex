@@ -3,6 +3,7 @@
 \usepackage[romanian]{babel}
 \usepackage{url}
 \usepackage{a4wide}
+\linespread{1.5}
 
 \renewcommand{\title}{OpenCad.org}
 \newcommand{\subtitle}{Proiectarea unei aplicaþii CAD pentru arhitecturã}
@@ -12,48 +13,48 @@
 \newcommand{\col}[1]{@{\hspace{0.01\textwidth}}p{#1\textwidth}@{\hspace{0.01\textwidth}}}
 
 \begin{document}
-	\begin{titlepage}
-	\null
-	\vfill
-	\begin{center}
-	{\Huge \title{}}
-	
-	{\Large \subtitle{}}
-	\end{center}
-	\vfill
-	\begin{flushright}
-		\begin{tabular}{ll}
-			Absolvent & \author{} \\
-			Profesor îndrumãtor & \teacher{}
-		\end{tabular}
-	\end{flushright}
-	\vskip 2cm
-	\begin{center}
-		\small Bucureºti, \today
-	\end{center}
-	\end{titlepage}
-	\pagenumbering{roman}
-	\tableofcontents
-	\listoftables
-	\listoffigures
-	\newpage
-	\pagenumbering{arabic}
-	\pagestyle{headings}
-	\chapter{Introducere}
-		\input{introducere.tex}
-	\chapter{Obiective}
-		\input{obiective.tex}
+%	\begin{titlepage}
+%	\null
+%	\vfill
+%	\begin{center}
+%	{\Huge \title{}}
+%	
+%	{\Large \subtitle{}}
+%	\end{center}
+%	\vfill
+%	\begin{flushright}
+%		\begin{tabular}{ll}
+%			Absolvent & \author{} \\
+%			Profesor îndrumãtor & \teacher{}
+%		\end{tabular}
+%	\end{flushright}
+%	\vskip 2cm
+%	\begin{center}
+%		\small Bucureºti, \today
+%	\end{center}
+%	\end{titlepage}
+%	\pagenumbering{roman}
+%	\tableofcontents
+%	\listoftables
+%	\listoffigures
+%	\newpage
+%	\pagenumbering{arabic}
+%	\pagestyle{headings}
+%	\chapter{Introducere}
+%		\input{introducere.tex}
+%	\chapter{Obiective}
+%		\input{obiective.tex}
 	\chapter{Tehnologii}
 		\input{tehnologii.tex}
-	\chapter{Arhitecturã}
-		\input{arhitectura.tex}
-	\chapter{Implementare}
-		\input{implementare.tex}
-	\chapter{Concluzii}
-		\input{concluzii.tex}
-	\newpage
-	\pagenumbering{roman}
-	\bibliographystyle{plain}
-	\bibliography{thesis}
+%	\chapter{Arhitecturã}
+%		\input{arhitectura.tex}
+%	\chapter{Implementare}
+%		\input{implementare.tex}
+%	\chapter{Concluzii}
+%		\input{concluzii.tex}
+%	\newpage
+%	\pagenumbering{roman}
+%	\bibliographystyle{plain}
+%	\bibliography{thesis}
 \end{document}
 

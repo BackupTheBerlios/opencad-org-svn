@@ -1,0 +1,9 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{OBS{\etalchar{+}}}
+
+\bibitem[OBS{\etalchar{+}}]{rcpfaq}
+Martin Oberhuber, Nick Boldt, Daniel Spiewak, Thomas Bonk, et~al.
+\newblock Rich client platform frequently asked questions
+  \url{http://wiki.eclipse.org/index.php/RCP_FAQ}.
+
+\end{thebibliography}

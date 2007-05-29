@@ -1,3 +1,8 @@
 \select@language {romanian}
 \contentsline {chapter}{\numberline {1}Introducere}{1}
-\contentsline {chapter}{\numberline {2}Introducere Tehnic\u a}{2}
+\contentsline {chapter}{\numberline {2}Obiective}{2}
+\contentsline {chapter}{\numberline {3}Tehnologii}{3}
+\contentsline {section}{\numberline {3.1}Eclipse Rich Client Platform}{3}
+\contentsline {chapter}{\numberline {4}Arhitectur\u a}{4}
+\contentsline {chapter}{\numberline {5}Implementare}{5}
+\contentsline {chapter}{\numberline {6}Concluzii}{6}

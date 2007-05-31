@@ -1,7 +1,8 @@
 package org.opencad.ui.view;
 
-import org.eclipse.core.internal.resources.WorkspaceRoot;
-import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.opengl.GL;
 import org.eclipse.opengl.GLU;
 import org.eclipse.swt.SWT;
@@ -17,14 +18,17 @@ import org.eclipse.swt.opengl.GLData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.ui.IPropertyListener;
+import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IViewSite;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
 import org.opencad.ui.editor.GLEditor;
 
-import sun.security.acl.WorldGroupImpl;
-
-public class GLView extends ViewPart implements MouseMoveListener {
+public class GLView extends ViewPart implements MouseMoveListener,
+		ISelectionListener, ISelectionChangedListener, IPropertyListener {
 	GLCanvas glCanvas;
 
 	double fov, eyex, eyey, eyez, centerx, centery, centerz;
@@ -32,7 +36,9 @@ public class GLView extends ViewPart implements MouseMoveListener {
 	double zoomSpeed;
 
 	private double min_eyez;
-	
+
+	GLEditor glEditor;
+
 	void modifyDistance(double fraction) {
 		fraction = 1 + fraction;
 		eyex = centerx + (eyex - centerx) * fraction;
@@ -111,6 +117,8 @@ public class GLView extends ViewPart implements MouseMoveListener {
 	}
 
 	void doInit() {
+		selectionChanged(getSite().getPage().getActivePart(), getSite()
+				.getPage().getSelection());
 		synchronized (GL.class) {
 			glCanvas.setCurrent();
 			glInit();
@@ -176,7 +184,7 @@ public class GLView extends ViewPart implements MouseMoveListener {
 				GLEditor.drawAnchor();
 			}
 			GL.glPopMatrix();
-			//outline.getEditor().getModel().editorRender();
+			glEditor.getModel().realRender();
 		}
 	}
 
@@ -204,10 +212,42 @@ public class GLView extends ViewPart implements MouseMoveListener {
 		doResize();
 		doDraw();
 	}
-	
+
 	@Override
 	public void init(IViewSite site) throws PartInitException {
 		super.init(site);
-		System.out.println(site.getPage());
+		IWorkbenchPage page = site.getPage();
+		page.addSelectionListener(this);
+	}
+
+	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+		if (part instanceof GLEditor) {
+			disabled = false;
+			glEditor = (GLEditor) part;
+			glEditor.getSite().getSelectionProvider()
+					.addSelectionChangedListener(this);
+			glEditor.addPropertyListener(this);
+			glCanvas.setEnabled(true);
+			doDraw();
+		} else {
+			disabled = true;
+			if (glEditor != null) {
+				glEditor.getSite().getSelectionProvider()
+						.removeSelectionChangedListener(this);
+				glEditor.removePropertyListener(this);
+			}
+			glEditor = null;
+			glCanvas.setEnabled(false);
+		}
+	}
+
+	public void selectionChanged(SelectionChangedEvent event) {
+		doDraw();
+	}
+
+	public void propertyChanged(Object source, int propId) {
+		if (propId == GLEditor.PROP_DIRTY) {
+			doDraw();
+		}
 	}
 }

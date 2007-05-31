@@ -3,6 +3,7 @@ package org.opencad.modelling.corners;
 import org.eclipse.opengl.GL;
 import org.opencad.modelling.Primitive;
 import org.opencad.modelling.PrimitiveTypeRegister;
+import org.opencad.modelling.walls.Wall;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Hoverable;
@@ -129,5 +130,15 @@ public class Corner extends Primitive implements Hoverable, Selectable {
 			}
 			GL.glDisable(GL.GL_LINE_STIPPLE);
 		}
+	}
+	
+	public void realRender() {
+		GL.glColor3d(0d, 0d, 0d);
+		GL.glBegin(GL.GL_LINES);
+		{
+			GL.glVertex3d(x, y, 0);
+			GL.glVertex3d(x, y, Wall.height);
+		}
+		GL.glEnd();
 	}
 }

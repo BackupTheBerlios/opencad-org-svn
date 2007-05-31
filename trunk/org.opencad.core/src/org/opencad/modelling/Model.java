@@ -101,4 +101,10 @@ public class Model extends Primitive {
 			primitive.editorRender();
 		}
 	}
+
+	public void realRender() {
+		for (Primitive primitive : primitives) {
+			primitive.realRender();
+		}
+	}
 }

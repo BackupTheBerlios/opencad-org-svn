@@ -53,4 +53,24 @@ public class Wall extends Primitive {
 			GL.glEnd();
 		}
 	}
+	
+	public static final double height = 3.5d;
+
+	public void realRender() {
+		if (getStartingCorner() != null && getEndingCorner() != null) {
+			GL.glColor3d(0d, 0d, 0d);
+			GL.glBegin(GL.GL_LINES);
+			{
+				GL.glVertex3d(getStartingCorner().getX(), getStartingCorner()
+						.getY(), 0);
+				GL.glVertex3d(getEndingCorner().getX(), getEndingCorner()
+						.getY(), 0);
+				GL.glVertex3d(getStartingCorner().getX(), getStartingCorner()
+						.getY(), height);
+				GL.glVertex3d(getEndingCorner().getX(), getEndingCorner()
+						.getY(), height);
+			}
+			GL.glEnd();
+		}
+	}
 }

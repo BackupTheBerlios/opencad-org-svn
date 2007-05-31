@@ -18,6 +18,7 @@ import org.eclipse.swt.opengl.GLData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IPropertyListener;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IViewSite;
@@ -35,7 +36,7 @@ public class GLView extends ViewPart implements MouseMoveListener,
 
 	double zoomSpeed;
 
-	private double min_eyez;
+	private double min_eyez, max_eyez;
 
 	GLEditor glEditor;
 
@@ -92,6 +93,7 @@ public class GLView extends ViewPart implements MouseMoveListener,
 		eyey = 50;
 		eyez = 50;
 		min_eyez = 1;
+		max_eyez = 50;
 		centerx = 0;
 		centery = 0;
 		centerz = 0;
@@ -161,7 +163,7 @@ public class GLView extends ViewPart implements MouseMoveListener,
 	void setupProjection(Rectangle size) {
 		if (size.width > 0 && size.height > 0) {
 			double aspect = size.width / size.height;
-			GLU.gluPerspective(fov, aspect, 0.1, 100);
+			GLU.gluPerspective(fov, aspect, 0.1, 200);
 
 			checkBounds();
 
@@ -172,18 +174,101 @@ public class GLView extends ViewPart implements MouseMoveListener,
 		}
 	}
 
+	public static void drawGrid() {
+		final int gridCount = 20;
+		final int gridSkip = 5;
+		final double gridSize = 5d;
+
+		GL.glPushMatrix();
+		{
+			GL.glTranslated(0d, -gridSize * gridCount, 0d);
+			for (int i = 0; i <= gridCount * 2; i++) {
+				if (i % gridSkip == 0) {
+					GL.glColor3d(0.7d, 0.7d, 0.7d);
+				} else {
+					GL.glColor3d(0.9d, 0.9d, 0.9d);
+				}
+				GL.glBegin(GL.GL_LINES);
+				{
+					GL.glVertex2d(-gridSize * gridCount, 0);
+					GL.glVertex2d(+gridSize * gridCount, 0);
+				}
+				GL.glEnd();
+				GL.glTranslated(0d, (double) gridSize, 0d);
+			}
+		}
+		GL.glPopMatrix();
+		GL.glPushMatrix();
+		{
+			GL.glTranslated(-gridSize * gridCount, 0d, 0d);
+			for (int i = 0; i <= 2 * gridCount; i++) {
+				if (i % gridSkip == 0) {
+					GL.glColor3d(0.7d, 0.7d, 0.7d);
+				} else {
+					GL.glColor3d(0.9d, 0.9d, 0.9d);
+				}
+				GL.glBegin(GL.GL_LINES);
+				{
+					GL.glVertex2d(0, -gridSize * gridCount);
+					GL.glVertex2d(0, +gridSize * gridCount);
+				}
+				GL.glEnd();
+				GL.glTranslated((double) gridSize, 0d, 0d);
+			}
+		}
+		GL.glPopMatrix();
+	}
+
+	public static void drawAnchor() {
+		double arrowWidth = 0.01d;
+		double arrowHeight = 0.07d;
+
+		double segmentHeight = 1d - arrowHeight;
+		GL.glColor3d(0d, 0.1d, 0.5d);
+		GL.glBegin(GL.GL_LINES);
+		{
+			GL.glVertex2d(-arrowHeight, 0d);
+			GL.glVertex2d(segmentHeight, 0d);
+			GL.glVertex2d(0d, -arrowHeight);
+			GL.glVertex2d(0d, segmentHeight);
+			GL.glVertex3d(0d, 0d, -arrowHeight);
+			GL.glVertex3d(0d, 0d, segmentHeight);
+		}
+		GL.glEnd();
+
+		GL.glBegin(GL.GL_POLYGON);
+		{
+			GL.glVertex3d(0d, 0d, 1d);
+			GL.glVertex3d(-arrowWidth, 0d, segmentHeight);
+			GL.glVertex3d(arrowWidth, 0d, segmentHeight);
+		}
+
+		GL.glEnd();
+		GL.glBegin(GL.GL_POLYGON);
+		{
+			GL.glVertex2d(1d, 0d);
+			GL.glVertex2d(segmentHeight, -arrowWidth);
+			GL.glVertex2d(segmentHeight, arrowWidth);
+		}
+		GL.glEnd();
+
+		GL.glBegin(GL.GL_POLYGON);
+		{
+			GL.glVertex2d(0d, 1d);
+			GL.glVertex2d(-arrowWidth, segmentHeight);
+			GL.glVertex2d(arrowWidth, segmentHeight);
+		}
+		GL.glEnd();
+	}
+
 	void glDraw() {
 		if (!disabled) {
 			GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 			GL.glLoadIdentity();
-			GL.glPushMatrix();
-			{
-				GL.glTranslated(0d, 0d, -0.1d);
-				GLEditor.drawGrid();
-				GL.glTranslated(0d, 0d, -0.1d);
-				GLEditor.drawAnchor();
-			}
-			GL.glPopMatrix();
+			drawAnchor();
+			GL.glTranslated(0d, 0d, -0.01d);
+			drawGrid();
+			GL.glLoadIdentity();
 			glEditor.getModel().realRender();
 		}
 	}
@@ -195,6 +280,11 @@ public class GLView extends ViewPart implements MouseMoveListener,
 
 	public void checkBounds() {
 		eyez = eyez < min_eyez ? min_eyez : eyez;
+		eyez = eyez > max_eyez ? max_eyez : eyez;
+		eyex = eyex > max_eyez ? max_eyez : eyex;
+		eyey = eyey > max_eyez ? max_eyez : eyey;
+		eyex = eyex < -max_eyez ? -max_eyez : eyex;
+		eyey = eyey < -max_eyez ? -max_eyez : eyey;
 	}
 
 	public void mouseMove(MouseEvent e) {
@@ -221,9 +311,10 @@ public class GLView extends ViewPart implements MouseMoveListener,
 	}
 
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		if (part instanceof GLEditor) {
+		IEditorPart editor = getSite().getPage().getActiveEditor();
+		if (editor instanceof GLEditor) {
 			disabled = false;
-			glEditor = (GLEditor) part;
+			glEditor = (GLEditor) editor;
 			glEditor.getSite().getSelectionProvider()
 					.addSelectionChangedListener(this);
 			glEditor.addPropertyListener(this);

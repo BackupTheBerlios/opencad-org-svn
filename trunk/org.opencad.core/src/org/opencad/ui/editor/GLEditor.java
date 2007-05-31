@@ -203,9 +203,9 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 		GL.glPushMatrix();
 		{
 			GL.glTranslated(0d, 0d, -0.1d);
-			drawGrid();
-			GL.glTranslated(0d, 0d, -0.1d);
 			drawAnchor();
+			GL.glTranslated(0d, 0d, -0.1d);
+			drawGrid();
 		}
 		GL.glPopMatrix();
 		model.editorRender();

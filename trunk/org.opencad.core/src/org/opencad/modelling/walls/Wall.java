@@ -20,7 +20,13 @@ public class Wall extends Primitive {
 	}
 
 	public final void setEndingCorner(Corner endingCorner) {
+		if (this.endingCorner != null) {
+			this.endingCorner.removeEnd(this);
+		}
 		this.endingCorner = endingCorner;
+		if (this.endingCorner != null) {
+			this.endingCorner.addEnd(this);
+		}
 	}
 
 	public final Corner getStartingCorner() {
@@ -28,7 +34,13 @@ public class Wall extends Primitive {
 	}
 
 	public final void setStartingCorner(Corner startingCorner) {
+		if (this.startingCorner != null) {
+			this.startingCorner.removeStart(this);
+		}
 		this.startingCorner = startingCorner;
+		if (this.startingCorner != null) {
+			this.startingCorner.addStart(this);
+		}
 	}
 
 	public Wall(Corner startingCorner, Corner endingCorner) {
@@ -37,7 +49,7 @@ public class Wall extends Primitive {
 	}
 
 	public String toString() {
-		return String.format("%s=%s", startingCorner, endingCorner);
+		return String.format("(wall %s %s)", startingCorner, endingCorner);
 	}
 
 	public void editorRender() {

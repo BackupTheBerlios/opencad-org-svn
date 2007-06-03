@@ -164,7 +164,7 @@ public class GLView extends ViewPart implements MouseMoveListener,
 			double glY = size.height * px2gl / 2;
 			GL.glFrustum(-glX, +glX, -glY, glY, scale, range);
 			checkBounds();
-			GL.glTranslated(0, 0, - dist);
+			GL.glTranslated(0, 0, -dist);
 			GL.glRotated(-90d + xrot, 1, 0, 0);
 			GL.glRotated(zrot, 0, 0, 1);
 			disabled = false;
@@ -177,9 +177,10 @@ public class GLView extends ViewPart implements MouseMoveListener,
 		final int gridCount = 20;
 		final int gridSkip = 5;
 		final double gridSize = 5d;
+		double size = gridSize * gridCount;
 		GL.glPushMatrix();
 		{
-			GL.glTranslated(0d, -gridSize * gridCount, 0d);
+			GL.glTranslated(0d, -size, 0d);
 			for (int i = 0; i <= gridCount * 2; i++) {
 				if (i % gridSkip == 0) {
 					GL.glColor3d(0.7d, 0.7d, 0.7d);
@@ -188,8 +189,8 @@ public class GLView extends ViewPart implements MouseMoveListener,
 				}
 				GL.glBegin(GL.GL_LINES);
 				{
-					GL.glVertex2d(-gridSize * gridCount, 0);
-					GL.glVertex2d(+gridSize * gridCount, 0);
+					GL.glVertex2d(-size, 0);
+					GL.glVertex2d(+size, 0);
 				}
 				GL.glEnd();
 				GL.glTranslated(0d, (double) gridSize, 0d);
@@ -198,23 +199,33 @@ public class GLView extends ViewPart implements MouseMoveListener,
 		GL.glPopMatrix();
 		GL.glPushMatrix();
 		{
-			GL.glTranslated(-gridSize * gridCount, 0d, 0d);
+			GL.glTranslated(-size, 0d, 0d);
 			for (int i = 0; i <= 2 * gridCount; i++) {
 				if (i % gridSkip == 0) {
-					GL.glColor3d(0.7d, 0.7d, 0.7d);
-				} else {
 					GL.glColor3d(0.9d, 0.9d, 0.9d);
+				} else {
+					GL.glColor3d(0.95d, 0.95d, 0.95d);
 				}
 				GL.glBegin(GL.GL_LINES);
 				{
-					GL.glVertex2d(0, -gridSize * gridCount);
-					GL.glVertex2d(0, +gridSize * gridCount);
+					GL.glVertex2d(0, -size);
+					GL.glVertex2d(0, +size);
 				}
 				GL.glEnd();
 				GL.glTranslated((double) gridSize, 0d, 0d);
 			}
 		}
 		GL.glPopMatrix();
+		GL.glTranslated(0d, 0d, -0.1d);
+		GL.glColor3d(0.99d, 0.99d, 0.99d);
+		GL.glBegin(GL.GL_POLYGON);
+		{
+			GL.glVertex2d(-size, -size);
+			GL.glVertex2d(+size, -size);
+			GL.glVertex2d(+size, +size);
+			GL.glVertex2d(-size, +size);
+		}
+		GL.glEnd();
 	}
 
 	public static void drawAnchor() {
@@ -260,7 +271,7 @@ public class GLView extends ViewPart implements MouseMoveListener,
 			GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 			GL.glLoadIdentity();
 			drawAnchor();
-			GL.glTranslated(0d, 0d, -0.01d);
+			GL.glTranslated(0d, 0d, -0.1d);
 			drawGrid();
 			GL.glLoadIdentity();
 			glEditor.getModel().realRender();

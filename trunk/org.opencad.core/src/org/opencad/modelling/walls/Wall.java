@@ -57,15 +57,43 @@ public class Wall extends Primitive {
 			GL.glColor3d(0d, 0d, 0d);
 			GL.glBegin(GL.GL_LINES);
 			{
-				GL.glVertex2d(getStartingCorner().getX(), getStartingCorner()
-						.getY());
-				GL.glVertex2d(getEndingCorner().getX(), getEndingCorner()
-						.getY());
+				double[] start_points = getStartingCorner().getStartLimitsOf(
+						this);
+				double[] end_points = getEndingCorner().getEndLimitsOf(this);
+				double angle = Math.atan2(getStartingCorner().getY()
+						- getEndingCorner().getY(), getStartingCorner().getX()
+						- getEndingCorner().getX());
+				double angle_1 = Math.atan2(start_points[1] - end_points[3],
+						start_points[0] - end_points[2]);
+				double e = 1e-15;
+				if (Math.abs(angle - angle_1) < e) {
+					GL.glVertex2d(start_points[0], start_points[1]);
+					GL.glVertex2d(end_points[2], end_points[3]);
+				}
+				double angle_2 = Math.atan2(start_points[3] - end_points[1],
+						start_points[2] - end_points[0]);
+				if (Math.abs(angle - angle_2) < e) {
+					GL.glVertex2d(start_points[2], start_points[3]);
+					GL.glVertex2d(end_points[0], end_points[1]);
+				}
 			}
 			GL.glEnd();
+			GL.glEnable(GL.GL_LINE_STIPPLE);
+			{
+				GL.glLineStipple(1, (short) 0xAAAA);
+				GL.glBegin(GL.GL_LINES);
+				{
+					GL.glVertex2d(getStartingCorner().getX(),
+							getStartingCorner().getY());
+					GL.glVertex2d(getEndingCorner().getX(), getEndingCorner()
+							.getY());
+				}
+				GL.glEnd();
+			}
+			GL.glDisable(GL.GL_LINE_STIPPLE);
 		}
 	}
-	
+
 	public static final double height = 3.5d;
 
 	public void realRender() {

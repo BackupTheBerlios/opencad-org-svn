@@ -1,7 +1,6 @@
 package org.opencad.modelling.corners;
 
 import java.util.HashSet;
-import java.util.SortedSet;
 import java.util.TreeMap;
 
 import org.eclipse.opengl.GL;
@@ -27,7 +26,7 @@ public class Corner extends Primitive implements Hoverable, Selectable {
 
 	private transient boolean selected;
 
-	private static double thickness = 0.1d;
+	private static double thickness = 0.05d;
 
 	private static double hoverSlack = 0.06d;
 
@@ -102,7 +101,7 @@ public class Corner extends Primitive implements Hoverable, Selectable {
 	public GLEditorState getSelectionState(GLEditor editor) {
 		return new SelectCornerState(editor, this);
 	}
-	
+
 	Double posAngle(double angle) {
 		return angle < 0d ? Math.PI * 2 + angle : angle;
 	}
@@ -119,6 +118,61 @@ public class Corner extends Primitive implements Hoverable, Selectable {
 				- x));
 	}
 
+	public TreeMap<Double, Wall> getWalls() {
+		TreeMap<Double, Wall> walls = new TreeMap<Double, Wall>();
+		for (Wall wall : startOf) {
+			walls.put(angleStartOf(wall), wall);
+		}
+		for (Wall wall : endOf) {
+			walls.put(angleEndOf(wall), wall);
+		}
+		return walls;
+	}
+
+	public double[] getStartLimitsOf(Wall wall) {
+		Double angle = angleStartOf(wall);
+		return getLimitsOf(wall, angle);
+	}
+
+	public double[] getEndLimitsOf(Wall wall) {
+		Double angle = angleEndOf(wall);
+		return getLimitsOf(wall, angle);
+	}
+
+	public double[] getLimitsOf(Wall wall, Double angle) {
+		TreeMap<Double, Wall> walls = getWalls();
+		double[] points = new double[4];
+		Double oldAngle = walls.lowerKey(angle);
+		if (oldAngle == null) {
+			oldAngle = walls.lastKey();
+		}
+		double avg;
+		double len;
+		if (oldAngle.equals(angle)) {
+			avg = angle - Math.PI / 2;
+			len = thickness;
+		} else {
+			avg = (angle + oldAngle) / 2;
+			len = thickness / Math.sin(angle - avg);
+		}
+		points[0] = x + Math.cos(avg) * len;
+		points[1] = y + Math.sin(avg) * len;
+		oldAngle = walls.higherKey(angle);
+		if (oldAngle == null) {
+			oldAngle = walls.firstKey();
+		}
+		if (oldAngle.equals(angle)) {
+			avg = angle + Math.PI / 2;
+			len = thickness;
+		} else {
+			avg = (angle + oldAngle) / 2;
+			len = thickness / Math.sin(oldAngle - avg);
+		}
+		points[2] = x + Math.cos(avg) * len;
+		points[3] = y + Math.sin(avg) * len;
+		return points;
+	}
+
 	public void editorRender() {
 		double selectionRadius = 0.06d;
 
@@ -131,40 +185,6 @@ public class Corner extends Primitive implements Hoverable, Selectable {
 		} else {
 			GL.glColor3d(0d, 0d, 0d);
 		}
-
-		TreeMap<Double, Wall> walls = new TreeMap<Double, Wall>();
-		for (Wall wall : startOf) {
-			walls.put(angleStartOf(wall), wall);
-		}
-		for (Wall wall : endOf) {
-			walls.put(angleEndOf(wall), wall);
-		}
-		Double oldAngle = null;
-		Double firstAngle = null;
-		GL.glBegin(GL.GL_LINES);
-		{
-			for (Double angle : walls.keySet()) {
-				if (oldAngle != null) {
-					double avg = (angle + oldAngle) / 2;
-					double ox = x + Math.cos(avg) * thickness;
-					double oy = y + Math.sin(avg) * thickness;
-					GL.glVertex2d(x, y);
-					GL.glVertex2d(ox, oy);
-				} else {
-					firstAngle = angle;
-				}
-				oldAngle = angle;
-			}
-			if (firstAngle != oldAngle) {
-				firstAngle += Math.PI * 2;
-				double avg = (firstAngle + oldAngle) / 2;
-				double ox = x + Math.cos(avg) * thickness;
-				double oy = y + Math.sin(avg) * thickness;
-				GL.glVertex2d(x, y);
-				GL.glVertex2d(ox, oy);
-			}
-		}
-		GL.glEnd();
 
 		if (isSelected()) {
 			GL.glEnable(GL.GL_LINE_STIPPLE);

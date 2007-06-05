@@ -214,10 +214,9 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
 	void glInit() {
 		GL.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		GL.glColor3f(0.0f, 0.0f, 0.0f);
-		//GL.glClearDepth(1.0f);
-		GL.glEnable(GL.GL_DEPTH_TEST);
-		GL.glHint(GL.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
-	}
+		GL.glEnable(GL.GL_LINE_SMOOTH);
+		GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+		GL.glEnable(GL.GL_BLEND);	}
 
 	void setupProjection(Rectangle size) {
 		double px2gl = px2gl(size);

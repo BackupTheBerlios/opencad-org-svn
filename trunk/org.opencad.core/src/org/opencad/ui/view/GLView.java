@@ -58,7 +58,7 @@ public class GLView extends ViewPart implements MouseMoveListener,
 	@Override
 	public void createPartControl(Composite parent) {
 		GLData data = new GLData();
-                data.depthSize = 1;
+        data.depthSize = 1;
 		data.doubleBuffer = true;
 		glCanvas = new GLCanvas(parent, SWT.NO_BACKGROUND, data);
 		glCanvas.addPaintListener(new PaintListener() {
@@ -123,11 +123,13 @@ public class GLView extends ViewPart implements MouseMoveListener,
 	}
 
 	void glInit() {
-		GL.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-		GL.glColor3f(0.0f, 0.0f, 0.0f);
-		GL.glClearDepth(1.0f);
 		GL.glEnable(GL.GL_DEPTH_TEST);
-		GL.glHint(GL.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
+		GL.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		GL.glEnable(GL.GL_POLYGON_OFFSET_FILL);
+		GL.glPolygonOffset(1f, 1f);
+		GL.glEnable(GL.GL_LINE_SMOOTH);
+		GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+		GL.glEnable(GL.GL_BLEND);
 	}
 
 	void doDraw() {
@@ -163,7 +165,7 @@ public class GLView extends ViewPart implements MouseMoveListener,
 			double px2gl = scale / min;
 			double glX = size.width * px2gl / 2;
 			double glY = size.height * px2gl / 2;
-			GL.glFrustum(-glX, +glX, -glY, glY, scale, range);
+			GL.glFrustum(-glX, +glX, -glY, glY, 0.1d, range);
 			checkBounds();
 			GL.glTranslated(0, 0, -dist);
 			GL.glRotated(-90d + xrot, 1, 0, 0);
@@ -203,9 +205,9 @@ public class GLView extends ViewPart implements MouseMoveListener,
 			GL.glTranslated(-size, 0d, 0d);
 			for (int i = 0; i <= 2 * gridCount; i++) {
 				if (i % gridSkip == 0) {
-					GL.glColor3d(0.9d, 0.9d, 0.9d);
+					GL.glColor3d(0.8d, 0.8d, 0.8d);
 				} else {
-					GL.glColor3d(0.95d, 0.95d, 0.95d);
+					GL.glColor3d(0.9d, 0.9d, 0.9d);
 				}
 				GL.glBegin(GL.GL_LINES);
 				{
@@ -217,7 +219,6 @@ public class GLView extends ViewPart implements MouseMoveListener,
 			}
 		}
 		GL.glPopMatrix();
-		GL.glTranslated(0d, 0d, -0.1d);
 		GL.glColor3d(0.99d, 0.99d, 0.99d);
 		GL.glBegin(GL.GL_POLYGON);
 		{
@@ -272,7 +273,6 @@ public class GLView extends ViewPart implements MouseMoveListener,
 			GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 			GL.glLoadIdentity();
 			drawAnchor();
-			GL.glTranslated(0d, 0d, -0.1d);
 			drawGrid();
 			GL.glLoadIdentity();
 			glEditor.getModel().realRender();

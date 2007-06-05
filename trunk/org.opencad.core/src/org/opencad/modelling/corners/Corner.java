@@ -215,12 +215,5 @@ public class Corner extends Primitive implements Hoverable, Selectable {
   }
 
   public void realRender() {
-    GL.glColor3d(0d, 0d, 0d);
-    GL.glBegin(GL.GL_LINES);
-    {
-      GL.glVertex3d(x, y, 0);
-      GL.glVertex3d(x, y, Wall.height);
-    }
-    GL.glEnd();
   }
 }

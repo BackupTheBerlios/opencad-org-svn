@@ -54,6 +54,11 @@ public class Wall extends Primitive {
     return a * a;
   }
 
+  int slight_slope(double[] a, double[] b, int ax, int bx) {
+    return (int) (Math.signum(a[ax+1] - b[bx + 1]) + 3 * Math.signum(a[ax]
+        - b[bx]));
+  }
+
   public void editorRender() {
     if (getStartingCorner() != null && getEndingCorner() != null) {
       GL.glColor3d(0d, 0d, 0d);
@@ -64,16 +69,13 @@ public class Wall extends Primitive {
         double[] these_points = new double[] { getStartingCorner().getX(),
             getStartingCorner().getY(), getEndingCorner().getX(),
             getEndingCorner().getY() };
-        int angle = (int) (Math.signum(these_points[1] - these_points[3]) + 3 * Math
-            .signum(these_points[0] - these_points[2]));
-        int angle_1 = (int) (Math.signum(start_points[1] - end_points[3]) + 3 * Math
-            .signum(start_points[0] - end_points[2]));
+        int angle = slight_slope(these_points, these_points, 0, 2);
+        int angle_1 = slight_slope(start_points, end_points, 0, 2);
         if (angle == angle_1) {
           GL.glVertex2d(start_points[0], start_points[1]);
           GL.glVertex2d(end_points[2], end_points[3]);
         }
-        int angle_2 = (int) (Math.signum(start_points[3] - end_points[1]) + 3 * Math
-            .signum(start_points[2] - end_points[0]));
+        int angle_2 = slight_slope(start_points, end_points, 2, 0);
         if (angle == angle_2) {
           GL.glVertex2d(start_points[2], start_points[3]);
           GL.glVertex2d(end_points[0], end_points[1]);
@@ -95,22 +97,52 @@ public class Wall extends Primitive {
   }
 
   public static final double height = 3.5d;
+  
+  void realRenderRoutine() {
+    GL.glBegin(GL.GL_QUADS);
+    {
+      double[] start_points = getStartingCorner().getStartLimitsOf(this);
+      double[] end_points = getEndingCorner().getEndLimitsOf(this);
+      double[] these_points = new double[] { getStartingCorner().getX(),
+          getStartingCorner().getY(), getEndingCorner().getX(),
+          getEndingCorner().getY() };
+      int angle = slight_slope(these_points, these_points, 0, 2);
+      int angle_1 = slight_slope(start_points, end_points, 0, 2);
+      if (angle == angle_1) {
+        GL.glVertex2d(start_points[0], start_points[1]);
+        GL.glVertex3d(start_points[0], start_points[1], height);
+        GL.glVertex3d(end_points[2], end_points[3], height);
+        GL.glVertex2d(end_points[2], end_points[3]);
+      }
+      int angle_2 = slight_slope(start_points, end_points, 2, 0);
+      if (angle == angle_2) {
+        GL.glVertex2d(start_points[2], start_points[3]);
+        GL.glVertex3d(start_points[2], start_points[3], height);
+        GL.glVertex3d(end_points[0], end_points[1], height);
+        GL.glVertex2d(end_points[0], end_points[1]);
+      }
+      if (angle == angle_1 && angle == angle_2) {
+        GL.glVertex3d(start_points[0], start_points[1], height);
+        GL.glVertex3d(start_points[2], start_points[3], height);
+        GL.glVertex3d(end_points[0], end_points[1], height);
+        GL.glVertex3d(end_points[2], end_points[3], height);
+      } 
+    }
+    GL.glEnd();
+  }
 
   public void realRender() {
     if (getStartingCorner() != null && getEndingCorner() != null) {
+      GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_LINE);
       GL.glColor3d(0d, 0d, 0d);
-      GL.glBegin(GL.GL_LINES);
-      {
-        GL
-            .glVertex3d(getStartingCorner().getX(), getStartingCorner().getY(),
-                0);
-        GL.glVertex3d(getEndingCorner().getX(), getEndingCorner().getY(), 0);
-        GL.glVertex3d(getStartingCorner().getX(), getStartingCorner().getY(),
-            height);
-        GL.glVertex3d(getEndingCorner().getX(), getEndingCorner().getY(),
-            height);
-      }
-      GL.glEnd();
+      realRenderRoutine();
+
+      GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_FILL);
+      GL.glEnable(GL.GL_POLYGON_OFFSET_FILL);
+      GL.glPolygonOffset(1f, 1f);
+      GL.glColor3d(1d, 1d, 1d);
+      realRenderRoutine();
+      GL.glDisable(GL.GL_POLYGON_OFFSET_FILL);
     }
   }
 }

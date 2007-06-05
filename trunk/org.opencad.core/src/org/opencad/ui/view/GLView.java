@@ -58,6 +58,7 @@ public class GLView extends ViewPart implements MouseMoveListener,
 	@Override
 	public void createPartControl(Composite parent) {
 		GLData data = new GLData();
+                data.depthSize = 1;
 		data.doubleBuffer = true;
 		glCanvas = new GLCanvas(parent, SWT.NO_BACKGROUND, data);
 		glCanvas.addPaintListener(new PaintListener() {

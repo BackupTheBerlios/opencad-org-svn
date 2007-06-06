@@ -127,9 +127,9 @@ public class GLView extends ViewPart implements MouseMoveListener,
 		GL.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		GL.glEnable(GL.GL_POLYGON_OFFSET_FILL);
 		GL.glPolygonOffset(1f, 1f);
-		GL.glEnable(GL.GL_LINE_SMOOTH);
-		GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
-		GL.glEnable(GL.GL_BLEND);
+//		GL.glEnable(GL.GL_LINE_SMOOTH);
+//		GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+//		GL.glEnable(GL.GL_BLEND);
 	}
 
 	void doDraw() {
@@ -176,10 +176,10 @@ public class GLView extends ViewPart implements MouseMoveListener,
 		}
 	}
 
-	public static void drawGrid() {
-		final int gridCount = 20;
+	public void drawGrid() {
+		final int gridCount = 100;
 		final int gridSkip = 5;
-		final double gridSize = 5d;
+		final double gridSize = 0.05d * dist;
 		double size = gridSize * gridCount;
 		GL.glPushMatrix();
 		{

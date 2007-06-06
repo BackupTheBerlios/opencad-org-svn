@@ -106,9 +106,12 @@ public class Corner extends Primitive implements Hoverable, Selectable {
   }
 
   public Double angleStartOf(Wall wall) {
-    return posAngle(Math.atan2(wall.getEndingCorner().getY() - y, wall
-        .getEndingCorner().getX()
-        - x));
+    if (wall.getEndingCorner() != null) {
+      return posAngle(Math.atan2(wall.getEndingCorner().getY() - y, wall
+          .getEndingCorner().getX()
+          - x));
+    }
+    return null;
   }
 
   public Double angleEndOf(Wall wall) {

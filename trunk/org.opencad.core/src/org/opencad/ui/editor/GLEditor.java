@@ -148,7 +148,7 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
   public void drawGrid() {
     final int gridCount = 1000;
     final int gridSkip = 5;
-    final double gridSize = scale * 0.05;
+    final double gridSize = 1d;
     GL.glPushMatrix();
     {
       GL.glTranslated(0d, -gridSize * gridCount, 0d);

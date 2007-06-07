@@ -102,9 +102,9 @@ public class Model extends Primitive {
 		}
 	}
 
-	public void realRender() {
+	public void realRender(boolean fillMode) {
 		for (Primitive primitive : primitives) {
-			primitive.realRender();
+			primitive.realRender(fillMode);
 		}
 	}
 }

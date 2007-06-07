@@ -217,6 +217,6 @@ public class Corner extends Primitive implements Hoverable, Selectable {
     }
   }
 
-  public void realRender() {
+  public void realRender(boolean fillMode) {
   }
 }

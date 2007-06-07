@@ -83,9 +83,19 @@ public class Wall extends Primitive {
 			}
 
 			public void editorRender() {
+				GL.glTranslated(0d, 0d, 2d);
+				GL.glBegin(GL.GL_LINES);
+				{
+					GL.glVertex2d(0, 0);
+					GL.glVertex2d(getWidth(), 0);
+					GL.glVertex2d(getWidth() / 2, 0);
+					GL.glVertex2d(getWidth() / 2, Corner.thickness / 2);
+				}
+				GL.glEnd();
 			}
 
-			public void realRender() {
+			public void realRender(boolean fillMode) {
+				editorRender();
 			}
 
 			public String toString() {
@@ -103,9 +113,70 @@ public class Wall extends Primitive {
 			}
 
 			public void editorRender() {
+				GL.glBegin(GL.GL_LINES);
+				{
+					GL.glVertex2d(0, 0);
+					GL.glVertex2d(getWidth(), 0);
+					GL.glVertex2d(getWidth() / 2, 0);
+					GL.glVertex2d(getWidth() / 2, Corner.thickness / 2);
+				}
+				GL.glEnd();
 			}
 
-			public void realRender() {
+			public void realRender(boolean fillMode) {
+				GL.glTranslated(0d, -Corner.thickness, 0d);
+				GL.glBegin(GL.GL_QUADS);
+				{
+					GL.glVertex3d(0, 0, 0);
+					GL.glVertex3d(getWidth(), 0, 0);
+					GL.glVertex3d(getWidth(), 0, getGroundOffset());
+					GL.glVertex3d(0, 0, getGroundOffset());
+
+					GL.glVertex3d(0, 0, getMaxGroundOffset());
+					GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
+					GL.glVertex3d(getWidth(), 0, Wall.height);
+					GL.glVertex3d(0, 0, Wall.height);
+
+					GL.glVertex3d(getWidth(), 0, getGroundOffset());
+					GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
+					GL.glVertex3d(getWidth(), 2 * Corner.thickness, getMaxGroundOffset());
+					GL.glVertex3d(getWidth(), 2 * Corner.thickness, getGroundOffset());
+
+					GL.glVertex3d(0, 0, getGroundOffset());
+					GL.glVertex3d(0, 0, getMaxGroundOffset());
+					GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
+					GL.glVertex3d(0, 2 * Corner.thickness, getGroundOffset());
+
+					GL.glVertex3d(getWidth(), 0, getGroundOffset());
+					GL.glVertex3d(0, 0, getGroundOffset());
+					GL.glVertex3d(0, 2 * Corner.thickness, getGroundOffset());
+					GL.glVertex3d(getWidth(), 2 * Corner.thickness, getGroundOffset());
+
+					GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
+					GL.glVertex3d(0, 0, getMaxGroundOffset());
+					GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
+					GL.glVertex3d(getWidth(), 2 * Corner.thickness, getMaxGroundOffset());
+
+					GL.glVertex3d(getWidth(), 0, Wall.height);
+					GL.glVertex3d(0, 0, Wall.height);
+					GL.glVertex3d(0, 2 * Corner.thickness, Wall.height);
+					GL.glVertex3d(getWidth(), 2 * Corner.thickness, Wall.height);
+				}
+				GL.glEnd();
+				GL.glTranslated(0d, 2 * Corner.thickness, 0d);
+				GL.glBegin(GL.GL_QUADS);
+				{
+					GL.glVertex3d(0, 0, 0);
+					GL.glVertex3d(getWidth(), 0, 0);
+					GL.glVertex3d(getWidth(), 0, getGroundOffset());
+					GL.glVertex3d(0, 0, getGroundOffset());
+
+					GL.glVertex3d(0, 0, getMaxGroundOffset());
+					GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
+					GL.glVertex3d(getWidth(), 0, Wall.height);
+					GL.glVertex3d(0, 0, Wall.height);
+				}
+				GL.glEnd();
 			}
 
 			public String toString() {
@@ -177,8 +248,13 @@ public class Wall extends Primitive {
 			double x2 = sx2;
 			double y2 = sy2;
 			boolean odd = true;
+			double rotation = 180 + Math.atan2(ey - sy, ex - sx) * 180
+					/ Math.PI;
+			int segment = 0;
 			GL.glColor3d(0d, 0d, 0d);
+			boolean old_feature = true;
 			for (Double dist : segments) {
+				segment++;
 				if (dist < 0) {
 					odd = !odd;
 					continue;
@@ -196,6 +272,14 @@ public class Wall extends Primitive {
 				double py1 = sy1 + u1 * dy1;
 				double px2 = sx2 + u2 * dx2;
 				double py2 = sy2 + u2 * dy2;
+				boolean feature_enabled = (sx1 < px1 && px1 < ex1 || sx1 > px1
+						&& px1 > ex1)
+						&& (sx2 < px2 && px2 < ex2 || sx2 > px2 && px2 > ex2);
+				if (!feature_enabled) {
+					old_feature = false;
+					odd = !odd;
+					continue;
+				}
 				if (odd) {
 					odd = false;
 					GL.glEnable(GL.GL_LINE_STIPPLE);
@@ -208,15 +292,11 @@ public class Wall extends Primitive {
 					GL.glDisable(GL.GL_LINE_STIPPLE);
 					GL.glBegin(GL.GL_LINES);
 					{
-						// This means sx1 < px1 < ex1
-						if (Math.signum(px1 - sx1) == Math.signum(dx1)
-								&& enable1) {
+						if (enable1) {
 							GL.glVertex2d(x1, y1);
 							GL.glVertex2d(px1, py1);
 						}
-						// This means sx1 < px1 < ex1
-						if (Math.signum(px2 - sx2) == Math.signum(dx2)
-								&& enable2) {
+						if (enable2) {
 							GL.glVertex2d(x2, y2);
 							GL.glVertex2d(px2, py2);
 						}
@@ -224,46 +304,58 @@ public class Wall extends Primitive {
 					GL.glEnd();
 				} else {
 					odd = true;
-					x = nx;
-					y = ny;
-					if (Math.signum(px1 - sx1) == Math.signum(dx1)) {
-						x1 = px1;
-						y1 = py1;
+					if (old_feature) {
+						x = nx;
+						y = ny;
+						if (enable1) {
+							x1 = px1;
+							y1 = py1;
+						}
+						if (enable2) {
+							x2 = px2;
+							y2 = py2;
+						}
+						GL.glPushMatrix();
+						{
+							GL.glTranslated(nx, ny, 0);
+							GL.glRotated(rotation, 0d, 0d, 1d);
+							findFeature((segment - 1) / 2).editorRender();
+						}
+						GL.glPopMatrix();
 					}
-					if (Math.signum(px2 - sx2) == Math.signum(dx2)) {
-						x2 = px2;
-						y2 = py2;
-					}
+				}
+				old_feature = true;
+			}
+			GL.glEnable(GL.GL_LINE_STIPPLE);
+			GL.glBegin(GL.GL_LINES);
+			{
+				GL.glVertex2d(x, y);
+				GL.glVertex2d(ex, ey);
+			}
+			GL.glEnd();
+			GL.glDisable(GL.GL_LINE_STIPPLE);
+			GL.glBegin(GL.GL_LINES);
+			{
+				if (enable1) {
+					GL.glVertex2d(x1, y1);
+					GL.glVertex2d(ex1, ey1);
+				}
+				if (enable2) {
+					GL.glVertex2d(x2, y2);
+					GL.glVertex2d(ex2, ey2);
 				}
 			}
-			if (odd) {
-				GL.glEnable(GL.GL_LINE_STIPPLE);
-				GL.glBegin(GL.GL_LINES);
-				{
-					GL.glVertex2d(x, y);
-					GL.glVertex2d(ex, ey);
-				}
-				GL.glEnd();
-				GL.glDisable(GL.GL_LINE_STIPPLE);
-				GL.glBegin(GL.GL_LINES);
-				{
-					if (enable1) {
-						GL.glVertex2d(x1, y1);
-						GL.glVertex2d(ex1, ey1);
-					}
-					if (enable2) {
-						GL.glVertex2d(x2, y2);
-						GL.glVertex2d(ex2, ey2);
-					}
-				}
-				GL.glEnd();
-			}
+			GL.glEnd();
 		}
+	}
+
+	private WallFeature findFeature(int i) {
+		return (WallFeature) features.toArray()[i];
 	}
 
 	public static final double height = 3.5d;
 
-	void realRenderRoutine(boolean fillMode) {
+	public void realRender(boolean fillMode) {
 		if (getStartingCorner() != null && getEndingCorner() != null) {
 			double[] start_points = getStartingCorner().getStartLimitsOf(this);
 			double[] end_points = getEndingCorner().getEndLimitsOf(this);
@@ -276,7 +368,6 @@ public class Wall extends Primitive {
 			boolean enable1 = angle == angle_1;
 			boolean enable2 = angle == angle_2;
 			ArrayList<Double> segments = getSegments();
-			GL.glLineStipple(1, (short) 0x43f0);
 			double sx = these_points[0];
 			double sy = these_points[1];
 			double ex = these_points[2];
@@ -301,7 +392,12 @@ public class Wall extends Primitive {
 			double x2 = sx2;
 			double y2 = sy2;
 			boolean odd = true;
+			boolean old_feature = true;
+			double rotation = 180 + Math.atan2(ey - sy, ex - sx) * 180
+					/ Math.PI;
+			int segment = 0;
 			for (Double dist : segments) {
+				segment++;
 				if (dist < 0) {
 					odd = !odd;
 					continue;
@@ -319,30 +415,35 @@ public class Wall extends Primitive {
 				double py1 = sy1 + u1 * dy1;
 				double px2 = sx2 + u2 * dx2;
 				double py2 = sy2 + u2 * dy2;
+				boolean feature_enabled = (sx1 < px1 && px1 < ex1 || sx1 > px1
+						&& px1 > ex1)
+						&& (sx2 < px2 && px2 < ex2 || sx2 > px2 && px2 > ex2);
+				if (!feature_enabled) {
+					old_feature = false;
+					odd = !odd;
+					continue;
+				}
 				if (odd) {
 					odd = false;
-					GL.glBegin(GL.GL_QUADS);
+					if (fillMode) {
+						GL.glBegin(GL.GL_QUADS);
+					} else {
+						GL.glBegin(GL.GL_LINES);
+					}
 					{
-						// This means sx1 < px1 < ex1
-						if (Math.signum(px1 - sx1) == Math.signum(dx1)
-								&& enable1) {
+						if (enable1) {
 							GL.glVertex3d(x1, y1, 0);
 							GL.glVertex3d(px1, py1, 0);
 							GL.glVertex3d(px1, py1, height);
 							GL.glVertex3d(x1, y1, height);
 						}
-						// This means sx1 < px1 < ex1
-						if (Math.signum(px2 - sx2) == Math.signum(dx2)
-								&& enable2) {
+						if (enable2) {
 							GL.glVertex3d(x2, y2, 0);
 							GL.glVertex3d(px2, py2, 0);
 							GL.glVertex3d(px2, py2, height);
 							GL.glVertex3d(x2, y2, height);
 						}
-						if (Math.signum(px1 - sx1) == Math.signum(dx1)
-								&& enable1
-								&& Math.signum(px2 - sx2) == Math.signum(dx2)
-								&& enable2) {
+						if (enable1 && enable2) {
 							GL.glVertex3d(px1, py1, height);
 							GL.glVertex3d(x1, y1, height);
 							GL.glVertex3d(x2, y2, height);
@@ -352,109 +453,82 @@ public class Wall extends Primitive {
 					GL.glEnd();
 				} else {
 					odd = true;
-					if (Math.signum(px1 - sx1) == Math.signum(dx1)) {
-						x1 = px1;
-						y1 = py1;
-					}
-					if (Math.signum(px2 - sx2) == Math.signum(dx2)) {
-						x2 = px2;
-						y2 = py2;
+					if (old_feature) {
+						if (enable1) {
+							x1 = px1;
+							y1 = py1;
+						}
+						if (enable2) {
+							x2 = px2;
+							y2 = py2;
+						}
+						double[] colors = new double[4];
+						GL.glGetDoublev(GL.GL_CURRENT_COLOR, colors);
+						GL.glPushAttrib(GL.GL_ALL_ATTRIB_BITS);
+						GL.glPushMatrix();
+						{
+							GL.glTranslated(nx, ny, 0);
+							GL.glRotated(rotation, 0d, 0d, 1d);
+							findFeature((segment - 1) / 2).realRender(fillMode);
+						}
+						GL.glPopMatrix();
+						GL.glPopAttrib();
+						GL.glColor3dv(colors);
 					}
 				}
+				old_feature = true;
 			}
-			if (odd) {
+			if (fillMode) {
 				GL.glBegin(GL.GL_QUADS);
+			} else {
+				GL.glBegin(GL.GL_LINES);
+			}
+			{
+				if (enable1) {
+					GL.glVertex3d(x1, y1, 0);
+					GL.glVertex3d(ex1, ey1, 0);
+					GL.glVertex3d(ex1, ey1, height);
+					GL.glVertex3d(x1, y1, height);
+				}
+				if (enable2) {
+					GL.glVertex3d(x2, y2, 0);
+					GL.glVertex3d(ex2, ey2, 0);
+					GL.glVertex3d(ex2, ey2, height);
+					GL.glVertex3d(x2, y2, height);
+				}
+				if (enable1 && enable2) {
+					GL.glVertex3d(ex1, ey1, height);
+					GL.glVertex3d(x1, y1, height);
+					GL.glVertex3d(x2, y2, height);
+					GL.glVertex3d(ex2, ey2, height);
+				}
+			}
+			GL.glEnd();
+			if (fillMode) {
+				GL.glBegin(GL.GL_TRIANGLES);
 				{
-					if (enable1) {
-						GL.glVertex3d(x1, y1, 0);
-						GL.glVertex3d(ex1, ey1, 0);
-						GL.glVertex3d(ex1, ey1, height);
-						GL.glVertex3d(x1, y1, height);
-					}
-					if (enable2) {
-						GL.glVertex3d(x2, y2, 0);
-						GL.glVertex3d(ex2, ey2, 0);
-						GL.glVertex3d(ex2, ey2, height);
-						GL.glVertex3d(x2, y2, height);
-					}
-					if (enable1 && enable2) {
-						GL.glVertex3d(ex1, ey1, height);
-						GL.glVertex3d(x1, y1, height);
-						GL.glVertex3d(x2, y2, height);
-						GL.glVertex3d(ex2, ey2, height);
-					}
+					GL.glVertex3d(sx1, sy1, height);
+					GL.glVertex3d(sx2, sy2, height);
+					GL.glVertex3d(sx, sy, height);
+					GL.glVertex3d(ex1, ey1, height);
+					GL.glVertex3d(ex2, ey2, height);
+					GL.glVertex3d(ex, ey, height);
+				}
+				GL.glEnd();
+			} else {
+				GL.glBegin(GL.GL_LINES);
+				{
+					GL.glVertex3d(sx1, sy1, height);
+					GL.glVertex3d(sx1, sy1, 0);
+					GL.glVertex3d(sx2, sy2, height);
+					GL.glVertex3d(sx2, sy2, 0);
+					GL.glVertex3d(ex1, ey1, height);
+					GL.glVertex3d(ex1, ey1, 0);
+					GL.glVertex3d(ex2, ey2, height);
+					GL.glVertex3d(ex2, ey2, 0);
 				}
 				GL.glEnd();
 			}
-		}
-	}
-
-	// void realRenderRoutine(boolean fillMode) {
-	// double[] start_points = getStartingCorner().getStartLimitsOf(this);
-	// double[] end_points = getEndingCorner().getEndLimitsOf(this);
-	// double[] these_points = new double[] { getStartingCorner().getX(),
-	// getStartingCorner().getY(), getEndingCorner().getX(),
-	// getEndingCorner().getY() };
-	// int angle = slight_slope(these_points, these_points, 0, 2);
-	// int angle_1 = slight_slope(start_points, end_points, 0, 2);
-	// int angle_2 = slight_slope(start_points, end_points, 2, 0);
-	// GL.glBegin(GL.GL_QUADS);
-	// {
-	// if (angle == angle_1) {
-	// GL.glVertex3d(start_points[0], start_points[1], 0d);
-	// GL.glVertex3d(start_points[0], start_points[1], height);
-	// GL.glVertex3d(end_points[2], end_points[3], height);
-	// GL.glVertex3d(end_points[2], end_points[3], 0d);
-	// }
-	// if (angle == angle_2) {
-	// GL.glVertex3d(start_points[2], start_points[3], 0d);
-	// GL.glVertex3d(start_points[2], start_points[3], height);
-	// GL.glVertex3d(end_points[0], end_points[1], height);
-	// GL.glVertex3d(end_points[0], end_points[1], 0d);
-	// }
-	// }
-	// GL.glEnd();
-	// if (angle == angle_1 && angle == angle_2) {
-	// if (fillMode) {
-	// GL.glBegin(GL.GL_TRIANGLES);
-	// {
-	// GL.glVertex3d(start_points[0], start_points[1], height);
-	// GL.glVertex3d(these_points[0], these_points[1], height);
-	// GL.glVertex3d(start_points[2], start_points[3], height);
-	// GL.glVertex3d(end_points[0], end_points[1], height);
-	// GL.glVertex3d(these_points[2], these_points[3], height);
-	// GL.glVertex3d(end_points[2], end_points[3], height);
-	// }
-	// GL.glEnd();
-	// GL.glBegin(GL.GL_QUADS);
-	// {
-	// GL.glVertex3d(start_points[0], start_points[1], height);
-	// GL.glVertex3d(start_points[2], start_points[3], height);
-	// GL.glVertex3d(end_points[0], end_points[1], height);
-	// GL.glVertex3d(end_points[2], end_points[3], height);
-	// }
-	// GL.glEnd();
-	// } else {
-	// GL.glBegin(GL.GL_LINES);
-	// {
-	// GL.glVertex3d(start_points[0], start_points[1], height);
-	// GL.glVertex3d(end_points[2], end_points[3], height);
-	// GL.glVertex3d(start_points[2], start_points[3], height);
-	// GL.glVertex3d(end_points[0], end_points[1], height);
-	// }
-	// GL.glEnd();
-	// }
-	// }
-	// }
-
-	public void realRender() {
-		if (getStartingCorner() != null && getEndingCorner() != null) {
-			GL.glColor3d(1d, 1d, 1d);
-			GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_FILL);
-			realRenderRoutine(true);
-			GL.glColor3d(0d, 0d, 0d);
-			GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_LINE);
-			realRenderRoutine(false);
 		}
 	}
 }

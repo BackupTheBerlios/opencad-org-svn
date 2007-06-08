@@ -25,7 +25,7 @@ public class Corner extends Primitive implements Hoverable, Selectable {
 
   private transient boolean selected;
 
-  public static double thickness = 0.5d;
+  public static double thickness = 0.1d;
 
   private static double hoverSlack = thickness;
 

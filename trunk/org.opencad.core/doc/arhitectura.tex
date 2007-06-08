@@ -1,0 +1,130 @@
+\chapter{Arhitectura aplicaþiei}
+
+Proiectatã privind cãtre viitor, aplicaþia noastrã oferã posibilitatea
+extinderii pe viitor în numeroase direcþii de dezvoltare. Am construit o
+platformã solidã pe baza cãreia se poate dezvolta o aplicaþie CAD de un nivel
+comparabil cu a altor aplicaþii de acest tip.
+
+Vom orienta prezentarea noastrã în douã direcþii. Întîi ne vom concentra asupra
+modelului de lucru. El reprezintã inima proiectului, un concept care uneºte în
+el toate capacitãþile acestui proiect. Apoi vom trece la descrierea interfeþei
+cu utilizatorul, a cãrei concepþie în sine prezintã o considerãm remarcabilã ºi
+reprezintã o bazã pentru dezvoltãri ulterioare.
+
+\section{Modelul de lucru}
+
+\begin{definition}
+\label{model}
+Numim \textbf{Model de lucru} reprezentarea într-o colecþie de obiecte Java a 
+unei structuri arhitecturale ce poate fi modelatã cu ajutorul acestui proiect.
+\end{definition}
+
+Modelul de lucru este o reprezentare a unei structuri pe care proiectantul
+doreºte sã o reprezinte cu aceastã unealtã într-o formã pe care programul o
+poate recunoaºte ºi o poate reface cît mai fidel cu modelul real imaginat de
+proiectant.
+
+\begin{definition}
+\label{primitive}
+Numim \textbf{Primitivã} unitatea structuralã ºi funcþionalã a Modelului de
+lucru. O primitivã poate fi o colecþie de alte primitive. De asemenea, o
+primitivã este un element ce poate fi materializat atît la nivel logic cît ºi
+într-o reprezentare graficã.
+\end{definition}
+
+Primitivele sunt analogiile entitãþilor logice în care un model real poate fi
+divizat pentru a-l reprezenta structurat. În seria de primitive ce pot apare în
+modelul logic pot exista primitive care nu au un analog imediat în lumea realã.
+
+\begin{statement}
+Modelul logic în totalitatea lui este o Primitivã.
+\end{statement}
+
+Plecînd de la aceste douã noþiuni, vom încerca sã prezentãm întreaga structurã a
+Modelului de lucru ºi modul în care acesta interacþioneazã cu aplicaþia în sine.
+
+În esenþã, o primitivã este orice poate fi desenat. De aceea, la rîndul sãu
+modelul este o primitivã. Introducem douã direcþii în care modelul poate fi
+reprezentat.
+
+\begin{definition}
+Numim \textbf{Reprezentare Realã} o materializare strictã în comenzi Java/OpenGL
+a unei reprezentãri schematice tridimensionale a unei Primitive, realizatã cu
+scopul formãrii unei imaginii asupra rezultatului final al construcþiei fizice a
+entitãþii logice din spatele acelei primitive.
+\end{definition}
+
+Modelul tridimensional este deci cea mai apropiatã formã de realitate pe care
+acest proiect o va reda pentru utilizatorii sãi.
+
+\begin{definition}
+Numim \textbf{Reprezentare Editabilã} o materializare strictã în comenzi Java/OpenGL
+a unei reprezentãri schematice bidimensionale a unei Primitive, realizatã cu
+scopul identificãrii vizuale a primitivelor ºi accesãrii facilã prin intermediul
+unui editor a proprietãþilor primitivelor.
+\end{definition}
+
+Reprezentarea Editabilã este apropiatã ca raþiune figurilor din desenul tehnic,
+ºi de aceea identitatea lor vizualã este la rîndul ei asemãnãtoare acelor figuri.
+
+Alegerea acestor noþiuni este în strictã corelaþie cu detaliile de implementare
+ale aplicaþiei, care le vom detalia în urmãtorul capitol. Pentru a ne face o
+idee despre cum aceste douã reprezentãri se potrivesc peste model, vom spune cã
+reprezentarea modelului de lucru este juxtapunerea tuturor reprezentãrilor
+celorlalte primitive existente în model, în ambele reprezentãri. Desigur, asta
+implicã cã modelul în sine nu este decît un simplu container logic pentru toate
+celelalte componente ale aplicaþiei.
+
+\subsection{Tipuri de primitive}
+
+Alegerea setului de primitive de care va dispune aceastã aplicaþie a fost o
+sarcinã dificilã. Timpul de implementare este în directã corelaþie cu volumul de
+primitive care trebuiesc implementate.
+
+Vom lãsa ca un exerciþiu viitor adãugarea de noi primitive care ar fi de un real
+ajutor utilizatorului acestei aplicaþii. Setul ales este considerat de autor ca
+fiind suficient pentru a oferi un set de funcþionalitãþi de bazã utilizabile
+pentru aceastã aplicaþie ºi destul de variate pentru a scoate în evidenþã
+potenþialul de creºtere al acestui proiect.
+
+\subsubsection{Ziduri ºi Colþuri de ziduri}
+
+Elementele constructive esenþiale ale unei structuri sunt zidurile. Ele
+delimiteazã forma ºi suprafaþa construcþiei, avînd un impact crucial asupra
+preþului de construcþie ºi facilitãþile ce vor putea fi oferite de acea
+construcþie.
+
+Colþurile sunt un tip de primitivã indirect disponibilã proiectantului. Unirea
+capetelor a douã ziduri se poate face printr-un colþ, care introduce de fapt o
+legãturã permanentã între marginile acelor douã ziduri. Constrîngerea este una
+punctualã, zidurile putînd avea orice orientare în cadrul modelului atîta timp
+cît sunt conectate la un colþ. Colþurile pot fi privite ca niºte puncte într-un
+plan.
+
+Orice zid este conectat la douã colþuri, \textbf{Colþul de Start} ºi
+\textbf{Colþul de Stop}. Astfel poziþionat, lungimea ºi orientarea unui zid este
+dictatã de poziþia celor douã colþuri. Astfel, un zid poate fi privit ca un
+segment ce leagã oricare douã puncte (colþuri) dintr-un plan.
+
+\subsubsection{Caracteristici de Ziduri}
+
+\begin{definition}
+Numim \textbf{Caracteristicã a unui zid} orice primitivã ce este asociatã în mod
+direct cu un zid.
+\end{definition}
+
+Toate Caractersticile sunt constrînse poziþional în lungimea zidului. Ele 
+adaugã elemente suplimentare modelului care sunt strict legate în realitate de 
+existenþa unui zid. Exemple tipice de caracterstici ce elucideazã ºi mai bine 
+ce reprezintã o caracteristicã ar fi:
+
+\begin{itemize}
+\item Fereastrã
+\item Uºã
+\item Deschidere -- orice trecere completã prin volumul unui zid (o intrare fãrã
+uºã, sau deschiderea unei ferestre fãrã o fereastrã montatã în ea)
+\item Cavitate -- orice intrare parþialã în volumul unui zid, ca un raft
+interior într-un perete fals.
+\item Ingroºãre -- orice adãugare la volumul unui zid, o îngroºare într-o
+anumitã zonã, ce poate servi, prin analogie, ca un raft exterior într-un perete.
+\end{itemize}

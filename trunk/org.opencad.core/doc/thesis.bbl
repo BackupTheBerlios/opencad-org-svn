@@ -1,34 +1,3 @@
-\begin{thebibliography}{1}
-
-\bibitem{eclipsehelp}
-Eclipse sdk documentation\\ \url{http://help.eclipse.org/}.
-
-\bibitem{equinoxfaq}
-Equinox frequently asked questions\\
-  \url{http://www.eclipse.org/equinox/faq.php}.
-
-\bibitem{equinox}
-Equinox\\ \url{http://www.eclipse.org/equinox/}.
-
-\bibitem{jface}
-Jface\\ \url{http://wiki.eclipse.org/index.php/JFace}.
-
-\bibitem{oglwiki}
-Opengl on wikipedia\\ \url{http://en.wikipedia.org/wiki/OpenGL}.
-
-\bibitem{rcpfaq}
-Martin Oberhuber, Nick Boldt, Daniel Spiewak, Thomas Bonk, et~al.
-\newblock Rich client platform frequently asked questions\\
-  \url{http://wiki.eclipse.org/index.php/RCP_FAQ}.
-
-\bibitem{jface-art}
-Brian Sam-bodden and Christopher Judd.
-\newblock Rich clients with the swt and jface\\
-  \url{http://www.javaworld.com/javaworld/jw-04-2004/jw-0426-swtjface.html}.
-
-\bibitem{swt}
-Joe Winchester and Steve Northover.
-\newblock Swt - a native widget toolkit for java\\
-  \url{http://java.sys-con.com/read/37463.htm}.
+\begin{thebibliography}{}
 
 \end{thebibliography}

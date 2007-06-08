@@ -125,6 +125,7 @@ public class Wall extends Primitive {
 
 			public void realRender(boolean fillMode) {
 				GL.glTranslated(0d, -Corner.thickness, 0d);
+				if (fillMode) {
 				GL.glBegin(GL.GL_QUADS);
 				{
 					GL.glVertex3d(0, 0, 0);
@@ -161,22 +162,62 @@ public class Wall extends Primitive {
 					GL.glVertex3d(0, 0, Wall.height);
 					GL.glVertex3d(0, 2 * Corner.thickness, Wall.height);
 					GL.glVertex3d(getWidth(), 2 * Corner.thickness, Wall.height);
-				}
-				GL.glEnd();
-				GL.glTranslated(0d, 2 * Corner.thickness, 0d);
-				GL.glBegin(GL.GL_QUADS);
-				{
-					GL.glVertex3d(0, 0, 0);
-					GL.glVertex3d(getWidth(), 0, 0);
-					GL.glVertex3d(getWidth(), 0, getGroundOffset());
-					GL.glVertex3d(0, 0, getGroundOffset());
 
-					GL.glVertex3d(0, 0, getMaxGroundOffset());
-					GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
-					GL.glVertex3d(getWidth(), 0, Wall.height);
-					GL.glVertex3d(0, 0, Wall.height);
+					GL.glVertex3d(0, 2 * Corner.thickness, 0);
+					GL.glVertex3d(getWidth(), 2 * Corner.thickness, 0);
+					GL.glVertex3d(getWidth(), 2 * Corner.thickness, getGroundOffset());
+					GL.glVertex3d(0, 2 * Corner.thickness, getGroundOffset());
+
+					GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
+					GL.glVertex3d(getWidth(), 2 * Corner.thickness, getMaxGroundOffset());
+					GL.glVertex3d(getWidth(), 2 * Corner.thickness, Wall.height);
+					GL.glVertex3d(0, 2 * Corner.thickness, Wall.height);
 				}
 				GL.glEnd();
+				} else {
+					GL.glBegin(GL.GL_LINES); {
+						GL.glVertex3d(0, 0, 0);
+						GL.glVertex3d(getWidth(), 0, 0);
+						GL.glVertex3d(0, 2 * Corner.thickness, 0);
+						GL.glVertex3d(getWidth(), 2 * Corner.thickness, 0);
+
+						GL.glVertex3d(0, 0, Wall.height);
+						GL.glVertex3d(getWidth(), 0, Wall.height);
+						GL.glVertex3d(0, 2 * Corner.thickness, Wall.height);
+						GL.glVertex3d(getWidth(), 2 * Corner.thickness, Wall.height);
+
+						GL.glVertex3d(0, 0, getGroundOffset());
+						GL.glVertex3d(getWidth(), 0, getGroundOffset());
+						GL.glVertex3d(0, 2 * Corner.thickness, getGroundOffset());
+						GL.glVertex3d(getWidth(), 2 * Corner.thickness, getGroundOffset());
+
+						GL.glVertex3d(0, 0, getMaxGroundOffset());
+						GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
+						GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
+						GL.glVertex3d(getWidth(), 2 * Corner.thickness, getMaxGroundOffset());
+						
+						GL.glVertex3d(0, 0, getGroundOffset());
+						GL.glVertex3d(0, 0, getMaxGroundOffset());
+						GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
+						GL.glVertex3d(0, 2 * Corner.thickness, getGroundOffset());
+
+						GL.glVertex3d(getWidth(), 0, getGroundOffset());
+						GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
+						GL.glVertex3d(getWidth(), 2 * Corner.thickness, getMaxGroundOffset());
+						GL.glVertex3d(getWidth(), 2 * Corner.thickness, getGroundOffset());
+
+						GL.glVertex3d(0, 0, getGroundOffset());
+						GL.glVertex3d(0, 2 * Corner.thickness, getGroundOffset());
+						GL.glVertex3d(getWidth(), 0, getGroundOffset());
+						GL.glVertex3d(getWidth(), 2 * Corner.thickness, getGroundOffset());
+						
+						GL.glVertex3d(0, 0, getMaxGroundOffset());
+						GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
+						GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
+						GL.glVertex3d(getWidth(), 2 * Corner.thickness, getMaxGroundOffset());
+					}
+					GL.glEnd();
+				}
 			}
 
 			public String toString() {

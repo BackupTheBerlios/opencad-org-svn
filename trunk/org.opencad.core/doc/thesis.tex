@@ -4,6 +4,7 @@
 \usepackage{url}
 \usepackage{a4wide}
 \linespread{1.5}
+\addtolength{\parskip}{\baselineskip}
 
 \renewcommand{\title}{OpenCad.org}
 \newcommand{\subtitle}{Proiectarea unei aplicaþii CAD pentru arhitecturã}
@@ -11,6 +12,9 @@
 \newcommand{\teacher}{prof. dr. ing. Florica Moldoveanu}
 
 \newcommand{\col}[1]{@{\hspace{0.01\textwidth}}p{#1\textwidth}@{\hspace{0.01\textwidth}}}
+
+\newtheorem{definition}{Definiþia}[chapter]
+\newtheorem{statement}{Propoziþia}[chapter]
 
 \begin{document}
 %	\begin{titlepage}
@@ -44,10 +48,8 @@
 %		\input{introducere.tex}
 %	\chapter{Obiective}
 %		\input{obiective.tex}
-	\chapter{Tehnologii}
-		\input{tehnologii.tex}
-%	\chapter{Arhitecturã}
-%		\input{arhitectura.tex}
+%	\input{tehnologii.tex}
+	\input{arhitectura.tex}
 %	\chapter{Implementare}
 %		\input{implementare.tex}
 %	\chapter{Concluzii}

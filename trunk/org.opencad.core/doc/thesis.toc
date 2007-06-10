@@ -1,11 +1,34 @@
 \select@language {romanian}
-\contentsline {chapter}{\numberline {1}Introducere}{1}
-\contentsline {chapter}{\numberline {2}Obiective}{2}
-\contentsline {chapter}{\numberline {3}Tehnologii}{3}
-\contentsline {section}{\numberline {3.1}Eclipse Rich Client Platform}{3}
-\contentsline {subsection}{\numberline {3.1.1}Eclipse Runtime}{3}
-\contentsline {subsection}{\numberline {3.1.2}SWT}{4}
-\contentsline {subsection}{\numberline {3.1.3}JFace}{5}
-\contentsline {chapter}{\numberline {4}Arhitectur\u a}{7}
-\contentsline {chapter}{\numberline {5}Implementare}{8}
-\contentsline {chapter}{\numberline {6}Concluzii}{9}
+\contentsline {chapter}{\numberline {1}Introducere}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Obiective}{2}{chapter.2}
+\contentsline {chapter}{\numberline {3}Tehnologii}{3}{chapter.3}
+\contentsline {section}{\numberline {3.1}Eclipse Rich Client Platform}{3}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Eclipse Runtime}{3}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}SWT}{5}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}JFace}{6}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Workbench}{7}{subsection.3.1.4}
+\contentsline {subsubsection}{Workbench}{7}{section*.4}
+\contentsline {subsubsection}{Pagina}{7}{section*.5}
+\contentsline {subsubsection}{Perspective}{7}{section*.6}
+\contentsline {subsubsection}{Vizualiz\u arile \c si Editoarele}{7}{section*.7}
+\contentsline {section}{\numberline {3.2}OpenGL \c si extensia OpenGL pentru SWT}{8}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}OpenGL \IeC {\^\i }n Java}{8}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}OpenGL pentru SWT}{8}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Ra\c tiunea alegerii tehnologiilor}{9}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}PHP \c si Python}{9}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}C \c si C++}{10}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}.net Framework}{11}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Java}{12}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Eclipse RCP}{13}{subsection.3.3.5}
+\contentsline {chapter}{\numberline {4}Arhitectura aplica\c tiei}{14}{chapter.4}
+\contentsline {section}{\numberline {4.1}Modelul de lucru}{14}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Tipuri de primitive}{15}{subsection.4.1.1}
+\contentsline {subsubsection}{Ziduri \c si Col\c turi de Ziduri}{16}{section*.8}
+\contentsline {subsubsection}{Caracteristici de Ziduri}{16}{section*.9}
+\contentsline {subsubsection}{Decora\c tiuni}{17}{section*.10}
+\contentsline {section}{\numberline {4.2}Editorul OpenGL}{17}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Aspecte ale modelului}{19}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Editorul ca ma\c sin\u a de st\u ari}{20}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Facilit\u a\c tile Editorului OpenGL}{20}{subsection.4.2.3}
+\contentsline {chapter}{\numberline {5}Implementare}{22}{chapter.5}
+\contentsline {chapter}{\numberline {6}Concluzii}{23}{chapter.6}

@@ -14,7 +14,7 @@ reprezintã o bazã pentru dezvoltãri ulterioare.
 \section{Modelul de lucru}
 
 \begin{definition}
-\label{model}
+\label{define:model}
 Numim \textbf{Model de lucru} reprezentarea într-o colecþie de obiecte Java a 
 unei structuri arhitecturale ce poate fi modelatã cu ajutorul acestui 
 proiect.
@@ -26,7 +26,7 @@ poate recunoaºte ºi o poate reface cît mai fidel cu modelul real imaginat de
 proiectant.
 
 \begin{definition}
-\label{primitive}
+\label{define:primitive}
 Numim \textbf{Primitivã} unitatea structuralã ºi funcþionalã a Modelului de 
 lucru. O primitivã poate fi o colecþie de alte primitive. De asemenea, o 
 primitivã este un element ce poate fi materializat atît la nivel logic cît ºi 
@@ -59,6 +59,7 @@ primitive.
 formã de realitate pe care acest proiect o va reda pentru utilizatorii sãi.
 
 \begin{definition}
+\label{define:editorRender}
 Numim \textbf{Reprezentare Editabilã} o materializare strictã în comenzi 
 Java/OpenGL a unei reprezentãri schematice bidimensionale a unei Primitive, 
 realizatã cu scopul identificãrii vizuale a primitivelor ºi accesãrii facilã 
@@ -109,7 +110,8 @@ un segment ce leagã oricare douã puncte (colþuri) dintr-un plan.
 \subsubsection{Caracteristici de Ziduri}
 
 \begin{definition}
-Numim \textbf{Caracteristicã a unui Zid} orice primitivã ce este asociatã în 
+\label{define:feature}
+Numim \textbf{Caracteristicã a unui Zid} orice Primitivã ce este asociatã în 
 mod direct cu un zid.
 \end{definition}
 
@@ -128,9 +130,7 @@ unei ferestre fãrã o fereastrã montatã în ea)
   \item Cavitate -- orice intrare 
 parþialã în volumul unui zid, ca un raft
   interior într-un perete fals.
-  
-\item Ingroºãre -- orice adãugare la volumul unui zid, o îngroºare într-o
-  
+\item Ingroºãre -- orice adãugare la volumul unui zid, o îngroºare într-o 
 anumitã zonã, ce poate servi, prin analogie, ca un raft exterior într-un 
 perete.
 \end{itemize}
@@ -138,21 +138,20 @@ perete.
 \subsubsection{Decoraþiuni}
   
 \begin{definition}
-\textbf{Decoraþiunile} reprezintã elemente care nu au legãturã strictã cu structura 
+\textbf{Decoraþiunile} sunt Primitive care nu au legãturã strictã cu structura 
 construitã, însã oferã un plus de realism ºi poate sugera viitoarea destinaþie 
 a diferitelor spaþii din model.
 \end{definition}
   
 \begin{itemize}
   \item Canapea
-  \item Plantã
+  \item Masã
   \item Toaletã
   \item Chiuvetã de baie
   \item Vanã
   \item Chiuvetã de bucãtãrie
   \item Aragaz
   \item Frigider
-  \item Mobilier de bucãtãrie
   \item Masã de bucãtãrie
 \end{itemize}
 
@@ -161,3 +160,117 @@ Caracterstici, datoritã constrîngerii lor reale de a apãrea pe un zid. Dintre
 cele menþionate mai sus, dãm exemplu chiuveta care întotdeauna apare în 
 vecinãtatea unui perete.
 
+În Figura \ref{figure:model-arh} vom sumariza cele prezentate mai sus printr-o 
+diagramã cu toate componentele modelului de lucru.
+
+\begin{figure}[htp]
+\begin{center} 
+\includegraphics[width=\textwidth]{figures/drawing.pdf}
+  \caption{Arhitectura 
+Modelului de Lucru}
+  \label{figure:model-arh}
+\end{center}
+\end{figure}
+
+
+\section{Editorul OpenGL}
+
+Înainte de a fi un editor pentru Modelul de Lucru (Definiþia 
+\ref{define:model}), editorul OpenGL dezvoltat de noi este un punct de plecare 
+foarte bun pentru orice editor care necesitã folosirea facilitãþilor OpenGL. 
+Vom încerca sã descriem succint arhitectura editorului, evidenþiind 
+caracteristicile generice cît ºi particularizãrile de suprafaþã care au fost 
+necesare pentru integrarea cu funcþionarea doritã.
+
+Editorul este în principiu o suprafaþã de desenare OpenGL cu aspect 
+bidimensional ce poate interacþiona cu utilizatorul prin intermediul interfeþei 
+oferite de RCP, adicã evenimentele ale mausului, ale tastaturii, ale 
+vizualizãrilor de structurã ºi de proprietãþi, despre care vom aminti mai jos.
+
+\subsection{Aspecte ale modelului}
+
+\begin{definition}
+\label{define:model-aspect}
+Numim \textbf{Aspect al Modelului de Lucru} orice formã de interpretare a unei
+primitive aflate într-un model de lucru care nu are legãturã cu modelul ºi
+structura sa, dar ajutã alte componente ale aplicaþiei în a interacþiona cu
+acesta.
+\end{definition}
+
+Pentru modelarea funcþionalitãþii editorului, orice Primitivã (Definiþia 
+\ref{define:primitive}) este consideratã ca un element ce poate fi desenat 
+într-un editor. Fiecare Primitivã trebuie sã specifice modul în care ea urmeazã 
+sã fie desenatã în spaþiul bidimensional al editorului.
+
+Unele primitive sunt desenate direct de cãtre model, altele, cum ar fi 
+Caracteristicile (Definiþia \ref{define:feature}), ale cãror desenare intrã în 
+sarcina zidului din care fac parte.
+
+Acest aspect al modelului reprezintã materializarea \textbf{Reprezentãrii 
+Editabile} (Definiþia \ref{define:editorRender}).
+
+Un alt aspect adãugat modelului este \textbf{Selectabilitate}. Orice Primitivã
+care din punct de vedere al interfeþei editorului poate fi selectat prin diverse
+metode de utilizator se spune cã este \textbf{selectabilã}. Primitivele pot
+reacþiona la schimbarea stãrii lor de selectabilitate ºi la rîndul sãu editorul
+poate trata evenimentul schimbãrii selecþiei în funcþie de implementarea doritã.
+
+În fine, ultimul aspect al modelului necesar implementãrii editorului este cel
+de \textbf{Navigabilitate}. În momentul în care mausul trece deasupra unei
+astfel de componente, ea poate reacþiona prin evenimente implementate la nivelul
+editorului. Multe Primitive folosesc aceastã proprietate pentru a-ºi schimba
+starea de selectare.
+
+\subsection{Editorul ca maºinã de stãri}
+
+Editorul OpenGL funcþioneazã ca o maºinã de stãri. Editorul suportã
+înregistrarea stãrilor noi ºi controleazã viaþa tuturor stãrilor înregistrate în
+stiva sa de stãri.
+
+La un moment dat o singurã stare este activã. O stare activã poate controla
+toate evenimentele pe care le primeºte editorul ºi poate sã introducã noi stãri
+în stivã sau sã modifice modelul în funcþie de evenimentele care au avut loc.
+Starea decide cînd viaþa ei a luat sfîrºit. Aceastã decizie este comunicatã
+editorului care apoi deînregistreazã starea din stivã.
+
+În Tabela \ref{table:editor-states} vom prezenta ciclul de viaþã al unei stãri.
+Acest model de ciclu de viaþã a fost stabilit în funcþie de necesitãþile
+editorului OpenGL, pentru a-i permite acestuia sã interacþioneze sincron cu
+schimbãrile de stare ce pot fi controlate asincron de cãtre evenimentele
+aplicaþiei.
+
+Dintr-o anumitã privinþã, acest ciclu de stare poate fi privit ca o
+serie de meta-stãri ale aplicaþiei (i.e. stãri ale stãrilor).
+
+\begin{table}[h] \caption{Ciclul de viaþã al stãrilor Editorului OpenGL 
+\label{table:editor-states}}
+\begin{tabular}{|\col{0.23}|\col{0.73}|}
+\hline FRESH & La construcþia unei stãri ciclul de viaþã este setat în poziþia
+FRESH. Editorul va citi orice stare setatã pe acest mod ºi o va seta ca ºi stare
+activã, înregistrînd toate rutinele de tratare a evenimentelor pentru aceastã
+stare în cadrul editorului. Starea curentã este setatã ca activã ºi modul ei
+este trecut în RUNNING. Starea activã anterioarã este trecutã pe modul SLEEPING.
+\\ \hline RUNNING & Dupã ce editorul iniþializeazã o stare, ea este în modul
+RUNNING. În acest mod starea primeºte toate evenimentele editorului. Decizia de
+a pãrãsi aceastã stare se poate lua dupã douã criterii. a) La discreþia stãrii
+în sine, prin trecerea în modul TERMINATED sau b) la discreþia editorului, în
+momentul sosirii unei noi stãri FRESH, cînd starea curentã trece în SLEEPING. \\
+\hline SLEEPING & Toate stãrile care au fost oprite de editor la apariþia unei
+stãri noi se adunã într-o stivã ºi modul lor este trecut în SLEEPING. Ele pot
+sta în acest mod un timp nedefinit ºi pot sã nu-l pãrãseascã niciodatã. Ele pot
+reveni la starea RUNNING în momentul în care se aflã la vîrful stivei ºi starea
+activã trece în modul TERMINATED. Atunci editorul automat va muta starea din
+capul stivei ca stare activã ºi ea va deveni RUNNING. De aceea rutina de tratare
+a tranziþiei în RUNNING cît ºi rutina de tratare în starea TERMINATED trebuie sã
+aibã în vedere posibilitatea rulãrii de mai multe ori pentru aceeaºi stare
+(i.e. sã nu trateze iniþializãri, care se fac în mod normal în starea FRESH) \\
+\hline TERMINATED & Odatã ce starea considerã cã ºi-a încheiat activitatea, ea
+poate alege sã treacã în modul TERMINATED. Odatã ajunsã în acest mod, starea va
+fi deînregistratã din lista de captare a evenimentelor editorului ºi va fi
+scoasã permanent din lista stãrilor editorului.\\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Facilitãþile Editorului OpenGL}
+
+Bla bla bla

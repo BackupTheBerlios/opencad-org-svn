@@ -1,0 +1,63 @@
+\documentclass[a4paper]{report}
+\usepackage[cp1250]{inputenc}
+\usepackage[romanian]{babel}
+\usepackage{url}
+\usepackage{a4wide}
+\usepackage[bookmarks, bookmarksopen=true, bookmarksnumbered=true]{hyperref}
+\usepackage{graphicx}
+\linespread{1.5}
+\addtolength{\parskip}{\baselineskip}
+
+\renewcommand{\title}{OpenCad.org}
+\newcommand{\subtitle}{Proiectarea unei aplicaþii CAD pentru arhitecturã}
+\renewcommand{\author}{Silviu-Georgian Aprozeanu}
+\newcommand{\teacher}{prof. dr. ing. Florica Moldoveanu}
+
+\newcommand{\col}[1]{@{\hspace{0.01\textwidth}}p{#1\textwidth}@{\hspace{0.01\textwidth}}}
+
+\newtheorem{definition}{Definiþia}[chapter]
+\newtheorem{statement}{Propoziþia}[chapter]
+
+\begin{document}
+	\begin{titlepage}
+	\null
+	\vfill
+	\begin{center}
+	{\Huge \title{}}
+	
+	{\Large \subtitle{}}
+	\end{center}
+	\vfill
+	\begin{flushright}
+		\begin{tabular}{ll}
+			Absolvent & \author{} \\
+			Profesor îndrumãtor & \teacher{}
+		\end{tabular}
+	\end{flushright}
+	\vskip 2cm
+	\begin{center}
+		\small Bucureºti, \today
+	\end{center}
+	\end{titlepage}
+	\pagenumbering{roman}
+	\tableofcontents
+	\listoftables
+	\listoffigures
+	\newpage
+	\pagenumbering{arabic}
+	\pagestyle{headings}
+	\chapter{Introducere}
+		\input{introducere.tex}
+	\chapter{Obiective}
+		\input{obiective.tex}
+	\input{tehnologii.tex}
+	\input{arhitectura.tex}
+	\chapter{Implementare}
+		\input{implementare.tex}
+	\chapter{Concluzii}
+		\input{concluzii.tex}
+	\clearpage
+	\pagenumbering{roman}
+	\bibliographystyle{plain}
+	\bibliography{thesis}
+\end{document}

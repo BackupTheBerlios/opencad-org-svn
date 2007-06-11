@@ -1,167 +1,167 @@
-\chapter{Arhitectura aplicaşiei}
+\chapter{Arhitectura aplicaÅ£iei}
 
-Proiectatã privind cãtre viitor, aplicaşia noastrã oferã posibilitatea 
-extinderii pe viitor în numeroase direcşii de dezvoltare. Am construit o 
-platformã solidã pe baza cãreia se poate dezvolta o aplicaşie CAD de un nivel 
-comparabil cu a altor aplicaşii de acest tip.
+ProiectatÄƒ privind cÄƒtre viitor, aplicaÅ£ia noastrÄƒ oferÄƒ posibilitatea 
+extinderii pe viitor Ã®n numeroase direcÅ£ii de dezvoltare. Am construit o 
+platformÄƒ solidÄƒ pe baza cÄƒreia se poate dezvolta o aplicaÅ£ie CAD de un nivel 
+comparabil cu a altor aplicaÅ£ii de acest tip.
 
-Vom orienta prezentarea noastrã în douã direcşii. Întîi ne vom concentra asupra 
-modelului de lucru. El reprezintã inima proiectului, un concept care uneºte în 
-el toate capacitãşile acestui proiect. Apoi vom trece la descrierea interfeşei 
-cu utilizatorul, a cãrei concepşie în sine prezintã o considerãm remarcabilã ºi 
-reprezintã o bazã pentru dezvoltãri ulterioare.
+Vom orienta prezentarea noastrÄƒ Ã®n douÄƒ direcÅ£ii. ÃntÃ®i ne vom concentra asupra 
+modelului de lucru. El reprezintÄƒ inima proiectului, un concept care uneÅŸte Ã®n 
+el toate capacitÄƒÅ£ile acestui proiect. Apoi vom trece la descrierea interfeÅ£ei 
+cu utilizatorul, a cÄƒrei concepÅ£ie Ã®n sine prezintÄƒ o considerÄƒm remarcabilÄƒ ÅŸi 
+reprezintÄƒ o bazÄƒ pentru dezvoltÄƒri ulterioare.
 
 \section{Modelul de lucru}
 
 \begin{definition}
 \label{define:model}
-Numim \textbf{Model de lucru} reprezentarea într-o colecşie de obiecte Java a 
-unei structuri arhitecturale ce poate fi modelatã cu ajutorul acestui 
+Numim \textbf{Model de lucru} reprezentarea Ã®ntr-o colecÅ£ie de obiecte Java a 
+unei structuri arhitecturale ce poate fi modelatÄƒ cu ajutorul acestui 
 proiect.
 \end{definition}
 
 Modelul de lucru este o reprezentare a unei structuri pe care proiectantul 
-doreºte sã o reprezinte cu aceastã unealtã într-o formã pe care programul o 
-poate recunoaºte ºi o poate reface cît mai fidel cu modelul real imaginat de 
+doreÅŸte sÄƒ o reprezinte cu aceastÄƒ unealtÄƒ Ã®ntr-o formÄƒ pe care programul o 
+poate recunoaÅŸte ÅŸi o poate reface cÃ®t mai fidel cu modelul real imaginat de 
 proiectant.
 
 \begin{definition}
 \label{define:primitive}
-Numim \textbf{Primitivã} unitatea structuralã ºi funcşionalã a Modelului de 
-lucru. O primitivã poate fi o colecşie de alte primitive. De asemenea, o 
-primitivã este un element ce poate fi materializat atît la nivel logic cît ºi 
-într-o reprezentare graficã.
+Numim \textbf{PrimitivÄƒ} unitatea structuralÄƒ ÅŸi funcÅ£ionalÄƒ a Modelului de 
+lucru. O primitivÄƒ poate fi o colecÅ£ie de alte primitive. De asemenea, o 
+primitivÄƒ este un element ce poate fi materializat atÃ®t la nivel logic cÃ®t ÅŸi 
+Ã®ntr-o reprezentare graficÄƒ.
 \end{definition}
 
-Primitivele sunt analogiile entitãşilor logice în care un model real poate fi 
-divizat pentru a-l reprezenta structurat. În seria de primitive ce pot apare în 
-modelul logic pot exista primitive care nu au un analog imediat în lumea realã.
+Primitivele sunt analogiile entitÄƒÅ£ilor logice Ã®n care un model real poate fi 
+divizat pentru a-l reprezenta structurat. Ãn seria de primitive ce pot apare Ã®n 
+modelul logic pot exista primitive care nu au un analog imediat Ã®n lumea realÄƒ.
 
 \begin{statement}
-Modelul logic în totalitatea lui este o Primitivã.
+Modelul logic Ã®n totalitatea lui este o PrimitivÄƒ.
 \end{statement}
 
-Plecînd de la aceste douã noşiuni, vom încerca sã prezentãm întreaga structurã 
-a Modelului de lucru ºi modul în care acesta interacşioneazã cu aplicaşia în 
+PlecÃ®nd de la aceste douÄƒ noÅ£iuni, vom Ã®ncerca sÄƒ prezentÄƒm Ã®ntreaga structurÄƒ 
+a Modelului de lucru ÅŸi modul Ã®n care acesta interacÅ£ioneazÄƒ cu aplicaÅ£ia Ã®n 
 sine.
 
-În esenşã, o primitivã este orice poate fi desenat. De aceea, la rîndul sãu 
-modelul este o primitivã. Introducem douã direcşii în care modelul poate fi 
+Ãn esenÅ£Äƒ, o primitivÄƒ este orice poate fi desenat. De aceea, la rÃ®ndul sÄƒu 
+modelul este o primitivÄƒ. Introducem douÄƒ direcÅ£ii Ã®n care modelul poate fi 
 reprezentat.
 
 \begin{definition}
-Numim \textbf{Reprezentare Realã} o materializare strictã în comenzi 
-Java/OpenGL a unei reprezentãri schematice tridimensionale a unei Primitive, 
-realizatã cu scopul formãrii unei imaginii asupra rezultatului final al 
-construcşiei fizice a entitãşii logice din spatele acelei 
+Numim \textbf{Reprezentare RealÄƒ} o materializare strictÄƒ Ã®n comenzi 
+Java/OpenGL a unei reprezentÄƒri schematice tridimensionale a unei Primitive, 
+realizatÄƒ cu scopul formÄƒrii unei imaginii asupra rezultatului final al 
+construcÅ£iei fizice a entitÄƒÅ£ii logice din spatele acelei 
 primitive.
-\end{definition} Modelul tridimensional este deci cea mai apropiatã 
-formã de realitate pe care acest proiect o va reda pentru utilizatorii sãi.
+\end{definition} Modelul tridimensional este deci cea mai apropiatÄƒ 
+formÄƒ de realitate pe care acest proiect o va reda pentru utilizatorii sÄƒi.
 
 \begin{definition}
 \label{define:editorRender}
-Numim \textbf{Reprezentare Editabilã} o materializare strictã în comenzi 
-Java/OpenGL a unei reprezentãri schematice bidimensionale a unei Primitive, 
-realizatã cu scopul identificãrii vizuale a primitivelor ºi accesãrii facilã 
-prin intermediul unui editor a proprietãşilor primitivelor.
+Numim \textbf{Reprezentare EditabilÄƒ} o materializare strictÄƒ Ã®n comenzi 
+Java/OpenGL a unei reprezentÄƒri schematice bidimensionale a unei Primitive, 
+realizatÄƒ cu scopul identificÄƒrii vizuale a primitivelor ÅŸi accesÄƒrii facilÄƒ 
+prin intermediul unui editor a proprietÄƒÅ£ilor primitivelor.
 \end{definition}
 
-Reprezentarea Editabilã este apropiatã ca raşiune figurilor din desenul tehnic, 
-ºi de aceea identitatea lor vizualã este la rîndul ei asemãnãtoare acelor 
-figuri. Alegerea acestor noşiuni este în strictã corelaşie cu detaliile de 
-implementare ale aplicaşiei, care le vom detalia în urmãtorul capitol. Pentru a 
-ne face o idee despre cum aceste douã reprezentãri se potrivesc peste model, 
-vom spune cã reprezentarea modelului de lucru este juxtapunerea tuturor 
-reprezentãrilor celorlalte primitive existente în model, în ambele 
-reprezentãri. Desigur, asta implicã cã modelul în sine nu este decît un simplu 
-container logic pentru toate celelalte componente ale aplicaşiei.
+Reprezentarea EditabilÄƒ este apropiatÄƒ ca raÅ£iune figurilor din desenul tehnic, 
+ÅŸi de aceea identitatea lor vizualÄƒ este la rÃ®ndul ei asemÄƒnÄƒtoare acelor 
+figuri. Alegerea acestor noÅ£iuni este Ã®n strictÄƒ corelaÅ£ie cu detaliile de 
+implementare ale aplicaÅ£iei, care le vom detalia Ã®n urmÄƒtorul capitol. Pentru a 
+ne face o idee despre cum aceste douÄƒ reprezentÄƒri se potrivesc peste model, 
+vom spune cÄƒ reprezentarea modelului de lucru este juxtapunerea tuturor 
+reprezentÄƒrilor celorlalte primitive existente Ã®n model, Ã®n ambele 
+reprezentÄƒri. Desigur, asta implicÄƒ cÄƒ modelul Ã®n sine nu este decÃ®t un simplu 
+container logic pentru toate celelalte componente ale aplicaÅ£iei.
 
 \subsection{Tipuri de primitive}
 
-Alegerea setului de primitive de care va dispune aceastã aplicaşie a fost o 
-sarcinã dificilã. Timpul de implementare este în directã corelaşie cu volumul 
+Alegerea setului de primitive de care va dispune aceastÄƒ aplicaÅ£ie a fost o 
+sarcinÄƒ dificilÄƒ. Timpul de implementare este Ã®n directÄƒ corelaÅ£ie cu volumul 
 de primitive care trebuiesc implementate.
 
-Vom lãsa ca un exercişiu viitor adãugarea de noi primitive care ar fi de un 
-real ajutor utilizatorului acestei aplicaşii. Setul ales este considerat de 
-autor ca fiind suficient pentru a oferi un set de funcşionalitãşi de bazã 
-utilizabile pentru aceastã aplicaşie ºi destul de variate pentru a scoate în 
-evidenşã potenşialul de creºtere al acestui proiect.
+Vom lÄƒsa ca un exerciÅ£iu viitor adÄƒugarea de noi primitive care ar fi de un 
+real ajutor utilizatorului acestei aplicaÅ£ii. Setul ales este considerat de 
+autor ca fiind suficient pentru a oferi un set de funcÅ£ionalitÄƒÅ£i de bazÄƒ 
+utilizabile pentru aceastÄƒ aplicaÅ£ie ÅŸi destul de variate pentru a scoate Ã®n 
+evidenÅ£Äƒ potenÅ£ialul de creÅŸtere al acestui proiect.
 
-\subsubsection{Ziduri ºi Colşuri de Ziduri}
+\subsubsection{Ziduri ÅŸi ColÅ£uri de Ziduri}
 
-Elementele constructive esenşiale ale unei structuri sunt zidurile. Ele 
-delimiteazã forma ºi suprafaşa construcşiei, avînd un impact crucial asupra 
-preşului de construcşie ºi facilitãşile ce vor putea fi oferite de acea 
-construcşie.
+Elementele constructive esenÅ£iale ale unei structuri sunt zidurile. Ele 
+delimiteazÄƒ forma ÅŸi suprafaÅ£a construcÅ£iei, avÃ®nd un impact crucial asupra 
+preÅ£ului de construcÅ£ie ÅŸi facilitÄƒÅ£ile ce vor putea fi oferite de acea 
+construcÅ£ie.
 
-Colşurile sunt un tip de primitivã indirect disponibilã proiectantului. Unirea 
-capetelor a douã ziduri se poate face printr-un colş, care introduce de fapt o 
-legãturã permanentã între marginile acelor douã ziduri. Constrîngerea este una 
-punctualã, zidurile putînd avea orice orientare în cadrul modelului atîta timp 
-cît sunt conectate la un colş. Colşurile pot fi privite ca niºte puncte într-un 
+ColÅ£urile sunt un tip de primitivÄƒ indirect disponibilÄƒ proiectantului. Unirea 
+capetelor a douÄƒ ziduri se poate face printr-un colÅ£, care introduce de fapt o 
+legÄƒturÄƒ permanentÄƒ Ã®ntre marginile acelor douÄƒ ziduri. ConstrÃ®ngerea este una 
+punctualÄƒ, zidurile putÃ®nd avea orice orientare Ã®n cadrul modelului atÃ®ta timp 
+cÃ®t sunt conectate la un colÅ£. ColÅ£urile pot fi privite ca niÅŸte puncte Ã®ntr-un 
 plan.
 
-Orice zid este conectat la douã colşuri, \textbf{Colşul de Start} ºi 
-\textbf{Colşul de Stop}. Astfel pozişionat, lungimea ºi orientarea unui zid 
-este dictatã de pozişia celor douã colşuri. Astfel, un zid poate fi privit ca 
-un segment ce leagã oricare douã puncte (colşuri) dintr-un plan.
+Orice zid este conectat la douÄƒ colÅ£uri, \textbf{ColÅ£ul de Start} ÅŸi 
+\textbf{ColÅ£ul de Stop}. Astfel poziÅ£ionat, lungimea ÅŸi orientarea unui zid 
+este dictatÄƒ de poziÅ£ia celor douÄƒ colÅ£uri. Astfel, un zid poate fi privit ca 
+un segment ce leagÄƒ oricare douÄƒ puncte (colÅ£uri) dintr-un plan.
 
 \subsubsection{Caracteristici de Ziduri}
 
 \begin{definition}
 \label{define:feature}
-Numim \textbf{Caracteristicã a unui Zid} orice Primitivã ce este asociatã în 
+Numim \textbf{CaracteristicÄƒ a unui Zid} orice PrimitivÄƒ ce este asociatÄƒ Ã®n 
 mod direct cu un zid.
 \end{definition}
 
-Toate Caractersticile sunt constrînse pozişional în lungimea zidului. Ele 
-adaugã elemente suplimentare modelului care sunt strict legate în realitate de 
-existenşa unui zid. Exemple tipice de caracterstici ce elucideazã ºi mai bine 
-ce reprezintã o caracteristicã ar fi:
+Toate Caractersticile sunt constrÃ®nse poziÅ£ional Ã®n lungimea zidului. Ele 
+adaugÄƒ elemente suplimentare modelului care sunt strict legate Ã®n realitate de 
+existenÅ£a unui zid. Exemple tipice de caracterstici ce elucideazÄƒ ÅŸi mai bine 
+ce reprezintÄƒ o caracteristicÄƒ ar fi:
 
 \begin{itemize}
-  \item Fereastrã
-  \item Uºã
+  \item FereastrÄƒ
+  \item UÅŸÄƒ
   \item Deschidere -- orice 
-trecere completã prin volumul unui zid (o intrare fãrã
-  uºã, sau deschiderea 
-unei ferestre fãrã o fereastrã montatã în ea)
+trecere completÄƒ prin volumul unui zid (o intrare fÄƒrÄƒ
+  uÅŸÄƒ, sau deschiderea 
+unei ferestre fÄƒrÄƒ o fereastrÄƒ montatÄƒ Ã®n ea)
   \item Cavitate -- orice intrare 
-parşialã în volumul unui zid, ca un raft
-  interior într-un perete fals.
-\item Ingroºãre -- orice adãugare la volumul unui zid, o îngroºare într-o 
-anumitã zonã, ce poate servi, prin analogie, ca un raft exterior într-un 
+parÅ£ialÄƒ Ã®n volumul unui zid, ca un raft
+  interior Ã®ntr-un perete fals.
+\item IngroÅŸÄƒre -- orice adÄƒugare la volumul unui zid, o Ã®ngroÅŸare Ã®ntr-o 
+anumitÄƒ zonÄƒ, ce poate servi, prin analogie, ca un raft exterior Ã®ntr-un 
 perete.
 \end{itemize}
   
-\subsubsection{Decoraşiuni}
+\subsubsection{DecoraÅ£iuni}
   
 \begin{definition}
-\textbf{Decoraşiunile} sunt Primitive care nu au legãturã strictã cu structura 
-construitã, însã oferã un plus de realism ºi poate sugera viitoarea destinaşie 
-a diferitelor spaşii din model.
+\textbf{DecoraÅ£iunile} sunt Primitive care nu au legÄƒturÄƒ strictÄƒ cu structura 
+construitÄƒ, Ã®nsÄƒ oferÄƒ un plus de realism ÅŸi poate sugera viitoarea destinaÅ£ie 
+a diferitelor spaÅ£ii din model.
 \end{definition}
   
 \begin{itemize}
   \item Canapea
-  \item Masã
-  \item Toaletã
-  \item Chiuvetã de baie
-  \item Vanã
-  \item Chiuvetã de bucãtãrie
+  \item MasÄƒ
+  \item ToaletÄƒ
+  \item ChiuvetÄƒ de baie
+  \item VanÄƒ
+  \item ChiuvetÄƒ de bucÄƒtÄƒrie
   \item Aragaz
   \item Frigider
-  \item Masã de bucãtãrie
+  \item MasÄƒ de bucÄƒtÄƒrie
 \end{itemize}
 
-Dintre aceste Decoraşiuni, unele dintre ele vor fi implementate ca ºi 
-Caracterstici, datoritã constrîngerii lor reale de a apãrea pe un zid. Dintre 
-cele menşionate mai sus, dãm exemplu chiuveta care întotdeauna apare în 
-vecinãtatea unui perete.
+Dintre aceste DecoraÅ£iuni, unele dintre ele vor fi implementate ca ÅŸi 
+Caracterstici, datoritÄƒ constrÃ®ngerii lor reale de a apÄƒrea pe un zid. Dintre 
+cele menÅ£ionate mai sus, dÄƒm exemplu chiuveta care Ã®ntotdeauna apare Ã®n 
+vecinÄƒtatea unui perete.
 
-În Figura \ref{figure:model-arh} vom sumariza cele prezentate mai sus printr-o 
-diagramã cu toate componentele modelului de lucru.
+Ãn Figura \ref{figure:model-arh} vom sumariza cele prezentate mai sus printr-o 
+diagramÄƒ cu toate componentele modelului de lucru.
 
 \begin{figure}[htp]
 \begin{center} 
@@ -175,102 +175,102 @@ Modelului de Lucru}
 
 \section{Editorul OpenGL}
 
-Înainte de a fi un editor pentru Modelul de Lucru (Definişia 
+Ãnainte de a fi un editor pentru Modelul de Lucru (DefiniÅ£ia 
 \ref{define:model}), editorul OpenGL dezvoltat de noi este un punct de plecare 
-foarte bun pentru orice editor care necesitã folosirea facilitãşilor OpenGL. 
-Vom încerca sã descriem succint arhitectura editorului, evidenşiind 
-caracteristicile generice cît ºi particularizãrile de suprafaşã care au fost 
-necesare pentru integrarea cu funcşionarea doritã.
+foarte bun pentru orice editor care necesitÄƒ folosirea facilitÄƒÅ£ilor OpenGL. 
+Vom Ã®ncerca sÄƒ descriem succint arhitectura editorului, evidenÅ£iind 
+caracteristicile generice cÃ®t ÅŸi particularizÄƒrile de suprafaÅ£Äƒ care au fost 
+necesare pentru integrarea cu funcÅ£ionarea doritÄƒ.
 
-Editorul este în principiu o suprafaşã de desenare OpenGL cu aspect 
-bidimensional ce poate interacşiona cu utilizatorul prin intermediul interfeşei 
-oferite de RCP, adicã evenimentele ale mausului, ale tastaturii, ale 
-vizualizãrilor de structurã ºi de proprietãşi, despre care vom aminti mai jos.
+Editorul este Ã®n principiu o suprafaÅ£Äƒ de desenare OpenGL cu aspect 
+bidimensional ce poate interacÅ£iona cu utilizatorul prin intermediul interfeÅ£ei 
+oferite de RCP, adicÄƒ evenimentele ale mausului, ale tastaturii, ale 
+vizualizÄƒrilor de structurÄƒ ÅŸi de proprietÄƒÅ£i, despre care vom aminti mai jos.
 
 \subsection{Aspecte ale modelului}
 
 \begin{definition}
 \label{define:model-aspect}
-Numim \textbf{Aspect al Modelului de Lucru} orice formã de interpretare a unei
-primitive aflate într-un model de lucru care nu are legãturã cu modelul ºi
-structura sa, dar ajutã alte componente ale aplicaşiei în a interacşiona cu
+Numim \textbf{Aspect al Modelului de Lucru} orice formÄƒ de interpretare a unei
+primitive aflate Ã®ntr-un model de lucru care nu are legÄƒturÄƒ cu modelul ÅŸi
+structura sa, dar ajutÄƒ alte componente ale aplicaÅ£iei Ã®n a interacÅ£iona cu
 acesta.
 \end{definition}
 
-Pentru modelarea funcşionalitãşii editorului, orice Primitivã (Definişia 
-\ref{define:primitive}) este consideratã ca un element ce poate fi desenat 
-într-un editor. Fiecare Primitivã trebuie sã specifice modul în care ea urmeazã 
-sã fie desenatã în spaşiul bidimensional al editorului.
+Pentru modelarea funcÅ£ionalitÄƒÅ£ii editorului, orice PrimitivÄƒ (DefiniÅ£ia 
+\ref{define:primitive}) este consideratÄƒ ca un element ce poate fi desenat 
+Ã®ntr-un editor. Fiecare PrimitivÄƒ trebuie sÄƒ specifice modul Ã®n care ea urmeazÄƒ 
+sÄƒ fie desenatÄƒ Ã®n spaÅ£iul bidimensional al editorului.
 
-Unele primitive sunt desenate direct de cãtre model, altele, cum ar fi 
-Caracteristicile (Definişia \ref{define:feature}), ale cãror desenare intrã în 
+Unele primitive sunt desenate direct de cÄƒtre model, altele, cum ar fi 
+Caracteristicile (DefiniÅ£ia \ref{define:feature}), ale cÄƒror desenare intrÄƒ Ã®n 
 sarcina zidului din care fac parte.
 
-Acest aspect al modelului reprezintã materializarea \textbf{Reprezentãrii 
-Editabile} (Definişia \ref{define:editorRender}).
+Acest aspect al modelului reprezintÄƒ materializarea \textbf{ReprezentÄƒrii 
+Editabile} (DefiniÅ£ia \ref{define:editorRender}).
 
-Un alt aspect adãugat modelului este \textbf{Selectabilitate}. Orice Primitivã
-care din punct de vedere al interfeşei editorului poate fi selectat prin diverse
-metode de utilizator se spune cã este \textbf{selectabilã}. Primitivele pot
-reacşiona la schimbarea stãrii lor de selectabilitate ºi la rîndul sãu editorul
-poate trata evenimentul schimbãrii selecşiei în funcşie de implementarea doritã.
+Un alt aspect adÄƒugat modelului este \textbf{Selectabilitate}. Orice PrimitivÄƒ
+care din punct de vedere al interfeÅ£ei editorului poate fi selectat prin diverse
+metode de utilizator se spune cÄƒ este \textbf{selectabilÄƒ}. Primitivele pot
+reacÅ£iona la schimbarea stÄƒrii lor de selectabilitate ÅŸi la rÃ®ndul sÄƒu editorul
+poate trata evenimentul schimbÄƒrii selecÅ£iei Ã®n funcÅ£ie de implementarea doritÄƒ.
 
-În fine, ultimul aspect al modelului necesar implementãrii editorului este cel
-de \textbf{Navigabilitate}. În momentul în care mausul trece deasupra unei
-astfel de componente, ea poate reacşiona prin evenimente implementate la nivelul
-editorului. Multe Primitive folosesc aceastã proprietate pentru a-ºi schimba
+Ãn fine, ultimul aspect al modelului necesar implementÄƒrii editorului este cel
+de \textbf{Navigabilitate}. Ãn momentul Ã®n care mausul trece deasupra unei
+astfel de componente, ea poate reacÅ£iona prin evenimente implementate la nivelul
+editorului. Multe Primitive folosesc aceastÄƒ proprietate pentru a-ÅŸi schimba
 starea de selectare.
 
-\subsection{Editorul ca maºinã de stãri}
+\subsection{Editorul ca maÅŸinÄƒ de stÄƒri}
 
-Editorul OpenGL funcşioneazã ca o maºinã de stãri. Editorul suportã
-înregistrarea stãrilor noi ºi controleazã viaşa tuturor stãrilor înregistrate în
-stiva sa de stãri.
+Editorul OpenGL funcÅ£ioneazÄƒ ca o maÅŸinÄƒ de stÄƒri. Editorul suportÄƒ
+Ã®nregistrarea stÄƒrilor noi ÅŸi controleazÄƒ viaÅ£a tuturor stÄƒrilor Ã®nregistrate Ã®n
+stiva sa de stÄƒri.
 
-La un moment dat o singurã stare este activã. O stare activã poate controla
-toate evenimentele pe care le primeºte editorul ºi poate sã introducã noi stãri
-în stivã sau sã modifice modelul în funcşie de evenimentele care au avut loc.
-Starea decide cînd viaşa ei a luat sfîrºit. Aceastã decizie este comunicatã
-editorului care apoi deînregistreazã starea din stivã.
+La un moment dat o singurÄƒ stare este activÄƒ. O stare activÄƒ poate controla
+toate evenimentele pe care le primeÅŸte editorul ÅŸi poate sÄƒ introducÄƒ noi stÄƒri
+Ã®n stivÄƒ sau sÄƒ modifice modelul Ã®n funcÅ£ie de evenimentele care au avut loc.
+Starea decide cÃ®nd viaÅ£a ei a luat sfÃ®rÅŸit. AceastÄƒ decizie este comunicatÄƒ
+editorului care apoi deÃ®nregistreazÄƒ starea din stivÄƒ.
 
-În Tabela \ref{table:editor-states} vom prezenta ciclul de viaşã al unei stãri.
-Acest model de ciclu de viaşã a fost stabilit în funcşie de necesitãşile
-editorului OpenGL, pentru a-i permite acestuia sã interacşioneze sincron cu
-schimbãrile de stare ce pot fi controlate asincron de cãtre evenimentele
-aplicaşiei.
+Ãn Tabela \ref{table:editor-states} vom prezenta ciclul de viaÅ£Äƒ al unei stÄƒri.
+Acest model de ciclu de viaÅ£Äƒ a fost stabilit Ã®n funcÅ£ie de necesitÄƒÅ£ile
+editorului OpenGL, pentru a-i permite acestuia sÄƒ interacÅ£ioneze sincron cu
+schimbÄƒrile de stare ce pot fi controlate asincron de cÄƒtre evenimentele
+aplicaÅ£iei.
 
-Dintr-o anumitã privinşã, acest ciclu de stare poate fi privit ca o
-serie de meta-stãri ale aplicaşiei (i.e. stãri ale stãrilor).
+Dintr-o anumitÄƒ privinÅ£Äƒ, acest ciclu de stare poate fi privit ca o
+serie de meta-stÄƒri ale aplicaÅ£iei (i.e. stÄƒri ale stÄƒrilor).
 
-\begin{table}[h] \caption{Ciclul de viaşã al stãrilor Editorului OpenGL 
+\begin{table}[h] \caption{Ciclul de viaÅ£Äƒ al stÄƒrilor Editorului OpenGL 
 \label{table:editor-states}}
 \begin{tabular}{|\col{0.23}|\col{0.73}|}
-\hline FRESH & La construcşia unei stãri ciclul de viaşã este setat în pozişia
-FRESH. Editorul va citi orice stare setatã pe acest mod ºi o va seta ca ºi stare
-activã, înregistrînd toate rutinele de tratare a evenimentelor pentru aceastã
-stare în cadrul editorului. Starea curentã este setatã ca activã ºi modul ei
-este trecut în RUNNING. Starea activã anterioarã este trecutã pe modul SLEEPING.
-\\ \hline RUNNING & Dupã ce editorul inişializeazã o stare, ea este în modul
-RUNNING. În acest mod starea primeºte toate evenimentele editorului. Decizia de
-a pãrãsi aceastã stare se poate lua dupã douã criterii. a) La discreşia stãrii
-în sine, prin trecerea în modul TERMINATED sau b) la discreşia editorului, în
-momentul sosirii unei noi stãri FRESH, cînd starea curentã trece în SLEEPING. \\
-\hline SLEEPING & Toate stãrile care au fost oprite de editor la aparişia unei
-stãri noi se adunã într-o stivã ºi modul lor este trecut în SLEEPING. Ele pot
-sta în acest mod un timp nedefinit ºi pot sã nu-l pãrãseascã niciodatã. Ele pot
-reveni la starea RUNNING în momentul în care se aflã la vîrful stivei ºi starea
-activã trece în modul TERMINATED. Atunci editorul automat va muta starea din
-capul stivei ca stare activã ºi ea va deveni RUNNING. De aceea rutina de tratare
-a tranzişiei în RUNNING cît ºi rutina de tratare în starea TERMINATED trebuie sã
-aibã în vedere posibilitatea rulãrii de mai multe ori pentru aceeaºi stare
-(i.e. sã nu trateze inişializãri, care se fac în mod normal în starea FRESH) \\
-\hline TERMINATED & Odatã ce starea considerã cã ºi-a încheiat activitatea, ea
-poate alege sã treacã în modul TERMINATED. Odatã ajunsã în acest mod, starea va
-fi deînregistratã din lista de captare a evenimentelor editorului ºi va fi
-scoasã permanent din lista stãrilor editorului.\\ \hline
+\hline FRESH & La construcÅ£ia unei stÄƒri ciclul de viaÅ£Äƒ este setat Ã®n poziÅ£ia
+FRESH. Editorul va citi orice stare setatÄƒ pe acest mod ÅŸi o va seta ca ÅŸi stare
+activÄƒ, Ã®nregistrÃ®nd toate rutinele de tratare a evenimentelor pentru aceastÄƒ
+stare Ã®n cadrul editorului. Starea curentÄƒ este setatÄƒ ca activÄƒ ÅŸi modul ei
+este trecut Ã®n RUNNING. Starea activÄƒ anterioarÄƒ este trecutÄƒ pe modul SLEEPING.
+\\ \hline RUNNING & DupÄƒ ce editorul iniÅ£ializeazÄƒ o stare, ea este Ã®n modul
+RUNNING. Ãn acest mod starea primeÅŸte toate evenimentele editorului. Decizia de
+a pÄƒrÄƒsi aceastÄƒ stare se poate lua dupÄƒ douÄƒ criterii. a) La discreÅ£ia stÄƒrii
+Ã®n sine, prin trecerea Ã®n modul TERMINATED sau b) la discreÅ£ia editorului, Ã®n
+momentul sosirii unei noi stÄƒri FRESH, cÃ®nd starea curentÄƒ trece Ã®n SLEEPING. \\
+\hline SLEEPING & Toate stÄƒrile care au fost oprite de editor la apariÅ£ia unei
+stÄƒri noi se adunÄƒ Ã®ntr-o stivÄƒ ÅŸi modul lor este trecut Ã®n SLEEPING. Ele pot
+sta Ã®n acest mod un timp nedefinit ÅŸi pot sÄƒ nu-l pÄƒrÄƒseascÄƒ niciodatÄƒ. Ele pot
+reveni la starea RUNNING Ã®n momentul Ã®n care se aflÄƒ la vÃ®rful stivei ÅŸi starea
+activÄƒ trece Ã®n modul TERMINATED. Atunci editorul automat va muta starea din
+capul stivei ca stare activÄƒ ÅŸi ea va deveni RUNNING. De aceea rutina de tratare
+a tranziÅ£iei Ã®n RUNNING cÃ®t ÅŸi rutina de tratare Ã®n starea TERMINATED trebuie sÄƒ
+aibÄƒ Ã®n vedere posibilitatea rulÄƒrii de mai multe ori pentru aceeaÅŸi stare
+(i.e. sÄƒ nu trateze iniÅ£ializÄƒri, care se fac Ã®n mod normal Ã®n starea FRESH) \\
+\hline TERMINATED & OdatÄƒ ce starea considerÄƒ cÄƒ ÅŸi-a Ã®ncheiat activitatea, ea
+poate alege sÄƒ treacÄƒ Ã®n modul TERMINATED. OdatÄƒ ajunsÄƒ Ã®n acest mod, starea va
+fi deÃ®nregistratÄƒ din lista de captare a evenimentelor editorului ÅŸi va fi
+scoasÄƒ permanent din lista stÄƒrilor editorului.\\ \hline
 \end{tabular}
 \end{table}
 
-\subsection{Facilitãşile Editorului OpenGL}
+\subsection{FacilitÄƒÅ£ile Editorului OpenGL}
 
 Bla bla bla

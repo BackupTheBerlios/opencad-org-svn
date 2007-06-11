@@ -2,427 +2,426 @@
 
 \section{Eclipse Rich Client Platform}
 
-Proiectul Eclipse îºi are începuturile alãturi de compania IBM de care s-a 
-separat în 2003; astãzi este printre cele mai cunoscute proiecte opensource, 
-fiind recunoscut ca un foarte popular mediu de dezvoltare de aplicaşii Java ºi 
+Proiectul Eclipse Ã®ÅŸi are Ã®nceputurile alÄƒturi de compania IBM de care s-a 
+separat Ã®n 2003; astÄƒzi este printre cele mai cunoscute proiecte opensource, 
+fiind recunoscut ca un foarte popular mediu de dezvoltare de aplicaÅ£ii Java ÅŸi 
 nu numai.
 
 Binecunoscutul mediu de dezvoltare Eclipse este dezvoltat pe baza Eclipse Rich 
-Client Platform. Aceasta reprezintã suita minimã de plugin-uri necesare pentru 
-dezvoltarea unei aplicaşii "rich client" \footnote{eng. \textit{client bogat} 
--- O aplicaşie desktop care beneficiazã de un set de elemente de interfaşã 
-evoluate ("bogate"), care oferã o putere mare de abstractizare ºi în acelaºi 
-timp control al funcşionalitãşii programatorului, pãstrînd o experienşã de 
-utilizare plãcutã pentru utilizator. În general orice aplicaşie desktop care 
-foloseºte elemente de interfaşã predefinite pînã la un anumit punct poate fi 
-consideratã ca un rich client.}. Deºi platforma este destinatã dezvoltãrii de 
-aplicaşii tip IDE, prin înlãturarea anumitor componente ale platformei se pot 
-dezvolta orice tip de aplicaşii desktop.
+Client Platform. Aceasta reprezintÄƒ suita minimÄƒ de plugin-uri necesare pentru 
+dezvoltarea unei aplicaÅ£ii "rich client" \footnote{eng. \textit{client bogat} 
+-- O aplicaÅ£ie desktop care beneficiazÄƒ de un set de elemente de interfaÅ£Äƒ 
+evoluate ("bogate"), care oferÄƒ o putere mare de abstractizare ÅŸi Ã®n acelaÅŸi 
+timp control al funcÅ£ionalitÄƒÅ£ii programatorului, pÄƒstrÃ®nd o experienÅ£Äƒ de 
+utilizare plÄƒcutÄƒ pentru utilizator. Ãn general orice aplicaÅ£ie desktop care 
+foloseÅŸte elemente de interfaÅ£Äƒ predefinite pÃ®nÄƒ la un anumit punct poate fi 
+consideratÄƒ ca un rich client.}. DeÅŸi platforma este destinatÄƒ dezvoltÄƒrii de 
+aplicaÅ£ii tip IDE, prin Ã®nlÄƒturarea anumitor componente ale platformei se pot 
+dezvolta orice tip de aplicaÅ£ii desktop.
 
-Structura de bazã a acestei platforme poate fi rezumatã dupã cum am prezentat 
-în Tabela \ref{table:rcpstruct}.
-\begin{table}[h]
+Structura de bazÄƒ a acestei platforme poate fi rezumatÄƒ dupÄƒ cum am prezentat 
+Ã®n Tabela \ref{table:rcpstruct}. \begin{table}[h]
 \caption{Structura Eclipse RCP \cite{rcpfaq} \label{table:rcpstruct}}
 \begin{tabular}{|\col{0.23}|\col{0.73}|}
-\hline Eclipse Runtime & Suport pentru plugin-uri, puncte de extensie ºi 
-extensii. Construitã peste framework-ul OSGi\\
-\hline SWT & Proiectat sã ofere acces eficient ºi portabil la facilitãşile de 
-interfaşã utilizator ale sistemului de operare pe care este implementat\\
-\hline JFace & Un framework de interfaşã utilizator, construit pest SWT, pentru 
-tratarea multor sarcini de programare de interfeşe\\
+\hline Eclipse Runtime & Suport pentru plugin-uri, puncte de extensie ÅŸi 
+extensii. ConstruitÄƒ peste framework-ul OSGi\\
+\hline SWT & Proiectat sÄƒ ofere acces eficient ÅŸi portabil la facilitÄƒÅ£ile de 
+interfaÅ£Äƒ utilizator ale sistemului de operare pe care este implementat\\
+\hline JFace & Un framework de interfaÅ£Äƒ utilizator, construit pest SWT, pentru 
+tratarea multor sarcini de programare de interfeÅ£e\\
 \hline Workbench & Construit peste toate componentele anterioare, aduce un 
-mediu de lucru ultra scalabil, cu interfaşã publicã ce suportã mai multe 
-ferestre pentru administrarea vizualizãrilor, editoarelor, perspectivelor, 
-acşiunilor, preferinşelor ºi multe altele. \\
+mediu de lucru ultra scalabil, cu interfaÅ£Äƒ publicÄƒ ce suportÄƒ mai multe 
+ferestre pentru administrarea vizualizÄƒrilor, editoarelor, perspectivelor, 
+acÅ£iunilor, preferinÅ£elor ÅŸi multe altele. \\
 \hline
 \end{tabular}
 \end{table}
 
 \subsection{Eclipse Runtime}
-Aceastã componentã a Eclipse RCP este cea mai abstractã ºi în acelaºi timp cea 
-mai puternicã componentã a sa. Structura sa de bazã este descrisã în Tabela 
+AceastÄƒ componentÄƒ a Eclipse RCP este cea mai abstractÄƒ ÅŸi Ã®n acelaÅŸi timp cea 
+mai puternicÄƒ componentÄƒ a sa. Structura sa de bazÄƒ este descrisÄƒ Ã®n Tabela 
 \ref{table:runtimestruct}.
 
 \begin{table}[h]
 \caption{Structura Eclipse Runtime \cite{eclipsehelp} \label{table:runtimestruct}}
 \begin{tabular}{|\col{0.38}|\col{0.58}|}
-\hline org.eclipse.core.contenttype & Suport pentru definirea ºi administrarea 
-tipurilor de fiºiere \\
-\hline org.eclipse.core.jobs & Infrastructurã pentru programare paralelã în 
+\hline org.eclipse.core.contenttype & Suport pentru definirea ÅŸi administrarea 
+tipurilor de fiÅŸiere \\
+\hline org.eclipse.core.jobs & InfrastructurÄƒ pentru programare paralelÄƒ Ã®n 
 Eclipse \\
-\hline org.eclipse.equinox.registry & Sistemul prin care un plugin publicã alte 
-plugin-uri de care depinde ºi defineºte puncte de extensie pentru ca alte 
-plugin-uri sã-i îmbogãşeascã funcşionalitatea \\
-\hline org.eclipse.equinox.preferences & O infrastructurã prin care un plugin 
-îºi pãstreazã preferinşele în seturi de perechi cheie/valoare modificabile de 
-cãtre utilizator \\
-\hline org.eclipse.equinox.common & Administrarea proiectelor, resurselor ºi 
-fiºierelor \\
+\hline org.eclipse.equinox.registry & Sistemul prin care un plugin publicÄƒ alte 
+plugin-uri de care depinde ÅŸi defineÅŸte puncte de extensie pentru ca alte 
+plugin-uri sÄƒ-i Ã®mbogÄƒÅ£eascÄƒ funcÅ£ionalitatea \\
+\hline org.eclipse.equinox.preferences & O infrastructurÄƒ prin care un plugin 
+Ã®ÅŸi pÄƒstreazÄƒ preferinÅ£ele Ã®n seturi de perechi cheie/valoare modificabile de 
+cÄƒtre utilizator \\
+\hline org.eclipse.equinox.common & Administrarea proiectelor, resurselor ÅŸi 
+fiÅŸierelor \\
 \hline
 \end{tabular}
 \end{table}
 
-Equinox este o implementare a specificaşiilor OSGi R4
+Equinox este o implementare a specificaÅ£iilor OSGi R4
 \footnote{\url{http://osgi.org/osgi_technology/download_specs.asp?section=2}}
-o serie de plugin-uri care implementeazã diverse servicii opşionale OSGi ºi 
+o serie de plugin-uri care implementeazÄƒ diverse servicii opÅ£ionale OSGi ÅŸi 
 alte infrastructuri pentru rularea sistemelor bazate pe OSGi. \cite{equinox}
 
-Equinox produce, printre alte lucruri, implementarea OSGi folositã de Eclipse 
-RCP (ºi celelalte proiecte bazate pe Eclipse) ca un model de componente.
+Equinox produce, printre alte lucruri, implementarea OSGi folositÄƒ de Eclipse 
+RCP (ÅŸi celelalte proiecte bazate pe Eclipse) ca un model de componente.
 \cite{equinoxfaq}
 
 \subsection{SWT}
 SWT\footnote{abrev. \textit{Standard Widget Toolkit}} este una din cele mai 
-populare tehnologii dezvoltate de Fundaşia Eclipse. Aceastã tehnologie 
-foloseºte la crearea de interfeşe utilizator în mediul de dezvoltare Java, 
-oferind programatorului capacitatea de a construi interfeşe utilizator 
-portabile între diverse sisteme de operare. În prezent suportã toate sistemele 
-de operare uzuale ºi diverse arhitecturi maºinã (e.g. x86, amd64).
+populare tehnologii dezvoltate de FundaÅ£ia Eclipse. AceastÄƒ tehnologie 
+foloseÅŸte la crearea de interfeÅ£e utilizator Ã®n mediul de dezvoltare Java, 
+oferind programatorului capacitatea de a construi interfeÅ£e utilizator 
+portabile Ã®ntre diverse sisteme de operare. Ãn prezent suportÄƒ toate sistemele 
+de operare uzuale ÅŸi diverse arhitecturi maÅŸinÄƒ (e.g. x86, amd64).
 
-Structura sa este similarã cu cea a altor toolkit-uri similare, ca AWT 
+Structura sa este similarÄƒ cu cea a altor toolkit-uri similare, ca AWT 
 \footnote{abrev. \textit{Abstract Window Toolkit} -- toolkit-ul IU standard 
-Java \url{http://en.wikipedia.org/wiki/Abstract_Windowing_Toolkit}} ºi 
-SWING\footnote{Un toolkit IU independent de platformã 
+Java \url{http://en.wikipedia.org/wiki/Abstract_Windowing_Toolkit}} ÅŸi 
+SWING\footnote{Un toolkit IU independent de platformÄƒ 
 \url{http://en.wikipedia.org/wiki/Swing_(Java)}}. Elementele fundamentale sunt 
-Shell-ul ºi Controlul. Un shell este abstracşia conceptului de fereastrã ºi 
-reprezintã în general un container pentru controale. Controalele sunt 
-elementele interfeşei utilizator. Butoanele, etichetele, arborii ºi tabelele 
-sunt toate controale ºi utilizatorii sunt obiºnuite cu ele din alte programe 
-ale desktopului. \cite{swt} În principiu orice widget poate fi simplu sau 
-compus (i.e. descendent al clasei Composite) ºi întreaga lor ierharhie este 
-controlatã de relaşiile dintre clasele SWT.
+Shell-ul ÅŸi Controlul. Un shell este abstracÅ£ia conceptului de fereastrÄƒ ÅŸi 
+reprezintÄƒ Ã®n general un container pentru controale. Controalele sunt 
+elementele interfeÅ£ei utilizator. Butoanele, etichetele, arborii ÅŸi tabelele 
+sunt toate controale ÅŸi utilizatorii sunt obiÅŸnuite cu ele din alte programe 
+ale desktopului. \cite{swt} Ãn principiu orice widget poate fi simplu sau 
+compus (i.e. descendent al clasei Composite) ÅŸi Ã®ntreaga lor ierharhie este 
+controlatÄƒ de relaÅ£iile dintre clasele SWT.
 
-Interacşiunile dintre controale ºi utilizator cît ºi controlul tranzişiei 
-stãrilor controalelor se face cu ajutorul Evenimentelor. Fiecare modificare de 
-stare a unui control (cum ar fi apãsarea pe un buton) este semnalatã de SWT 
-cãtre aplicaşie prin declanºarea unui eveniment. Orice Listener (ascultãtor 
-înregistrat pentru un anumit eveniment) va primi o notificare (i.e. o metodã 
-declaratã în interfaşa de Listener va fi apelatã) ce va conşine evenimentul ce 
-a avut loc. Orice clasã poate deveni listener prin implementarea unor interfeşe 
-specifice, SWT oferind astfel o mare flexibilitate în cadrul aplicaşiilor care 
-îl folosesc.
+InteracÅ£iunile dintre controale ÅŸi utilizator cÃ®t ÅŸi controlul tranziÅ£iei 
+stÄƒrilor controalelor se face cu ajutorul Evenimentelor. Fiecare modificare de 
+stare a unui control (cum ar fi apÄƒsarea pe un buton) este semnalatÄƒ de SWT 
+cÄƒtre aplicaÅ£ie prin declanÅŸarea unui eveniment. Orice Listener (ascultÄƒtor 
+Ã®nregistrat pentru un anumit eveniment) va primi o notificare (i.e. o metodÄƒ 
+declaratÄƒ Ã®n interfaÅ£a de Listener va fi apelatÄƒ) ce va conÅ£ine evenimentul ce 
+a avut loc. Orice clasÄƒ poate deveni listener prin implementarea unor interfeÅ£e 
+specifice, SWT oferind astfel o mare flexibilitate Ã®n cadrul aplicaÅ£iilor care 
+Ã®l folosesc.
 
-Ca ºi în AWT sau SWING, pozişia controalelor este stabilitã cu ajutorul 
-Layout-urilor. Un layout reprezintã un set de reguli de pozişionare pentru un 
+Ca ÅŸi Ã®n AWT sau SWING, poziÅ£ia controalelor este stabilitÄƒ cu ajutorul 
+Layout-urilor. Un layout reprezintÄƒ un set de reguli de poziÅ£ionare pentru un 
 control compus ce va decide pentru toate controalele incluse cum vor fi ele 
-pozişionate pe ecran. Unele layout-uri asociazã anumite date fiecãrui control 
-pentru a reşine pozişia în care va fi desenat. Pozişionarea manualã a tuturor 
-controalelor este o problemã complexã ºi dacã acel algoritm nu este scris 
-eficient, el poate afecta performaneşele întregii aplicaşii. De aceea, SWT 
-oferã niºte seturi predefinite de layout-uri ce serversc cele mai comune cazuri 
-întîlnite de programatori.
+poziÅ£ionate pe ecran. Unele layout-uri asociazÄƒ anumite date fiecÄƒrui control 
+pentru a reÅ£ine poziÅ£ia Ã®n care va fi desenat. PoziÅ£ionarea manualÄƒ a tuturor 
+controalelor este o problemÄƒ complexÄƒ ÅŸi dacÄƒ acel algoritm nu este scris 
+eficient, el poate afecta performaneÅ£ele Ã®ntregii aplicaÅ£ii. De aceea, SWT 
+oferÄƒ niÅŸte seturi predefinite de layout-uri ce serversc cele mai comune cazuri 
+Ã®ntÃ®lnite de programatori.
 
 \subsection{JFace}
-JFace este un toolkit pentru interfeşe utilizator ce conşine clase pentru 
-tratarea multora din sarcinile uzuale de programarea interfeşelor utilizator. 
-JFace este independent de sistemul de ferestre atît in interfaşa sa pentru 
-programatori cît ºi în implementare, ºi este proiectat sã funcşioneze cu SWT 
-fãrã a-i ascunde funcşionalitatea.
+JFace este un toolkit pentru interfeÅ£e utilizator ce conÅ£ine clase pentru 
+tratarea multora din sarcinile uzuale de programarea interfeÅ£elor utilizator. 
+JFace este independent de sistemul de ferestre atÃ®t in interfaÅ£a sa pentru 
+programatori cÃ®t ÅŸi Ã®n implementare, ÅŸi este proiectat sÄƒ funcÅ£ioneze cu SWT 
+fÄƒrÄƒ a-i ascunde funcÅ£ionalitatea.
 
-JFace include componentele uzuale de toolkit IU, regiºtri de imagine ºi seturi 
-de caractere, text, dialog-uri, framework-uri pentru preferinşe ºi wizard-uri
-\footnote{Dialogurile des întîlnite ce automatizeazã diverse sarcini repetitive}
-ºi raportarea progresului pentru sarcini cu duratã mare de execuşie.
+JFace include componentele uzuale de toolkit IU, regiÅŸtri de imagine ÅŸi seturi 
+de caractere, text, dialog-uri, framework-uri pentru preferinÅ£e ÅŸi wizard-uri
+\footnote{Dialogurile des Ã®ntÃ®lnite ce automatizeazÄƒ diverse sarcini repetitive}
+ÅŸi raportarea progresului pentru sarcini cu duratÄƒ mare de execuÅ£ie.
 \cite{jface}
 
-Pachete principale din JFace, care oferã funcşionalitatea de bazã a tehnologiei 
-sunt prezentate în Tabela \ref{table:jfacestruct}
+Pachete principale din JFace, care oferÄƒ funcÅ£ionalitatea de bazÄƒ a tehnologiei 
+sunt prezentate Ã®n Tabela \ref{table:jfacestruct}
 
 \begin{table}[htb]
 \caption{Structura JFace \cite{jface-art} \label{table:jfacestruct}}
 \begin{tabular}{|\col{0.13}|\col{0.28}|\col{0.53}|}
-\hline Ferestre & org.eclipse.jface.window & Facilitãşi de creerea ºi 
-administrarea ferestrelor. Interesantã este clasa ApplicationWindow, care aduce 
-un nou nivel de abstracşie peste conceptul de fereastrã ºi înglobeazã o buclã 
+\hline Ferestre & org.eclipse.jface.window & FacilitÄƒÅ£i de creerea ÅŸi 
+administrarea ferestrelor. InteresantÄƒ este clasa ApplicationWindow, care aduce 
+un nou nivel de abstracÅ£ie peste conceptul de fereastrÄƒ ÅŸi Ã®nglobeazÄƒ o buclÄƒ 
 program SWT.\\
-\hline Vizualizãri & org.eclipse.jface.viewers & Vizualizãri ca ºi TreeViewer 
+\hline VizualizÄƒri & org.eclipse.jface.viewers & VizualizÄƒri ca ÅŸi TreeViewer 
 sau TableViewer, care sunt componente ghidate de model ce folosesc widgeturi 
-SWT ºi adapteazã conşinutul modelului la conşinutul widgetului.\\
+SWT ÅŸi adapteazÄƒ conÅ£inutul modelului la conÅ£inutul widgetului.\\
 \hline Dialog-uri & org.eclipse.jface.dialogs & Diverse dialog-uri des 
 folosite.\\
-\hline Acşiuni & org.eclipse.jface.actions & Un framework de acşiuni IU similar 
-cu cel gãsit în SWING pentru a implementa comportament partajat între douã sau 
-mai multe componente, cum ar fi o intrare în meniu ºi un buton de pe bara de 
+\hline AcÅ£iuni & org.eclipse.jface.actions & Un framework de acÅ£iuni IU similar 
+cu cel gÄƒsit Ã®n SWING pentru a implementa comportament partajat Ã®ntre douÄƒ sau 
+mai multe componente, cum ar fi o intrare Ã®n meniu ÅŸi un buton de pe bara de 
 instrumente.\\
 \hline Wizard-uri & org.eclipse.jface.wizard & Un framework avansat de 
-construcşie a wizard-urilor.\\
+construcÅ£ie a wizard-urilor.\\
 \hline Resurse & org.eclipse.jface.resource & Suport pentru administrarea 
-resurselor, cum ar fi imaginile ºi fonturile SWT.\\
+resurselor, cum ar fi imaginile ÅŸi fonturile SWT.\\
 \hline Text & org.eclipse.jface.text & Un framework de crearea, manipularea, 
-afiºarea ºi editarea documentelor text.\\
+afiÅŸarea ÅŸi editarea documentelor text.\\
 \hline
 \end{tabular}
 \end{table}
 
 \subsection{Workbench}
-Aceastã parte a Eclipse RCP reprezintã o colecşie largã de clase ºi interfeşe 
-pentru construirea de interfeşe utilizator complexe.
+AceastÄƒ parte a Eclipse RCP reprezintÄƒ o colecÅ£ie largÄƒ de clase ÅŸi interfeÅ£e 
+pentru construirea de interfeÅ£e utilizator complexe.
 
-Iatã principalele elemente ce constituie un Workbench.
+IatÄƒ principalele elemente ce constituie un Workbench.
 
 \subsubsection{Workbench}
-Ca termen strict, se referã la fereastra care conşine întreaga aplicaşie. 
-Defineºte un container abstract pentru toate elementele de interfaşã din 
-aplicaşia dezvoltatã cu Eclipse RCP.
+Ca termen strict, se referÄƒ la fereastra care conÅ£ine Ã®ntreaga aplicaÅ£ie. 
+DefineÅŸte un container abstract pentru toate elementele de interfaÅ£Äƒ din 
+aplicaÅ£ia dezvoltatÄƒ cu Eclipse RCP.
 
 \subsubsection{Pagina}
-Reprezintã, în mod intuitiv, toatã partea ferestrei care nu conşine barele de 
-unelte ºi meniul.
+ReprezintÄƒ, Ã®n mod intuitiv,  toatÄƒ partea ferestrei care nu conÅ£ine barele de 
+unelte ÅŸi meniul.
 
 \subsubsection{Perspective}
-Folosesc pentru organizarea conşinutului într-o Paginã. O perspectivã defineºte 
-o colecşie de Vizualizãri, aºezarea lor ºi acşiunile ce pot fi efectuate pentru 
-o sarcinã a utilizatorului. Perspectivele pot fi schimbate de cãtre 
-utilizatorul. Modificarea Perspectivei afecteazã doar Vizualizãrile nu ºi 
+Folosesc pentru organizarea conÅ£inutului Ã®ntr-o PaginÄƒ. O perspectivÄƒ defineÅŸte 
+o colecÅ£ie de VizualizÄƒri, aÅŸezarea lor ÅŸi acÅ£iunile ce pot fi efectuate pentru 
+o sarcinÄƒ a utilizatorului. Perspectivele pot fi schimbate de cÄƒtre 
+utilizatorul. Modificarea Perspectivei afecteazÄƒ doar VizualizÄƒrile nu ÅŸi 
 Editoarele. \cite{eclipsehelp}
 
-\subsubsection{Vizualizãrile ºi Editoarele}
-Reprezintã extensiile aduse de programator într-o aplicaşie Eclipse RCP. Un 
-editor urmãreºte modelul unei maºini de stãri în sensul cã el are o etapã de 
-deschidere, editare ºi o etapã de salvare.
+\subsubsection{VizualizÄƒrile ÅŸi Editoarele}
+ReprezintÄƒ extensiile aduse de programator Ã®ntr-o aplicaÅ£ie Eclipse RCP. Un 
+editor urmÄƒreÅŸte modelul unei maÅŸini de stÄƒri Ã®n sensul cÄƒ el are o etapÄƒ de 
+deschidere, editare ÅŸi o etapÄƒ de salvare.
 
-În schimb orice modificare a stãrii unei Vizualizãri este salvatã imediat. 
-Vizualizãrile sunt folosite la a arãta structura modelului deschis într-un 
-Editor, la a facilita accesul la fiºiere ºi la alte resurse ale unui proiect.
+Ãn schimb orice modificare a stÄƒrii unei VizualizÄƒri este salvatÄƒ imediat. 
+VizualizÄƒrile sunt folosite la a arÄƒta structura modelului deschis Ã®ntr-un 
+Editor, la a facilita accesul la fiÅŸiere ÅŸi la alte resurse ale unui proiect.
 
-Editoarele urmãresc în general modelul unui editor de text clasic ºi oferã 
-aceeaºi funcşionalitate însã la un nivel mai abstract, nefiind dependent de o 
-intrare ca fiºier text, nici mãcar ca intrarea sã fie orice fel de fiºier.
+Editoarele urmÄƒresc Ã®n general modelul unui editor de text clasic ÅŸi oferÄƒ 
+aceeaÅŸi funcÅ£ionalitate Ã®nsÄƒ la un nivel mai abstract, nefiind dependent de o 
+intrare ca fiÅŸier text, nici mÄƒcar ca intrarea sÄƒ fie orice fel de fiÅŸier.
 
-\section{OpenGL ºi extensia OpenGL pentru SWT}
+\section{OpenGL ÅŸi extensia OpenGL pentru SWT}
 
-OpenGL\footnote{abrev. \textit{Open Graphics Library}} este o specificaşie de 
-standard independent de limbaj ce definieºte un API pentru scrierea de 
-aplicaşii ce produc grafice tridimensionale sau bidimensionale pe calculator. 
-Interfaşa este compusã din peste 250 de apeluri de funcşii ce pot fi folosite 
+OpenGL\footnote{abrev. \textit{Open Graphics Library}} este o specificaÅ£ie de 
+standard independent de limbaj ce definieÅŸte un API pentru scrierea de 
+aplicaÅ£ii ce produc grafice tridimensionale sau bidimensionale pe calculator. 
+InterfaÅ£a este compusÄƒ din peste 250 de apeluri de funcÅ£ii ce pot fi folosite 
 pentru a desena scene tridimensionale complexe din primitive simple. OpenGL a 
-fost dezvoltat de SGI\footnote{abrev. \textit{Silicon Graphics Inc.}} în 1992. 
-Este folosit pe scarã largã în aplicaşii CAD, realitate virtualã, vizualizare 
-ºtiinşificã, vizualizarea informaşiei, simularea zborului, dezvoltare de jocuri 
-pe calculator, º.a. \cite{oglwiki}
+fost dezvoltat de SGI\footnote{abrev. \textit{Silicon Graphics Inc.}} Ã®n 1992. 
+Este folosit pe scarÄƒ largÄƒ Ã®n aplicaÅ£ii CAD, realitate virtualÄƒ, vizualizare 
+ÅŸtiinÅ£ificÄƒ, vizualizarea informaÅ£iei, simularea zborului, dezvoltare de jocuri 
+pe calculator, ÅŸ.a. \cite{oglwiki}
 
-\subsection{OpenGL în Java}
-Java reprezintã una dintre cele mai puternice platforme de dezvoltare de 
-aplicaşii cunoscute în ziua de azi. Dezvoltatã inişial pentru a separa sarcina 
-de dezvoltare de aplicaşii de platforma pe care va rula, astãzi limbajul Java 
-este folosit în numeroase aplicaşii software, începînd de la clienşi destop 
-pînã la jocuri pentru telefoane mobile ºi aplicaşii web. Un astfel de sistem nu 
-putea sã rãmînã fãrã o implementare a OpenGL. În prezent, existã douã extensii 
-OpenGL pentru Java, JOGL ºi LWJGL.
+\subsection{OpenGL Ã®n Java}
+Java reprezintÄƒ una dintre cele mai puternice platforme de dezvoltare de 
+aplicaÅ£ii cunoscute Ã®n ziua de azi. DezvoltatÄƒ iniÅ£ial pentru a separa sarcina 
+de dezvoltare de aplicaÅ£ii de platforma pe care va rula, astÄƒzi limbajul Java 
+este folosit Ã®n numeroase aplicaÅ£ii software, Ã®ncepÃ®nd de la clienÅ£i destop 
+pÃ®nÄƒ la jocuri pentru telefoane mobile ÅŸi aplicaÅ£ii web. Un astfel de sistem nu 
+putea sÄƒ rÄƒmÃ®nÄƒ fÄƒrÄƒ o implementare a OpenGL. Ãn prezent, existÄƒ douÄƒ extensii 
+OpenGL pentru Java, JOGL ÅŸi LWJGL.
 
 JOGL\footnote{Java OpenGL Library \url{http://jogl.dev.java.net}} este varianta 
-agreatã de Sun ºi urmeazã sã facã parte din distribuşia oficialã a 
-JDK\footnote{Dupã cum precizeazã JSR231 
-\url{http://jcp.org/en/jsr/detail?id=231}}. Principala sa caracteristicã este 
-cã foloseºte AWT ca ºi suport de interfaşã graficã.
+agreatÄƒ de Sun ÅŸi urmeazÄƒ sÄƒ facÄƒ parte din distribuÅ£ia oficialÄƒ a 
+JDK\footnote{DupÄƒ cum precizeazÄƒ JSR231 
+\url{http://jcp.org/en/jsr/detail?id=231}}. Principala sa caracteristicÄƒ este 
+cÄƒ foloseÅŸte AWT ca ÅŸi suport de interfaÅ£Äƒ graficÄƒ.
 
 LWJGL\footnote{Lightweight Java Game Library \url{http://lwjgl.org/}} este o 
-soluşie mai amplã dedicatã dezvoltãrii de jocuri în OpenGL. Librãria oferã ºi 
-suport pentru tratarea sunetului ºi a evenimentelor de interacşiune cu 
-utilizatorul, specializate cum am spus dupã nevoile programãrii jocurilor pe 
+soluÅ£ie mai amplÄƒ dedicatÄƒ dezvoltÄƒrii de jocuri Ã®n OpenGL. LibrÄƒria oferÄƒ ÅŸi 
+suport pentru tratarea sunetului ÅŸi a evenimentelor de interacÅ£iune cu 
+utilizatorul, specializate cum am spus dupÄƒ nevoile programÄƒrii jocurilor pe 
 calculator.
 
 \subsection{OpenGL pentru SWT}
 
-Din pãcate, nici una din aceste tehnologii nu se împacã foarte bine cu SWT. 
-Pentru cã atît OpenGL cît ºi SWT ºi AWT implicã apeluri native cãtre sistemul 
-de operare, de multe ori aceste apeluri sunt ignorante unele de celelalte ºi 
-multe interferenşe apar între interfaşa graficã desenatã cu SWT ºi fereastra de 
+Din pÄƒcate, nici una din aceste tehnologii nu se Ã®mpacÄƒ foarte bine cu SWT. 
+Pentru cÄƒ atÃ®t OpenGL cÃ®t ÅŸi SWT ÅŸi AWT implicÄƒ apeluri native cÄƒtre sistemul 
+de operare, de multe ori aceste apeluri sunt ignorante unele de celelalte ÅŸi 
+multe interferenÅ£e apar Ã®ntre interfaÅ£a graficÄƒ desenatÄƒ cu SWT ÅŸi fereastra de 
 desenare OpenGL.
 
-Din aceste raşiuni, o a treia variantã a fost aleasã de noi, anume extensia 
-OpenGL pentru Java fãcutã de Eclipse pentru SWT. Este de menşionat cã rezultate 
-similare s-au obşinut ºi LWJGL, care la rîndul sãu poate fi integrat cu puşin 
-efort cu SWT. JOGL din pãcate, datoritã legãturii sale puternice cu AWT, nu 
-poate fi adus în scopul aplicaşiei noastre într-un mod care sã poate fi uºor 
+Din aceste raÅ£iuni, o a treia variantÄƒ a fost aleasÄƒ de noi, anume extensia 
+OpenGL pentru Java fÄƒcutÄƒ de Eclipse pentru SWT. Este de menÅ£ionat cÄƒ rezultate 
+similare s-au obÅ£inut ÅŸi LWJGL, care la rÃ®ndul sÄƒu poate fi integrat cu puÅ£in 
+efort cu SWT. JOGL din pÄƒcate, datoritÄƒ legÄƒturii sale puternice cu AWT, nu 
+poate fi adus Ã®n scopul aplicaÅ£iei noastre Ã®ntr-un mod care sÄƒ poate fi uÅŸor 
 reproductibil de autor.
 
-Limitãrile bibliotecii OpenGL pentru SWT fãcute de Eclipse se referã la 
-versiunea de OpenGL suportatã (i.e. OpenGL 1.1) ºi la faptul cã interesul 
-pentru aceastã tehnologie este oarecum scãzut, ultima versiune existentã 
-dateazã din septembrie 2005\footnote{\url{http://www.eclipse.org/swt/opengl/}} 
-ºi sunt ºanse ca versiuni ulterioare sã nu mai existe, pe cînd celelalte douã 
-librãrii sunt în continuã dezvoltare.
+LimitÄƒrile bibliotecii OpenGL pentru SWT fÄƒcute de Eclipse se referÄƒ la 
+versiunea de OpenGL suportatÄƒ (i.e. OpenGL 1.1) ÅŸi la faptul cÄƒ interesul 
+pentru aceastÄƒ tehnologie este oarecum scÄƒzut, ultima versiune existentÄƒ 
+dateazÄƒ din septembrie 2005\footnote{\url{http://www.eclipse.org/swt/opengl/}} 
+ÅŸi sunt ÅŸanse ca versiuni ulterioare sÄƒ nu mai existe, pe cÃ®nd celelalte douÄƒ 
+librÄƒrii sunt Ã®n continuÄƒ dezvoltare.
 
-La momentul determinãrii acestei alegeri, dupã o testare a tuturor 
-tehnologiilor disponibile, am ajuns la concluzia cã funcşionalitatea oferitã de 
-varianta Eclipse a legãturii cu OpenGL este atît suficientã ca ºi capacişãşi 
-necesitate de acest proiect cît ºi destul de stabilã pentru a oferi o calitate 
-înaltã de producşie.
+La momentul determinÄƒrii acestei alegeri, dupÄƒ o testare a tuturor 
+tehnologiilor disponibile, am ajuns la concluzia cÄƒ funcÅ£ionalitatea oferitÄƒ de 
+varianta Eclipse a legÄƒturii cu OpenGL este atÃ®t suficientÄƒ ca ÅŸi capaciÅ£ÄƒÅ£i 
+necesitate de acest proiect cÃ®t ÅŸi destul de stabilÄƒ pentru a oferi o calitate 
+Ã®naltÄƒ de producÅ£ie.
 
-\section{Raşiunea alegerii tehnologiilor}
+\section{RaÅ£iunea alegerii tehnologiilor}
 
-Încã de la începutul dezvoltãrii acestui proiect, s-a pus problema tehnologiei 
-care sã fie folositã pentru îndeplinirea cît mai facilã a obiectivelor 
-proiectului. Munca de cercetare în privinşa alegerii tehnologiei potrivite a 
-implicat o documentare amplã asupra tehnologiilor luate în considerarea cît ºi 
-testarea practicã a multora dintre ele.
+ÃncÄƒ de la Ã®nceputul dezvoltÄƒrii acestui proiect, s-a pus problema tehnologiei 
+care sÄƒ fie folositÄƒ pentru Ã®ndeplinirea cÃ®t mai facilÄƒ a obiectivelor 
+proiectului. Munca de cercetare Ã®n privinÅ£a alegerii tehnologiei potrivite a 
+implicat o documentare amplÄƒ asupra tehnologiilor luate Ã®n considerarea cÃ®t ÅŸi 
+testarea practicÄƒ a multora dintre ele.
 
-Vom încerca mai jos sã trecem în revistã o serie de alegeri care le-am fãcut ºi 
-raşiunea ce stã în spatele lor, prin prisma avantajelor ºi dezavantajelor aduse 
-de alegerile fãcute.
+Vom Ã®ncerca mai jos sÄƒ trecem Ã®n revistÄƒ o serie de alegeri care le-am fÄƒcut ÅŸi 
+raÅ£iunea ce stÄƒ Ã®n spatele lor, prin prisma avantajelor ÅŸi dezavantajelor aduse 
+de alegerile fÄƒcute.
 
-\subsection{PHP ºi Python}
+\subsection{PHP ÅŸi Python}
 
-Consideraşia asupra alegerii limbajului de programare în care urma sã fie 
-dezvoltat acest proiect a început desigur de la aria cunoºtinşelor autorului. 
-Alegerea s-a fãcut astfel între C, C++ ºi Java. Alte alternative mai 
-,,exotice'' au fost luate în considerare marginal, cum ar fi 
+ConsideraÅ£ia asupra alegerii limbajului de programare Ã®n care urma sÄƒ fie 
+dezvoltat acest proiect a Ã®nceput desigur de la aria cunoÅŸtinÅ£elor autorului. 
+Alegerea s-a fÄƒcut astfel Ã®ntre C, C++ ÅŸi Java. Alte alternative mai 
+,,exotice'' au fost luate Ã®n considerare marginal, cum ar fi 
 Python\footnote{\url{http://www.python.org/}} sau 
 PHP\footnote{\url{http://www.php.net/}}.
 
-Capacitãşile limbajelor scripturale de a intercaşiona cu libãrii native ºi de a 
-crea interfeşe grafice a cunoscut o dezvoltare masivã în ultima perioadã. 
-Existã pentru Python PyGTK\footnote{\url{http://www.pygtk.org/}}, o librãrie ce 
-permite programarea facilã a intefeşelor grafice cu GTK\footnote{abrev. 
+CapacitÄƒÅ£ile limbajelor scripturale de a intercaÅ£iona cu libÄƒrii native ÅŸi de a 
+crea interfeÅ£e grafice a cunoscut o dezvoltare masivÄƒ Ã®n ultima perioadÄƒ. 
+ExistÄƒ pentru Python PyGTK\footnote{\url{http://www.pygtk.org/}}, o librÄƒrie ce 
+permite programarea facilÄƒ a intefeÅ£elor grafice cu GTK\footnote{abrev. 
 \textit{The GIMP Toolkit} \url{http://www.gtk.org/}} sub Python. O extensie 
-similarã existã pentru PHP, numitã PHP-GTK\footnote{\url{http://gtk.php.net/}}.
+similarÄƒ existÄƒ pentru PHP, numitÄƒ PHP-GTK\footnote{\url{http://gtk.php.net/}}.
 
-Din punctul de vedere al graficii tridimensionale, extensii similare existã 
-pentru ambele limbaje, oferind funcşionalitate similarã cu extensia prezenzã în 
+Din punctul de vedere al graficii tridimensionale, extensii similare existÄƒ 
+pentru ambele limbaje, oferind funcÅ£ionalitate similarÄƒ cu extensia prezenzÄƒ Ã®n 
 limbajul Java.
 
-La nivel de dezvoltarea de aplicaşii desktop complexe, pentru Python existã 
+La nivel de dezvoltarea de aplicaÅ£ii desktop complexe, pentru Python existÄƒ 
 framework-ul DABO\footnote{\url{http://dabodev.com/} Un framework orientat pe o 
-funcşionalitate client similarã aplicaşiei Visual FoxPro} bazat pe 
+funcÅ£ionalitate client similarÄƒ aplicaÅ£iei Visual FoxPro} bazat pe 
 wxPython\footnote{\url{http://www.wxpython.org/} un framework similar cu 
-wxWidgets (despre care vom discuta ulterior), ce oferã portabilitate pentru 
-codul intefeşei grafice între diverse sisteme de operare}. Apropierea acestor 
-sisteme de cerinşele noastre nu a fost evidentã, cît ºi popularitatea relativã 
-a acestor proiecte a fãcut considerarea lor doar trecãtoare.
+wxWidgets (despre care vom discuta ulterior), ce oferÄƒ portabilitate pentru 
+codul intefeÅ£ei grafice Ã®ntre diverse sisteme de operare}. Apropierea acestor 
+sisteme de cerinÅ£ele noastre nu a fost evidentÄƒ, cÃ®t ÅŸi popularitatea relativÄƒ 
+a acestor proiecte a fÄƒcut considerarea lor doar trecÄƒtoare.
 
-\subsection{C ºi C++}
+\subsection{C ÅŸi C++}
 
-Revenind la principalii candidaşi, limbajele tradişionale pentru dezvoltarea de 
-aplicaşii software nu puteau sã treacã neobservate autorului. Existã o suitã 
-impresionantã de aplicaşii desktop dezvoltate exclusiv doar pe baza acestor 
-douã limbaje de operare.
+Revenind la principalii candidaÅ£i, limbajele tradiÅ£ionale pentru dezvoltarea de 
+aplicaÅ£ii software nu puteau sÄƒ treacÄƒ neobservate autorului. ExistÄƒ o suitÄƒ 
+impresionantÄƒ de aplicaÅ£ii desktop dezvoltate exclusiv doar pe baza acestor 
+douÄƒ limbaje de operare.
 
-Ca ºi set de widgeturi interesante pentru noi, menşionãm librãriile GTK, 
-QT\footnote{\url{http://en.wikipedia.org/wiki/Qt_(toolkit)}} ºi bineînşeles 
+Ca ÅŸi set de widgeturi interesante pentru noi, menÅ£ionÄƒm librÄƒriile GTK, 
+QT\footnote{\url{http://en.wikipedia.org/wiki/Qt_(toolkit)}} ÅŸi bineÃ®nÅ£eles 
 .NET Framework\footnote{\url{http://msdn.microsoft.com/netframework/}}.
 
-Programarea la nivel de bazã, cum este cea în limbajul C nu a fost niciodatã 
-agreatã de autor pentru capacitãşile limitate de scalare (sau viteza redusã de 
-scalare ºi efortul depus pentru scalare), lipsa unei integrãri independente de 
-platformã la un nivel superior ºi cu o structurã coerentã, orientatã obiect.
+Programarea la nivel de bazÄƒ, cum este cea Ã®n limbajul C nu a fost niciodatÄƒ 
+agreatÄƒ de autor pentru capacitÄƒÅ£ile limitate de scalare (sau viteza redusÄƒ de 
+scalare ÅŸi efortul depus pentru scalare), lipsa unei integrÄƒri independente de 
+platformÄƒ la un nivel superior ÅŸi cu o structurÄƒ coerentÄƒ, orientatÄƒ obiect.
 
-Aceste considerente au cîntãrit greu împotriva bibiliotecii GTK, cea mai 
-popularã arhitecturã open-source de dezvoltare de aplicaşii grafice în C, ce 
-stã la baza sistemului desktop GNOME\footnote{\url{http://www.gnome.org/}, un 
-sistem destkop complet, întîlnit în majoritatea distribuşiilor Linux cît ºi a 
-majoritãşii altor platforme UNIX}.
+Aceste considerente au cÃ®ntÄƒrit greu Ã®mpotriva bibiliotecii GTK, cea mai 
+popularÄƒ arhitecturÄƒ open-source de dezvoltare de aplicaÅ£ii grafice Ã®n C, ce 
+stÄƒ la baza sistemului desktop GNOME\footnote{\url{http://www.gnome.org/}, un 
+sistem destkop complet, Ã®ntÃ®lnit Ã®n majoritatea distribuÅ£iilor Linux cÃ®t ÅŸi a 
+majoritÄƒÅ£ii altor platforme UNIX}.
 
-În contrabalans a stat librãria gtkmm\footnote{\url{http://www.gtkmm.org/}}, o 
-extensie a lui gtk pentru C++. Pînã în ziua de astãzi, o despãrşire clarã de 
-aceastã tehnologie din partea autorului nu existã. Unicele considerente 
-împotriva acestei alegeri rãmîn dependinşa de limbajul C++ ºi lipsa unei 
-portabilitãşi între sisteme de operare de o stabilitate apreciabilã.
+Ãn contrabalans a stat librÄƒria gtkmm\footnote{\url{http://www.gtkmm.org/}}, o 
+extensie a lui gtk pentru C++. PÃ®nÄƒ Ã®n ziua de astÄƒzi, o despÄƒrÅ£ire clarÄƒ de 
+aceastÄƒ tehnologie din partea autorului nu existÄƒ. Unicele considerente 
+Ã®mpotriva acestei alegeri rÄƒmÃ®n dependinÅ£a de limbajul C++ ÅŸi lipsa unei 
+portabilitÄƒÅ£i Ã®ntre sisteme de operare de o stabilitate apreciabilÄƒ.
 
-Rãspunsul acestor lipsuri a pãrut sã îl aibã 
-wxWidgets\footnote{\url{http://www.wxwidgets.org/}}. O platformã cu o tradişie 
-considerabilã în dezvoltarea de aplicaşii client, wxWidgets reprezintã poate 
-cea mai bunã alegere pentru un dezvoltator de aplicaşii client portabile sub 
-C++, în opinia noastrã.
+RÄƒspunsul acestor lipsuri a pÄƒrut sÄƒ Ã®l aibÄƒ 
+wxWidgets\footnote{\url{http://www.wxwidgets.org/}}. O platformÄƒ cu o tradiÅ£ie 
+considerabilÄƒ Ã®n dezvoltarea de aplicaÅ£ii client, wxWidgets reprezintÄƒ poate 
+cea mai bunÄƒ alegere pentru un dezvoltator de aplicaÅ£ii client portabile sub 
+C++, Ã®n opinia noastrÄƒ.
 
-Însã o analizã mai profundã a acestei platforme a scos la ivealã faptul cã 
-wxWidgets existã ca ºi sistem de dezvoltare de aplicaşii client dinaintea 
+ÃnsÄƒ o analizÄƒ mai profundÄƒ a acestei platforme a scos la ivealÄƒ faptul cÄƒ 
+wxWidgets existÄƒ ca ÅŸi sistem de dezvoltare de aplicaÅ£ii client dinaintea 
 extensiei STL\footnote{abrev. \textit{Standard Template Library} 
 \url{http://en.wikipedia.org/wiki/Standard_Template_Library}} pentru C++. De 
-departe -- în opinia autorului -- cea mai atractivã componentã a limbajului C++ 
-suferã de un suport consistent pentru wxWidgets.\cite{wxfaq} Aceastã 
-caracteristicã a bibliotecii a reprezentat un criteriu de nedepãºit în alegerea 
-noastrã.
+departe -- Ã®n opinia autorului -- cea mai atractivÄƒ componentÄƒ a limbajului C++ 
+suferÄƒ de un suport consistent pentru wxWidgets.\cite{wxfaq} AceastÄƒ 
+caracteristicÄƒ a bibliotecii a reprezentat un criteriu de nedepÄƒÅŸit Ã®n alegerea 
+noastrÄƒ.
 
-Biblioteca QT a trebuit sã fie datã la o parte pe baza principiului 
-portabilitãşii. Din pãcate, existã puşine implementãri de succes de software 
+Biblioteca QT a trebuit sÄƒ fie datÄƒ la o parte pe baza principiului 
+portabilitÄƒÅ£ii. Din pÄƒcate, existÄƒ puÅ£ine implementÄƒri de succes de software 
 implementat cu QT pentru platforma Windows. De asemenea, QT nu este distribuit 
-sub o licenşã compatibilã cu intenşiile de distribuşie ale autorului.
+sub o licenÅ£Äƒ compatibilÄƒ cu intenÅ£iile de distribuÅ£ie ale autorului.
 
 \subsection{.net Framework}
 
-Dacã pînã acum ne-am uitat la tehnologii care pornesc dinspre domeniul 
-open-source ºi Linux, .net Framework reprezintã rãspunsul gigantului Microsoft 
-la evoluşia sistemelor software moderne.
+DacÄƒ pÃ®nÄƒ acum ne-am uitat la tehnologii care pornesc dinspre domeniul 
+open-source ÅŸi Linux, .net Framework reprezintÄƒ rÄƒspunsul gigantului Microsoft 
+la evoluÅ£ia sistemelor software moderne.
 
-Cu o structurã de clase avansatã, .net Framework este printre puşinele soluşii 
-software atît de impresionante care nu au reuºit sã-ºi gãseascã un rãspuns 
-rezonabil în lumea opensource.
+Cu o structurÄƒ de clase avansatÄƒ, .net Framework este printre puÅ£inele soluÅ£ii 
+software atÃ®t de impresionante care nu au reuÅŸit sÄƒ-ÅŸi gÄƒseascÄƒ un rÄƒspuns 
+rezonabil Ã®n lumea opensource.
 
-Deºi reprezintã şelul unui întreg proiect, 
-mono\footnote{\url{http://www.mono-project.com}}, la data la care am fãcut 
-cercetãrile noastre, portabilitatea sistemului .net pentru platforme UNIX nu a 
-ajunsese încã, în opinia autorului, la o maturitate demnã de luat în seamã. 
-Aflat într-o continuã dezvoltare, proiectul mono promite sã realizeze o 
-revoluşie în ceea ce priveºte portabilitatea programelor software pe diverse 
+DeÅŸi reprezintÄƒ Å£elul unui Ã®ntreg proiect, 
+mono\footnote{\url{http://www.mono-project.com}}, la data la care am fÄƒcut 
+cercetÄƒrile noastre, portabilitatea sistemului .net pentru platforme UNIX nu a 
+ajunsese Ã®ncÄƒ, Ã®n opinia autorului, la o maturitate demnÄƒ de luat Ã®n seamÄƒ. 
+Aflat Ã®ntr-o continuÄƒ dezvoltare, proiectul mono promite sÄƒ realizeze o 
+revoluÅ£ie Ã®n ceea ce priveÅŸte portabilitatea programelor software pe diverse 
 sisteme de operare.
 
 \subsection{Java}
 
-Dintre toate sistemele de dezvoltare software existente astãzi în lumea 
-dezvoltatorilor de aplicaşii desktop, noi am decis cã Java reprezintã cel mai 
-convenabil, uºor de dezvoltat, uºor de menşinut ºi uºor de distribuit mod de a 
-dezvolta proiectul de faşã.
+Dintre toate sistemele de dezvoltare software existente astÄƒzi Ã®n lumea 
+dezvoltatorilor de aplicaÅ£ii desktop, noi am decis cÄƒ Java reprezintÄƒ cel mai 
+convenabil, uÅŸor de dezvoltat, uÅŸor de menÅ£inut ÅŸi uÅŸor de distribuit mod de a 
+dezvolta proiectul de faÅ£Äƒ.
 
-Cu o istorie legendarã de realizãri, Java reprezintã poate cel mai dezvoltat 
-sistem software existent, cu biblioteci dezvoltate de un numãr impresionant de 
-programatori din întreaga lume, cu o serie de tehnologii pentru toate 
-aplicaşiile software cunscute.
+Cu o istorie legendarÄƒ de realizÄƒri, Java reprezintÄƒ poate cel mai dezvoltat 
+sistem software existent, cu biblioteci dezvoltate de un numÄƒr impresionant de 
+programatori din Ã®ntreaga lume, cu o serie de tehnologii pentru toate 
+aplicaÅ£iile software cunscute.
 
-Mai mult, deschiderea perspectivelor software cãtre alte platforme decît cele 
-tradişionale (i.e. Mac, PC), cu dezvoltarea din ce în ce mai mare a 
-tehnologiilor web ºi a nevoilor crescînde în domeniul server, Java tinde sã 
-devinã cel mai variat sistem software existent vreodatã. În ceea ce priveºte 
-dezvoltarea aplicaşiilor client, Java a cunoscut o serie de etape remarcabile 
-pe parcursul evoluşiei sale. Primul sistem de interfeşe pentru utilizatori a 
-fost AWT, tehnologie care permitea legarea apelurilor native de construcşie a 
-widget-urile grafice de o structurã de clase abstractã ºi independentã de 
-platforma de execuşie. Dezvoltarea tehnologiei a fost însã prematur întreruptã, 
-fiind folositã astãzi doar sporadic în dezvoltarea de aplicaşii client, acolo 
-unde performanşa este consideratã prioritarã uºurinşei de utilizare a 
-aplicaşiei.
+Mai mult, deschiderea perspectivelor software cÄƒtre alte platforme decÃ®t cele 
+tradiÅ£ionale (i.e. Mac, PC), cu dezvoltarea din ce Ã®n ce mai mare a 
+tehnologiilor web ÅŸi a nevoilor crescÃ®nde Ã®n domeniul server, Java tinde sÄƒ 
+devinÄƒ cel mai variat sistem software existent vreodatÄƒ. Ãn ceea ce priveÅŸte 
+dezvoltarea aplicaÅ£iilor client, Java a cunoscut o serie de etape remarcabile 
+pe parcursul evoluÅ£iei sale. Primul sistem de interfeÅ£e pentru utilizatori a 
+fost AWT, tehnologie care permitea legarea apelurilor native de construcÅ£ie a 
+widget-urile grafice de o structurÄƒ de clase abstractÄƒ ÅŸi independentÄƒ de 
+platforma de execuÅ£ie. Dezvoltarea tehnologiei a fost Ã®nsÄƒ prematur Ã®ntreruptÄƒ, 
+fiind folositÄƒ astÄƒzi doar sporadic Ã®n dezvoltarea de aplicaÅ£ii client, acolo 
+unde performanÅ£a este consideratÄƒ prioritarÄƒ uÅŸurinÅ£ei de utilizare a 
+aplicaÅ£iei.
 
-A urmat SWING, care reprezintã rãspunsul dezvoltatorilor Java la problemele 
-utilizatorilor cu platforma AWT. Rãmînînd complet în spectrul Java, codul 
-bibliotecii SWING nu interacşioneazã direct cu sistemul de operare pe care 
-ruleazã aplicaşia ci alege sã-ºi deseneze întreaga interfaşã folosind libãria 
-Java 2D\footnote{\url{http://java.sun.com/products/java-media/2D/}}. Pierzînd 
-contactul cu interfaşa nativã, SWING a avut dintotdeauna problema performanşei. 
-Evoluşia tehnologiei a adus progrese semnificative în acest sens. SWING aducea 
-de asemenea o nouã formã a interfeşei grafice, diferitã de orice ce altã 
-interfaşã a sistemelor de operare.
+A urmat SWING, care reprezintÄƒ rÄƒspunsul dezvoltatorilor Java la problemele 
+utilizatorilor cu platforma AWT. RÄƒmÃ®nÃ®nd complet Ã®n spectrul Java, codul 
+bibliotecii SWING nu interacÅ£ioneazÄƒ direct cu sistemul de operare pe care 
+ruleazÄƒ aplicaÅ£ia ci alege sÄƒ-ÅŸi deseneze Ã®ntreaga interfaÅ£Äƒ folosind libÄƒria 
+Java 2D\footnote{\url{http://java.sun.com/products/java-media/2D/}}. PierzÃ®nd 
+contactul cu interfaÅ£a nativÄƒ, SWING a avut dintotdeauna problema performanÅ£ei. 
+EvoluÅ£ia tehnologiei a adus progrese semnificative Ã®n acest sens. SWING aducea 
+de asemenea o nouÄƒ formÄƒ a interfeÅ£ei grafice, diferitÄƒ de orice ce altÄƒ 
+interfaÅ£Äƒ a sistemelor de operare.
 
-Acest aspect este considerat de mulşi un atu al tehnologiei, permişînd 
-aplicaşiei sã arate la fel pe sisteme de operare diferite. Neajunsul este însã 
-faptul cã utilizatorii noi trebuie sã se obiºnuiascã cu o nouã interfaşã 
-graficã cînd deschid aplicaşia, lucru ce poate afecta prima impresie ºi curba 
-de învãşare a utilizatorilor.
+Acest aspect este considerat de mulÅ£i un atu al tehnologiei, permiÅ£Ã®nd 
+aplicaÅ£iei sÄƒ arate la fel pe sisteme de operare diferite. Neajunsul este Ã®nsÄƒ 
+faptul cÄƒ utilizatorii noi trebuie sÄƒ se obiÅŸnuiascÄƒ cu o nouÄƒ interfaÅ£Äƒ 
+graficÄƒ cÃ®nd deschid aplicaÅ£ia, lucru ce poate afecta prima impresie ÅŸi curba 
+de Ã®nvÄƒÅ£are a utilizatorilor.
 
-Eclipse a început proiectul SWT pentru dezvoltarea aplicaşiei Eclipse. 
-Proiectul dorea sã ofere tot ce AWT nu a reuºit sã ofere. Printre 
-caractersticile principale ale SWT este cã foloseºte un numãr mai mare de 
-widget-uri comune decît AWT ºi cã pentru platformele UNIX foloseºte biblioteca 
-gtk de widget-uri, faşã de biblioteca 
-motif\footnote{\url{http://www.opengroup.org/motif/}} folositã de AWT, o
-tehnologie care astãzi a fost lãsatã în urmã pentru dezvoltarea de interfeşe
-grafice în sisteme UNIX/Linux.
-
+Eclipse a Ã®nceput proiectul SWT pentru dezvoltarea aplicaÅ£iei Eclipse. 
+Proiectul dorea sÄƒ ofere tot ce AWT nu a reuÅŸit sÄƒ ofere. Printre 
+caractersticile principale ale SWT este cÄƒ foloseÅŸte un numÄƒr mai mare de 
+widget-uri comune decÃ®t AWT ÅŸi cÄƒ pentru platformele UNIX foloseÅŸte biblioteca 
+gtk de widget-uri, faÅ£Äƒ de biblioteca 
+motif\footnote{\url{http://www.opengroup.org/motif/}} folositÄƒ de AWT, o 
+tehnologie care astÄƒzi a fost lÄƒsatÄƒ Ã®n urmÄƒ pentru dezvoltarea de interfeÅ£e 
+grafice Ã®n sisteme UNIX/Linux.
 \subsection{Eclipse RCP}
 
-În final, vom încerca sã motivãm ºi alegerea folosirii RCP pentru dezvoltarea
-acestui proiect. Considerentele de bazã au pornit în primul rînd de la succesul
-aplicaşiei Eclipse ca ºi un IDE pentru documente Java, aplicaşii web, º.a.
-Cunoaºterea ºi familiarizarea cu modul de lucru al acestui IDE au dus inevitabil
-la recunoaºterea calitãşilor de interfaşã utilizator ale Eclipse RCP, care stã
-la bazã Eclipse IDE.
+Ãn final, vom Ã®ncerca sÄƒ motivÄƒm ÅŸi alegerea folosirii RCP pentru dezvoltarea 
+acestui proiect. Considerentele de bazÄƒ au pornit Ã®n primul rÃ®nd de la succesul 
+aplicaÅ£iei Eclipse ca ÅŸi un IDE pentru documente Java, aplicaÅ£ii web, ÅŸ.a. 
+CunoaÅŸterea ÅŸi familiarizarea cu modul de lucru al acestui IDE au dus 
+inevitabil la recunoaÅŸterea calitÄƒÅ£ilor de interfaÅ£Äƒ utilizator ale Eclipse 
+RCP, care stÄƒ la bazÄƒ Eclipse IDE.
 
-Deºi RCP a fost proiectat în principal pentru editarea documentelor de tip text,
-am considerat cã experimentarea cu un nou tip de model de editare, cea de
-modelare tridimensionalã poate deschide o nouã perspectivã în aria de aplicaşii
+DeÅŸi RCP a fost proiectat Ã®n principal pentru editarea documentelor de tip 
+text, am considerat cÄƒ experimentarea cu un nou tip de model de editare, cea de 
+modelare tridimensionalÄƒ poate deschide o nouÄƒ perspectivÄƒ Ã®n aria de aplicaÅ£ii 
 a Eclipse RCP.
 
-Dupã inişierea dezvoltãrii proiectului, mare parte a premizelor asupra uºurinşei
-de extindere ºi dezvoltare a platformei s-au confirmat. Bineînşeles, volumul cel
-mai mare de muncã l-a cerut ,,învãşarea'' lui Eclipse sã editeze un model
-tridimensional, sarcinã care la rîndul ei a fost facilã datoritã abstracşiei
-puternice de care se bucurã structura aplicaşiilor dezvoltate în RCP.
+DupÄƒ iniÅ£ierea dezvoltÄƒrii proiectului, mare parte a premizelor asupra 
+uÅŸurinÅ£ei de extindere ÅŸi dezvoltare a platformei s-au confirmat. BineÃ®nÅ£eles, 
+volumul cel mai mare de muncÄƒ l-a cerut ,,Ã®nvÄƒÅ£area'' lui Eclipse sÄƒ editeze un 
+model tridimensional, sarcinÄƒ care la rÃ®ndul ei a fost facilÄƒ datoritÄƒ 
+abstracÅ£iei puternice de care se bucurÄƒ structura aplicaÅ£iilor dezvoltate Ã®n 
+RCP.

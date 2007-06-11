@@ -1,5 +1,5 @@
 \documentclass[a4paper]{report}
-\usepackage[cp1250]{inputenc}
+\usepackage[utf8]{inputenc} 
 \usepackage[romanian]{babel}
 \usepackage{url}
 \usepackage{a4wide}
@@ -9,54 +9,46 @@
 \addtolength{\parskip}{\baselineskip}
 
 \renewcommand{\title}{OpenCad.org}
-\newcommand{\subtitle}{Proiectarea unei aplicaþii CAD pentru arhitecturã}
+\newcommand{\subtitle}{Proiectarea unei aplicaÅ£ii CAD pentru arhitecturÄƒ}
 \renewcommand{\author}{Silviu-Georgian Aprozeanu}
 \newcommand{\teacher}{prof. dr. ing. Florica Moldoveanu}
 
 \newcommand{\col}[1]{@{\hspace{0.01\textwidth}}p{#1\textwidth}@{\hspace{0.01\textwidth}}}
 
-\newtheorem{definition}{Definiþia}[chapter]
-\newtheorem{statement}{Propoziþia}[chapter]
+\newtheorem{definition}{DefiniÅ£ia}[chapter] 
+\newtheorem{statement}{PropoziÅ£ia}[chapter]
 
 \begin{document}
 	\begin{titlepage}
-	\null
-	\vfill
+\null \vfill
 	\begin{center}
-	{\Huge \title{}}
+{\Huge \title{}}
 	
-	{\Large \subtitle{}}
+{\Large \subtitle{}}
 	\end{center}
-	\vfill
+\vfill
 	\begin{flushright}
 		\begin{tabular}{ll}
-			Absolvent & \author{} \\
-			Profesor îndrumãtor & \teacher{}
+Absolvent & \author{} \\
+Profesor Ã®ndrumÄƒtor & \teacher{}
 		\end{tabular}
 	\end{flushright}
-	\vskip 2cm
+\vskip 2cm
 	\begin{center}
-		\small Bucureºti, \today
+\small BucureÅŸti, \today
 	\end{center}
 	\end{titlepage}
 	\pagenumbering{roman}
-	\tableofcontents
-	\listoftables
-	\listoffigures
-	\newpage
+\tableofcontents \listoftables \listoffigures \newpage
 	\pagenumbering{arabic}
 	\pagestyle{headings}
-	\chapter{Introducere}
 		\input{introducere.tex}
-	\chapter{Obiective}
 		\input{obiective.tex}
 	\input{tehnologii.tex}
 	\input{arhitectura.tex}
-	\chapter{Implementare}
 		\input{implementare.tex}
-	\chapter{Concluzii}
 		\input{concluzii.tex}
-	\clearpage
+\clearpage
 	\pagenumbering{roman}
 	\bibliographystyle{plain}
 	\bibliography{thesis}

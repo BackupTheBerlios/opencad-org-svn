@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <project name="diploma" default="default">
-	<description>
-            description
-    </description>
+	<description>description</description>
 	<target name="default" depends="bibtex">
 		<antcall target="pdflatex" />
 		<antcall target="pdflatex" />

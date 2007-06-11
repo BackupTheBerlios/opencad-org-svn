@@ -242,7 +242,7 @@ aplicaţiei.
 Dintr-o anumită privinţă, acest ciclu de stare poate fi privit ca o
 serie de meta-stări ale aplicaţiei (i.e. stări ale stărilor).
 
-\begin{table}[h] \caption{Ciclul de viaţă al stărilor Editorului OpenGL 
+\begin{table}[ht] \caption{Ciclul de viaţă al stărilor Editorului OpenGL 
 \label{table:editor-states}}
 \begin{tabular}{|\col{0.23}|\col{0.73}|}
 \hline FRESH & La construcţia unei stări ciclul de viaţă este setat în poziţia
@@ -271,6 +271,32 @@ scoasă permanent din lista stărilor editorului.\\ \hline
 \end{tabular}
 \end{table}
 
-\subsection{Facilităţile Editorului OpenGL}
+Stările editorului sunt folosite pentru a manipula modelul de lucru. Ele pot
+adăuga şterge sau schimba diverse proprietăţi ale primitivelor aflate în model.
+Din acest motiv, stările sunt strict asociate cu diversele tipuri de primitive
+din model.
 
-Bla bla bla
+De exemplu, colţurile introduc o serie de stări pentru a le modela toate
+operaţiunile posibile în cadrul editorului. Ele pot fi enumerate după cum am
+arătat în Tabela \cite{table:corner-states}.
+
+\begin{table}[ht] \caption{Stările ce modelează operaţiile posibile pentru 
+diverse Primitive \label{table:corner-states}}
+\begin{tabular}{|\col{0.23}|\col{0.73}|}
+\hline \multicolumn{2}{|l|}{\Large \textbf{Colţuri}} \\
+\hline DragCornerState & Modelează modificarea poziţiei unui colţ atunci cînd 
+el este tras cu mausul pe suprafaţa editorului. \\
+\hline SelectCornerState & Implementează comportamentul operaţiunii de 
+selectare a unui Colţ. Dacă selecţia s-a făcut fără ca mausul să fie în 
+vecinătatea colţului, atunci starea se termină imediat, altfel se iniţiază 
+DragCornerState. \\ \hline \multicolumn{2}{|l|}{\Large \textbf{Ziduri}} \\
+\hline PickupCornerState & Modelează operaţiunea de alegere a unui colţ în \\ 
+\hline
+\end{tabular}
+\end{table}
+
+% TODO Adaugă toate stările posibile în descriere
+
+\section{Vizualizarea 3D OpenGL}
+
+După cum 

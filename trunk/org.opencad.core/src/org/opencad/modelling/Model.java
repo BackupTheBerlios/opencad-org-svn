@@ -1,11 +1,14 @@
 package org.opencad.modelling;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
+import org.opencad.ui.editor.EditorRenderable;
 import org.opencad.ui.editor.Hoverable;
+import org.opencad.ui.editor.RealRenderable;
 import org.opencad.ui.editor.Selectable;
 
-public class Model extends Primitive {
+public class Model implements EditorRenderable, RealRenderable, Serializable {
 
 	private static final long serialVersionUID = -4303353063372058728L;
 
@@ -69,6 +72,7 @@ public class Model extends Primitive {
 	}
 
 	public Hoverable trapHoverable(double x, double y, Hoverable... exceptions) {
+		Hoverable selection = null;
 		for (Hoverable hoverable : hoverables) {
 			if (hoverable.isHoverCoordinates(x, y)) {
 				boolean excepted = false;
@@ -78,12 +82,14 @@ public class Model extends Primitive {
 						break;
 					}
 				}
-				if (!excepted) {
-					return hoverable;
+				if (!excepted
+						&& (selection == null || selection.getZIndex() < hoverable
+								.getZIndex())) {
+					selection = hoverable;
 				}
 			}
 		}
-		return null;
+		return selection;
 	}
 
 	public boolean informHoverables(double x, double y) {

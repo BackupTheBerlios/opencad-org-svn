@@ -1,19 +1,18 @@
-package org.opencad.modelling.corners;
+package org.opencad.modelling.corners; 
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+
 import org.eclipse.opengl.GL;
 import org.opencad.modelling.Primitive;
 import org.opencad.modelling.PrimitiveTypeRegister;
 import org.opencad.modelling.walls.Wall;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
-import org.opencad.ui.editor.Hoverable;
-import org.opencad.ui.editor.Selectable;
 
-public class Corner extends Primitive implements Hoverable, Selectable {
+public class Corner extends Primitive {
   private static final long serialVersionUID = -1332083715502519329L;
   static {
     PrimitiveTypeRegister.registerPrimitiveType(Corner.class);
@@ -25,9 +24,9 @@ public class Corner extends Primitive implements Hoverable, Selectable {
 
   private transient boolean selected;
 
-  public static double thickness = 0.1d;
+  public static double thickness = 0.2d;
 
-  private static double hoverSlack = thickness;
+  private static double hoverSlack = 2 * thickness;
 
   private HashSet<Wall> startOf = new HashSet<Wall>();
 
@@ -186,7 +185,7 @@ public class Corner extends Primitive implements Hoverable, Selectable {
   }
 
   public void editorRender() {
-    double selectionRadius = 0.06d;
+    double selectionRadius = hoverSlack;
     double x = getX();
     double y = getY();
     if (isHover()) {
@@ -196,7 +195,7 @@ public class Corner extends Primitive implements Hoverable, Selectable {
     } else {
       GL.glColor3d(0d, 0d, 0d);
     }
-    if (isSelected()) {
+    if (isSelected() || isHover()) {
       GL.glEnable(GL.GL_LINE_STIPPLE);
       {
         GL.glLineStipple(1, (short) 0xAAAA);
@@ -219,4 +218,8 @@ public class Corner extends Primitive implements Hoverable, Selectable {
 
   public void realRender(boolean fillMode) {
   }
+
+public int getZIndex() {
+	return 0;
+}
 }

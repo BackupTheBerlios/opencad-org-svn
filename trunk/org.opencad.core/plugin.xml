@@ -16,9 +16,18 @@
            targetID="org.opencad.core.editors.GLEditor">
         <action
               class="org.opencad.modelling.walls.AddWallActionDelegate"
-              icon="icons/plugin_config_obj.gif"
               id="org.opencad.core.addWallAction"
               label="New Wall"
+              style="push"
+              toolbarPath="GLEditor"/>
+     </editorContribution>
+     <editorContribution
+           id="org.opencad.core.addWindowContribution"
+           targetID="org.opencad.core.editors.GLEditor">
+        <action
+              class="org.opencad.modelling.window.AddWindowActionDelegate"
+              id="org.opencad.core.addWindowAction"
+              label="New Window"
               style="push"
               toolbarPath="GLEditor"/>
      </editorContribution>

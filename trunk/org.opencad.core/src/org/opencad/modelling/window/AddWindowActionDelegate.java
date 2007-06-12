@@ -1,15 +1,14 @@
-package org.opencad.modelling.walls;
+package org.opencad.modelling.window;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorActionDelegate;
 import org.eclipse.ui.IEditorPart;
-import org.opencad.modelling.corners.PickupCornerState;
 import org.opencad.ui.editor.GLEditor;
 
-public class AddWallActionDelegate implements IEditorActionDelegate {
+public class AddWindowActionDelegate implements IEditorActionDelegate {
 
-	GLEditor editor;
+	private GLEditor editor;
 
 	public void setActiveEditor(IAction action, IEditorPart targetEditor) {
 		if (targetEditor instanceof GLEditor) {
@@ -21,12 +20,7 @@ public class AddWallActionDelegate implements IEditorActionDelegate {
 	}
 
 	public void run(IAction action) {
-		Wall wall = new Wall(null, null);
-		new PickupCornerState(editor, wall, action,
-				PickupCornerState.CornerType.ENDING).freshen();
-		new PickupCornerState(editor, wall, action,
-				PickupCornerState.CornerType.STARTING).freshen();
-		action.setEnabled(false);
+		new PlaceWindowState(editor).freshen();
 	}
 
 	public void selectionChanged(IAction action, ISelection selection) {

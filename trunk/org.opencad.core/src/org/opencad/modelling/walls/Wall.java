@@ -7,6 +7,8 @@ import org.eclipse.opengl.GL;
 import org.opencad.modelling.Primitive;
 import org.opencad.modelling.PrimitiveTypeRegister;
 import org.opencad.modelling.corners.Corner;
+import org.opencad.ui.editor.GLEditor;
+import org.opencad.ui.editor.GLEditorState;
 
 public class Wall extends Primitive {
 	private static final long serialVersionUID = -8662848078904155699L;
@@ -14,28 +16,26 @@ public class Wall extends Primitive {
 		PrimitiveTypeRegister.registerPrimitiveType(Wall.class);
 	}
 
+	boolean selected, hover;
+
 	Corner startingCorner, endingCorner;
 
 	private TreeSet<WallFeature> features = new TreeSet<WallFeature>();
 
-	public void addFeature(WallFeature feature) {
+	public boolean addFeature(WallFeature feature) {
 		for (WallFeature aFeature : features) {
 			if (aFeature.getStartOffset() <= feature.getStartOffset()
 					&& !(aFeature.getMaxStartOffset() <= feature
 							.getStartOffset())) {
-				throw new IllegalArgumentException(String.format(
-						"Features overlap (<): %s with %s in %s", aFeature,
-						feature, this));
+				return false;
 			}
 			if (aFeature.getStartOffset() >= feature.getStartOffset()
 					&& !(aFeature.getStartOffset() >= feature
 							.getMaxStartOffset())) {
-				throw new IllegalArgumentException(String.format(
-						"Features overlap (>): %s with %s in %s", aFeature,
-						feature, this));
+				return false;
 			}
 		}
-		features.add(feature);
+		return features.add(feature);
 	}
 
 	public void removeFeature(WallFeature feature) {
@@ -73,165 +73,13 @@ public class Wall extends Primitive {
 	public Wall(Corner startingCorner, Corner endingCorner) {
 		this.startingCorner = startingCorner;
 		this.endingCorner = endingCorner;
-		addFeature(new WallFeature() {
-			private static final long serialVersionUID = 1L;
-			{
-				setStartOffset(2d);
-				setWidth(.8d);
-				setGroundOffset(1d);
-				setHeight(1.6d);
-			}
-
-			public void editorRender() {
-				GL.glTranslated(0d, 0d, 2d);
-				GL.glBegin(GL.GL_LINES);
-				{
-					GL.glVertex2d(0, 0);
-					GL.glVertex2d(getWidth(), 0);
-					GL.glVertex2d(getWidth() / 2, 0);
-					GL.glVertex2d(getWidth() / 2, Corner.thickness / 2);
-				}
-				GL.glEnd();
-			}
-
-			public void realRender(boolean fillMode) {
-				editorRender();
-			}
-
-			public String toString() {
-				return String.format("(feature %.2f to %.2f)",
-						getStartOffset(), getMaxStartOffset());
-			}
-		});
-		addFeature(new WallFeature() {
-			private static final long serialVersionUID = 1L;
-			{
-				setStartOffset(4d);
-				setWidth(.8d);
-				setGroundOffset(1d);
-				setHeight(1.6d);
-			}
-
-			public void editorRender() {
-				GL.glBegin(GL.GL_LINES);
-				{
-					GL.glVertex2d(0, 0);
-					GL.glVertex2d(getWidth(), 0);
-					GL.glVertex2d(getWidth() / 2, 0);
-					GL.glVertex2d(getWidth() / 2, Corner.thickness / 2);
-				}
-				GL.glEnd();
-			}
-
-			public void realRender(boolean fillMode) {
-				GL.glTranslated(0d, -Corner.thickness, 0d);
-				if (fillMode) {
-				GL.glBegin(GL.GL_QUADS);
-				{
-					GL.glVertex3d(0, 0, 0);
-					GL.glVertex3d(getWidth(), 0, 0);
-					GL.glVertex3d(getWidth(), 0, getGroundOffset());
-					GL.glVertex3d(0, 0, getGroundOffset());
-
-					GL.glVertex3d(0, 0, getMaxGroundOffset());
-					GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
-					GL.glVertex3d(getWidth(), 0, Wall.height);
-					GL.glVertex3d(0, 0, Wall.height);
-
-					GL.glVertex3d(getWidth(), 0, getGroundOffset());
-					GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
-					GL.glVertex3d(getWidth(), 2 * Corner.thickness, getMaxGroundOffset());
-					GL.glVertex3d(getWidth(), 2 * Corner.thickness, getGroundOffset());
-
-					GL.glVertex3d(0, 0, getGroundOffset());
-					GL.glVertex3d(0, 0, getMaxGroundOffset());
-					GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
-					GL.glVertex3d(0, 2 * Corner.thickness, getGroundOffset());
-
-					GL.glVertex3d(getWidth(), 0, getGroundOffset());
-					GL.glVertex3d(0, 0, getGroundOffset());
-					GL.glVertex3d(0, 2 * Corner.thickness, getGroundOffset());
-					GL.glVertex3d(getWidth(), 2 * Corner.thickness, getGroundOffset());
-
-					GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
-					GL.glVertex3d(0, 0, getMaxGroundOffset());
-					GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
-					GL.glVertex3d(getWidth(), 2 * Corner.thickness, getMaxGroundOffset());
-
-					GL.glVertex3d(getWidth(), 0, Wall.height);
-					GL.glVertex3d(0, 0, Wall.height);
-					GL.glVertex3d(0, 2 * Corner.thickness, Wall.height);
-					GL.glVertex3d(getWidth(), 2 * Corner.thickness, Wall.height);
-
-					GL.glVertex3d(0, 2 * Corner.thickness, 0);
-					GL.glVertex3d(getWidth(), 2 * Corner.thickness, 0);
-					GL.glVertex3d(getWidth(), 2 * Corner.thickness, getGroundOffset());
-					GL.glVertex3d(0, 2 * Corner.thickness, getGroundOffset());
-
-					GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
-					GL.glVertex3d(getWidth(), 2 * Corner.thickness, getMaxGroundOffset());
-					GL.glVertex3d(getWidth(), 2 * Corner.thickness, Wall.height);
-					GL.glVertex3d(0, 2 * Corner.thickness, Wall.height);
-				}
-				GL.glEnd();
-				} else {
-					GL.glBegin(GL.GL_LINES); {
-						GL.glVertex3d(0, 0, 0);
-						GL.glVertex3d(getWidth(), 0, 0);
-						GL.glVertex3d(0, 2 * Corner.thickness, 0);
-						GL.glVertex3d(getWidth(), 2 * Corner.thickness, 0);
-
-						GL.glVertex3d(0, 0, Wall.height);
-						GL.glVertex3d(getWidth(), 0, Wall.height);
-						GL.glVertex3d(0, 2 * Corner.thickness, Wall.height);
-						GL.glVertex3d(getWidth(), 2 * Corner.thickness, Wall.height);
-
-						GL.glVertex3d(0, 0, getGroundOffset());
-						GL.glVertex3d(getWidth(), 0, getGroundOffset());
-						GL.glVertex3d(0, 2 * Corner.thickness, getGroundOffset());
-						GL.glVertex3d(getWidth(), 2 * Corner.thickness, getGroundOffset());
-
-						GL.glVertex3d(0, 0, getMaxGroundOffset());
-						GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
-						GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
-						GL.glVertex3d(getWidth(), 2 * Corner.thickness, getMaxGroundOffset());
-						
-						GL.glVertex3d(0, 0, getGroundOffset());
-						GL.glVertex3d(0, 0, getMaxGroundOffset());
-						GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
-						GL.glVertex3d(0, 2 * Corner.thickness, getGroundOffset());
-
-						GL.glVertex3d(getWidth(), 0, getGroundOffset());
-						GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
-						GL.glVertex3d(getWidth(), 2 * Corner.thickness, getMaxGroundOffset());
-						GL.glVertex3d(getWidth(), 2 * Corner.thickness, getGroundOffset());
-
-						GL.glVertex3d(0, 0, getGroundOffset());
-						GL.glVertex3d(0, 2 * Corner.thickness, getGroundOffset());
-						GL.glVertex3d(getWidth(), 0, getGroundOffset());
-						GL.glVertex3d(getWidth(), 2 * Corner.thickness, getGroundOffset());
-						
-						GL.glVertex3d(0, 0, getMaxGroundOffset());
-						GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
-						GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
-						GL.glVertex3d(getWidth(), 2 * Corner.thickness, getMaxGroundOffset());
-					}
-					GL.glEnd();
-				}
-			}
-
-			public String toString() {
-				return String.format("(feature %.2f to %.2f)",
-						getStartOffset(), getMaxStartOffset());
-			}
-		});
 	}
 
 	public String toString() {
 		return String.format("(wall %s %s)", startingCorner, endingCorner);
 	}
 
-	public double sqr(double a) {
+	public static double sqr(double a) {
 		return a * a;
 	}
 
@@ -292,7 +140,13 @@ public class Wall extends Primitive {
 			double rotation = 180 + Math.atan2(ey - sy, ex - sx) * 180
 					/ Math.PI;
 			int segment = 0;
-			GL.glColor3d(0d, 0d, 0d);
+			if (isSelected()) {
+				GL.glColor3d(0d, 0.5d, 0d);
+			} else if (isHover()) {
+				GL.glColor3d(1d, 0d, 0d);
+			} else {
+				GL.glColor3d(0d, 0d, 0d);
+			}
 			boolean old_feature = true;
 			for (Double dist : segments) {
 				segment++;
@@ -422,12 +276,12 @@ public class Wall extends Primitive {
 			double ex2 = end_points[0];
 			double ey2 = end_points[1];
 			double len = Math.sqrt(sqr(ex - sx) + sqr(ey - sy));
-			double sqlen1 = sqr(ex1 - sx1) + sqr(ey1 - sy1);
-			double sqlen2 = sqr(ex2 - sx2) + sqr(ey2 - sy2);
 			double dx1 = ex1 - sx1;
 			double dy1 = ey1 - sy1;
 			double dx2 = ex2 - sx2;
 			double dy2 = ey2 - sy2;
+			double sqlen1 = sqr(dx1) + sqr(dy1);
+			double sqlen2 = sqr(dx2) + sqr(dy2);
 			double x1 = sx1;
 			double y1 = sy1;
 			double x2 = sx2;
@@ -571,5 +425,64 @@ public class Wall extends Primitive {
 				GL.glEnd();
 			}
 		}
+	}
+
+	double[] getIntersectionOf(double x, double y, double... line) {
+		double dx = line[2] - line[0];
+		double dy = line[3] - line[1];
+		double sqlen = sqr(dx) + sqr(dy);
+		double u = ((x - line[0]) * dx + (y - line[1]) * dy) / sqlen;
+		double[] ret = new double[] { line[0] + u * dx, line[1] + u * dy, u };
+		return ret;
+	}
+
+	public double[] getProjectionOf(double x, double y) {
+		double[] intersection = getIntersectionOf(x, y, getStartingCorner()
+				.getX(), getStartingCorner().getY(), getEndingCorner().getX(),
+				getEndingCorner().getY());
+		if (intersection[2] > 0 && intersection[2] < 1) {
+			return intersection;
+		}
+		return null;
+	}
+
+	public boolean isHoverCoordinates(double x, double y) {
+		double[] prj = getProjectionOf(x, y);
+		if (prj != null) {
+			return sqr(x - prj[0]) + sqr(y - prj[1]) < sqr(Corner.thickness);
+		}
+		return false;
+	}
+
+	public boolean setHover(boolean hover) {
+		boolean changed = this.hover != hover;
+		this.hover = hover;
+		return changed;
+	}
+
+	public GLEditorState getSelectionState(GLEditor editor) {
+		return null;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
+	public boolean isHover() {
+		return hover;
+	}
+
+	public int getZIndex() {
+		return -100;
+	}
+
+	public double getLength() {
+		return Math.sqrt(sqr(getEndingCorner().getX()
+				- getStartingCorner().getX())
+				+ sqr(getEndingCorner().getY() - getStartingCorner().getY()));
 	}
 }

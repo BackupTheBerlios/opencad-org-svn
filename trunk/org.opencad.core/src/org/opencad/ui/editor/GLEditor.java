@@ -79,7 +79,8 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
           new StructuredSelection(selection));
     }
     getSite().getSelectionProvider().addSelectionChangedListener(this);
-    selection.getSelectionState(this).freshen();
+    GLEditorState state = selection.getSelectionState(this);
+    if (state != null) state.freshen();
   }
 
   public final Model getModel() {

@@ -51,9 +51,11 @@ public class PickupCornerState extends GLEditorState implements MouseListener,
 		return corner;
 	}
 
-	public PickupCornerState(GLEditor glEditor, Wall wall, CornerType cornerType) {
+	public PickupCornerState(GLEditor glEditor, Wall wall, IAction action,
+			CornerType cornerType) {
 		super(glEditor);
 		this.wall = wall;
+		this.action = action;
 		this.cornerType = cornerType;
 	}
 
@@ -70,7 +72,7 @@ public class PickupCornerState extends GLEditorState implements MouseListener,
 		glEditor.getModel().informHoverables(glx, gly);
 		if (e.button == 1) {
 			Hoverable hoverable = glEditor.getModel().trapHoverable(glx, gly,
-					babyCorner);
+					babyCorner, wall);
 			if (hoverable == null) {
 				hoverable = babyCorner;
 			}

@@ -1,6 +1,5 @@
 package org.opencad.modelling.corners;
 
-import org.eclipse.swt.events.MouseEvent;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 
@@ -15,9 +14,6 @@ public class SelectCornerState extends GLEditorState {
 		this.corner = corner;
 	}
 
-	public void mouseDoubleClick(MouseEvent e) {
-	}
-	
 	@Override
 	public void run() {
 		if (started || !corner.isHover()) {

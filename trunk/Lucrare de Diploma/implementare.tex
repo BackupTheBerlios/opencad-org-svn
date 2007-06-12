@@ -1,0 +1,48 @@
+\chapter{Implementare}
+\label{chapter:impl}
+
+În acest capitol vom prezenta detaliile implementării acestui proiect. Se va 
+trece prin structura de clase, fluxul datelor în aplicaţie, mutaţiile Modelului 
+de Lucru (\ref{define:model})  şi funcţionarea componentelor de interfaţă,
+editorul OpenGL şi Vizualizarea 3D, prezentate în secţiunile
+\ref{section:opengl-editor}, respectiv \ref{section:view}.
+
+\section{Structura claselor}
+
+Fiecare dintre componentele arhitecturale descrise la capitolul 
+\ref{chapter:arh} sunt materializate în implementarea efectivă printr-un set de 
+clase bine definite şi bine separate ca logică şi structură de celelalte 
+componente ale aplicaţiei.
+
+\subsection{Modelul de Lucru}
+
+\subsubsection{Primitive}
+Clasa de bază a modelului de lucru este clasa Primitive. Desigur, este o
+materializare a conceptului de Primitivă (\ref{define:primitive}). Aceasta este o clasă 
+abstractă care nu introduce nici un comportament singular, însă marchează 
+nevoie de implementare pentru intefeţele EditorRenderable şi RealRenderable, 
+necesare celor două vizualizări, cum vom vedea la secţiunile 
+\ref{section:impl-editor} şi \ref{section:impl-view}.
+
+Din clasa Primitive sunt extinse clasele concrete Corner, Wall şi
+toate clasele ce implementează Decoraţiunile (\ref{define:decoration}). Fiecare
+din aceste clase implementează metodele definite în interfeţele amintite mai
+sus.
+
+Tot din clasa Primitive se desprinde şi clasa WallFeature, o materializare a
+conceptului de Caracterstică de Ziduri (\ref{define:feature}). Din ea la rîndul
+ei se concretizează clasele Door, Window, Inset, Outset, Tunnel, implementări
+ale diverselor caracteristici amintite în \ref{section:primitives}.
+
+\subsubsection{Corner}
+
+Clasa Corner reprezintă una din puţinele Primitive care nu sunt direct
+disponibile utilizatorului aplicaţiei. Ea serveşte strict poziţionării Zidurilor
+şi prin aceasta editorul nu le oferă o importanţă deosebită printr-o
+individualizare în cadrul interfeţei, reducînd astfel solicitarea asupra curbei
+de învăţare a utilizatorului.
+
+Clasa Corner, pe lîngă implementarea comportamentului de desenare pentru
+proiectate (\ref{define:editorRender}) şi de desenare reală
+(\ref{define:realRender}), aderă şi la comportamentele de Selectabilitate
+(\ref{define:selectable}) şi de Navigabilitate (\ref{define:hoverable}).

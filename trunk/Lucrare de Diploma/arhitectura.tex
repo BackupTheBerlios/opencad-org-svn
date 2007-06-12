@@ -1,4 +1,5 @@
 \chapter{Arhitectura aplicaţiei}
+\label{chapter:arh}
 
 Proiectată privind către viitor, aplicaţia noastră oferă posibilitatea 
 extinderii pe viitor în numeroase direcţii de dezvoltare. Am construit o 
@@ -49,6 +50,7 @@ modelul este o primitivă. Introducem două direcţii în care modelul poate fi
 reprezentat.
 
 \begin{definition}
+\label{define:realRender}
 Numim \textbf{Reprezentare Reală} o materializare strictă în comenzi 
 Java/OpenGL a unei reprezentări schematice tridimensionale a unei Primitive, 
 realizată cu scopul formării unei imaginii asupra rezultatului final al 
@@ -75,7 +77,7 @@ reprezentări. Desigur, asta implică că modelul în sine nu este decît un sim
 container logic pentru toate celelalte componente ale aplicaţiei.
 
 \subsection{Tipuri de primitive}
-
+\label{section:primitives}
 Alegerea setului de primitive de care va dispune această aplicaţie a fost o 
 sarcină dificilă. Timpul de implementare este în directă corelaţie cu volumul 
 de primitive care trebuiesc implementate.
@@ -133,6 +135,7 @@ ce reprezintă o caracteristică ar fi:
 \subsubsection{Decoraţiuni}
   
 \begin{definition}
+\label{define:decoration}
 \textbf{Decoraţiunile} sunt Primitive care nu au legătură strictă cu structura 
 construită, însă oferă un plus de realism şi poate sugera viitoarea destinaţie 
 a diferitelor spaţii din model.
@@ -168,6 +171,7 @@ Modelului de Lucru}
 
 
 \section{Editorul OpenGL}
+\label{section:opengl-editor}
 
 Înainte de a fi un editor pentru Modelul de Lucru (\ref{define:model}), 
 editorul OpenGL dezvoltat de noi este un punct de plecare foarte bun pentru 
@@ -197,24 +201,37 @@ Pentru modelarea funcţionalităţii editorului, orice Primitivă
 să fie desenată în spaţiul bidimensional al editorului.
 
 Unele primitive sunt desenate direct de către model, altele, cum ar fi 
-Caracteristicile (Definiţia \ref{define:feature}), ale căror desenare intră în 
+Caracteristicile (\ref{define:feature}), ale căror desenare intră în 
 sarcina zidului din care fac parte.
 
 Acest aspect al modelului reprezintă materializarea \textbf{Reprezentării 
-Editabile} (Definiţia \ref{define:editorRender}).
+Editabile} (\ref{define:editorRender}).
 
-Un alt aspect adăugat modelului este \textbf{Selectabilitate}. Orice Primitivă 
-care din punct de vedere al interfeţei editorului poate fi selectat prin 
-diverse metode de utilizator se spune că este \textbf{selectabilă}. Primitivele 
-pot reacţiona la schimbarea stării lor de selectabilitate şi la rîndul său 
-editorul poate trata evenimentul schimbării selecţiei în funcţie de 
+Un alt aspect adăugat modelului este \textbf{Selectabilitate}.
+
+\begin{definition}
+\label{define:selectable}
+Orice Primitivă care din punct de vedere al interfeţei editorului poate fi 
+selectat prin diverse metode de utilizator se spune că este 
+\textbf{selectabilă}, sau că are un aspect de \textbf{Selectabilitate}.
+\end{definition}
+
+Primitivele pot reacţiona la schimbarea stării lor de selectabilitate şi la 
+rîndul său editorul poate trata evenimentul schimbării selecţiei în funcţie de 
 implementarea dorită.
 
 În fine, ultimul aspect al modelului necesar implementării editorului este cel 
-de \textbf{Navigabilitate}. În momentul în care mausul trece deasupra unei 
+de \textbf{Navigabilitate}.
+
+\begin{definition}
+\label{define:hoverable}
+În momentul în care mausul trece deasupra unei 
 astfel de componente, ea poate reacţiona prin evenimente implementate la 
-nivelul editorului. Multe Primitive folosesc această proprietate pentru a-şi 
-schimba starea de selectare.
+nivelul editorului, avînd astfel aspectul de \textbf{Navigabilitate}.
+\end{definition}
+
+Multe Primitive folosesc această proprietate pentru a-şi schimba starea de 
+selectare.
 
 \subsection{Editorul ca maşină de stări}
 
@@ -240,17 +257,20 @@ meta-stări ale aplicaţiei (i.e. stări ale stărilor).
 \begin{table}[ht] \caption{Ciclul de viaţă al stărilor Editorului OpenGL
 \label{table:editor-states}}
 \begin{tabular}{|\col{0.23}|\col{0.73}|}
+
 \hline FRESH & La construcţia unei stări ciclul de viaţă este setat în poziţia 
 FRESH. Editorul va citi orice stare setată pe acest mod şi o va seta ca şi 
 stare activă, înregistrînd toate rutinele de tratare a evenimentelor pentru 
 această stare în cadrul editorului. Starea curentă este setată ca activă şi 
 modul ei este trecut în RUNNING. Starea activă anterioară este trecută pe modul 
-SLEEPING. \\ \hline RUNNING & După ce editorul iniţializează o stare, ea este 
-în modul RUNNING. În acest mod starea primeşte toate evenimentele editorului. 
-Decizia de a părăsi această stare se poate lua după două criterii. a) La 
-discreţia stării în sine, prin trecerea în modul TERMINATED sau b) la discreţia 
-editorului, în momentul sosirii unei noi stări FRESH, cînd starea curentă trece 
-în SLEEPING. \\
+SLEEPING. \\
+
+\hline RUNNING & După ce editorul iniţializează o stare, ea este în modul 
+RUNNING. În acest mod starea primeşte toate evenimentele editorului. Decizia de 
+a părăsi această stare se poate lua după două criterii. a) La discreţia stării 
+în sine, prin trecerea în modul TERMINATED sau b) la discreţia editorului, în 
+momentul sosirii unei noi stări FRESH, cînd starea curentă trece în SLEEPING. \\
+
 \hline SLEEPING & Toate stările care au fost oprite de editor la apariţia unei 
 stări noi se adună într-o stivă şi modul lor este trecut în SLEEPING. Ele pot 
 sta în acest mod un timp nedefinit şi pot să nu-l părăsească niciodată. Ele pot 
@@ -261,10 +281,13 @@ tratare a tranziţiei în RUNNING cît şi rutina de tratare în starea TERMINAT
 trebuie să aibă în vedere posibilitatea rulării de mai multe ori pentru aceeaşi 
 stare (i.e. să nu trateze iniţializări, care se fac în mod normal în starea 
 FRESH) \\
+
 \hline TERMINATED & Odată ce starea consideră că şi-a încheiat activitatea, ea 
 poate alege să treacă în modul TERMINATED. Odată ajunsă în acest mod, starea va 
 fi deînregistrată din lista de captare a evenimentelor editorului şi va fi 
-scoasă permanent din lista stărilor editorului.\\ \hline
+scoasă permanent din lista stărilor editorului.\\
+
+\hline
 \end{tabular}
 \end{table}
 
@@ -287,8 +310,10 @@ el este tras cu mausul pe suprafaţa editorului. \\
 selectare a unui Colţ. Dacă selecţia s-a făcut fără ca mausul să fie în 
 vecinătatea colţului, atunci starea se termină imediat, altfel se iniţiază 
 DragCornerState. \\ \hline \multicolumn{2}{|l|}{\Large \textbf{Ziduri}} \\
-\hline PickupCornerState & Modelează operaţiunea de alegere a unui colţ în \\
-\hline
+\hline PickupCornerState & Modelează operaţiunea de alegere a unui colţ în
+cadrul sarcinii de adăugare a unui zid.
+
+\\ \hline
 \end{tabular}
 \end{table}
 
@@ -298,18 +323,19 @@ DragCornerState. \\ \hline \multicolumn{2}{|l|}{\Large \textbf{Ziduri}} \\
 
 Editorul OpenGL este optimizat pentru motorul asincron de sincronizare, 
 desenare şi tratare a evenimentelor ale aplicaţiilor Eclipse RCP. Deşi vom 
-intra în detalii în capitolul următor, amintim doar aici că într-o singură 
-aplicaţie se pot edita oricîte Modele de Lucru, fără nici un impact asupra 
-unuia dintre ele şi fără interferenţe de nici un fel atît în logica modelului 
-cît şi în ciclul de randare.
+intra în detalii în capitolul \ref{chapter:impl}, amintim doar aici că într-o 
+singură aplicaţie se pot edita oricîte Modele de Lucru, fără nici un impact 
+asupra unuia dintre ele şi fără interferenţe de nici un fel atît în logica 
+modelului cît şi în ciclul de randare.
 
 \section{Vizualizarea 3D OpenGL}
+\label{section:view}
 
-După cum am văzut în secţiunea anterioară, Editorul OpenGL serveşte la 
-manipularea Modelului de Lucru (\ref{define:model}) şi a proprietăţilor 
-diverselor Primitive (\ref{define:primitive}) din acest Model. Sarcina 
-vizualizării tridimensionale a modelului cade în măinile componentei despre 
-care vom discuta în această secţiune.
+După cum am văzut în secţiunea \ref{section:opengl-editor}, Editorul OpenGL 
+serveşte la manipularea Modelului de Lucru (\ref{define:model}) şi a 
+proprietăţilor diverselor Primitive (\ref{define:primitive}) din acest Model. 
+Sarcina vizualizării tridimensionale a modelului cade în măinile componentei 
+despre care vom discuta în această secţiune.
 
 Diferenţa principală dintre Editor şi Vizualizare este că cea din urmă nu 
 permite interacţiunea cu proprietăţile modelului, ci doar proiecţia lor într-o 

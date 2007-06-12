@@ -12,10 +12,9 @@
    height="877.81244"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.45.1"
-   sodipodi:docbase="C:\Documents and Settings\yu87t3fk\workspace\org.opencad.core\doc\figures"
+   inkscape:version="0.44.1"
+   sodipodi:docbase="/home/sgeorgian/workspace/Lucrare de Diploma/figures"
    sodipodi:docname="drawing.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape"
    version="1.0">
   <defs
      id="defs4">
@@ -88,14 +87,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="219.73274"
-     inkscape:cy="630.2367"
+     inkscape:cx="353.82473"
+     inkscape:cy="544.01455"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     inkscape:window-width="1280"
+     inkscape:window-width="1278"
      inkscape:window-height="968"
      inkscape:window-x="0"
-     inkscape:window-y="22" />
+     inkscape:window-y="7" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -113,7 +112,7 @@
      id="layer1"
      transform="translate(-84.352815,-84.136041)">
     <rect
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:2,4;stroke-dashoffset:0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:3,3;stroke-dashoffset:0"
        id="rect2162"
        width="565.66852"
        height="649.51123"
@@ -130,188 +129,177 @@
          id="tspan3136"
          x="122.22846"
          y="139.18428">Model</tspan></text>
-    <g
-       id="g5157"
-       transform="translate(1.0819422,2.8137265e-8)">
-      <path
-         transform="translate(84.352815,84.136041)"
-         d="M 88.893425 135.35031 A 30.304577 30.304577 0 1 1  28.284271,135.35031 A 30.304577 30.304577 0 1 1  88.893425 135.35031 z"
-         sodipodi:ry="30.304577"
-         sodipodi:rx="30.304577"
-         sodipodi:cy="135.35031"
-         sodipodi:cx="58.588848"
-         id="path2160"
-         style="fill:#ff6600;fill-opacity:0.29803922;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         sodipodi:type="arc" />
-      <text
-         sodipodi:linespacing="125%"
-         id="text4103"
+    <path
+       sodipodi:type="arc"
+       style="fill:#ffdfca;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="path2160"
+       sodipodi:cx="58.588848"
+       sodipodi:cy="135.35031"
+       sodipodi:rx="30.304577"
+       sodipodi:ry="30.304577"
+       d="M 88.893425 135.35031 A 30.304577 30.304577 0 1 1  28.284271,135.35031 A 30.304577 30.304577 0 1 1  88.893425 135.35031 z"
+       transform="translate(85.43476,84.13604)" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:black;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+       x="122.40495"
+       y="222.9761"
+       id="text4103"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4105"
+         x="122.40495"
          y="222.9761"
-         x="121.32301"
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
-         xml:space="preserve"><tspan
-           style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Constantia"
-           y="222.9761"
-           x="121.32301"
-           id="tspan4105"
-           sodipodi:role="line">Colţuri</tspan></text>
-    </g>
-    <g
-       id="g5152"
-       transform="translate(-20.364114,0.5050905)">
-      <rect
-         y="208.01053"
-         x="214.29836"
-         height="25.982077"
-         width="147.20038"
-         id="rect5080"
-         style="fill:#ff6600;fill-opacity:0.30065361;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         sodipodi:linespacing="125%"
-         id="text5082"
-         y="226.05675"
-         x="269.1749"
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
-         xml:space="preserve"><tspan
-           y="226.05675"
-           x="269.1749"
-           id="tspan5084"
-           sodipodi:role="line">Ziduri</tspan></text>
-    </g>
-    <g
-       id="g6574">
-      <rect
-         rx="34.423355"
-         y="260.90262"
-         x="96.474648"
-         height="446.48743"
-         width="264.65997"
-         id="rect5098"
-         style="fill:#ffb900;fill-opacity:0.29803922;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         sodipodi:linespacing="125%"
-         id="text5100"
-         y="291.21603"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Constantia">Colţuri</tspan></text>
+    <rect
+       style="fill:#ffe9cd;fill-opacity:0.97093022;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect5080"
+       width="147.20038"
+       height="25.982077"
+       x="193.93425"
+       y="208.51562" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:black;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+       x="248.81079"
+       y="226.56184"
+       id="text5082"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5084"
+         x="248.81079"
+         y="226.56184">Ziduri</tspan></text>
+    <rect
+       style="fill:#fff1ca;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect5098"
+       width="264.65997"
+       height="446.48743"
+       x="96.474648"
+       y="260.90262"
+       rx="34.423355" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:black;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+       x="118.09844"
+       y="291.21603"
+       id="text5100"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5102"
          x="118.09844"
-         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+         y="291.21603">Caracteristici</tspan></text>
+    <g
+       id="g5207"
+       transform="translate(43.94163,20.66701)">
+      <rect
+         y="317.47116"
+         x="125.76907"
+         height="32.324879"
+         width="118.18785"
+         id="rect5162"
+         style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text5164"
+         y="337.9881"
+         x="162.03365"
+         style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:black;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
          xml:space="preserve"><tspan
-           y="291.21603"
-           x="118.09844"
-           id="tspan5102"
-           sodipodi:role="line">Caracteristici</tspan></text>
-      <g
-         transform="translate(43.941634,20.667011)"
-         id="g5207">
-        <rect
-           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5162"
-           width="118.18785"
-           height="32.324879"
-           x="125.76907"
-           y="317.47116" />
-        <text
-           xml:space="preserve"
-           style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
-           x="162.03365"
            y="337.9881"
-           id="text5164"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan5166"
-             x="162.03365"
-             y="337.9881">Ferestre</tspan></text>
-      </g>
-      <g
-         transform="translate(45.456854,40.061924)"
-         id="g5228">
-        <rect
-           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5168"
-           width="118.18785"
-           height="32.324879"
-           x="124.25385"
-           y="369.99908" />
-        <text
-           xml:space="preserve"
-           style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
-           x="174.00085"
+           x="162.03365"
+           id="tspan5166"
+           sodipodi:role="line">Ferestre</tspan></text>
+    </g>
+    <g
+       id="g5228"
+       transform="translate(45.45685,40.06192)">
+      <rect
+         y="369.99908"
+         x="124.25385"
+         height="32.324879"
+         width="118.18785"
+         id="rect5168"
+         style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text5170"
+         y="389.10684"
+         x="174.00085"
+         style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:black;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+         xml:space="preserve"><tspan
            y="389.10684"
-           id="text5170"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan5172"
-             x="174.00085"
-             y="389.10684">Uşi</tspan></text>
-      </g>
-      <g
-         transform="translate(45.45687,62.487323)"
-         id="g5202">
-        <rect
-           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5174"
-           width="118.18785"
-           height="32.324879"
-           x="124.25384"
-           y="419.49655" />
-        <text
-           xml:space="preserve"
-           style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
-           x="152.82823"
+           x="174.00085"
+           id="tspan5172"
+           sodipodi:role="line">Uşi</tspan></text>
+    </g>
+    <g
+       id="g5202"
+       transform="translate(45.45687,62.48732)">
+      <rect
+         y="419.49655"
+         x="124.25384"
+         height="32.324879"
+         width="118.18785"
+         id="rect5174"
+         style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text5176"
+         y="440.35309"
+         x="152.82823"
+         style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:black;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+         xml:space="preserve"><tspan
            y="440.35309"
-           id="text5176"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan5178"
-             x="152.82823"
-             y="440.35309">Deschideri</tspan></text>
-      </g>
-      <g
-         transform="translate(46.467017,80.872074)"
-         id="g5197">
-        <rect
-           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5180"
-           width="118.18785"
-           height="32.324879"
-           x="123.24369"
-           y="473.03467" />
-        <text
-           xml:space="preserve"
-           style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
-           x="160.28268"
+           x="152.82823"
+           id="tspan5178"
+           sodipodi:role="line">Deschideri</tspan></text>
+    </g>
+    <g
+       id="g5197"
+       transform="translate(46.46702,80.87207)">
+      <rect
+         y="473.03467"
+         x="123.24369"
+         height="32.324879"
+         width="118.18785"
+         id="rect5180"
+         style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text5182"
+         y="492.17099"
+         x="160.28268"
+         style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:black;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+         xml:space="preserve"><tspan
            y="492.17099"
-           id="text5182"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan5184"
-             x="160.28268"
-             y="492.17099">Cavităţi</tspan></text>
-      </g>
-      <g
-         transform="translate(45.456854,102.28731)"
-         id="g5192">
-        <rect
-           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5186"
-           width="118.18785"
-           height="32.324879"
-           x="124.25385"
-           y="523.5423" />
-        <text
-           xml:space="preserve"
-           style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
-           x="158.07458"
+           x="160.28268"
+           id="tspan5184"
+           sodipodi:role="line">Cavităţi</tspan></text>
+    </g>
+    <g
+       id="g5192"
+       transform="translate(45.45685,102.2873)">
+      <rect
+         y="523.5423"
+         x="124.25385"
+         height="32.324879"
+         width="118.18785"
+         id="rect5186"
+         style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text5188"
+         y="543.7323"
+         x="158.07458"
+         style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:black;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+         xml:space="preserve"><tspan
            y="543.7323"
-           id="text5188"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan5190"
-             x="158.07458"
-             y="543.7323">Îngroşări</tspan></text>
-      </g>
+           x="158.07458"
+           id="tspan5190"
+           sodipodi:role="line">Îngroşări</tspan></text>
     </g>
     <rect
-       style="fill:#ffb9b3;fill-opacity:0.37254903;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#f8e0f8;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect5233"
        width="264.65997"
        height="593.96973"

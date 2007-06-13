@@ -31,6 +31,16 @@
               style="push"
               toolbarPath="GLEditor"/>
      </editorContribution>
+     <editorContribution
+           id="org.opencad.core.addDoorContribution"
+           targetID="org.opencad.core.editors.GLEditor">
+        <action
+              class="org.opencad.modelling.door.AddDoorActionDelegate"
+              id="org.opencad.core.addDoorAction"
+              label="New Door"
+              style="push"
+              toolbarPath="GLEditor"/>
+     </editorContribution>
   </extension>
   <extension
         id="product"

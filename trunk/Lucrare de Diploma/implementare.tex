@@ -7,6 +7,10 @@ de Lucru (\ref{define:model})  şi funcţionarea componentelor de interfaţă,
 editorul OpenGL şi Vizualizarea 3D, prezentate în secţiunile
 \ref{section:opengl-editor}, respectiv \ref{section:view}.
 
+Vom trece în revistă, de asemenea, principalele conexiuni la nivel de cod între
+componentele aplicaţiei, şi modul de interacţiune al principalelor module
+prezentate în Capitolul \ref{chapter:arh}.
+
 \section{Structura claselor}
 
 Fiecare dintre componentele arhitecturale descrise la capitolul 
@@ -14,14 +18,62 @@ Fiecare dintre componentele arhitecturale descrise la capitolul
 clase bine definite şi bine separate ca logică şi structură de celelalte 
 componente ale aplicaţiei.
 
+Există o diviziune clară între componentele abstracte, definitorii ale
+aplicaţiei noastre şi componentele materializate, implementările concrete. Toate
+abstracţiile făcute aici reprezintă forme de simplificare a interacţiunilor
+între obiecte, de marcare a anumitor comportamente şi separarea sarcinilor de
+dezvoltare în unităţi logice ce pot fi urmărite pe direcţia mai multor module de
+cod ale programului.
+
 \subsection{Modelul de Lucru}
 
+\subsubsection{Model}
+Există o clasă specială pentru concretizarea conceptului de
+Model (\ref{define:model}). Responsabilităţile modelului cad în a fi un suport
+logic cît şi structural pentru obiectele ce materializează componentele
+modelului proiectat de către utilizator. Pentru asta, clasa model va şti
+întotdeauna diverse informaţii vitale funcţionării editorului.
+
+Modelul în sine implementează aspectele de desenare pentru
+proiectate (\ref{define:editorRender}) şi de desenare reală
+(\ref{define:realRender}). Reutilizarea abstracţiei despre care vom vorbi
+imediat la Primitive conferă coerenţă şi creşte şi mai mult nivelul de
+abstactizare la care se poate lucra cu această aplicaţie.
+
+Îndeplinirea sarcinilor de editare pentru proiectare şi de desenare reală se
+rezumă la apelarea aceloraşi rutine pentru toate componentele modelului. Pentru
+a reţine toate componentele, clasa de faţă reţine tabele de căutare pentru toate
+componentele care aleg să fie înregistrate în model.
+
+Pot exista primitive care nu sunt desenate direct de către model, în speţă este
+cazul Caracteristicilor (\ref{define:feature}). Acestea sunt desenate de
+containerul lor, în speţă Zidul care le conţine.
+
+Modelul serveşte şi ca suport pentru persistenţa datelor. Salvarea datelor în 
+formatul specific aplicaţiei de faţă reprezintă varianta serializată a clasei
+model. De aceea, este important ca toate datele care sunt necesare salvării
+stării modelului să fie prezente cumva în legătură cu modelul, altfel există
+şansa ca ele să nu fie persistate de către aplicaţie în momentul în care se
+salvează în fişier documentul de lucru.
+
+Modelul serveşte şi ca suport sumar de reţinere de stare pentru Editorul OpenGL.
+El va păstra în model selecţia curentă, cît şi starea transientă a unora dintre
+componente, cum ar fi dacă ele sunt navigate de către maus la momentul respectiv
+sau nu.
+
+Aceasta se realizează prin păstrarea informaţiei despre elementele ce pot fi
+navigate (i.e. care implementează aspectul de Navigabilitate
+(\ref{define:hoverable})) într-o tabelă de căutare specială. Editorul va cere
+reevaluarea deciziei de navigabiltiate pentru toate componentele din această
+listă în momentul în care mausul îşi modifică poziţia în urma acţiunii
+utilizatorului.
+
 \subsubsection{Primitive}
-Clasa de bază a modelului de lucru este clasa Primitive. Desigur, este o
-materializare a conceptului de Primitivă (\ref{define:primitive}). Aceasta este o clasă 
-abstractă care nu introduce nici un comportament singular, însă marchează 
-nevoie de implementare pentru intefeţele EditorRenderable şi RealRenderable, 
-necesare celor două vizualizări, cum vom vedea la secţiunile 
+Clasa de bază a modelului de lucru este clasa Primitive. Desigur, este o 
+materializare a conceptului de Primitivă (\ref{define:primitive}). Aceasta este 
+o clasă abstractă care nu introduce nici un comportament singular, însă 
+marchează nevoie de implementare pentru intefeţele EditorRenderable şi 
+RealRenderable, necesare celor două vizualizări, cum vom vedea la secţiunile 
 \ref{section:impl-editor} şi \ref{section:impl-view}.
 
 Din clasa Primitive sunt extinse clasele concrete Corner, Wall şi
@@ -33,6 +85,13 @@ Tot din clasa Primitive se desprinde şi clasa WallFeature, o materializare a
 conceptului de Caracterstică de Ziduri (\ref{define:feature}). Din ea la rîndul
 ei se concretizează clasele Door, Window, Inset, Outset, Tunnel, implementări
 ale diverselor caracteristici amintite în \ref{section:primitives}.
+
+Deşi este doar o clasă de marcaj, Primitive prezintă un rol crucial în cadrul
+arhitecturii aplicaţiei noastre. Întreaga interacţiune pe care o au editorul şi
+vizualizarea 3D cu modelul se face prin această abstracţie. Tot ce are nevoie să
+ştie modelul despre orice componentă a sa este că extinde clasa Primitive. Cu
+această minimă funcţionalitate, se pot implementa toate operaţiile de desenare
+necesare interfeţei aplicaţiei de faţă.
 
 \subsubsection{Corner}
 
@@ -46,3 +105,11 @@ Clasa Corner, pe lîngă implementarea comportamentului de desenare pentru
 proiectate (\ref{define:editorRender}) şi de desenare reală
 (\ref{define:realRender}), aderă şi la comportamentele de Selectabilitate
 (\ref{define:selectable}) şi de Navigabilitate (\ref{define:hoverable}).
+
+Ironic este însă că deşi joacă un rol atît de important în poziţionarea 
+obiectelor în scenă, şi interacţionează mai mult decît orice altă componentă cu 
+utilizatorul, colţurile nu au reprezentare specifică în editor. Deşi există un 
+marcaj pentru starea de selecţie a colţului, în rest imaginea colţului este de 
+fapt inexistentă. Îmbinarea lor cu alte componente şi efectul care îl au asupra 
+Zidurilor îi oferă o reprezentare sugestivă şi pot fi controlate astfel de 
+către utilizator.

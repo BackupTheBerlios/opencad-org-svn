@@ -38,7 +38,7 @@ acţiunilor, preferinţelor şi multe altele. \\
 \end{tabular}
 \end{table}
 
-\subsection{Eclipse Runtime}
+\subsection{Eclipse Runtime. Equinox}
 Această componentă a Eclipse RCP este cea mai abstractă şi în acelaşi timp cea 
 mai puternică componentă a sa. Structura sa de bază este descrisă în Tabela 
 \ref{table:runtimestruct}.
@@ -62,14 +62,59 @@ fişierelor \\
 \end{tabular}
 \end{table}
 
+\begin{quotation}
 Equinox este o implementare a specificaţiilor OSGi R4
 \footnote{\url{http://osgi.org/osgi_technology/download_specs.asp?section=2}}
 o serie de plugin-uri care implementează diverse servicii opţionale OSGi şi 
 alte infrastructuri pentru rularea sistemelor bazate pe OSGi. \cite{equinox}
+\end{quotation}
 
+\begin{quotation}
 Equinox produce, printre alte lucruri, implementarea OSGi folosită de Eclipse 
 RCP (şi celelalte proiecte bazate pe Eclipse) ca un model de componente.
 \cite{equinoxfaq}
+\end{quotation}
+
+\begin{quotation}
+OSGi este un framework care implementează un model de componente complet şi 
+dinamic -- o componentă ce lipseşte din mediile Java. Aplicaţiile sau 
+componentele (ce sunt sub formă de seturi de produse) pot fi instalate de la 
+distanţă, oprite, pornite, aduse la zi şi dezininstalate fără a fi nevoie de 
+repornirea aplicaţiei - administrarea claselor şi pachetelor Java este 
+specificată în detaliu. Administrarea ciclului de viaţă este realizat prin 
+interfeţe de aplicaţii care permit descărcarea la distanţă a politicilor de 
+administrare. Registrul de servicii permite seturilor de aplicaţii să detecteze 
+noi servicii, să detecteze dispariţia unor servicii şi adaptarea în consecinţă.
+
+La început, proiectul s-a concentrat mai mult pe interfeţe de servicii dar s-a 
+dovedit că aplicabilitatea este mult mai largă. Specificaţiile OSGi sunt 
+folosite astăzi în aplicaţii pornind de la telefoane mobile pînă la Eclipse 
+IDE. Alte aplicaţii includ automobile, automatizare industrială, automatizare 
+în construcţii, PDA-uri, super-calculatoare, divertisment, administrarea 
+flotelor şi servre de aplicaţii.
+
+Specificaţia OSGi este creată de membri într-un proces deschis şi publicate 
+fără taxe sub o licenţă specifică. Alianţa OSGi are un program de înscrieri 
+care este deschis doar membrilor. Din ianuarie 2007, lista implementatorilor 
+OSGi recunoscuţi conţinea 3 intrări.
+\cite{osgiwiki}
+\end{quotation}
+
+Equinox este o implementare a specificaţiilor în versiunea 
+R4, care conţine, printre altele\cite{osgiwiki}:
+
+\begin{itemize}
+  \item Noi capacităţi de modularizare puternince ce oferă încapsulare avansată 
+  a serviciilor reţea care pot împărţi o singură maşină virtuală\footnote{O 
+  maşină virtuală Java reprezintă o aplicaţie ce funcţionează ca un container 
+  pentru toate aplicaţiile Java, oferind toate facilităţile unei maşini de 
+  calcul ce ar putea executa nativ instrucţiuni Java.}.
+  \item Partajarea claselor modularizată şi ascunderea detaliilor de 
+  implementare.
+  \item Tratarea avansată a diferitelor versiuni ale aceleaşi clase astfel 
+  încît aplicaţiile noi pot fi executate în paralele cu cele noi în aceeaşi 
+  maşină virtuală.
+\end{itemize}
 
 \subsection{SWT}
 SWT\footnote{abrev. \textit{Standard Widget Toolkit}} este una din cele mai 
@@ -126,7 +171,16 @@ de caractere, text, dialog-uri, framework-uri pentru preferinţe şi wizard-uri
 \cite{jface}
 
 Pachete principale din JFace, care oferă funcţionalitatea de bază a tehnologiei 
-sunt prezentate în Tabela \ref{table:jfacestruct}
+sunt prezentate în Tabela \ref{table:jfacestruct}.
+
+JFace reprezintă un strat de abstractizare suplimentară faţă de SWT, ce
+îmbunătăţeşte performanţa şi timpul de dezvoltare a interfeţelor vizuale
+dezvoltate cu aceste tehnologii. JFace reprezintă o completare importantă a
+setului SWT, ce aduce tehnologia dezvoltată de Eclipse la acelaşi nivel cu alte
+framework-uri similare, cum ar fi .net Framework. Importanţa deosebită a acestei
+extensii o reprezintă separarea totală de librăriile AWT şi SWING, care nu mai
+sunt necesare nici măcar pentru administrarea imaginilor sau a fonturilor din
+sistem.
 
 \begin{table}[htb]
 \caption{Structura JFace \cite{jface-art} \label{table:jfacestruct}}
@@ -165,9 +219,18 @@ Ca termen strict, se referă la fereastra care conţine întreaga aplicaţie.
 Defineşte un container abstract pentru toate elementele de interfaţă din 
 aplicaţia dezvoltată cu Eclipse RCP.
 
+Funcţionalitatea sa programatică este să răspundă nevoilor abstrace, care nu
+sunt legate în mod specific de interfaţa vizuală, deservind însă desigur şi
+scopurilor ferestrei pe care o conţine.
+
 \subsubsection{Pagina}
 Reprezintă, în mod intuitiv,  toată partea ferestrei care nu conţine barele de 
 unelte şi meniul.
+
+Pagina reprezintă o colecţie de Părţi şi conţine în funcţionalitatea sa un
+algoritm de gruparea a părţilor. O pagină reprezintă containerul atît fizic cît
+şi la nivel al logicii aplicaţiei a tuturor părţilor. Ea comunică diverse
+informaţii între aceste părţi pentru a le ajuta să-şi sincronizeze conţinutul.
 
 \subsubsection{Perspective}
 Folosesc pentru organizarea conţinutului într-o Pagină. O perspectivă defineşte 
@@ -176,7 +239,13 @@ o sarcină a utilizatorului. Perspectivele pot fi schimbate de către
 utilizatorul. Modificarea Perspectivei afectează doar Vizualizările nu şi 
 Editoarele. \cite{eclipsehelp}
 
-\subsubsection{Vizualizările şi Editoarele}
+\subsubsection{Părţi. Vizualizările şi Editoarele}
+Părţile sunt o abstracţie a editoarelor şi vizualizărilor, privite prin
+perspectiva lor comună de componente ale unei pagini. Părţile au în comun o
+serie largă de proprietăţi ce le ajută să comunice între ele la acest nivel
+abstract la care există nevoia de sincronizare, de informare asupra stării
+diverselor componente, etc.
+
 Reprezintă extensiile aduse de programator într-o aplicaţie Eclipse RCP. Un 
 editor urmăreşte modelul unei maşini de stări în sensul că el are o etapă de 
 deschidere, editare şi o etapă de salvare.

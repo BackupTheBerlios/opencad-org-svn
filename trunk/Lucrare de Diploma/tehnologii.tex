@@ -209,6 +209,7 @@ afişarea şi editarea documentelor text.\\
 \end{table}
 
 \subsection{Workbench}
+\label{section:workbench}
 Această parte a Eclipse RCP reprezintă o colecţie largă de clase şi interfeţe 
 pentru construirea de interfeţe utilizator complexe.
 
@@ -562,7 +563,19 @@ nu era satisfăcătoare.
 \cite{swtawtswing}
 \end{quotation}
 
-\subsection{SWING}
+Concluzia noastră despre AWT este că nu oferă destule facilităţi pentru
+dezvoltarea aplicaţiilor client de mare anvergură. De asemenea, aspectul
+aplicaţiilor, dat fiind setul redus de componente, este oarecum plictisitor şi
+monoton, nereuşind să impresioneze prin valenţe comerciale.
+
+În \cite{awtswing} vedem cum SWT se aproprie mult mai mult de nevoile
+dezvoltatorilor de astăzi decît AWT, deşi acessta din urmă rămîne soluţia ce
+respectă cel mai bine principiile platformei Java. Tot în \cite{awtswing} vedem
+cum designul SWT porneşte de la premizele AWT şi construişte un sistem care
+încearcă să evite tocmai nejunsurile primului toolkit grafic ce a existat pentru
+Java.
+
+\subsubsection{SWING}
 
 \begin{quotation}
 Java Swing, parte a JFC\footnote{n.a. Java Foundation Classes, setul de clase
@@ -596,3 +609,64 @@ Aceasta înseamnă că e nevoie de o maşină mai puternică pentru a-l executa 
 are nevoie SWT sau AWT.
 \cite{swtawtswing}
 \end{quotation}
+
+Deşi este considerat de mulţi autor ca un lucru benefic, cum putem vedea şi în
+\cite{killswt}, capacitatea SWING de oferi un aspect unic pe orice sistem de
+operare, însă unul diferit de cele ale sistemelor gazdă\footnote{Deşi în
+\cite{killswt} vedem că există modalităţi de emulare al aspectului sistemului
+gazdă}, noi considerăm că asemănarea cu aplicaţiile client faţă de care
+utilizatorul s-a obişnuit oferă o curbă de învăţare mai rapidă, şi o acceptare
+pe termen lung a programului ca ceva ``natural'', care se potriveşte perfect cu
+celelalte aplicaţii cu care utilizatorul s-a obişnuit.
+
+\subsubsection{SWT}
+
+\begin{quotation}
+
+SWT este un toolkit de interfaţă utilizator comparabil cu AWT. JFace este un set
+de componente avansate şi servicii de asistenţă menite pentru construirea de
+interfeţe cu SWT mai uşoară. Cei care au construit SWT au învăţat din
+implementările AWT şi Swing şi au încercat să construiască un sistem care are
+avantajele ambelor fără să aibă dezavantajele lor. În multe privinţe, ei au
+reuşit.
+
+SWT seamănă mult cu AWT în sensul că este bazat pe pe o implementare cu
+componente corespondente. Depăşeşte problema divizorului comun a AWT prin
+definirea unui set de componente potrivite pentru aplicaţii de birou şi de
+dezvoltare software şi apoi, în funcţie de fiecare sistem în parte, creînd
+variante emulate (aidoma cu Swing) pentru acele controale indisponibile pe acel
+sistem. Pentru multe dintre sistemele moderne, aproape toate controalele sunt
+bazate pe corespondenţii lor nativi. Aceasta înseamnă că o interfaţă bazată pe
+SWT are aspectul şi comportamentul sistemului gazdă, cît şi performanţa lui.
+Aceasta evită cele mai multe dintre probleme lui AWT şi Swing. Unele sisteme au
+versiuni mai primitive ale anumitor controale şi atunci SWT vine cu versiuni
+îmbunătăţite şi uneori emulate, oferindu-le un comportament mai apropiat de
+cultura utilizatorilor.
+
+SWT este difeit de AWT în modul în care funcţionează corespondenţi. În SWT,
+corespondenţii sunt doar o faţadă pentru controalele native. în AWT,
+corespondenţii pot oferi servicii pentru minimizarea diferenţelor dintre sisteme
+(aici AWT a avut probleme de comportament). Aceasta înseamnă că aplicaţiile SWT
+sunt de fapt aplicaţii pe sistemul gazdă, cu toate părţile bune şi părţile rele.
+Aceasta înseamnă, de asemenea, că nu respectă dezideratul ``scrie odată, rulează
+oriunde'', ci este mai mult o soluţie ``scrie odată, testează peste tot''. Cu
+toate astea, SWT este remarcabil în privinţa portabilităţii, neajungînd însă la
+potenţialul Swing.
+\cite{swtawtswing}
+\end{quotation}
+
+Astfel ajungem şi la concluzia acestei comparaţii, şi anume că cea mai
+importantă caracteristică a SWT este faptul că este un mod de a realiza
+aplicaţii native pe un sistem de operare în Java. Mai mult, acelaşi cod poate
+servi dezvoltării pe mai multe sisteme de operare în acelaşi timp.  Aspectul
+aplicaţiilor SWT este remarcabil, diferind la minim de orice alte aplicaţii
+native.
+
+Legătura cu sistemul de operare nativ este foarte puternică şi ``sănătoasă'' în
+acelaşi timp, oferind facilităţi deosebite greu de implementat cu alte
+toolkit-uri (cum ar fi drag and drop).
+
+Vom spune că, deşi Swing este un candidat foarte bun pentru implementarea de
+aplicaţii desktop în Java, existenţa lui JFace şi a întregii Eclipse RCP a făcut
+din SWT un candidat ideal, şi vedem că într-adevăr folosirea acestei tehnologii
+a avut roade.

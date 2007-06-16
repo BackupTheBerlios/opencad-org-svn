@@ -179,22 +179,6 @@ Modelului de Lucru}
 \end{center}
 \end{figure}
 
-
-\section{Editorul OpenGL}
-\label{section:opengl-editor}
-
-Înainte de a fi un editor pentru Modelul de Lucru (\ref{define:model}), 
-editorul OpenGL dezvoltat de noi este un punct de plecare foarte bun pentru 
-orice editor care necesită folosirea facilităţilor OpenGL. Vom încerca să 
-descriem succint arhitectura editorului, evidenţiind caracteristicile generice 
-cît şi particularizările de suprafaţă care au fost necesare pentru integrarea 
-cu funcţionarea dorită.
-
-Editorul este în principiu o suprafaţă de desenare OpenGL cu aspect 
-bidimensional ce poate interacţiona cu utilizatorul prin intermediul interfeţei 
-oferite de RCP, adică evenimentele ale mausului, ale tastaturii, ale 
-vizualizărilor de structură şi de proprietăţi, despre care vom aminti mai jos.
-
 \subsection{Aspecte ale modelului}
 
 \begin{definition}
@@ -241,7 +225,27 @@ nivelul editorului, avînd astfel aspectul de \textbf{Navigabilitate}.
 \end{definition}
 
 Multe Primitive folosesc această proprietate pentru a-şi schimba starea de 
-selectare.
+selectare. Fiecare Primitivă selectabilă defineşte o stare proprie în care
+editorul va trece în momentul în care primitiva respectivă este selectată. Dacă
+primitiva nu defineşte o astfel de stare, atunci editorul rămîne în starea de
+navigare.
+
+
+\section{Editorul OpenGL}
+\label{section:opengl-editor}
+
+Înainte de a fi un editor pentru Modelul de Lucru (\ref{define:model}), 
+editorul OpenGL dezvoltat de noi este un punct de plecare foarte bun pentru 
+orice editor care necesită folosirea facilităţilor OpenGL. Vom încerca să 
+descriem succint arhitectura editorului, evidenţiind caracteristicile generice 
+cît şi particularizările de suprafaţă care au fost necesare pentru integrarea 
+cu funcţionarea dorită.
+
+Editorul este în principiu o suprafaţă de desenare OpenGL cu aspect 
+bidimensional ce poate interacţiona cu utilizatorul prin intermediul interfeţei 
+oferite de RCP, adică evenimentele ale mausului, ale tastaturii, ale 
+vizualizărilor de structură şi de proprietăţi, despre care vom aminti mai jos.
+
 
 \subsection{Editorul ca maşină de stări}
 
@@ -306,33 +310,27 @@ adăuga şterge sau schimba diverse proprietăţi ale primitivelor aflate în mo
 Din acest motiv, stările sunt strict asociate cu diversele tipuri de primitive 
 din model.
 
-De exemplu, colţurile introduc o serie de stări pentru a le modela toate 
-operaţiunile posibile în cadrul editorului. Ele pot fi enumerate după cum am 
-arătat în Tabela \cite{table:corner-states}.
+Există o stare nativă a editorului, anume starea de navigare. Este singura stare
+definită aici care nu se termină niciodată, şi este pornită automat de către
+editor la iniţializarea sa. Starea de navigare este responsabilă de
+administrarea diverselor proprietăţi ale obiectelor, ea fiind cea care ia
+decizia -- şi în acelaşi timp informează -- fiecare proprietate de starea sa de
+acoperire cu mausul. De asemenea, ea porneşte mecanismul de selecate a
+obiectelor şi de trecere în starea predefinită de fiecare obiect care poate fi
+selectat dintr-o scenă.
 
-\begin{table}[htp] \caption{Stările ce modelează operaţiile posibile pentru 
-diverse Primitive \label{table:corner-states}}
-\begin{tabular}{|\col{0.23}|\col{0.73}|}
-\hline \multicolumn{2}{|l|}{\Large \textbf{Colţuri}} \\
-\hline DragCornerState & Modelează modificarea poziţiei unui colţ atunci cînd 
-el este tras cu mausul pe suprafaţa editorului. \\
-\hline SelectCornerState & Implementează comportamentul operaţiunii de 
-selectare a unui Colţ. Dacă selecţia s-a făcut fără ca mausul să fie în 
-vecinătatea colţului, atunci starea se termină imediat, altfel se iniţiază 
-DragCornerState.\\
-
-\hline PickupCornerState & Modelează operaţiunea de alegere a unui colţ în
-cadrul sarcinii de adăugare a unui zid.
-
-\\\hline
-
-\multicolumn{2}{|l|}{\Large \textbf{Ziduri}} \\
-
-\\ \hline
-\end{tabular}
-\end{table}
-
-% TODO Adaugă toate stările posibile în descriere
+Starea de selectare este o stare specială în care editorul trece atunci cînd un
+obiect este selectat cu ajutorul diverselor metode puse la dispoziţie de Eclipse
+RCP. Starea de selectare este folosită de Colţuri, spre exemplu, pentru a iniţia
+procedura de transformare prin deplasare a mausului, mişcare prin care poziţia
+Colţului este modificată. Starea de selecţie a colţului trebuie să aibă în
+vedere -- precum toate celelalte stări de selecţie -- că selecţia poate avea mai
+multe surse şi comportamentul său predefinit -- de a transporta cu ajutorul
+mausului colţul -- nu este valid decît in cazul selecţiei cu ajutorul mausului.
+Această discriminare se face cu ajutorul stării de acoperire cu mausul a
+Colţului respectiv\footnote{Dacă mausul nu este deasupra componentei, înseamnă
+că selecţia avut loc prin alte mecanisme, şi atunci se anulează procedura de
+mutare a colţului}.
 
 \subsection{Capacităţi asincrone}
 
@@ -386,3 +384,37 @@ dat.
 De asemenea, Vizualizarea 3D are capacitatea de a reprezenta orice modificare
 are loc în Modelul de Lucru în timp real, în momentul în care datele parţiale
 sunt salvate în Model.
+
+\section{Vizualizarea structurii modelului}
+
+Eclipse RCP oferă o vizualizare predefinită pentru descrierea structurii 
+conţinutului unui editor\footnote{cunoscută în documentaţia Eclipse ca 
+\textit{Content Outline View}}. În cazul de faţă, conţinutul logic al 
+editorului îl reprezintă tocmai modelul, şi astfel o reprezentare a structurii 
+modelului a fost furnizată pentru această vizualizare.
+
+În cadrul acestei vizualizări utilizatorul poate modifica selecţia curentă în
+editor şi poate afla informaţii despre poziţia diverselor componente ale
+modelului. Afişarea acestor informaţii este în strictă legătură cu sursa de
+selecţie.
+
+\section{Sursa de selecţie. Descriptorul de conţinut}
+
+Orice Pagină Eclipse\footnote{Paginile sunt descrise în Secţiunea
+\ref{section:workbench}} poate avea o sursă de selecţie. O sursă de selecţie
+este un concept abstract care vine asupra conţinutului unui editor pentru a
+ajuta sincronizarea afişării informaţiilor în diverse vizualizări care sunt
+implementate în program.
+
+Special pentru scopurile Vizualizării 3D şi a Vizualizării de structură despre
+care amintim acum, am definit o sursă de selecţie strict legată de modelul de
+lucru din editor.
+
+Această sursă de selecţie implementează conceptul abstract definit în Eclipse şi
+îl adaptează nevoilor modelului nostru. El este capabil şi conştient de
+diversele tipuri de Primitive care există în model şi poate distinge între
+stările acestora.
+
+Acesta reprezintă deci un descriptor de conţinut al editorului care este folosit
+de către Pagina Eclipse pentru sincronizarea diverselor componente ale
+interfeţei grafice.

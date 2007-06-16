@@ -8,8 +8,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="530.80182"
-   height="798.1712"
+   width="710.16595"
+   height="809.50244"
    id="svg2"
    sodipodi:version="0.32"
    inkscape:version="0.45.1"
@@ -438,14 +438,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="399.17494"
-     inkscape:cy="377.26032"
+     inkscape:cx="276.61883"
+     inkscape:cy="383.08701"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     inkscape:window-width="911"
-     inkscape:window-height="880"
-     inkscape:window-x="107"
-     inkscape:window-y="24" />
+     inkscape:window-width="1280"
+     inkscape:window-height="968"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -461,7 +461,17 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-97.966281,-125.08578)">
+     transform="translate(81.397831,-113.75453)">
+    <path
+       sodipodi:type="arc"
+       style="fill:#d4ffa6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path6199"
+       sodipodi:cx="267.69043"
+       sodipodi:cy="333.72058"
+       sodipodi:rx="70.710678"
+       sodipodi:ry="70.710678"
+       d="M 338.40111 333.72058 A 70.710678 70.710678 0 1 1  196.97975,333.72058 A 70.710678 70.710678 0 1 1  338.40111 333.72058 z"
+       transform="translate(-35.940967,120.8256)" />
     <path
        sodipodi:type="arc"
        style="fill:#fbfcc4;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:2, 4;stroke-dashoffset:0;stroke-opacity:1"
@@ -504,7 +514,7 @@
          y="290.48651">Editorul OpenGL</tspan></text>
     <path
        sodipodi:type="star"
-       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:2, 4;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#c2dbff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:2, 4;stroke-dashoffset:0;stroke-opacity:1"
        id="path3213"
        sodipodi:sides="5"
        sodipodi:cx="375"
@@ -520,7 +530,7 @@
        transform="matrix(0.7423303,0,0,0.7423303,245.2147,292.63831)" />
     <text
        xml:space="preserve"
-       style="font-size:8.90796375px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+       style="font-size:8.90796375px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
        x="526.87848"
        y="452.40317"
        id="text3215"
@@ -598,14 +608,14 @@
     <text
        xml:space="preserve"
        style="font-size:10.39262486px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
-       x="264.08469"
-       y="505.73834"
+       x="259.03394"
+       y="539.07336"
        id="text3663"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3665"
-         x="264.08469"
-         y="505.73834">Maşina de stări</tspan></text>
+         x="259.03394"
+         y="539.07336">Maşina de stări</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.96932125;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Send);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 208.59453,415.00447 C 207.84466,336.26845 234.83986,287.5271 291.82975,288.27698"
@@ -631,7 +641,7 @@
          y="889.12817">Vizualizarea 3D</tspan></text>
     <path
        sodipodi:type="star"
-       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:2, 4;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#c8f9f7;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:2, 4;stroke-dashoffset:0;stroke-opacity:1"
        id="path3675"
        sodipodi:sides="5"
        sodipodi:cx="375"
@@ -647,7 +657,7 @@
        transform="matrix(0.7423303,0,0,0.7423303,297.3367,596.8557)" />
     <text
        xml:space="preserve"
-       style="font-size:8.90796375px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+       style="font-size:8.90796375px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
        x="579.00049"
        y="756.62054"
        id="text3677"
@@ -670,48 +680,136 @@
        id="path3687" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:5.34899139;stroke-linecap:butt;stroke-linejoin:miter;marker-start:url(#Dot_m);marker-end:url(#Arrow1Send);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 234.20586,158.20816 C 358.4817,160.00926 366.58664,214.04223 366.58664,252.76586"
-       id="path3691" />
+       d="M 454.41911,160.22847 C 366.56292,156.9788 366.58664,214.04223 366.58664,252.76586"
+       id="path3691"
+       sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:10.69798279px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
-       x="236.90753"
-       y="140.19716"
+       x="532.8822"
+       y="162.42052"
        id="text3693"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3695"
-         x="236.90753"
-         y="140.19716">Acţiunile Utilizatorului</tspan></text>
+         x="532.8822"
+         y="162.42052">Acţiunile Utilizatorului</tspan></text>
+    <g
+       id="g2273"
+       transform="translate(-197.9899,-39.23797)">
+      <rect
+         rx="7.4233036"
+         y="747.26965"
+         x="244.02385"
+         height="73.172562"
+         width="166.49409"
+         id="rect2267"
+         style="fill:#ffecdb;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:2, 4;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text2269"
+         y="786.31342"
+         x="326.85547"
+         style="font-size:10.39262486px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+         xml:space="preserve"><tspan
+           y="786.31342"
+           x="326.85547"
+           id="tspan2271"
+           sodipodi:role="line">Vizualizarea Structurii</tspan></text>
+    </g>
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:5.34899139;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#DiamondM);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 421.52017,252.76586 C 420.61962,202.33509 429.62511,143.79937 353.07841,143.79937"
-       id="path3697" />
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;marker-start:url(#Arrow2Mstart);marker-end:url(#Arrow2Mend);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 33.335034,583.00871 C 33.335034,425.42491 20.203051,146.62281 190.91883,148.64312"
+       id="path2280"
+       transform="translate(97.966281,125.08578)" />
     <text
        xml:space="preserve"
-       style="font-size:10.69798279px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
-       x="412.79413"
-       y="132.95778"
-       id="text3699"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+       x="173.72772"
+       y="692.9422"
+       id="text4222"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan3701"
-         x="412.79413"
-         y="132.95778">Feedback Vizual</tspan></text>
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:5.34899139;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#DiamondM);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 287.33829,892.15605 C 76.609695,895.75824 114.43278,193.32959 114.43278,178.9208"
-       id="path3705" />
+         id="tspan4224"
+         x="173.72772"
+         y="692.9422">Sincronizare</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:10.69798279px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
-       x="161.14642"
-       y="203.49629"
-       id="text3707"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+       x="234.27534"
+       y="266.70413"
+       id="text4226"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan3709"
-         x="161.14642"
-         y="203.49629">Feedback Vizual</tspan></text>
+         id="tspan4228"
+         x="234.27534"
+         y="266.70413">Sincronizare</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow2Mend);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 33.335034,655.73969 C 33.335034,783.01892 160.61425,774.9377 187.88837,774.9377"
+       id="path4230"
+       transform="translate(97.966281,125.08578)" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+       x="175.68651"
+       y="801.07483"
+       id="text5201"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5203"
+         x="175.68651"
+         y="801.07483">Sincronizare</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+       x="247.40733"
+       y="886.93787"
+       id="text5205"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5207"
+         x="247.40733"
+         y="886.93787">Sincronizare</tspan></text>
+    <g
+       id="g5215"
+       transform="translate(-134.9174,-88.581639)">
+      <rect
+         y="301.00302"
+         x="53.519569"
+         height="141.42136"
+         width="191.92899"
+         id="rect5209"
+         style="fill:#ffecdb;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text5211"
+         y="374.66095"
+         x="149.34344"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Constantia"
+         xml:space="preserve"><tspan
+           y="374.66095"
+           x="149.34344"
+           id="tspan5213"
+           sodipodi:role="line">Pagina Aplicaţiei</tspan></text>
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow2Mend);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M -79.282108,84.005672 C -81.267569,-35.994328 237.80427,-61.463511 237.38585,126.41976"
+       id="path5220"
+       transform="translate(97.966281,125.08578)"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;marker-start:none;marker-end:url(#Arrow1Mend);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M -97.123324,229.59379 C -98.133477,631.66425 -113.80571,615.50692 -53.538085,617.3539"
+       id="path5226"
+       transform="translate(97.966281,125.08578)"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow2Mend);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M -126.2147,230.60395 C -130.42862,832.73176 -132.99861,778.06968 187.88837,786.04937"
+       id="path5228"
+       transform="translate(97.966281,125.08578)"
+       sodipodi:nodetypes="cc" />
   </g>
 </svg>

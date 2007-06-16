@@ -21,7 +21,7 @@ aplicaţii tip IDE, prin înlăturarea anumitor componente ale platformei se pot
 dezvolta orice tip de aplicaţii desktop.
 
 Structura de bază a acestei platforme poate fi rezumată după cum am prezentat 
-în Tabela \ref{table:rcpstruct}. \begin{table}[h]
+în Tabela \ref{table:rcpstruct}. \begin{table}[htp]
 \caption{Structura Eclipse RCP \cite{rcpfaq} \label{table:rcpstruct}}
 \begin{tabular}{|\col{0.23}|\col{0.73}|}
 \hline Eclipse Runtime & Suport pentru plugin-uri, puncte de extensie şi 
@@ -43,7 +43,7 @@ Această componentă a Eclipse RCP este cea mai abstractă şi în acelaşi timp
 mai puternică componentă a sa. Structura sa de bază este descrisă în Tabela 
 \ref{table:runtimestruct}.
 
-\begin{table}[h]
+\begin{table}[htp]
 \caption{Structura Eclipse Runtime \cite{eclipsehelp} \label{table:runtimestruct}}
 \begin{tabular}{|\col{0.38}|\col{0.58}|}
 \hline org.eclipse.core.contenttype & Suport pentru definirea şi administrarea 
@@ -182,7 +182,7 @@ extensii o reprezintă separarea totală de librăriile AWT şi SWING, care nu m
 sunt necesare nici măcar pentru administrarea imaginilor sau a fonturilor din
 sistem.
 
-\begin{table}[htb]
+\begin{table}[htp]
 \caption{Structura JFace \cite{jface-art} \label{table:jfacestruct}}
 \begin{tabular}{|\col{0.13}|\col{0.28}|\col{0.53}|}
 \hline Ferestre & org.eclipse.jface.window & Facilităţi de creerea şi 
@@ -495,3 +495,104 @@ volumul cel mai mare de muncă l-a cerut ``învăţarea'' lui Eclipse să editez
 model tridimensional, sarcină care la rîndul ei a fost facilă datorită 
 abstracţiei puternice de care se bucură structura aplicaţiilor dezvoltate în 
 RCP.
+
+\subsection{SWT, AWT sau SWING}
+
+În lumea dezvoltării aplicaţiilor client în Java există o faimoasă dilemă (una
+dintre multe altele astfel de dileme) asupra căreia dintre tehnologiile
+enumerate mai sus este cea mai bună.
+
+După cum putem vedea în \cite{swtawtswing}, şi care reprezintă şi consideraţia
+noastră în această privinţă, problema nu se poate judeca la nivel global, cît
+mai bine în fiecare caz în parte, în funcţie de nevoile fiecărui program ce
+urmează a fi dezvoltat.
+
+\begin{quotation}
+De ce există mai mult de un toolkit Java pentru interfeţe grafice? Cel mai bun 
+răspuns este că o mărime nu e bună pentru toţi, şi nu va fi inventat un toolkit 
+care să se potrivească cu toate mărimile în curînd. Fiecare toolkit oferă 
+avantaje şi dezavantaje care fac alegerea unuia dintre ele mai potrivită, date 
+fiind nevoile dvs. şi publicul ţintă. \cite{swtawtswing}
+\end{quotation}
+
+Desigur alegerea noastră a fost bazată în principal pe opţiunea de a folosi 
+Eclipse RCP care foloseşte nativ SWT. Însă în acelaşi timp, alegerea Eclipse 
+RCP a pornit de la alegerea despre care vorbim în această secţiune.
+
+Am pornit de la SWT, apoi am simţit nevoia de a folosi de asemenea JFace, ca
+într-un final să ajungem la concluzia că cea mai bună soluţie ar fi folosirea
+Eclipse RCP în totalitatea sa.
+
+Vom încerca să prezentăm mai jos fiecare din tehnologiile amintite, şi vom
+încerca să ne motivăm alegerea bazat pe această comparaţie.
+
+\subsubsection{AWT}
+
+\begin{quotation}
+AWT este toolkitul original Java. Avantajele principale ale lui AWT vin din
+faptul că este distribuit alături de orice versiune a tehnologiei Java,
+incluzînd implementări Java pentru browsere web\footnote{n.a. De asemenea,
+pentru tehnologii embeded, telefoane mobile, PDA, etc.}, şi este foarte stabil.
+Aceasta înseamnă că nu trebuie instalat şi poţi să te bazezi pe disponibilitatea
+lui oriunde există Java, şi va avea facilităţile la care te
+aştepţi\footnote{n.a. Deşi experienţa arată că funcţionarea AWT în medii
+esoretice (telefoane mobile, PDA) lasă de dorit, datorită aparentului abandon al
+AWT din partea dezvoltatorilor Java}.
+
+AWT este un toolkit foarte simplu avînd un set limitat de componente,
+administratori de layout\footnote{Layout Manager -- Un algoritm de aşezare a
+componentelor într-un container. Conceptul este folosit în toate toolkiturile
+Java.} şi evenimente. Aceasta se datoreazaă faptului că Sun Microsystems a decis
+să folosească principiul celui mai mic divizor comun\footnote{n.a. Alegerea
+componentelor disponibile s-a făcut pe baza componentelor comune existente în
+toate platformele pentru care Java este disponibilă} pentru AWT. Doar
+componentele comune tuturor platformelor aveau să fie folosite şi astfel
+rezultatul a fost că unele componente foarte folosite, cum ar fi tabele, arbori,
+bare de progres şi altele nu sunt suportate. Pentru aplicaţii care au nevoie de
+mai multe tipuri de componente, ele trebuie create de le zero. Aceasta este o
+mare povară. [\ldots]
+
+Sun a vrut ca Java să fie un limbaj ``scrie odată, rulează oriunde''. Asta
+înseamnă că programele Java ar fi dezvoltate pe o platformă anume şi se aşteaptă
+să ruleze identic pe celelalte platforme fără teste. În mare parte, tehnologia a
+reuşi aceasta, cu excepţia AWT. Datorită faptului că AWT depinde de controalele
+native, interfaţa arăta şi -- mai important -- se comporta diferit pe diferite
+sisteme. Aceasta a dus la o situaţie ``scrie odată, testează peste tot'', care
+nu era satisfăcătoare.
+\cite{swtawtswing}
+\end{quotation}
+
+\subsection{SWING}
+
+\begin{quotation}
+Java Swing, parte a JFC\footnote{n.a. Java Foundation Classes, setul de clase
+distribuite în tehnologia Java}, a fost o încercare de a rezolva neajunsurile
+AWT. Swing este un toolkit foarte bine pus la punct, flexibil şi puternic. Asta
+înseamnă că Swing este greu de învăţat şi uneori este prea complex pentru
+situaţii comune.
+
+Swing este compus parţial din componente ale AWT. Orice parte a lui Swing este o
+parte a lui AWT. Swing foloseşte modelul de evenimente a lui AWT şi clasele
+ajutătoare, cum ar fi culori, imagini şi grafică. [\ldots]
+
+Pentru a învinge variaţiile de comportament dinte diferite sisteme, Swing a 
+minimizat dependinţa de controalele native. De fapt, Swing foloseşte controale 
+native doar pentru componentele de nivel înalt, cum ar fi ferestre sau cadre. 
+Cele mai multe componente sunt emulate în cod Java pur. Aceasta înseamnă că 
+Swing este intrisec portabil pe toate sistemele. Implicit, Swing nu arată ca o 
+aplicaţie nativă, ci chiar are mai multe înfăţişări, dintre care unele emulează 
+-- deşi nu chiar exact -- diverse sisteme şi unele oferă un aspect 
+unic\footnote{n.a. Aceste aspecte sunt personalizabile de programator şi de 
+către utilizator, aşa cum se menţionează şi \cite{swtawtswing} la un alt 
+paragraf}.
+
+Swing nu poate beneficia de accelerarea hardware a interfeţei grafice şi diverse
+operaţii de intefaţă grafică ale sistemului de operare\footnote{n.a. Cum ar
+drag and drop}. Rezultatul este că aplicaţiile Swing pot fi mai încete ca o
+aplicaţie nativă. Sun a lucrat mult asupra performanţei Swing în ultimele
+versiuni (Java 1.4 şi 1.5), şi acest dezavantaj devine mai puţin observabil.
+Pentru că arhitectura Swing este mai robustă, el are un cod de bază mai mare.
+Aceasta înseamnă că e nevoie de o maşină mai puternică pentru a-l executa decît
+are nevoie SWT sau AWT.
+\cite{swtawtswing}
+\end{quotation}

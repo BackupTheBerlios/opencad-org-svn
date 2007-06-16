@@ -62,7 +62,7 @@ reprezentat.
 \begin{definition}
 \label{define:realRender}
 Numim \textbf{Reprezentare Reală} o materializare strictă în comenzi 
-Java/OpenGL a unei reprezentări schematice tridimensionale a unei Primitive, 
+Java / OpenGL a unei reprezentări schematice tridimensionale a unei Primitive, 
 realizată cu scopul formării unei imaginii asupra rezultatului final al 
 construcţiei fizice a entităţii logice din spatele acelei primitive. 
 \end{definition} Modelul tridimensional este deci cea mai apropiată formă de 
@@ -71,7 +71,7 @@ realitate pe care acest proiect o va reda pentru utilizatorii săi.
 \begin{definition}
 \label{define:editorRender}
 Numim \textbf{Reprezentare Editabilă} o materializare strictă în comenzi 
-Java/OpenGL a unei reprezentări schematice bidimensionale a unei Primitive, 
+Java / OpenGL a unei reprezentări schematice bidimensionale a unei Primitive, 
 realizată cu scopul identificării vizuale a primitivelor şi accesării facilă 
 prin intermediul unui editor a proprietăţilor primitivelor.
 \end{definition}
@@ -264,7 +264,7 @@ aplicaţiei.
 Dintr-o anumită privinţă, acest ciclu de stare poate fi privit ca o serie de 
 meta-stări ale aplicaţiei (i.e. stări ale stărilor).
 
-\begin{table}[ht] \caption{Ciclul de viaţă al stărilor Editorului OpenGL
+\begin{table}[htp] \caption{Ciclul de viaţă al stărilor Editorului OpenGL
 \label{table:editor-states}}
 \begin{tabular}{|\col{0.23}|\col{0.73}|}
 
@@ -310,7 +310,7 @@ De exemplu, colţurile introduc o serie de stări pentru a le modela toate
 operaţiunile posibile în cadrul editorului. Ele pot fi enumerate după cum am 
 arătat în Tabela \cite{table:corner-states}.
 
-\begin{table}[ht] \caption{Stările ce modelează operaţiile posibile pentru 
+\begin{table}[htp] \caption{Stările ce modelează operaţiile posibile pentru 
 diverse Primitive \label{table:corner-states}}
 \begin{tabular}{|\col{0.23}|\col{0.73}|}
 \hline \multicolumn{2}{|l|}{\Large \textbf{Colţuri}} \\
@@ -319,9 +319,14 @@ el este tras cu mausul pe suprafaţa editorului. \\
 \hline SelectCornerState & Implementează comportamentul operaţiunii de 
 selectare a unui Colţ. Dacă selecţia s-a făcut fără ca mausul să fie în 
 vecinătatea colţului, atunci starea se termină imediat, altfel se iniţiază 
-DragCornerState. \\ \hline \multicolumn{2}{|l|}{\Large \textbf{Ziduri}} \\
+DragCornerState.\\
+
 \hline PickupCornerState & Modelează operaţiunea de alegere a unui colţ în
 cadrul sarcinii de adăugare a unui zid.
+
+\\\hline
+
+\multicolumn{2}{|l|}{\Large \textbf{Ziduri}} \\
 
 \\ \hline
 \end{tabular}

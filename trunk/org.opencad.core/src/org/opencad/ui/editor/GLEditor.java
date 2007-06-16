@@ -253,7 +253,7 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
     } catch (CoreException e) {
       throw new RuntimeException(e);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+        Activator.error("Probably new file", e);
     } catch (ClassNotFoundException e) {
       throw new RuntimeException(e);
     } catch (IllegalArgumentException e) {

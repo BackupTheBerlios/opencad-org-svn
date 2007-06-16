@@ -52,8 +52,14 @@
               name="aboutText"
               value="OpenCad.org&#x0A;Build, not draw&#x0A;&#x0A;Copyright © 2007 Silviu-Georgian Aprozeanu"/>
         <property
-              name="startupProgressRect"
-              value="0,10,420,10"/>
+              name="windowImages"
+              value="icons/oc.gif"/>
+        <property
+              name="startupForegroundColor"
+              value="000000"/>
+        <property
+              name="startupMessageRect"
+              value="0,0,0,0"/>
      </product>
   </extension>
   <extension
@@ -67,5 +73,34 @@
      <category
            id="org.opencad.core.viewCategory"
            name="OpenCad.org"/>
+  </extension>
+  <extension
+        point="org.eclipse.ui.newWizards">
+     <category
+           id="org.opencad.core.category"
+           name="OpenCad.org"/>
+     <wizard
+           canFinishEarly="true"
+           category="org.opencad.core.category"
+           class="org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard"
+           hasPages="true"
+           icon="icons/new_project.gif"
+           id="org.opencad.core.projectWizard"
+           name="OpenCad.org Project"
+           project="true"/>
+     <wizard
+           category="org.opencad.core.category"
+           class="org.opencad.ui.NewFileWizard"
+           icon="icons/new_con.gif"
+           id="org.opencad.ui.NewFileWizard"
+           name="New OpenCad.org Model"/>
+  </extension>
+  <extension
+        point="org.eclipse.ui.perspectives">
+     <perspective
+           class="org.opencad.ui.PerspectiveFactory"
+           icon="icons/oc.gif"
+           id="org.opencad.core.perspective"
+           name="Modelling"/>
   </extension>
 </plugin>

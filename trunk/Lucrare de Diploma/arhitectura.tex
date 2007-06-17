@@ -118,6 +118,7 @@ este dictată de poziţia celor două colţuri. Astfel, un zid poate fi privit c
 un segment ce leagă oricare două puncte (colţuri) dintr-un plan.
 
 \subsubsection{Caracteristici de Ziduri}
+\label{section:features}
 
 \begin{definition}
 \label{define:feature}
@@ -398,7 +399,8 @@ editor şi poate afla informaţii despre poziţia diverselor componente ale
 modelului. Afişarea acestor informaţii este în strictă legătură cu sursa de
 selecţie.
 
-\section{Sursa de selecţie. Descriptorul de conţinut}
+
+\subsection{Sursa de selecţie. Descriptorul de conţinut}
 
 Orice Pagină Eclipse\footnote{Paginile sunt descrise în Secţiunea
 \ref{section:workbench}} poate avea o sursă de selecţie. O sursă de selecţie
@@ -418,3 +420,35 @@ stările acestora.
 Acesta reprezintă deci un descriptor de conţinut al editorului care este folosit
 de către Pagina Eclipse pentru sincronizarea diverselor componente ale
 interfeţei grafice.
+
+\section{Particularizarea Platformei Eclipse}
+
+\subsection{Facilităţile de creare de noi fişiere şi proiecte}
+
+Aplicaţia noastră vine cu facilităţi pentru uşurarea creări de noi modele de
+editare şi pentru crearea de proiecte noi ce vor organiza modelele create de
+utilizator. Pentru particularizarea acestora, am folosit modele predefinite care
+vin cu aplicaţia Eclipse.
+
+Funcţiile acestor automatizări ale creări de proiecte şi fişiere sunt crearea 
+de noi astfel de componente cu setările potrivite pentru utilizarea cu această 
+aplicaţie. În particular, proiectul nu are nici o caracteristică deosebită însă 
+fişierele trebuie să aibă întotdeauna extensia ocm\footnote{abrev. 
+\textit{OpenCad.org Model}}.
+
+\subsection{Perspectiva de lucru}
+
+După cum am prezentat anterior\footnote{În secţiunea \ref{section:workbench}},
+Perspectivele oferă o aşezare pentru toate componentele din Pagina unui
+Workbench.
+
+Varianta particularizată pentru acest proiect porneşte cu vizualizarea de
+navigare în partea de stînga sus, cu Vizualizarea 3D în stînga jos şi cu
+editorul modelului în partea dreaptă.
+
+\subsection{Butoanele de acţiuni}
+
+Pentru diverse acţiuni din cadrul aplicaţiei am adăugat butoane care iniţiază
+executarea comenzilor respective. În general, butoanele serversc operaţiunilor
+de modificare a structurii modelului. Există astfel butoane pentru adăugarea de
+ziduri, ferestre, uşi, etc.

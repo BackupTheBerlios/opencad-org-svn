@@ -1,10 +1,10 @@
 \documentclass[a4paper,11pt,twoside,openright]{report}
-\usepackage{geometry}
 \usepackage[utf8]{inputenc} 
 \usepackage[romanian]{babel}
 \usepackage{url}
 \usepackage[bookmarks, bookmarksopen=true, bookmarksnumbered=true]{hyperref}
 \usepackage[pdftex]{graphicx}
+\usepackage[bottom=3.5cm,top=4cm,left=3cm,right=4cm]{geometry}
 \linespread{1.2}
 \addtolength{\parskip}{0.5\baselineskip}
 
@@ -21,7 +21,7 @@
 \begin{document}
 	\begin{titlepage}
 \null \vfill
-	\begin{center}
+	\begin{center} 
 {\Huge \title{}}
 	
 {\Large \subtitle{}}
@@ -51,16 +51,20 @@ Profesor îndrumător & \teacher{}
 
 \cleardoublepage
 
-	\pagenumbering{arabic}
-	\pagestyle{headings}
-	\input{introducere.tex}
-	\input{obiective.tex}
-	\input{tehnologii.tex}
-	\input{arhitectura.tex}
-	\input{implementare.tex}
-	\input{concluzii.tex}
-\clearpage
-	\pagenumbering{roman}
-	\bibliographystyle{acm}
-	\bibliography{thesis}
+\pagenumbering{arabic}
+\pagestyle{headings}
+
+\input{introducere.tex}
+\input{obiective.tex}
+\input{tehnologii.tex}
+\input{arhitectura.tex}
+\input{implementare.tex}
+\input{concluzii.tex}
+
+\cleardoublepage
+
+\pagenumbering{roman}
+\bibliographystyle{acm}
+\bibliography{thesis}
+
 \end{document}

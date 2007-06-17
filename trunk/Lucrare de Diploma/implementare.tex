@@ -3,72 +3,70 @@
 
 În acest capitol vom prezenta detaliile implementării acestui proiect. Se va 
 trece prin structura de clase, fluxul datelor în aplicaţie, mutaţiile Modelului 
-de Lucru (\ref{define:model})  şi funcţionarea componentelor de interfaţă,
-editorul OpenGL şi Vizualizarea 3D, prezentate în secţiunile
+de Lucru (\ref{define:model})  şi funcţionarea componentelor de interfaţă, 
+editorul OpenGL şi Vizualizarea 3D, prezentate în secţiunile 
 \ref{section:opengl-editor}, respectiv \ref{section:view}.
 
-Vom trece în revistă, de asemenea, principalele conexiuni la nivel de cod între
-componentele aplicaţiei, şi modul de interacţiune al principalelor module
+Vom trece în revistă, de asemenea, principalele conexiuni la nivel de cod între 
+componentele aplicaţiei, şi modul de interacţiune al principalelor module 
 prezentate în Capitolul \ref{chapter:arh}.
-
-\section{Structura claselor}
 
 Fiecare dintre componentele arhitecturale descrise la capitolul 
 \ref{chapter:arh} sunt materializate în implementarea efectivă printr-un set de 
 clase bine definite şi bine separate ca logică şi structură de celelalte 
 componente ale aplicaţiei.
 
-Există o diviziune clară între componentele abstracte, definitorii ale
-aplicaţiei noastre şi componentele materializate, implementările concrete. Toate
-abstracţiile făcute aici reprezintă forme de simplificare a interacţiunilor
-între obiecte, de marcare a anumitor comportamente şi separarea sarcinilor de
-dezvoltare în unităţi logice ce pot fi urmărite pe direcţia mai multor module de
-cod ale programului.
+Există o diviziune clară între componentele abstracte, definitorii ale 
+aplicaţiei noastre şi componentele materializate, implementările concrete. 
+Toate abstracţiile făcute aici reprezintă forme de simplificare a 
+interacţiunilor între obiecte, de marcare a anumitor comportamente şi separarea 
+sarcinilor de dezvoltare în unităţi logice ce pot fi urmărite pe direcţia mai 
+multor module de cod ale programului.
 
-\subsection{Modelul de Lucru}
+\section{Modelul de Lucru}
 
-\subsubsection{Model}
-Există o clasă specială pentru concretizarea conceptului de
-Model (\ref{define:model}). Responsabilităţile modelului cad în a fi un suport
-logic cît şi structural pentru obiectele ce materializează componentele
-modelului proiectat de către utilizator. Pentru asta, clasa model va şti
-întotdeauna diverse informaţii vitale funcţionării editorului.
+\subsection{Model}
+Există o clasă specială pentru concretizarea conceptului de Model 
+(\ref{define:model}). Responsabilităţile modelului cad în a fi un suport logic 
+cît şi structural pentru obiectele ce materializează componentele modelului 
+proiectat de către utilizator. Pentru asta, clasa model va şti întotdeauna 
+diverse informaţii vitale funcţionării editorului.
 
-Modelul în sine implementează aspectele de desenare pentru
-proiectate (\ref{define:editorRender}) şi de desenare reală
-(\ref{define:realRender}). Reutilizarea abstracţiei despre care vom vorbi
-imediat la Primitive conferă coerenţă şi creşte şi mai mult nivelul de
-abstactizare la care se poate lucra cu această aplicaţie.
+Modelul în sine implementează aspectele de desenare pentru proiectate 
+(\ref{define:editorRender}) şi de desenare reală (\ref{define:realRender}). 
+Reutilizarea abstracţiei despre care vom vorbi imediat la Primitive conferă 
+coerenţă şi creşte şi mai mult nivelul de abstactizare la care se poate lucra 
+cu această aplicaţie.
 
-Îndeplinirea sarcinilor de editare pentru proiectare şi de desenare reală se
-rezumă la apelarea aceloraşi rutine pentru toate componentele modelului. Pentru
-a reţine toate componentele, clasa de faţă reţine tabele de căutare pentru toate
-componentele care aleg să fie înregistrate în model.
+Îndeplinirea sarcinilor de editare pentru proiectare şi de desenare reală se 
+rezumă la apelarea aceloraşi rutine pentru toate componentele modelului. Pentru 
+a reţine toate componentele, clasa de faţă reţine tabele de căutare pentru 
+toate componentele care aleg să fie înregistrate în model.
 
-Pot exista primitive care nu sunt desenate direct de către model, în speţă este
-cazul Caracteristicilor (\ref{define:feature}). Acestea sunt desenate de
+Pot exista primitive care nu sunt desenate direct de către model, în speţă este 
+cazul Caracteristicilor (\ref{define:feature}). Acestea sunt desenate de 
 containerul lor, în speţă Zidul care le conţine.
 
 Modelul serveşte şi ca suport pentru persistenţa datelor. Salvarea datelor în 
-formatul specific aplicaţiei de faţă reprezintă varianta serializată a clasei
-model. De aceea, este important ca toate datele care sunt necesare salvării
-stării modelului să fie prezente cumva în legătură cu modelul, altfel există
-şansa ca ele să nu fie persistate de către aplicaţie în momentul în care se
+formatul specific aplicaţiei de faţă reprezintă varianta serializată a clasei 
+model. De aceea, este important ca toate datele care sunt necesare salvării 
+stării modelului să fie prezente cumva în legătură cu modelul, altfel există 
+şansa ca ele să nu fie persistate de către aplicaţie în momentul în care se 
 salvează în fişier documentul de lucru.
 
-Modelul serveşte şi ca suport sumar de reţinere de stare pentru Editorul OpenGL.
-El va păstra în model selecţia curentă, cît şi starea transientă a unora dintre
-componente, cum ar fi dacă ele sunt navigate de către maus la momentul respectiv
-sau nu.
+Modelul serveşte şi ca suport sumar de reţinere de stare pentru Editorul 
+OpenGL. El va păstra în model selecţia curentă, cît şi starea transientă a 
+unora dintre componente, cum ar fi dacă ele sunt navigate de către maus la 
+momentul respectiv sau nu.
 
-Aceasta se realizează prin păstrarea informaţiei despre elementele ce pot fi
-navigate (i.e. care implementează aspectul de Navigabilitate
-(\ref{define:hoverable})) într-o tabelă de căutare specială. Editorul va cere
-reevaluarea deciziei de navigabiltiate pentru toate componentele din această
-listă în momentul în care mausul îşi modifică poziţia în urma acţiunii
+Aceasta se realizează prin păstrarea informaţiei despre elementele ce pot fi 
+navigate (i.e. care implementează aspectul de Navigabilitate 
+(\ref{define:hoverable})) într-o tabelă de căutare specială. Editorul va cere 
+reevaluarea deciziei de navigabiltiate pentru toate componentele din această 
+listă în momentul în care mausul îşi modifică poziţia în urma acţiunii 
 utilizatorului.
 
-\subsubsection{Primitive}
+\subsection{Primitive}
 Clasa de bază a modelului de lucru este clasa Primitive. Desigur, este o 
 materializare a conceptului de Primitivă (\ref{define:primitive}). Aceasta este 
 o clasă abstractă care nu introduce nici un comportament singular, însă 
@@ -76,40 +74,112 @@ marchează nevoie de implementare pentru intefeţele EditorRenderable şi
 RealRenderable, necesare celor două vizualizări, cum vom vedea la secţiunile 
 \ref{section:impl-editor} şi \ref{section:impl-view}.
 
-Din clasa Primitive sunt extinse clasele concrete Corner, Wall şi
-toate clasele ce implementează Decoraţiunile (\ref{define:decoration}). Fiecare
-din aceste clase implementează metodele definite în interfeţele amintite mai
-sus.
+Din clasa Primitive sunt extinse clasele concrete Corner, Wall şi toate clasele 
+ce implementează Decoraţiunile (\ref{define:decoration}). Fiecare din aceste 
+clase implementează metodele definite în interfeţele amintite mai sus.
 
-Tot din clasa Primitive se desprinde şi clasa WallFeature, o materializare a
-conceptului de Caracterstică de Ziduri (\ref{define:feature}). Din ea la rîndul
-ei se concretizează clasele Door, Window, Inset, Outset, Tunnel, implementări
+Tot din clasa Primitive se desprinde şi clasa WallFeature, o materializare a 
+conceptului de Caracterstică de Ziduri (\ref{define:feature}). Din ea la rîndul 
+ei se concretizează clasele Door, Window, Inset, Outset, Tunnel, implementări 
 ale diverselor caracteristici amintite în \ref{section:primitives}.
 
-Deşi este doar o clasă de marcaj, Primitive prezintă un rol crucial în cadrul
-arhitecturii aplicaţiei noastre. Întreaga interacţiune pe care o au editorul şi
-vizualizarea 3D cu modelul se face prin această abstracţie. Tot ce are nevoie să
-ştie modelul despre orice componentă a sa este că extinde clasa Primitive. Cu
-această minimă funcţionalitate, se pot implementa toate operaţiile de desenare
-necesare interfeţei aplicaţiei de faţă.
+Deşi este doar o clasă de marcaj, Primitive prezintă un rol crucial în cadrul 
+arhitecturii aplicaţiei noastre. Întreaga interacţiune pe care o au editorul şi 
+vizualizarea 3D cu modelul se face prin această abstracţie. Tot ce are nevoie 
+să ştie modelul despre orice componentă a sa este că extinde clasa Primitive. 
+Cu această minimă funcţionalitate, se pot implementa toate operaţiile de 
+desenare necesare interfeţei aplicaţiei de faţă.
 
-\subsubsection{Corner}
+\subsection{Corner}
 
-Clasa Corner reprezintă una din puţinele Primitive care nu sunt direct
-disponibile utilizatorului aplicaţiei. Ea serveşte strict poziţionării Zidurilor
-şi prin aceasta editorul nu le oferă o importanţă deosebită printr-o
-individualizare în cadrul interfeţei, reducînd astfel solicitarea asupra curbei
+Clasa Corner reprezintă una din puţinele Primitive care nu sunt direct 
+disponibile utilizatorului aplicaţiei. Ea serveşte strict poziţionării 
+Zidurilor şi prin aceasta editorul nu le oferă o importanţă deosebită printr-o 
+individualizare în cadrul interfeţei, reducînd astfel solicitarea asupra curbei 
 de învăţare a utilizatorului.
 
-Clasa Corner, pe lîngă implementarea comportamentului de desenare pentru
-proiectate (\ref{define:editorRender}) şi de desenare reală
-(\ref{define:realRender}), aderă şi la comportamentele de Selectabilitate
+Clasa Corner, pe lîngă implementarea comportamentului de desenare pentru 
+proiectate (\ref{define:editorRender}) şi de desenare reală 
+(\ref{define:realRender}), aderă şi la comportamentele de Selectabilitate 
 (\ref{define:selectable}) şi de Navigabilitate (\ref{define:hoverable}).
 
 Ironic este însă că deşi joacă un rol atît de important în poziţionarea 
 obiectelor în scenă, şi interacţionează mai mult decît orice altă componentă cu 
 utilizatorul, colţurile nu au reprezentare specifică în editor. Deşi există un 
 marcaj pentru starea de selecţie a colţului, în rest imaginea colţului este de 
-fapt inexistentă. Îmbinarea lor cu alte componente şi efectul care îl au asupra 
-Zidurilor îi oferă o reprezentare sugestivă şi pot fi controlate astfel de 
+fapt inexistentă. Îmbinarea lor cu alte componente şi efectul care îl au asupra
+ Zidurilor îi oferă o reprezentare sugestivă şi pot fi controlate astfel de 
 către utilizator.
+
+\subsection{Wall}
+
+Materializarea zidurilor are un rol important în cadrul aplicaţiei pentru că 
+serveşte la rîndul său ca un container pentru toate tipurile de Caracteristici 
+(\ref{define:feature}) ce pot fi adăugate în model. În acest scop, clasa reţine 
+o listă sortată cu toate caracteristicile ce există pe acel Zid.
+
+\begin{figure}[htp]
+\begin{center}
+  \includegraphics[width=0.9\textwidth]{figures/corners.pdf}
+  \caption{Determinarea liniilor de contur pentru un Zid \label{figure:corner}}
+\end{center}
+\end{figure}
+
+Destul de interesantă este metoda de desenare a zidurilor care, atît pentru 
+desenarea reală cît şi pentru cea destinată editorului, aplică un algoritm de 
+unire cu ceilalţi pereţi ce împart acelaşi colţ. Algoritmul calculează, 
+printr-o parcurgere în sens trigonometric a tuturor zidurilor conectate la un 
+colţ, interesecţia dintre muchiile interioare şi exterioare cu pereţii 
+alăturaţi, aşa cum se poate vedea în Figura \ref{figure:corner}. Apoi se 
+trasează liniile exterioare şi interioare pînă în punctele respective. Există, 
+desigur, cazuri limită în care liniile trebuie eliminate datorită faptului că 
+intersecţia depăşeşete dimensiunea reală a zidului şi atunci linia ar fi 
+desenată de fapt în afara conturului zidului respectiv.
+
+Zidurile sunt responsabile şi de desenarea tuturor Caracteristicilor aflate pe 
+zid. Pentru aceasta, conturul exterior al zidurilor trebuie întrerupt în locul
+în care caracteristica urmează să fie desenată. Această decupare este îmbinată
+cu algorimtul de detectare a intersecţiilor cu celelalte ziduri din colţ. pentru
+fie care dintre laturile zidurilor, se calculează punctele de intersecţie dintre
+punctele ce delimitează fiecare caracteristică şi muchiile zidurilor, cum am
+arătat în Figura \ref{figure:corner}.
+
+Apoi, în spaţiul vid creat de delimitările tuturor caracteristicilor, printr-o
+transformare afină, se mută sistemul de coordonate rotit şi poziţionat în
+punctul de start al fiecărei caracterstici. În final se apelează rutina de
+desenare a caractersticii, fie cea reală sau cea pentru editare, după caz.
+
+\subsection{WallFeature}
+
+Feature este clasa care marchează toate caracteristicile ce pot apărea pe un
+Zid. Nu vom repeta enumerarea lor de la Secţiunea \ref{section:features}, ci vom
+încerca să prezentăm modalitatea în care am implementat funcţionalitatea
+acestora.
+
+Practic, pentru fiecare caracteristică, cum am arătat la secţiunea precedentă,
+zidul este prevăzut cu o cavitate în care desenarea este lăsată pe baza
+caracteristicii. Dacă caracteristica nu ocupă întregul volum al zidului în zona
+respectivă, este responabilitatea ei să ``cîrpească'' înapoi zidul, cum este
+cazul ferestrelor, care lasă intact peretele în partea inferioară şi superioară
+ferestrei în sine, sau la fel pentru uşi care au un spaţiu pînă la tavan.
+
+Fiecare caracteristică trebuie să ofere propria reprezentare grafică, însă ele
+sunt scutite de nevoile calculaţiilor poziţionale\footnote{Precum nu sunt
+scutite zidurile, al căror algoritm de determinare a muchiilor implică calcule
+complexe}, datorită faptului că zidurile aplică o transformare afină înainte de
+iniţierea procedurii de desenare a caracteristicii, mutînd spaţiul de coordonate
+în punctul de start al caractersticii şi cu rotaţia corespunzătoare.
+
+\subsection{Decoration}
+
+Decoraţiunile sunt componente independente de celelalte elemente de model, ce
+sunt desenate poziţional direct de către model (precum zidurile). Simplitatea
+lor implică puţine dificultăţi tehnice. Fiecare dintre ele a trebuit însă
+proiectată cu grijă pentru a reda modelul reprezentat cît mai aproape posibil de
+imaginea reală.
+
+Cum este valabil şi pentru ziduri, nu se face detectare a suprapunerilor peste
+alte obiecte, fiind astfel posibil ca diverse decoraţiuni să se suprapună peste
+altele sau peste ziduri. O implementare rudimentară ar putea evita cele mai
+multe din situaţiile de suprapunere, folosind funcţiile de suprapunere
+implementate de fiecare obiect în parte.

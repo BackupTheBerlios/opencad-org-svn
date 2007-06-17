@@ -183,3 +183,101 @@ alte obiecte, fiind astfel posibil ca diverse decoraţiuni să se suprapună pes
 altele sau peste ziduri. O implementare rudimentară ar putea evita cele mai
 multe din situaţiile de suprapunere, folosind funcţiile de suprapunere
 implementate de fiecare obiect în parte.
+
+\section{Editorul OpenGL}
+
+\subsection{Plugin-ul OpenGL pentru SWT}
+Editorul OpenGL este primul loc al aplicaţiei unde avem de aface cu plugin-ul
+pentru OpenGL şi SWT. Deşi a fost scris special pentru Eclipse, acest plugin a
+necesitat o extensivă testare şi configurare pentru funcţionarea corectă alături
+de platforma Eclipse.
+
+Plugin-ul de OpenGL funcţionează pe baza unei suprafeţe de desenare\footnote{O 
+clasă numită GLCanvas}. În cadrul unei aplicaţii pot exista mai multe astfel de 
+suprafeţe, \footnote{În cazul nostru era strict necesar existenţa a mai mult de 
+o astfel de suprafaţă, datorită posibilităţii de a avea mai multe editoare, şi 
+posibilitatea de a avea simultan Vizualizarea 3D} dar în orice moment o 
+instrucţiune OpenGL nu poate desena decît într-o singură anume astfel de 
+suprafaţă, desemnată printr-o rutină de selectare. Prima implementare (cea 
+directă) a avut ca rezultat ``scurgerea'' de diverse efecte şi secţiuni din 
+desen dintr-o suprafaţă în alta, datorită problemelor de sincronizare datorate 
+de faptul că Eclipse RCP execută diverse operaţiuni în fire de execuţie 
+diferite, care executau simultan instrucţiuni OpenGL fără o determinare precisă 
+a suprafeţei în care ele desenau. Soluţia a fost sincronizarea diverselor 
+metode din Editor şi Vizualizarea faţă de un punct fix, şi în cadrul zonei 
+sincronizate să se selecteze (şi astfel să fie totdeauna determinată) suprafaţa 
+de desenare.
+
+\subsection{Maşina de stări}
+Pentru implementarea maşinii de stări am folosit o stivă în vîrful căreia stătea
+totdeauna starea activă\footnote{Am explicat funcţionarea Maşinii de stări în
+Secţiunea \ref{section:machine}}.
+
+Întreg comportamentul editorului este modelat prin intermediul acestor stări.
+Pentru preluarea şi retragerea controlului anumitor stări asupra suprafeţei de
+editare, se folosesc metode de aflare a unor obiecte de tratare a evenimentelor
+pentru diverse evenimente ale editorului. Tipurile de obiecte de tratare sunt
+prezentate în Tabela \ref{table:state-events}.
+
+\begin{table}
+\begin{tabular}{{|\col{0.28}|\col{0.68}|}}
+\hline
+\textbf{Clasă} & \textbf{Descriere Funcţionare}
+\\ \hline
+KeyListener & Poate interpreta orice apăsare de tastă (sau respectiv eliberare
+de tastă, prin intermediul unui cod care indentifică unic orice tastă)
+
+\\ \hline
+MouseListener & Interceptează apăsările butoanelor mausului, fie cu click simplu
+sau dublu, fiind capabil să reacţioneze la toate aceste evenimente, avînd
+cunoştinţe asupra zonei în care mausul a fost apăsat.
+
+\\ \hline
+MouseMoveListener & Tratează orice mişcare a mausului în suprafaţa editorului şi
+poate executa o rutină incrementală la fiecare deplasare a mausului.
+
+\\ \hline
+MouseTrackListener & Poate intercepta evenimentele de intrare a mausului, de
+ieşire a acestuia şi starea de deplasare deasupra suprafeţei editorului.
+
+\\ \hline
+MouseWheelListener & Interceptează orice mişcare a rotiţei mausului pentru a
+reacţiona în funcţie de viteza de rotaţie şi poziţia mausului în acel moment. De
+notat că acest tip de eveniment nu are o clasă proprie ci se lucrează direct cu
+interfaţa generică Listener.
+
+\\ \hline
+\end{tabular}
+\caption{Tipurile de evenimente ce pot fi tratate de o stare a editorului
+\label{table:state-events}}
+\end{table}
+
+\subsection{Interacţiunea cu utilizatorul. Prezentarea 2D}
+Editorul OpenGL poate interacţiona prin intermediul mausului cu orice obiect din
+model ce suportă acest comportament. Pentru aceasta, editorul trebuie să reţină
+în orice moment caracteristicile zonei care este desenată pe ecran, adică
+punctul de start, dimensiunile în coordonate model ale ferestrei de afişare. La
+fiecare interacţiune cu mausul, coordonatele ecran sunt transformate în
+coordonate model cu ajutorul acestor informaţii.
+
+Editorul are, de asemenea, capacitatea de a modifica valorile de vizualizare
+într-un mod intuitiv, care-i permite să vizualizeze diverse detalii ale
+modelului la diverse scări de mărire. Utilizatorul poate controla aceste
+caracteristici cu ajutorul stării de navigare, în care tragerea suprafeţei de
+editare mută punctul de start iar scroll-ul cu rotiţa modifică scara desenului.
+
+De asemenea, redimensionarea ferestrei va mări suprafaţa de desenare după un
+algoritm special. Pe scurt, acest algoritm încearcă să păstreze aceeaşi mărire
+relativă a modelului\footnote{Se păstrează aceeaşi cantitate de detalii în
+desen}, la acelaşi aspect al ferestrei de vizualizare. La modificare aspectului,
+cantitatea de detalii va ramîne constantă în zona pătratică a desenului,
+crescînd înspre zonele unde modificarea aspectului scoate la iveală noi zone din
+model.
+
+\section{Vizualizarea 3D}
+
+\section{Sursa de selecţie}
+
+\section{Vizualizarea structurii}
+
+\section{Particularizările interfeţei Eclipse}

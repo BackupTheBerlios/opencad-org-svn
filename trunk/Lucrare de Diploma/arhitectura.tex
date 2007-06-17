@@ -1,6 +1,14 @@
 \chapter{Arhitectura aplicaţiei}
 \label{chapter:arh}
 
+\begin{figure}[htp]
+\begin{center} 
+\includegraphics[width=\textwidth]{figures/arh-svg.pdf} \caption{Arhitectura
+generală a aplicaţiei}
+  \label{figure:arh}
+\end{center}
+\end{figure}
+
 Proiectată privind către viitor, aplicaţia noastră oferă posibilitatea 
 extinderii pe viitor în numeroase direcţii de dezvoltare. Am construit o 
 platformă solidă pe baza căreia se poate dezvolta o aplicaţie CAD de un nivel 
@@ -14,13 +22,6 @@ reprezintă o bază pentru dezvoltări ulterioare.
 
 În Figura \ref{figure:arh} am făcut o reprezentare schematică a celor ce vor fi
 enunţate mai jos, a structurii aplicaţiei şi a principalelor sale componente.
-
-\begin{figure}[htp]
-\begin{center}
-  \includegraphics[width=\textwidth]{figures/arh-svg.pdf}
-  \caption{Structura generală a proiectului \label{figure:arh}}
-\end{center}
-\end{figure}
 
 \section{Modelul de lucru}
 
@@ -172,14 +173,6 @@ vecinătatea unui perete.
 În Figura \ref{figure:model-arh} vom sumariza cele prezentate mai sus printr-o 
 diagramă cu toate componentele modelului de lucru.
 
-\begin{figure}[htp]
-\begin{center} 
-\includegraphics[width=\textwidth]{figures/drawing.pdf} \caption{Arhitectura 
-Modelului de Lucru}
-  \label{figure:model-arh}
-\end{center}
-\end{figure}
-
 \subsection{Aspecte ale modelului}
 
 \begin{definition}
@@ -231,6 +224,13 @@ editorul va trece în momentul în care primitiva respectivă este selectată. D
 primitiva nu defineşte o astfel de stare, atunci editorul rămîne în starea de
 navigare.
 
+\begin{figure}[htp]
+\begin{center} 
+\includegraphics[width=\textwidth]{figures/model.pdf} \caption{Arhitectura 
+Modelului de Lucru}
+  \label{figure:model-arh}
+\end{center}
+\end{figure}
 
 \section{Editorul OpenGL}
 \label{section:opengl-editor}

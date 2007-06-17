@@ -4,7 +4,7 @@
 \usepackage{url}
 \usepackage[bookmarks, bookmarksopen=true, bookmarksnumbered=true]{hyperref}
 \usepackage[pdftex]{graphicx}
-\usepackage[bottom=3.5cm,top=4cm,left=3cm,right=4cm]{geometry}
+\usepackage[bottom=3.5cm,top=4cm,left=4cm,right=3cm]{geometry}
 \linespread{1.2}
 \addtolength{\parskip}{0.5\baselineskip}
 
@@ -14,6 +14,14 @@
 \newcommand{\teacher}{prof. dr. ing. Florica Moldoveanu}
 
 \newcommand{\col}[1]{@{\hspace{0.01\textwidth}}p{#1\textwidth}@{\hspace{0.01\textwidth}}}
+
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+    \thispagestyle{plain}
+    \null
+    \newpage
+    \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother 
 
 \newtheorem{definition}{Definiţia}[chapter] 
 \newtheorem{statement}{Propoziţia}[chapter]
@@ -36,18 +44,19 @@ Profesor îndrumător & \teacher{}
 \vskip 2cm
 	\begin{center}
 \small Bucureşti, \today
-	\end{center}
-	\end{titlepage}
-	\pagenumbering{roman}
-	\begin{abstract}
-    \input{rezumat.tex}
-    \end{abstract}
+\end{center}
+\end{titlepage}
+\pagenumbering{Roman}
+\pagestyle{empty}
 
+\newpage
+\null
+\begin{abstract}
+\input{rezumat.tex}
+\end{abstract}
+
+\pagestyle{plain}
 \tableofcontents
-
-\listoftables
-
-\listoffigures
 
 \cleardoublepage
 
@@ -63,7 +72,13 @@ Profesor îndrumător & \teacher{}
 
 \cleardoublepage
 
-\pagenumbering{roman}
+\pagenumbering{Alph}
+\pagestyle{plain}
+
+\listoftables
+
+\listoffigures
+
 \bibliographystyle{acm}
 \bibliography{thesis}
 

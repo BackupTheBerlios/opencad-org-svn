@@ -185,6 +185,27 @@ multe din situaţiile de suprapunere, folosind funcţiile de suprapunere
 implementate de fiecare obiect în parte.
 
 \section{Editorul OpenGL}
+\label{section:impl-editor}
+
+\subsection{Integrarea cu Eclipse}
+Editorul OpenGL este un editor pentru Eclipse RCP, şi respectă standardele
+pentru un editor de acest fel. De aceea, el poate fi folosit ca orice alt editor
+(i.e. Un editor de text pentru surse Java) în cadrul unei aplicaţii Eclipse. El
+este integrat cu Eclipse şi se marchează ca editor standard pentru fişiere de
+tip .ocm\footnote{Extensia standard a fişierelor acestui proiect: OpenCad.org
+Model}.
+
+Desigur, diferenţa majoră faţă de alte editoare întîlnite în Eclipse este că
+prezentarea sa nu se face prin intermediul unui control de editare de text, ci
+printr-o suprafaţă de desenare OpenGL. Cea mai mare parte a pragurilor care au
+trebuit trecute în implementarea acestei aplicaţii au derivat din această
+caracteristică deosebită a editorului nostru.
+
+Editorul are o sursă de selecţie şi paginator de conţinut, a căror descriere o
+vom prezenta în \ref{section:impl-selecta}. Prin această componentă, spunem că
+Editorul OpenGL este integrat perfect cu Eclipse RCP, beneficiind (poate
+beneficia astfel) de toate facilităţile pe care le are de oferit această
+platformă.
 
 \subsection{Plugin-ul OpenGL pentru SWT}
 Editorul OpenGL este primul loc al aplicaţiei unde avem de aface cu plugin-ul
@@ -275,9 +296,58 @@ crescînd înspre zonele unde modificarea aspectului scoate la iveală noi zone 
 model.
 
 \section{Vizualizarea 3D}
+\label{section:impl-view}
+
+\subsection{Integrarea cu Eclipse}
+Vizualizarea 3D este o Vizualizare Eclipse standard. Ca şi în cazul editorului,
+particularitatea componentei create de noi este că foloseşte pentru
+reprezentarea conţinutului o suprafaţă de desenare OpenGL. Diferenţa
+fundamentală faţă de Editor este căm în cazul vizualizării, utilizatorul nu
+poate modifica modelul de lucru prin interacţiunea cu controlul respectiv.
+Astfel, se reduce mult din nevoile şi calculaţiile necesare (nu avem nevoie nici
+de mecanismul de stări prezent la editor). Vizualizarea este doar o modalitate
+foarte bună de vizualizarea tridimensională a modelului final.
+
+\subsection{Prezentarea 3D}
+Deşi toate rutinele de desenare sunt prezente în fiecare componentă a modelului
+în parte, vizualizarea are însă totuşi responsabilitatea de a face unele
+operaţii pentru suprafaţa de desenare.
+
+În principal, are aceleaşi responsabilităţi de sincronizare de threaduri pe care
+le are şi Editorul. Deşi nu poate exista decît o singură vizualizare, motorul de
+desenare OpenGL interacţionează în acelaşi fel cu toate componentele care doresc
+să deseneze pe o suprafaţă OpenGL.
+
+De asemenea, vizualizarea are răspunderea de a seta datele proiecţiei, în
+funcţie de unghiul de privire şi punctul de centru pe care utilizatorul le poate
+modifica cu ajutorul mausului. Pentru controlul acestor coordonate, vizualizarea
+captează evenimentele mausului întocmai ca o stare a editorului şi tratează
+diverse mişcări ale mausului în sensul modificării parametrilor de vizualizare.
 
 \section{Sursa de selecţie}
+\label{section:impl-selecta}
+Sursa de selecţie, reprezentată de clasa GLEditorOutlinePage serveşte în 
+principal vizualizării de structură, prezentată la \ref{section:impl-outline}. 
+Însă în acelaşi timp, serveşte unui scop similar sincronizării cu Vizualirea 
+3D. Principala ei funcţie este să anunţe tuturor celor înscrişi schimbarea 
+selecţiei în editor. Schimbarea selecţiei poate avea mai multe 
+surse\footnote{i.e. Vizualizarea structurii poate schimba selecţia}, şi deci şi 
+editorul în sine ascultă acest serviciu. Pentru aceasta, el trebuie să se
+protejeze la a reacţiona în lanţ la acţiunea de schimbare a
+selecţiei\footnote{El cînd schimbă selecţia anunţă serviciul, care apoi îl
+anunţă pe el, el schimbă selecţia şi anunţă din nou, etc.}.
+
+În acelaşi timp clasa menţionată serveşte ca sursă de conţinut pentru
+Vizualizarea de structură. Arborii în SWT sunt structuri abstracte, care separă
+conţinutul de prezentare, şi partea lor de sursă de date este tocmai această
+clasă.
 
 \section{Vizualizarea structurii}
+\label{section:impl-outline}
+
+Vizualizarea de structură se bazează în principal pe Sursa de selecţie, descrisă
+la \ref{section:impl-selecta}. În general, toate editoarele din Eclipse
+beneficiază de această componentă, şi utilizatorul se aşteaptă ca în cadrul ei
+să vizualizeze toate componentele logice în struct
 
 \section{Particularizările interfeţei Eclipse}

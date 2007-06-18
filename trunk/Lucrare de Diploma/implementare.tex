@@ -348,6 +348,15 @@ clasă.
 Vizualizarea de structură se bazează în principal pe Sursa de selecţie, descrisă
 la \ref{section:impl-selecta}. În general, toate editoarele din Eclipse
 beneficiază de această componentă, şi utilizatorul se aşteaptă ca în cadrul ei
-să vizualizeze toate componentele logice în struct
+să vizualizeze toate componentele logice într-o structura naturală.
+
+În cazul de faţă, se prezintă toate primitivilele şi conexiunile dintre ele,
+într-o structură arborescentă. Deşi legăturile dintre primitive sunt mai
+complexe, se reprezintă într-o versiune simplificată şi uşor de înţeles pentru
+utilizator.
+
+Conţinutul efectiv al vizualizării este dat de sursa de selecţie, prezentată la
+\ref{section:impl-selecta}. Vizualizarea de structură este doar o componentă
+standard a Eclipse RCP, particularizată prin conectarea cu sursa de selecţie.
 
 \section{Particularizările interfeţei Eclipse}

@@ -184,10 +184,12 @@ altele sau peste ziduri. O implementare rudimentară ar putea evita cele mai
 multe din situaţiile de suprapunere, folosind funcţiile de suprapunere
 implementate de fiecare obiect în parte.
 
-\section{Editorul OpenGL}
+\section{Particularizarea Eclipse RCP}
+
+\subsection{Editorul OpenGL}
 \label{section:impl-editor}
 
-\subsection{Integrarea cu Eclipse}
+\subsubsection{Integrarea cu Eclipse}
 Editorul OpenGL este un editor pentru Eclipse RCP, şi respectă standardele
 pentru un editor de acest fel. De aceea, el poate fi folosit ca orice alt editor
 (i.e. Un editor de text pentru surse Java) în cadrul unei aplicaţii Eclipse. El
@@ -207,7 +209,7 @@ Editorul OpenGL este integrat perfect cu Eclipse RCP, beneficiind (poate
 beneficia astfel) de toate facilităţile pe care le are de oferit această
 platformă.
 
-\subsection{Plugin-ul OpenGL pentru SWT}
+\subsubsection{Plugin-ul OpenGL pentru SWT}
 Editorul OpenGL este primul loc al aplicaţiei unde avem de aface cu plugin-ul
 pentru OpenGL şi SWT. Deşi a fost scris special pentru Eclipse, acest plugin a
 necesitat o extensivă testare şi configurare pentru funcţionarea corectă alături
@@ -229,7 +231,7 @@ metode din Editor şi Vizualizarea faţă de un punct fix, şi în cadrul zonei
 sincronizate să se selecteze (şi astfel să fie totdeauna determinată) suprafaţa 
 de desenare.
 
-\subsection{Maşina de stări}
+\subsubsection{Maşina de stări}
 Pentru implementarea maşinii de stări am folosit o stivă în vîrful căreia stătea
 totdeauna starea activă\footnote{Am explicat funcţionarea Maşinii de stări în
 Secţiunea \ref{section:machine}}.
@@ -273,7 +275,7 @@ interfaţa generică Listener.
 \label{table:state-events}}
 \end{table}
 
-\subsection{Interacţiunea cu utilizatorul. Prezentarea 2D}
+\subsubsection{Interacţiunea cu utilizatorul. Prezentarea 2D}
 Editorul OpenGL poate interacţiona prin intermediul mausului cu orice obiect din
 model ce suportă acest comportament. Pentru aceasta, editorul trebuie să reţină
 în orice moment caracteristicile zonei care este desenată pe ecran, adică
@@ -295,10 +297,10 @@ cantitatea de detalii va ramîne constantă în zona pătratică a desenului,
 crescînd înspre zonele unde modificarea aspectului scoate la iveală noi zone din
 model.
 
-\section{Vizualizarea 3D}
+\subsection{Vizualizarea 3D}
 \label{section:impl-view}
 
-\subsection{Integrarea cu Eclipse}
+\subsubsection{Integrarea cu Eclipse}
 Vizualizarea 3D este o Vizualizare Eclipse standard. Ca şi în cazul editorului,
 particularitatea componentei create de noi este că foloseşte pentru
 reprezentarea conţinutului o suprafaţă de desenare OpenGL. Diferenţa
@@ -308,7 +310,7 @@ Astfel, se reduce mult din nevoile şi calculaţiile necesare (nu avem nevoie ni
 de mecanismul de stări prezent la editor). Vizualizarea este doar o modalitate
 foarte bună de vizualizarea tridimensională a modelului final.
 
-\subsection{Prezentarea 3D}
+\subsubsection{Prezentarea 3D}
 Deşi toate rutinele de desenare sunt prezente în fiecare componentă a modelului
 în parte, vizualizarea are însă totuşi responsabilitatea de a face unele
 operaţii pentru suprafaţa de desenare.
@@ -324,7 +326,7 @@ modifica cu ajutorul mausului. Pentru controlul acestor coordonate, vizualizarea
 captează evenimentele mausului întocmai ca o stare a editorului şi tratează
 diverse mişcări ale mausului în sensul modificării parametrilor de vizualizare.
 
-\section{Sursa de selecţie}
+\subsection{Sursa de selecţie}
 \label{section:impl-selecta}
 Sursa de selecţie, reprezentată de clasa GLEditorOutlinePage serveşte în 
 principal vizualizării de structură, prezentată la \ref{section:impl-outline}. 
@@ -342,7 +344,7 @@ Vizualizarea de structură. Arborii în SWT sunt structuri abstracte, care separ
 conţinutul de prezentare, şi partea lor de sursă de date este tocmai această
 clasă.
 
-\section{Vizualizarea structurii}
+\subsection{Vizualizarea structurii}
 \label{section:impl-outline}
 
 Vizualizarea de structură se bazează în principal pe Sursa de selecţie, descrisă
@@ -358,5 +360,3 @@ utilizator.
 Conţinutul efectiv al vizualizării este dat de sursa de selecţie, prezentată la
 \ref{section:impl-selecta}. Vizualizarea de structură este doar o componentă
 standard a Eclipse RCP, particularizată prin conectarea cu sursa de selecţie.
-
-\section{Particularizările interfeţei Eclipse}

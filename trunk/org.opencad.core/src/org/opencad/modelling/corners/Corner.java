@@ -21,10 +21,6 @@ public class Corner extends Primitive implements Outlineable {
 
 	private Double x, y;
 
-	private transient boolean hover;
-
-	private transient boolean selected;
-
 	public static double thickness = 0.2d;
 
 	private static double hoverSlack = 2 * thickness;
@@ -77,24 +73,6 @@ public class Corner extends Primitive implements Outlineable {
 	public boolean isHoverCoordinates(double x, double y) {
 		return Math.abs(this.x - x) < hoverSlack
 				&& Math.abs(this.y - y) < hoverSlack;
-	}
-
-	public boolean setHover(boolean hover) {
-		boolean changed = this.hover != hover;
-		this.hover = hover;
-		return changed;
-	}
-
-	public boolean isHover() {
-		return hover;
-	}
-
-	public boolean isSelected() {
-		return selected;
-	}
-
-	public void setSelected(boolean selected) {
-		this.selected = selected;
 	}
 
 	public GLEditorState getSelectionState(GLEditor editor) {

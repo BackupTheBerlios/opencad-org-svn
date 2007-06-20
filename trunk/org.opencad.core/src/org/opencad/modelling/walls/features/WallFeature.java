@@ -1,58 +1,90 @@
 package org.opencad.modelling.walls.features;
 
 import org.opencad.modelling.Primitive;
+import org.opencad.modelling.corners.Corner;
+import org.opencad.modelling.walls.Wall;
 
 public abstract class WallFeature extends Primitive implements
-    Comparable<WallFeature> {
-  private Double startOffset;
+		Comparable<WallFeature> {
+	private Double startOffset;
 
-  private Double width;
+	private Double width;
 
-  private Double height;
+	private Double height;
 
-  private Double groundOffset;
+	private Double groundOffset;
 
-  public Double getMaxStartOffset() {
-    return startOffset + width;
-  }
+	private Wall wall;
 
-  public double getMaxGroundOffset() {
-    return groundOffset + height;
-  }
+	@Override
+	public boolean isRenderable() {
+		return false;
+	}
 
-  public Double getGroundOffset() {
-    return groundOffset;
-  }
+	public Wall getWall() {
+		return wall;
+	}
 
-  public void setGroundOffset(Double bottomOffset) {
-    this.groundOffset = bottomOffset;
-  }
+	public void setWall(Wall wall) {
+		this.wall = wall;
+	}
 
-  public Double getWidth() {
-    return width;
-  }
+	public Double getMaxStartOffset() {
+		return startOffset + width;
+	}
 
-  public void setWidth(Double endOffset) {
-    this.width = endOffset;
-  }
+	public double getMaxGroundOffset() {
+		return groundOffset + height;
+	}
 
-  public Double getHeight() {
-    return height;
-  }
+	public Double getGroundOffset() {
+		return groundOffset;
+	}
 
-  public void setHeight(Double topOffset) {
-    this.height = topOffset;
-  }
+	public void setGroundOffset(Double bottomOffset) {
+		this.groundOffset = bottomOffset;
+	}
 
-  public Double getStartOffset() {
-    return startOffset;
-  }
+	public Double getWidth() {
+		return width;
+	}
 
-  public void setStartOffset(Double startOffset) {
-    this.startOffset = startOffset;
-  }
+	public void setWidth(Double endOffset) {
+		this.width = endOffset;
+	}
 
-  public int compareTo(WallFeature o) {
-    return startOffset.compareTo(o.startOffset);
-  }
+	public Double getHeight() {
+		return height;
+	}
+
+	public void setHeight(Double topOffset) {
+		this.height = topOffset;
+	}
+
+	public Double getStartOffset() {
+		return startOffset;
+	}
+
+	public void setStartOffset(Double startOffset) {
+		this.startOffset = startOffset;
+	}
+
+	public int compareTo(WallFeature o) {
+		return startOffset.compareTo(o.startOffset);
+	}
+
+	final public boolean isHoverCoordinates(double x, double y) {
+		if (wall != null) {
+			double[] prj = wall.getProjectionOf(x, y);
+			double len = wall.getLength();
+			double sp = startOffset / len;
+			double ep = getMaxStartOffset() / len;
+			if (prj != null) {
+				return Wall.sqr(x - prj[0]) + Wall.sqr(y - prj[1]) < Wall
+						.sqr(Corner.thickness)
+						&& prj[2] > sp && prj[2] < ep;
+			}
+		}
+		return false;
+	}
 }

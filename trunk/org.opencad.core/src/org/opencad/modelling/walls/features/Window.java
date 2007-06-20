@@ -9,6 +9,7 @@ import org.opencad.ui.editor.GLEditorState;
 public class Window extends WallFeature {
   private static final long serialVersionUID = 1L;
 
+ 
   public Window() {
     setGroundOffset(1d);
     setHeight(1.5d);
@@ -123,26 +124,7 @@ public class Window extends WallFeature {
     return -50;
   }
 
-  public boolean isHover() {
-    return false;
-  }
-
-  public boolean isHoverCoordinates(double x, double y) {
-    return false;
-  }
-
-  public boolean setHover(boolean hover) {
-    return false;
-  }
-
   public GLEditorState getSelectionState(GLEditor editor) {
-    return null;
-  }
-
-  public boolean isSelected() {
-    return false;
-  }
-
-  public void setSelected(boolean selected) {
+    return new SelectFeatureState(editor, this);
   }
 }

@@ -3,6 +3,7 @@ package org.opencad.modelling;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import org.eclipse.opengl.GL;
 import org.opencad.ui.editor.EditorRenderable;
 import org.opencad.ui.editor.Hoverable;
 import org.opencad.ui.editor.RealRenderable;
@@ -104,13 +105,25 @@ public class Model implements EditorRenderable, RealRenderable, Serializable {
 
 	public void editorRender() {
 		for (Primitive primitive : primitives) {
-			primitive.editorRender();
+			if (primitive.isRenderable()) {
+				GL.glPushMatrix();
+				{
+					primitive.editorRender();
+				}
+				GL.glPopMatrix();
+			}
 		}
 	}
 
 	public void realRender(boolean fillMode) {
 		for (Primitive primitive : primitives) {
-			primitive.realRender(fillMode);
+			if (primitive.isRenderable()) {
+				GL.glPushMatrix();
+				{
+					primitive.realRender(fillMode);
+				}
+				GL.glPopMatrix();
+			}
 		}
 	}
 }

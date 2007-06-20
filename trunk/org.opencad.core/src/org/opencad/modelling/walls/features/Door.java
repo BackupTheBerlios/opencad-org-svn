@@ -136,26 +136,9 @@ public class Door extends WallFeature {
     return -50;
   }
 
-  public boolean isHover() {
-    return false;
-  }
-
-  public boolean isHoverCoordinates(double x, double y) {
-    return false;
-  }
-
-  public boolean setHover(boolean hover) {
-    return false;
-  }
 
   public GLEditorState getSelectionState(GLEditor editor) {
-    return null;
+    return new SelectFeatureState(editor, this);
   }
 
-  public boolean isSelected() {
-    return false;
-  }
-
-  public void setSelected(boolean selected) {
-  }
 }

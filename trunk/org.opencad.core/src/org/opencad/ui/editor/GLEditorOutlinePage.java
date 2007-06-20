@@ -14,7 +14,8 @@ public class GLEditorOutlinePage extends ContentOutlinePage {
 		this.editor = editor;
 		editor.addPropertyListener(new IPropertyListener() {
 			public void propertyChanged(Object source, int propId) {
-				if (propId == GLEditor.PROP_DIRTY) {
+				if (propId == GLEditor.PROP_DIRTY && editor != null
+						&& getTreeViewer() != null) {
 					getTreeViewer().setInput(editor.getModel());
 				}
 			}

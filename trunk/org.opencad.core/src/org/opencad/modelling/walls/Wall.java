@@ -12,6 +12,8 @@ import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Outlineable;
 
+import com.sun.xml.internal.ws.model.Mode;
+
 public class Wall extends Primitive implements Outlineable {
 	private static final long serialVersionUID = -8662848078904155699L;
 	static {
@@ -37,6 +39,7 @@ public class Wall extends Primitive implements Outlineable {
 				return false;
 			}
 		}
+		feature.setWall(this);
 		return features.add(feature);
 	}
 
@@ -456,26 +459,8 @@ public class Wall extends Primitive implements Outlineable {
 		return false;
 	}
 
-	public boolean setHover(boolean hover) {
-		boolean changed = this.hover != hover;
-		this.hover = hover;
-		return changed;
-	}
-
 	public GLEditorState getSelectionState(GLEditor editor) {
 		return null;
-	}
-
-	public boolean isSelected() {
-		return selected;
-	}
-
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
-
-	public boolean isHover() {
-		return hover;
 	}
 
 	public int getZIndex() {

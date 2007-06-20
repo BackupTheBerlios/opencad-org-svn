@@ -53,19 +53,22 @@ public class PlaceFeatureState extends GLEditorState implements MouseListener,
 		double gly = ((double) size.height / 2 - e.y) * px2gl
 				+ glEditor.getTopAnchor();
 		glEditor.getModel().informHoverables(glx, gly);
-		Hoverable selection = getGlEditor().getModel().trapHoverable(glx, gly);
+		Hoverable selection = getGlEditor().getModel().trapHoverable(glx, gly,
+				feature);
 		if (selection == null) {
 			selection = wall;
 		}
 		if (selection instanceof Wall) {
 			if (wall != null) {
 				wall.removeFeature(feature);
+				glEditor.getModel().removePrimitive(feature);
 			}
 			wall = (Wall) selection;
 			if (wall != null) {
 				double[] prj = wall.getProjectionOf(glx, gly);
 				feature.setStartOffset(prj[2] * wall.getLength());
 				wall.addFeature(feature);
+				glEditor.getModel().addPrimitive(feature);
 			}
 		}
 		glEditor.doRefresh();

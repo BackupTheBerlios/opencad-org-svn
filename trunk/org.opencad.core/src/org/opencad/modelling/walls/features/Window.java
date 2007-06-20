@@ -3,7 +3,6 @@ package org.opencad.modelling.walls.features;
 import org.eclipse.opengl.GL;
 import org.opencad.modelling.corners.Corner;
 import org.opencad.modelling.walls.Wall;
-import org.opencad.modelling.walls.WallFeature;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 

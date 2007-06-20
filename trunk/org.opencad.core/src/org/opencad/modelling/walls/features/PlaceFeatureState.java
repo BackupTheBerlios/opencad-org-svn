@@ -1,9 +1,10 @@
-package org.opencad.modelling.walls;
+package org.opencad.modelling.walls.features;
 
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.graphics.Rectangle;
+import org.opencad.modelling.walls.Wall;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Hoverable;

@@ -1,4 +1,4 @@
-package org.opencad.modelling.walls;
+package org.opencad.modelling.walls.features;
 
 import org.opencad.modelling.Primitive;
 

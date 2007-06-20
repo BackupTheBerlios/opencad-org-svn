@@ -7,6 +7,7 @@ import org.eclipse.opengl.GL;
 import org.opencad.modelling.Primitive;
 import org.opencad.modelling.PrimitiveTypeRegister;
 import org.opencad.modelling.corners.Corner;
+import org.opencad.modelling.walls.features.WallFeature;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Outlineable;

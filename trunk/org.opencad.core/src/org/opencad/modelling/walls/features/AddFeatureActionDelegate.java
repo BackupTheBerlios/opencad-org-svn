@@ -1,11 +1,9 @@
-package org.opencad.modelling.walls;
+package org.opencad.modelling.walls.features;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorActionDelegate;
 import org.eclipse.ui.IEditorPart;
-import org.opencad.modelling.walls.features.Door;
-import org.opencad.modelling.walls.features.Window;
 import org.opencad.ui.editor.GLEditor;
 
 public class AddFeatureActionDelegate implements IEditorActionDelegate {

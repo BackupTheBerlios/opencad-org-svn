@@ -25,7 +25,7 @@
            id="org.opencad.core.addWindowContribution"
            targetID="org.opencad.core.editors.GLEditor">
         <action
-              class="org.opencad.modelling.walls.AddFeatureActionDelegate"
+              class="org.opencad.modelling.walls.features.AddFeatureActionDelegate"
               id="org.opencad.core.addWindowAction"
               label="New Window"
               style="push"
@@ -35,7 +35,7 @@
            id="org.opencad.core.addDoorContribution"
            targetID="org.opencad.core.editors.GLEditor">
         <action
-              class="org.opencad.modelling.walls.AddFeatureActionDelegate"
+              class="org.opencad.modelling.walls.features.AddFeatureActionDelegate"
               id="org.opencad.core.addDoorAction"
               label="New Door"
               style="push"

@@ -323,7 +323,7 @@ public class GLView extends ViewPart implements MouseMoveListener,
 			glEditor.getSite().getSelectionProvider()
 					.addSelectionChangedListener(this);
 			glEditor.addPropertyListener(this);
-			glCanvas.setEnabled(true);
+			glCanvas.setVisible(true);
 			doDraw();
 		} else {
 			disabled = true;
@@ -333,7 +333,7 @@ public class GLView extends ViewPart implements MouseMoveListener,
 				glEditor.removePropertyListener(this);
 			}
 			glEditor = null;
-			glCanvas.setEnabled(false);
+			glCanvas.setVisible(false);
 		}
 	}
 

@@ -277,11 +277,11 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
       throws PartInitException {
     setSite(site);
     setInput(input);
+    parseFile(input);
     stateStack = new LinkedList<GLEditorState>();
     outlinePage = new GLEditorOutlinePage(this);
     site.setSelectionProvider(outlinePage);
     site.getSelectionProvider().addSelectionChangedListener(this);
-    parseFile(input);
   }
 
   @Override

@@ -52,14 +52,8 @@
               name="aboutText"
               value="OpenCad.org&#x0A;Build, not draw&#x0A;&#x0A;Copyright © 2007 Silviu-Georgian Aprozeanu"/>
         <property
-              name="windowImages"
-              value="icons/oc.gif"/>
-        <property
-              name="startupForegroundColor"
-              value="000000"/>
-        <property
-              name="startupMessageRect"
-              value="0,0,0,0"/>
+              name="startupProgressRect"
+              value="0,10,420,10"/>
      </product>
   </extension>
   <extension

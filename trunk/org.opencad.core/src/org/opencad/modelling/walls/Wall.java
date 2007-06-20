@@ -9,8 +9,9 @@ import org.opencad.modelling.PrimitiveTypeRegister;
 import org.opencad.modelling.corners.Corner;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
+import org.opencad.ui.editor.Outlineable;
 
-public class Wall extends Primitive {
+public class Wall extends Primitive implements Outlineable {
 	private static final long serialVersionUID = -8662848078904155699L;
 	static {
 		PrimitiveTypeRegister.registerPrimitiveType(Wall.class);
@@ -484,5 +485,17 @@ public class Wall extends Primitive {
 		return Math.sqrt(sqr(getEndingCorner().getX()
 				- getStartingCorner().getX())
 				+ sqr(getEndingCorner().getY() - getStartingCorner().getY()));
+	}
+
+	public Object[] getChildren() {
+		return features.toArray();
+	}
+
+	public String getText() {
+		return "Wall";
+	}
+
+	public boolean hasChildren() {
+		return features.size() > 0;
 	}
 }

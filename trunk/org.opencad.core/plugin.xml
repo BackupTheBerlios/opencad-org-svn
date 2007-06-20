@@ -25,7 +25,7 @@
            id="org.opencad.core.addWindowContribution"
            targetID="org.opencad.core.editors.GLEditor">
         <action
-              class="org.opencad.modelling.window.AddWindowActionDelegate"
+              class="org.opencad.modelling.walls.AddFeatureActionDelegate"
               id="org.opencad.core.addWindowAction"
               label="New Window"
               style="push"
@@ -35,7 +35,7 @@
            id="org.opencad.core.addDoorContribution"
            targetID="org.opencad.core.editors.GLEditor">
         <action
-              class="org.opencad.modelling.door.AddDoorActionDelegate"
+              class="org.opencad.modelling.walls.AddFeatureActionDelegate"
               id="org.opencad.core.addDoorAction"
               label="New Door"
               style="push"
@@ -77,17 +77,21 @@
            canFinishEarly="true"
            category="org.opencad.core.category"
            class="org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard"
+           finalPerspective="org.opencad.core.perspective"
            hasPages="true"
            icon="icons/new_project.gif"
            id="org.opencad.core.projectWizard"
            name="OpenCad.org Project"
+           preferredPerspectives="org.opencad.core.perspective"
            project="true"/>
      <wizard
            category="org.opencad.core.category"
            class="org.opencad.ui.NewFileWizard"
+           finalPerspective="org.opencad.core.perspective"
            icon="icons/new_con.gif"
            id="org.opencad.ui.NewFileWizard"
-           name="New OpenCad.org Model"/>
+           name="New OpenCad.org Model"
+           preferredPerspectives="org.opencad.core.perspective"/>
   </extension>
   <extension
         point="org.eclipse.ui.perspectives">

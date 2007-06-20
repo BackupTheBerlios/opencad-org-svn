@@ -21,16 +21,19 @@ public class GLEditorTreeContentProvider implements ITreeContentProvider,
 	}
 	
 	public Object[] getChildren(Object parentElement) {
-		HashSet<Primitive> children = new HashSet<Primitive>();
 		if (parentElement instanceof Class) {
+			HashSet<Primitive> children = new HashSet<Primitive>();
 			for (Primitive primitive : model.getPrimitives()) {
 				if (((Class<? extends Primitive>) parentElement)
 						.isAssignableFrom(primitive.getClass())) {
 					children.add(primitive);
 				}
 			}
+			return children.toArray();
+		} else if (parentElement instanceof Outlineable) {
+			return ((Outlineable) parentElement).getChildren();
 		}
-		return children.toArray();
+		return null;
 	}
 
 	public Object getParent(Object element) {
@@ -48,6 +51,8 @@ public class GLEditorTreeContentProvider implements ITreeContentProvider,
 					return true;
 				}
 			}
+		} else if (element instanceof Outlineable) {
+			return ((Outlineable) element).hasChildren();
 		}
 		return false;
 	}
@@ -71,8 +76,13 @@ public class GLEditorTreeContentProvider implements ITreeContentProvider,
 	}
 
 	public String getText(Object element) {
+		if (element instanceof String) {
+			return (String) element;
+		} else
 		if (element instanceof Class) {
 			return ((Class) element).getSimpleName();
+		} else if (element instanceof Outlineable) {
+			return ((Outlineable) element).getText();
 		} else if (element instanceof Primitive) {
 			return element.toString();
 		}

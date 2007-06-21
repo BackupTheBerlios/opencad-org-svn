@@ -7,6 +7,7 @@ import org.eclipse.opengl.GL;
 import org.opencad.ui.editor.EditorRenderable;
 import org.opencad.ui.editor.Hoverable;
 import org.opencad.ui.editor.RealRenderable;
+import org.opencad.ui.editor.RenderStage;
 import org.opencad.ui.editor.Selectable;
 
 public class Model implements EditorRenderable, RealRenderable, Serializable {
@@ -115,12 +116,12 @@ public class Model implements EditorRenderable, RealRenderable, Serializable {
 		}
 	}
 
-	public void realRender(boolean fillMode) {
+	public void realRender(RenderStage stage) {
 		for (Primitive primitive : primitives) {
 			if (primitive.isRenderable()) {
 				GL.glPushMatrix();
 				{
-					primitive.realRender(fillMode);
+					primitive.realRender(stage);
 				}
 				GL.glPopMatrix();
 			}

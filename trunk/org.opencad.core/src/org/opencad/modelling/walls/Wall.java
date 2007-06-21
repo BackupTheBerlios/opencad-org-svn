@@ -11,6 +11,7 @@ import org.opencad.modelling.walls.features.WallFeature;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Outlineable;
+import org.opencad.ui.editor.RenderStage;
 
 public class Wall extends Primitive implements Outlineable {
 	private static final long serialVersionUID = -8662848078904155699L;
@@ -26,14 +27,10 @@ public class Wall extends Primitive implements Outlineable {
 
 	public boolean addFeature(WallFeature feature) {
 		for (WallFeature aFeature : features) {
-			if (aFeature.getStartOffset() <= feature.getStartOffset()
-					&& !(aFeature.getMaxStartOffset() <= feature
-							.getStartOffset())) {
+			if (aFeature.getStartOffset() <= feature.getStartOffset() && !(aFeature.getMaxStartOffset() <= feature.getStartOffset())) {
 				return false;
 			}
-			if (aFeature.getStartOffset() >= feature.getStartOffset()
-					&& !(aFeature.getStartOffset() >= feature
-							.getMaxStartOffset())) {
+			if (aFeature.getStartOffset() >= feature.getStartOffset() && !(aFeature.getStartOffset() >= feature.getMaxStartOffset())) {
 				return false;
 			}
 		}
@@ -87,8 +84,7 @@ public class Wall extends Primitive implements Outlineable {
 	}
 
 	int slight_slope(double[] a, double[] b, int ax, int bx) {
-		return (int) (Math.signum(a[ax + 1] - b[bx + 1]) + 3 * Math
-				.signum(a[ax] - b[bx]));
+		return (int) (Math.signum(a[ax + 1] - b[bx + 1]) + 3 * Math.signum(a[ax] - b[bx]));
 	}
 
 	ArrayList<Double> getSegments() {
@@ -104,9 +100,7 @@ public class Wall extends Primitive implements Outlineable {
 		if (getStartingCorner() != null && getEndingCorner() != null) {
 			double[] start_points = getStartingCorner().getStartLimitsOf(this);
 			double[] end_points = getEndingCorner().getEndLimitsOf(this);
-			double[] these_points = new double[] { getStartingCorner().getX(),
-					getStartingCorner().getY(), getEndingCorner().getX(),
-					getEndingCorner().getY() };
+			double[] these_points = new double[] { getStartingCorner().getX(), getStartingCorner().getY(), getEndingCorner().getX(), getEndingCorner().getY() };
 			int angle = slight_slope(these_points, these_points, 0, 2);
 			int angle_1 = slight_slope(start_points, end_points, 0, 2);
 			int angle_2 = slight_slope(start_points, end_points, 2, 0);
@@ -140,8 +134,7 @@ public class Wall extends Primitive implements Outlineable {
 			double x2 = sx2;
 			double y2 = sy2;
 			boolean odd = true;
-			double rotation = 180 + Math.atan2(ey - sy, ex - sx) * 180
-					/ Math.PI;
+			double rotation = 180 + Math.atan2(ey - sy, ex - sx) * 180 / Math.PI;
 			int segment = 0;
 			if (isSelected()) {
 				GL.glColor3d(0d, 0.5d, 0d);
@@ -170,9 +163,7 @@ public class Wall extends Primitive implements Outlineable {
 				double py1 = sy1 + u1 * dy1;
 				double px2 = sx2 + u2 * dx2;
 				double py2 = sy2 + u2 * dy2;
-				boolean feature_enabled = (sx1 < px1 && px1 < ex1 || sx1 > px1
-						&& px1 > ex1)
-						&& (sx2 < px2 && px2 < ex2 || sx2 > px2 && px2 > ex2);
+				boolean feature_enabled = (sx1 < px1 && px1 < ex1 || sx1 > px1 && px1 > ex1) && (sx2 < px2 && px2 < ex2 || sx2 > px2 && px2 > ex2);
 				if (!feature_enabled) {
 					old_feature = false;
 					odd = !odd;
@@ -252,14 +243,23 @@ public class Wall extends Primitive implements Outlineable {
 	}
 
 	public static final double height = 3.5d;
+	
+	public static void getColor(RenderStage stage) {
+		switch (stage) {
+		case FILL:
+			GL.glColor3d(1d, 1d, 0.95d);
+			break;
+		case WIRE:
+			GL.glColor3d(0.4d, 0.4d, 0.35d);
+			break;
+		}
+	}
 
-	public void realRender(boolean fillMode) {
+	public void realRender(RenderStage stage) {
 		if (getStartingCorner() != null && getEndingCorner() != null) {
 			double[] start_points = getStartingCorner().getStartLimitsOf(this);
 			double[] end_points = getEndingCorner().getEndLimitsOf(this);
-			double[] these_points = new double[] { getStartingCorner().getX(),
-					getStartingCorner().getY(), getEndingCorner().getX(),
-					getEndingCorner().getY() };
+			double[] these_points = new double[] { getStartingCorner().getX(), getStartingCorner().getY(), getEndingCorner().getX(), getEndingCorner().getY() };
 			int angle = slight_slope(these_points, these_points, 0, 2);
 			int angle_1 = slight_slope(start_points, end_points, 0, 2);
 			int angle_2 = slight_slope(start_points, end_points, 2, 0);
@@ -291,9 +291,9 @@ public class Wall extends Primitive implements Outlineable {
 			double y2 = sy2;
 			boolean odd = true;
 			boolean old_feature = true;
-			double rotation = 180 + Math.atan2(ey - sy, ex - sx) * 180
-					/ Math.PI;
+			double rotation = 180 + Math.atan2(ey - sy, ex - sx) * 180 / Math.PI;
 			int segment = 0;
+			getColor(stage);
 			for (Double dist : segments) {
 				segment++;
 				if (dist < 0) {
@@ -313,9 +313,7 @@ public class Wall extends Primitive implements Outlineable {
 				double py1 = sy1 + u1 * dy1;
 				double px2 = sx2 + u2 * dx2;
 				double py2 = sy2 + u2 * dy2;
-				boolean feature_enabled = (sx1 < px1 && px1 < ex1 || sx1 > px1
-						&& px1 > ex1)
-						&& (sx2 < px2 && px2 < ex2 || sx2 > px2 && px2 > ex2);
+				boolean feature_enabled = (sx1 < px1 && px1 < ex1 || sx1 > px1 && px1 > ex1) && (sx2 < px2 && px2 < ex2 || sx2 > px2 && px2 > ex2);
 				if (!feature_enabled) {
 					old_feature = false;
 					odd = !odd;
@@ -323,10 +321,15 @@ public class Wall extends Primitive implements Outlineable {
 				}
 				if (odd) {
 					odd = false;
-					if (fillMode) {
+					switch (stage) {
+					case FILL: {
 						GL.glBegin(GL.GL_QUADS);
-					} else {
+					}
+						break;
+					case WIRE: {
 						GL.glBegin(GL.GL_LINES);
+					}
+						break;
 					}
 					{
 						if (enable1) {
@@ -367,7 +370,7 @@ public class Wall extends Primitive implements Outlineable {
 						{
 							GL.glTranslated(nx, ny, 0);
 							GL.glRotated(rotation, 0d, 0d, 1d);
-							findFeature((segment - 1) / 2).realRender(fillMode);
+							findFeature((segment - 1) / 2).realRender(stage);
 						}
 						GL.glPopMatrix();
 						GL.glPopAttrib();
@@ -376,10 +379,15 @@ public class Wall extends Primitive implements Outlineable {
 				}
 				old_feature = true;
 			}
-			if (fillMode) {
+			switch (stage) {
+			case FILL: {
 				GL.glBegin(GL.GL_QUADS);
-			} else {
+			}
+				break;
+			case WIRE: {
 				GL.glBegin(GL.GL_LINES);
+			}
+				break;
 			}
 			{
 				if (enable1) {
@@ -402,7 +410,8 @@ public class Wall extends Primitive implements Outlineable {
 				}
 			}
 			GL.glEnd();
-			if (fillMode) {
+			switch (stage) {
+			case FILL: {
 				GL.glBegin(GL.GL_TRIANGLES);
 				{
 					GL.glVertex3d(sx1, sy1, height);
@@ -413,7 +422,9 @@ public class Wall extends Primitive implements Outlineable {
 					GL.glVertex3d(ex, ey, height);
 				}
 				GL.glEnd();
-			} else {
+			}
+				break;
+			case WIRE: {
 				GL.glBegin(GL.GL_LINES);
 				{
 					GL.glVertex3d(sx1, sy1, height);
@@ -426,6 +437,7 @@ public class Wall extends Primitive implements Outlineable {
 					GL.glVertex3d(ex2, ey2, 0);
 				}
 				GL.glEnd();
+			}
 			}
 		}
 	}
@@ -440,9 +452,7 @@ public class Wall extends Primitive implements Outlineable {
 	}
 
 	public double[] getProjectionOf(double x, double y) {
-		double[] intersection = getIntersectionOf(x, y, getStartingCorner()
-				.getX(), getStartingCorner().getY(), getEndingCorner().getX(),
-				getEndingCorner().getY());
+		double[] intersection = getIntersectionOf(x, y, getStartingCorner().getX(), getStartingCorner().getY(), getEndingCorner().getX(), getEndingCorner().getY());
 		if (intersection[2] > 0 && intersection[2] < 1) {
 			return intersection;
 		}
@@ -466,9 +476,7 @@ public class Wall extends Primitive implements Outlineable {
 	}
 
 	public double getLength() {
-		return Math.sqrt(sqr(getEndingCorner().getX()
-				- getStartingCorner().getX())
-				+ sqr(getEndingCorner().getY() - getStartingCorner().getY()));
+		return Math.sqrt(sqr(getEndingCorner().getX() - getStartingCorner().getX()) + sqr(getEndingCorner().getY() - getStartingCorner().getY()));
 	}
 
 	public Object[] getChildren() {

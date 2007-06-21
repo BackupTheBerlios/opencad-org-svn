@@ -26,6 +26,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
 import org.opencad.ui.editor.GLEditor;
+import org.opencad.ui.editor.RenderStage;
 
 public class GLView extends ViewPart implements MouseMoveListener,
 		ISelectionListener, ISelectionChangedListener, IPropertyListener {
@@ -126,7 +127,7 @@ public class GLView extends ViewPart implements MouseMoveListener,
 		GL.glEnable(GL.GL_DEPTH_TEST);
 		GL.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		GL.glEnable(GL.GL_POLYGON_OFFSET_FILL);
-		GL.glPolygonOffset(0.5f, 0.5f);
+		GL.glPolygonOffset(0.5f, 0.1f);
 //		GL.glEnable(GL.GL_LINE_SMOOTH);
 //		GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
 //		GL.glEnable(GL.GL_BLEND);
@@ -275,12 +276,16 @@ public class GLView extends ViewPart implements MouseMoveListener,
 			drawAnchor();
 			drawGrid();
 			GL.glLoadIdentity();
-			GL.glColor3d(1d, 1d, 1d);
-			GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_FILL);
-			glEditor.getModel().realRender(true);
-			GL.glColor3d(0d, 0d, 0d);
 			GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_LINE);
-			glEditor.getModel().realRender(false);
+			glEditor.getModel().realRender(RenderStage.WIRE);
+			GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_FILL);
+			glEditor.getModel().realRender(RenderStage.FILL);
+			GL.glEnable(GL.GL_BLEND);
+			{
+				GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+				glEditor.getModel().realRender(RenderStage.ALPHA);
+			}
+			GL.glDisable(GL.GL_BLEND);
 		}
 	}
 

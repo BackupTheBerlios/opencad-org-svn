@@ -12,6 +12,7 @@ import org.opencad.modelling.walls.Wall;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Outlineable;
+import org.opencad.ui.editor.RenderStage;
 
 public class Corner extends Primitive implements Outlineable {
 	private static final long serialVersionUID = -1332083715502519329L;
@@ -21,7 +22,7 @@ public class Corner extends Primitive implements Outlineable {
 
 	private Double x, y;
 
-	public static double thickness = 0.2d;
+	public static double thickness = 0.1d;
 
 	private static double hoverSlack = 2 * thickness;
 
@@ -71,8 +72,7 @@ public class Corner extends Primitive implements Outlineable {
 	}
 
 	public boolean isHoverCoordinates(double x, double y) {
-		return Math.abs(this.x - x) < hoverSlack
-				&& Math.abs(this.y - y) < hoverSlack;
+		return Math.abs(this.x - x) < hoverSlack && Math.abs(this.y - y) < hoverSlack;
 	}
 
 	public GLEditorState getSelectionState(GLEditor editor) {
@@ -85,17 +85,14 @@ public class Corner extends Primitive implements Outlineable {
 
 	public Double angleStartOf(Wall wall) {
 		if (wall.getEndingCorner() != null) {
-			return posAngle(Math.atan2(wall.getEndingCorner().getY() - y, wall
-					.getEndingCorner().getX()
-					- x));
+			return posAngle(Math.atan2(wall.getEndingCorner().getY() - y, wall.getEndingCorner().getX() - x));
 		}
 		return 0d;
 	}
 
 	public Double angleEndOf(Wall wall) {
 		if (wall.getStartingCorner() != null) {
-			return posAngle(Math.atan2(wall.getStartingCorner().getY() - y,
-					wall.getStartingCorner().getX() - x));
+			return posAngle(Math.atan2(wall.getStartingCorner().getY() - y, wall.getStartingCorner().getX() - x));
 		}
 		return 0d;
 	}
@@ -215,7 +212,9 @@ public class Corner extends Primitive implements Outlineable {
 		}
 	}
 
-	public void realRender(boolean fillMode) {
+	public void realRender(RenderStage stage) {
+		Wall.getColor(stage);
+		if (stage == RenderStage.ALPHA) return;
 		TreeMap<Double, Wall> walls = getWalls();
 		if (walls.size() == 1) {
 			Wall wall = walls.get(walls.firstKey());
@@ -227,7 +226,8 @@ public class Corner extends Primitive implements Outlineable {
 			} else {
 				throw new IllegalStateException();
 			}
-			if (fillMode) {
+			switch (stage) {
+			case FILL: {
 				GL.glBegin(GL.GL_QUADS);
 				{
 					GL.glVertex3d(lim[0], lim[1], 0);
@@ -236,7 +236,9 @@ public class Corner extends Primitive implements Outlineable {
 					GL.glVertex3d(lim[0], lim[1], Wall.height);
 				}
 				GL.glEnd();
-			} else {
+			}
+				break;
+			case WIRE: {
 				GL.glBegin(GL.GL_LINES);
 				{
 					GL.glVertex3d(lim[0], lim[1], 0);
@@ -245,6 +247,7 @@ public class Corner extends Primitive implements Outlineable {
 					GL.glVertex3d(lim[2], lim[3], Wall.height);
 				}
 				GL.glEnd();
+			}
 			}
 		}
 	}

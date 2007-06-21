@@ -142,10 +142,6 @@ public class Door extends WallFeature {
 		}
 	}
 
-	public int getZIndex() {
-		return -50;
-	}
-
 	public GLEditorState getSelectionState(GLEditor editor) {
 		return new SelectFeatureState(editor, this);
 	}

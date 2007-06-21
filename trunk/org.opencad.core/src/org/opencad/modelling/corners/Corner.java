@@ -89,13 +89,15 @@ public class Corner extends Primitive implements Outlineable {
 					.getEndingCorner().getX()
 					- x));
 		}
-		return null;
+		return 0d;
 	}
 
 	public Double angleEndOf(Wall wall) {
-		return posAngle(Math.atan2(wall.getStartingCorner().getY() - y, wall
-				.getStartingCorner().getX()
-				- x));
+		if (wall.getStartingCorner() != null) {
+			return posAngle(Math.atan2(wall.getStartingCorner().getY() - y,
+					wall.getStartingCorner().getX() - x));
+		}
+		return 0d;
 	}
 
 	public TreeMap<Double, Wall> getWalls() {

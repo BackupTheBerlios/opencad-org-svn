@@ -73,6 +73,10 @@ public abstract class WallFeature extends Primitive implements
 	public int compareTo(WallFeature o) {
 		return startOffset.compareTo(o.startOffset);
 	}
+	
+	final public int getZIndex() {
+		return -50;
+	}
 
 	final public boolean isHoverCoordinates(double x, double y) {
 		if (wall != null) {

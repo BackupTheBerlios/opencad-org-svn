@@ -193,9 +193,58 @@ public class Corner extends Primitive implements Outlineable {
 			}
 			GL.glDisable(GL.GL_LINE_STIPPLE);
 		}
+		TreeMap<Double, Wall> walls = getWalls();
+		if (walls.size() == 1) {
+			Wall wall = walls.get(walls.firstKey());
+			double[] lim;
+			if (startOf.contains(wall)) {
+				lim = getStartLimitsOf(wall);
+			} else if (endOf.contains(wall)) {
+				lim = getEndLimitsOf(wall);
+			} else {
+				throw new IllegalStateException();
+			}
+			GL.glBegin(GL.GL_LINES);
+			{
+				GL.glVertex2d(lim[0], lim[1]);
+				GL.glVertex2d(lim[2], lim[3]);
+			}
+			GL.glEnd();
+		}
 	}
 
 	public void realRender(boolean fillMode) {
+		TreeMap<Double, Wall> walls = getWalls();
+		if (walls.size() == 1) {
+			Wall wall = walls.get(walls.firstKey());
+			double[] lim;
+			if (startOf.contains(wall)) {
+				lim = getStartLimitsOf(wall);
+			} else if (endOf.contains(wall)) {
+				lim = getEndLimitsOf(wall);
+			} else {
+				throw new IllegalStateException();
+			}
+			if (fillMode) {
+				GL.glBegin(GL.GL_QUADS);
+				{
+					GL.glVertex3d(lim[0], lim[1], 0);
+					GL.glVertex3d(lim[2], lim[3], 0);
+					GL.glVertex3d(lim[2], lim[3], Wall.height);
+					GL.glVertex3d(lim[0], lim[1], Wall.height);
+				}
+			GL.glEnd();
+			} else {
+			GL.glBegin(GL.GL_LINES);
+				{
+					GL.glVertex3d(lim[0], lim[1], 0);
+					GL.glVertex3d(lim[2], lim[3], 0);
+					GL.glVertex3d(lim[0], lim[1], Wall.height);
+					GL.glVertex3d(lim[2], lim[3], Wall.height);
+				}
+			GL.glEnd();
+			} 
+		}
 	}
 
 	public int getZIndex() {

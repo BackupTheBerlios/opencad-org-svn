@@ -12,8 +12,6 @@ import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Outlineable;
 
-import com.sun.xml.internal.ws.model.Mode;
-
 public class Wall extends Primitive implements Outlineable {
 	private static final long serialVersionUID = -8662848078904155699L;
 	static {

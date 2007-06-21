@@ -57,6 +57,12 @@
         <property
               name="startupProgressRect"
               value="0,10,420,10"/>
+        <property
+              name="windowImages"
+              value="icons/oc.gif,icons/application32.gif,icons/application48.gif,icons/application64.gif,icons/application128.gif"/>
+        <property
+              name="aboutImage"
+              value="icons/application250.gif"/>
      </product>
   </extension>
   <extension

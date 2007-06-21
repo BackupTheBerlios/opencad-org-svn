@@ -482,4 +482,8 @@ public class Wall extends Primitive implements Outlineable {
 	public boolean hasChildren() {
 		return features.size() > 0;
 	}
+
+	public String getImage() {
+		return "icons/wall.gif";
+	}
 }

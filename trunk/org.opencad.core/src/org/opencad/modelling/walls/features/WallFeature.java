@@ -3,9 +3,10 @@ package org.opencad.modelling.walls.features;
 import org.opencad.modelling.Primitive;
 import org.opencad.modelling.corners.Corner;
 import org.opencad.modelling.walls.Wall;
+import org.opencad.ui.editor.Outlineable;
 
 public abstract class WallFeature extends Primitive implements
-		Comparable<WallFeature> {
+		Comparable<WallFeature>, Outlineable {
 	private Double startOffset;
 
 	private Double width;
@@ -86,5 +87,18 @@ public abstract class WallFeature extends Primitive implements
 			}
 		}
 		return false;
+	}
+
+	final public String getText() {
+		return String.format("%s @%.2f", getClass().getSimpleName(),
+				getStartOffset());
+	}
+	
+	final public boolean hasChildren() {
+		return false;
+	}
+	
+	final public Object[] getChildren() {
+		return null;
 	}
 }

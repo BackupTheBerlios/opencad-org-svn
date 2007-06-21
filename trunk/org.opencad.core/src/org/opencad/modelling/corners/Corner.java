@@ -233,17 +233,17 @@ public class Corner extends Primitive implements Outlineable {
 					GL.glVertex3d(lim[2], lim[3], Wall.height);
 					GL.glVertex3d(lim[0], lim[1], Wall.height);
 				}
-			GL.glEnd();
+				GL.glEnd();
 			} else {
-			GL.glBegin(GL.GL_LINES);
+				GL.glBegin(GL.GL_LINES);
 				{
 					GL.glVertex3d(lim[0], lim[1], 0);
 					GL.glVertex3d(lim[2], lim[3], 0);
 					GL.glVertex3d(lim[0], lim[1], Wall.height);
 					GL.glVertex3d(lim[2], lim[3], Wall.height);
 				}
-			GL.glEnd();
-			} 
+				GL.glEnd();
+			}
 		}
 	}
 
@@ -252,48 +252,18 @@ public class Corner extends Primitive implements Outlineable {
 	}
 
 	public Object[] getChildren() {
-		return new Object[] { new Outlineable() {
-			public Object[] getChildren() {
-				HashSet<String> children = new HashSet<String>();
-				for (Wall wall : startOf) {
-					children.add(wall.toString());
-				}
-				return children.toArray();
-			}
-
-			public String getText() {
-				return "Start Of";
-			}
-
-			public boolean hasChildren() {
-				return startOf.size() > 0;
-			}
-
-		}, new Outlineable() {
-			public Object[] getChildren() {
-				HashSet<String> children = new HashSet<String>();
-				for (Wall wall : endOf) {
-					children.add(wall.getText());
-				}
-				return children.toArray();
-			}
-
-			public String getText() {
-				return "End Of";
-			}
-
-			public boolean hasChildren() {
-				return endOf.size() > 0;
-			}
-
-		}, };
+		return getWalls().values().toArray();
 	}
 
 	public String getText() {
-		return "Corner";
+		return String.format("Corner @%.2f:%.2f", x, y);
 	}
 
 	public boolean hasChildren() {
 		return true;
+	}
+
+	public String getImage() {
+		return "icons/corner.gif";
 	}
 }

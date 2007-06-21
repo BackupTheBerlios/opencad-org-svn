@@ -16,6 +16,7 @@
            targetID="org.opencad.core.editors.GLEditor">
         <action
               class="org.opencad.modelling.walls.AddWallActionDelegate"
+              icon="icons/wall.gif"
               id="org.opencad.core.addWallAction"
               label="New Wall"
               style="push"
@@ -26,6 +27,7 @@
            targetID="org.opencad.core.editors.GLEditor">
         <action
               class="org.opencad.modelling.walls.features.AddFeatureActionDelegate"
+              icon="icons/window.gif"
               id="org.opencad.core.addWindowAction"
               label="New Window"
               style="push"
@@ -36,6 +38,7 @@
            targetID="org.opencad.core.editors.GLEditor">
         <action
               class="org.opencad.modelling.walls.features.AddFeatureActionDelegate"
+              icon="icons/door.gif"
               id="org.opencad.core.addDoorAction"
               label="New Door"
               style="push"

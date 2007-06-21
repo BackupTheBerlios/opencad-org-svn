@@ -1,8 +1,10 @@
 package org.opencad.ui.editor;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.logging.Logger;
 
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITreeContentProvider;
@@ -11,6 +13,7 @@ import org.eclipse.swt.graphics.Image;
 import org.opencad.modelling.Model;
 import org.opencad.modelling.Primitive;
 import org.opencad.modelling.PrimitiveTypeRegister;
+import org.opencad.ui.Activator;
 
 public class GLEditorTreeContentProvider implements ITreeContentProvider,
 		ILabelProvider {
@@ -19,7 +22,7 @@ public class GLEditorTreeContentProvider implements ITreeContentProvider,
 
 	public GLEditorTreeContentProvider() {
 	}
-	
+
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof Class) {
 			HashSet<Primitive> children = new HashSet<Primitive>();
@@ -71,15 +74,25 @@ public class GLEditorTreeContentProvider implements ITreeContentProvider,
 		model = (Model) newInput;
 	}
 
+	HashMap<String, Image> images = new HashMap<String, Image>();
+
 	public Image getImage(Object element) {
+		if (element instanceof ImageProvider) {
+			ImageProvider ip = (ImageProvider) element;
+			if (images.get(ip.getImage()) == null) {
+				ImageDescriptor id = Activator
+						.getImageDescriptor(ip.getImage());
+				images.put(ip.getImage(), id.createImage());
+			}
+			return images.get(ip.getImage());
+		}
 		return null;
 	}
 
 	public String getText(Object element) {
 		if (element instanceof String) {
 			return (String) element;
-		} else
-		if (element instanceof Class) {
+		} else if (element instanceof Class) {
 			return ((Class) element).getSimpleName();
 		} else if (element instanceof Outlineable) {
 			return ((Outlineable) element).getText();

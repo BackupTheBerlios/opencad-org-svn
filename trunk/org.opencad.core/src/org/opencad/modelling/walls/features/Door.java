@@ -8,6 +8,8 @@ import org.opencad.ui.editor.GLEditorState;
 
 public class Door extends WallFeature {
 	private static final long serialVersionUID = 1L;
+	
+	private static final double thickness = Corner.thickness / 4;
 
 	public Door() {
 		setGroundOffset(1d);
@@ -43,6 +45,52 @@ public class Door extends WallFeature {
 				// GL.glVertex3d(getWidth(), 0, 0);
 				// GL.glVertex3d(getWidth(), 0, getGroundOffset());
 				// GL.glVertex3d(0, 0, getGroundOffset());
+				
+				GL.glVertex3d(2 * thickness, Corner.thickness - thickness, 0);
+				GL.glVertex3d(2 * thickness, Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(2 * thickness, Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(2 * thickness, Corner.thickness + thickness, 0);
+				
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness - thickness, 0);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness + thickness, 0);
+
+				GL.glVertex3d(2 * thickness, Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(2 * thickness, Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+
+				
+				GL.glVertex3d(0, Corner.thickness - thickness, 0);
+				GL.glVertex3d(2 * thickness, Corner.thickness - thickness, 0);
+				GL.glVertex3d(2 * thickness, Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(0, Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+
+				GL.glVertex3d(0, Corner.thickness + thickness, 0);
+				GL.glVertex3d(2 * thickness, Corner.thickness + thickness, 0);
+				GL.glVertex3d(2 * thickness, Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(0, Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+				
+				GL.glVertex3d(getWidth(), Corner.thickness - thickness, 0);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness - thickness, 0);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth(), Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+
+				GL.glVertex3d(getWidth(), Corner.thickness + thickness, 0);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness + thickness, 0);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth(), Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+
+				GL.glVertex3d(0, Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth(), Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth(), Corner.thickness - thickness, getMaxGroundOffset());
+				GL.glVertex3d(0, Corner.thickness - thickness, getMaxGroundOffset());
+
+				GL.glVertex3d(0, Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth(), Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth(), Corner.thickness + thickness, getMaxGroundOffset());
+				GL.glVertex3d(0, Corner.thickness + thickness, getMaxGroundOffset());
 
 				GL.glVertex3d(0, 0, getMaxGroundOffset());
 				GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
@@ -51,14 +99,29 @@ public class Door extends WallFeature {
 
 				GL.glVertex3d(getWidth(), 0, 0);
 				GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
-				GL.glVertex3d(getWidth(), 2 * Corner.thickness,
+				GL.glVertex3d(getWidth(), Corner.thickness - thickness,
 						getMaxGroundOffset());
-				GL.glVertex3d(getWidth(), 2 * Corner.thickness, 0);
+				GL.glVertex3d(getWidth(), Corner.thickness - thickness, 0);
 
+				GL.glVertex3d(getWidth(), 2 * Corner.thickness, 0);
+				GL.glVertex3d(getWidth(), 2 * Corner.thickness, getMaxGroundOffset());
+				GL.glVertex3d(getWidth(), Corner.thickness + thickness,
+						getMaxGroundOffset());
+				GL.glVertex3d(getWidth(), Corner.thickness + thickness, 0);
+				
 				GL.glVertex3d(0, 0, 0);
 				GL.glVertex3d(0, 0, getMaxGroundOffset());
-				GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
+				GL.glVertex3d(0, Corner.thickness - thickness,
+						getMaxGroundOffset());
+				GL.glVertex3d(0, Corner.thickness - thickness, 0);
+
 				GL.glVertex3d(0, 2 * Corner.thickness, 0);
+				GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
+				GL.glVertex3d(0, Corner.thickness + thickness,
+						getMaxGroundOffset());
+				GL.glVertex3d(0, Corner.thickness + thickness, 0);
+
+				
 
 				// GL.glVertex3d(getWidth(), 0, getGroundOffset());
 				// GL.glVertex3d(0, 0, getGroundOffset());
@@ -68,6 +131,12 @@ public class Door extends WallFeature {
 
 				GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
 				GL.glVertex3d(0, 0, getMaxGroundOffset());
+				GL.glVertex3d(0, Corner.thickness - thickness, getMaxGroundOffset());
+				GL.glVertex3d(getWidth(), Corner.thickness - thickness,
+						getMaxGroundOffset());
+
+				GL.glVertex3d(getWidth(), Corner.thickness + thickness, getMaxGroundOffset());
+				GL.glVertex3d(0, Corner.thickness + thickness, getMaxGroundOffset());
 				GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
 				GL.glVertex3d(getWidth(), 2 * Corner.thickness,
 						getMaxGroundOffset());
@@ -98,16 +167,72 @@ public class Door extends WallFeature {
 				//
 				// GL.glVertex3d(0, 2 * Corner.thickness, 0);
 				// GL.glVertex3d(getWidth(), 2 * Corner.thickness, 0);
+				
+				GL.glVertex3d(2 * thickness, Corner.thickness - thickness, 0);
+				GL.glVertex3d(2 * thickness, Corner.thickness + thickness, 0);
+				GL.glVertex3d(2 * thickness, Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(2 * thickness, Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+				
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness - thickness, 0);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness + thickness, 0);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
 
+				GL.glVertex3d(0, Corner.thickness - thickness, 0);
+				GL.glVertex3d(2 * thickness, Corner.thickness - thickness, 0);
+				GL.glVertex3d(0, Corner.thickness + thickness, 0);
+				GL.glVertex3d(2 * thickness, Corner.thickness + thickness, 0);
+				GL.glVertex3d(0, Corner.thickness - thickness, 0);
+				GL.glVertex3d(2 * thickness, Corner.thickness - thickness, 0);
+				GL.glVertex3d(0, Corner.thickness + thickness, 0);
+				GL.glVertex3d(2 * thickness, Corner.thickness + thickness, 0);
+
+				GL.glVertex3d(getWidth(), Corner.thickness - thickness, 0);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness - thickness, 0);
+				GL.glVertex3d(getWidth(), Corner.thickness + thickness, 0);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness + thickness, 0);
+				GL.glVertex3d(getWidth(), Corner.thickness - thickness, 0);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness - thickness, 0);
+				GL.glVertex3d(getWidth(), Corner.thickness + thickness, 0);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness + thickness, 0);
+
+				GL.glVertex3d(2 * thickness, Corner.thickness - thickness, 0);
+				GL.glVertex3d(2 * thickness, Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(2 * thickness, Corner.thickness + thickness, 0);
+				GL.glVertex3d(2 * thickness, Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness - thickness, 0);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness + thickness, 0);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+
+				GL.glVertex3d(2 * thickness, Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness - thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(2 * thickness, Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+				GL.glVertex3d(getWidth() - 2 * thickness, Corner.thickness + thickness, getMaxGroundOffset() - 2 * thickness);
+
+				
 				GL.glVertex3d(0, 0, 0);
+				GL.glVertex3d(0, Corner.thickness - thickness, 0);
+				GL.glVertex3d(0, Corner.thickness + thickness, 0);
 				GL.glVertex3d(0, 2 * Corner.thickness, 0);
+				
 				GL.glVertex3d(getWidth(), 0, 0);
+				GL.glVertex3d(getWidth(), Corner.thickness - thickness, 0);
+				GL.glVertex3d(getWidth(), Corner.thickness + thickness, 0);
 				GL.glVertex3d(getWidth(), 2 * Corner.thickness, 0);
 
 				GL.glVertex3d(0, 0, Wall.height);
 				GL.glVertex3d(getWidth(), 0, Wall.height);
+
+				GL.glVertex3d(0, Corner.thickness - thickness, getMaxGroundOffset());
+				GL.glVertex3d(getWidth(), Corner.thickness - thickness, getMaxGroundOffset());
+
+				GL.glVertex3d(0, Corner.thickness + thickness, getMaxGroundOffset());
+				GL.glVertex3d(getWidth(), Corner.thickness + thickness, getMaxGroundOffset());
+				
 				GL.glVertex3d(0, 2 * Corner.thickness, Wall.height);
 				GL.glVertex3d(getWidth(), 2 * Corner.thickness, Wall.height);
+				
 				// GL.glVertex3d(0, 0, getGroundOffset());
 				// GL.glVertex3d(getWidth(), 0, getGroundOffset());
 				// GL.glVertex3d(0, 2 * Corner.thickness, getGroundOffset());
@@ -118,10 +243,26 @@ public class Door extends WallFeature {
 				GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
 				GL.glVertex3d(getWidth(), 2 * Corner.thickness,
 						getMaxGroundOffset());
+
 				GL.glVertex3d(0, 0, 0);
 				GL.glVertex3d(0, 0, getMaxGroundOffset());
+
+				GL.glVertex3d(0, Corner.thickness - thickness, 0);
+				GL.glVertex3d(0, Corner.thickness - thickness, getMaxGroundOffset());
+
+				GL.glVertex3d(0, Corner.thickness + thickness, 0);
+				GL.glVertex3d(0, Corner.thickness + thickness, getMaxGroundOffset());
+
+				GL.glVertex3d(getWidth(), Corner.thickness - thickness, 0);
+				GL.glVertex3d(getWidth(), Corner.thickness - thickness, getMaxGroundOffset());
+
+				GL.glVertex3d(getWidth(), Corner.thickness + thickness, 0);
+				GL.glVertex3d(getWidth(), Corner.thickness + thickness, getMaxGroundOffset());
+
+				
 				GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
 				GL.glVertex3d(0, 2 * Corner.thickness, 0);
+
 				GL.glVertex3d(getWidth(), 0, 0);
 				GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
 				GL.glVertex3d(getWidth(), 2 * Corner.thickness,
@@ -132,9 +273,15 @@ public class Door extends WallFeature {
 				// GL.glVertex3d(getWidth(), 0, getGroundOffset());
 				// GL.glVertex3d(getWidth(), 2 * Corner.thickness,
 				// getGroundOffset());
+				
 				GL.glVertex3d(0, 0, getMaxGroundOffset());
+				GL.glVertex3d(0, Corner.thickness - thickness, getMaxGroundOffset());
+				GL.glVertex3d(0, Corner.thickness + thickness, getMaxGroundOffset());
 				GL.glVertex3d(0, 2 * Corner.thickness, getMaxGroundOffset());
+				
 				GL.glVertex3d(getWidth(), 0, getMaxGroundOffset());
+				GL.glVertex3d(getWidth(), Corner.thickness - thickness, getMaxGroundOffset());
+				GL.glVertex3d(getWidth(), Corner.thickness + thickness, getMaxGroundOffset());
 				GL.glVertex3d(getWidth(), 2 * Corner.thickness,
 						getMaxGroundOffset());
 			}

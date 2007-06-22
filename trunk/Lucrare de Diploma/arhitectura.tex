@@ -135,13 +135,6 @@ ce reprezintă o caracteristică ar fi:
 \begin{itemize}
   \item Fereastră
   \item Uşă
-  \item Deschidere -- orice trecere completă prin volumul unui zid (o intrare 
-  fără uşă, sau deschiderea unei ferestre fără o fereastră montată în ea)
-  \item Cavitate -- orice intrare parţială în volumul unui zid, ca un raft 
-  interior într-un perete fals.
-  \item Ingroşăre -- orice adăugare la volumul unui zid, o îngroşare într-o 
-  anumită zonă, ce poate servi, prin analogie, ca un raft exterior într-un 
-  perete.
 \end{itemize}
   
 \subsubsection{Decoraţiuni}
@@ -156,22 +149,12 @@ a diferitelor spaţii din model.
 \begin{itemize}
   \item Canapea
   \item Masă
-  \item Toaletă
-  \item Chiuvetă de baie
-  \item Vană
-  \item Chiuvetă de bucătărie
-  \item Aragaz
-  \item Frigider
-  \item Masă de bucătărie
 \end{itemize}
 
 Dintre aceste Decoraţiuni, unele dintre ele vor fi implementate ca şi 
 Caracterstici, datorită constrîngerii lor reale de a apărea pe un zid. Dintre 
 cele menţionate mai sus, dăm exemplu chiuveta care întotdeauna apare în 
 vecinătatea unui perete.
-
-În Figura \ref{figure:model-arh} vom sumariza cele prezentate mai sus printr-o 
-diagramă cu toate componentele modelului de lucru.
 
 \subsection{Aspecte ale modelului}
 
@@ -223,14 +206,6 @@ selectare. Fiecare Primitivă selectabilă defineşte o stare proprie în care
 editorul va trece în momentul în care primitiva respectivă este selectată. Dacă
 primitiva nu defineşte o astfel de stare, atunci editorul rămîne în starea de
 navigare.
-
-\begin{figure}[htp]
-\begin{center} 
-\includegraphics[width=\textwidth]{figures/model.pdf} \caption{Arhitectura 
-Modelului de Lucru}
-  \label{figure:model-arh}
-\end{center}
-\end{figure}
 
 \section{Editorul OpenGL}
 \label{section:opengl-editor}

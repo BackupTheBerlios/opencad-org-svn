@@ -20,7 +20,7 @@ public class SelectDecorationState extends GLEditorState {
 			terminate();
 		} else {
 			super.run();
-			new PlaceDecorationState(glEditor, decoration).freshen();
+			new PlaceDecorationState(glEditor, decoration, false).freshen();
 			started = true;
 		}
 	}

@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 
 import org.eclipse.opengl.GL;
+import org.opencad.modelling.Model;
 import org.opencad.modelling.Primitive;
 import org.opencad.modelling.PrimitiveTypeRegister;
 import org.opencad.modelling.corners.Corner;
 import org.opencad.modelling.walls.features.WallFeature;
+import org.opencad.ui.editor.Deletable;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Outlineable;
 import org.opencad.ui.editor.RenderStage;
 
-public class Wall extends Primitive implements Outlineable {
+public class Wall extends Primitive implements Outlineable, Deletable {
 	private static final long serialVersionUID = -8662848078904155699L;
 	static {
 		PrimitiveTypeRegister.registerPrimitiveType(Wall.class);
@@ -136,15 +138,16 @@ public class Wall extends Primitive implements Outlineable {
 			boolean odd = true;
 			double rotation = 180 + Math.atan2(ey - sy, ex - sx) * 180 / Math.PI;
 			int segment = 0;
+			boolean old_feature = true;
 			if (isSelected()) {
-				GL.glColor3d(0d, 0.5d, 0d);
+				GL.glColor3d(0d, 0.5d, 1d);
 			} else if (isHover()) {
 				GL.glColor3d(1d, 0d, 0d);
 			} else {
 				GL.glColor3d(0d, 0d, 0d);
 			}
-			boolean old_feature = true;
 			for (Double dist : segments) {
+
 				segment++;
 				if (dist < 0) {
 					odd = !odd;
@@ -205,11 +208,13 @@ public class Wall extends Primitive implements Outlineable {
 							y2 = py2;
 						}
 						GL.glPushMatrix();
+						GL.glPushAttrib(GL.GL_CURRENT_BIT);
 						{
 							GL.glTranslated(nx, ny, 0);
 							GL.glRotated(rotation, 0d, 0d, 1d);
 							findFeature((segment - 1) / 2).editorRender();
 						}
+						GL.glPopAttrib();
 						GL.glPopMatrix();
 					}
 				}
@@ -243,7 +248,7 @@ public class Wall extends Primitive implements Outlineable {
 	}
 
 	public static final double height = 3.5d;
-	
+
 	public static void getColor(RenderStage stage) {
 		switch (stage) {
 		case FILL:
@@ -493,5 +498,16 @@ public class Wall extends Primitive implements Outlineable {
 
 	public String getImage() {
 		return "icons/wall.gif";
+	}
+
+	public void delete(Model model) {
+		model.removePrimitive(this);
+		for (WallFeature feature : features) {
+			feature.delete(model);
+		}
+		startingCorner.removeStart(this);
+		endingCorner.removeEnd(this);
+		startingCorner.delete(model);
+		endingCorner.delete(model);
 	}
 }

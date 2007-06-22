@@ -1,14 +1,16 @@
 package org.opencad.modelling.walls.features;
 
+import org.opencad.modelling.Model;
 import org.opencad.modelling.Primitive;
 import org.opencad.modelling.corners.Corner;
 import org.opencad.modelling.walls.Wall;
+import org.opencad.ui.editor.Deletable;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Outlineable;
 
 public abstract class WallFeature extends Primitive implements
-		Comparable<WallFeature>, Outlineable {
+		Comparable<WallFeature>, Outlineable, Deletable {
 	private Double startOffset;
 
 	private Double width;
@@ -110,5 +112,12 @@ public abstract class WallFeature extends Primitive implements
 	
 	final public Object[] getChildren() {
 		return null;
+	}
+	
+	public void delete(Model model) {
+		if (wall != null) {
+			wall.removeFeature(this);
+		}
+		model.removePrimitive(this);
 	}
 }

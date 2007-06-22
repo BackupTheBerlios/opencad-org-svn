@@ -1,12 +1,11 @@
-package org.opencad.modelling.decorations;
+package org.opencad.ui.editor;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorActionDelegate;
 import org.eclipse.ui.IEditorPart;
-import org.opencad.ui.editor.GLEditor;
 
-public class AddDecorationActionDelegate implements IEditorActionDelegate {
+public class DeleteActionDelegate implements IEditorActionDelegate {
 
 	private GLEditor editor;
 
@@ -20,14 +19,7 @@ public class AddDecorationActionDelegate implements IEditorActionDelegate {
 	}
 
 	public void run(IAction action) {
-		new PlaceDecorationState(editor, action2feature(action), true).freshen();
-	}
-
-	private Decoration action2feature(IAction action) {
-		if (action.getId().equals("org.opencad.core.addSofaAction")) {
-			return new Sofa();
-		}
-		return null;
+		new DeletePrimitiveState(editor).freshen();
 	}
 
 	public void selectionChanged(IAction action, ISelection selection) {

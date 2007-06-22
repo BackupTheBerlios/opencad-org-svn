@@ -19,6 +19,13 @@ public class Door extends WallFeature {
 
 	public void editorRender() {
 		GL.glTranslated(0d, -Corner.thickness, 0d);
+		if (isSelected()) {
+			GL.glColor3d(0d, 0.5d, 1d);
+		} else if (isHover()) {
+			GL.glColor3d(1d, 0d, 0d);
+		} else {
+			GL.glColor3d(0d, 0d, 0d);
+		}
 		GL.glBegin(GL.GL_LINES);
 		{
 			GL.glVertex2d(0, 0);

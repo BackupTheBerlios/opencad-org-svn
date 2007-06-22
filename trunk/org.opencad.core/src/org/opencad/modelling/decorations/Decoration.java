@@ -1,12 +1,14 @@
 package org.opencad.modelling.decorations;
 
+import org.opencad.modelling.Model;
 import org.opencad.modelling.Primitive;
 import org.opencad.modelling.PrimitiveTypeRegister;
+import org.opencad.ui.editor.Deletable;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Outlineable;
 
-public abstract class Decoration extends Primitive implements Outlineable {
+public abstract class Decoration extends Primitive implements Outlineable, Deletable {
 
 	private double rotation;
 
@@ -58,5 +60,9 @@ public abstract class Decoration extends Primitive implements Outlineable {
 
 	public String getText() {
 		return String.format("%s @%.2f:%.2f", getClass().getSimpleName(), x, y);
+	}
+	
+	public void delete(Model model) {
+		model.removePrimitive(this);
 	}
 }

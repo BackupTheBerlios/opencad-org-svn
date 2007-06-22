@@ -28,6 +28,13 @@ public class Sofa extends Decoration {
 	}
 
 	public void editorRender() {
+		if (isSelected()) {
+			GL.glColor3d(0d, 0.5d, 1d);
+		} else if (isHover()) {
+			GL.glColor3d(1d, 0d, 0d);
+		} else {
+			GL.glColor3d(0d, 0d, 0d);
+		}
 		GL.glTranslated(x, y, 0);
 		GL.glBegin(GL.GL_QUADS);
 		{
@@ -65,8 +72,9 @@ public class Sofa extends Decoration {
 	}
 
 	private void drawLump(double l, double w, double lump) {
-		int ld = (int) (l / 0.1d);
-		int wd = (int) (w / 0.1d);
+		double patchSize = 0.06;
+		int ld = (int) (l / patchSize);
+		int wd = (int) (w / patchSize);
 		double height = 0.1 * lump * l;
 		for (int i = 0; i < ld; i++) {
 			double x = (double) i / ld;

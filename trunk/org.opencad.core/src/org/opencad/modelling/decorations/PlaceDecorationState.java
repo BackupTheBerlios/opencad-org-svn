@@ -6,16 +6,16 @@ import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.graphics.Rectangle;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
-import org.opencad.ui.editor.Hoverable;
 
 public class PlaceDecorationState extends GLEditorState implements MouseListener, MouseMoveListener {
 
 	Decoration decoration;
 
-	public PlaceDecorationState(GLEditor glEditor, Decoration decoration) {
+	public PlaceDecorationState(GLEditor glEditor, Decoration decoration, boolean delay) {
 		super(glEditor);
 		glEditor.getModel().addPrimitive(decoration);
 		this.decoration = decoration;
+		flag = !delay;
 	}
 
 	@Override
@@ -33,24 +33,37 @@ public class PlaceDecorationState extends GLEditorState implements MouseListener
 	}
 
 	public void mouseDown(MouseEvent e) {
+		flag = true;
+	}
+
+	public void mouseUp(MouseEvent e) {
 		glEditor.setDirty(true);
 		terminate();
 	}
 
-	public void mouseUp(MouseEvent e) {
-	}
+	double xoff, yoff;
+
+	boolean started = false;
+
+	boolean flag = false;
 
 	public void mouseMove(MouseEvent e) {
+		if (!flag)
+			return;
 		Rectangle size = glEditor.getCanvasClientArea();
 		double px2gl = glEditor.px2gl(size);
 		double glx = (e.x - (double) size.width / 2) * px2gl + glEditor.getLeftAnchor();
 		double gly = ((double) size.height / 2 - e.y) * px2gl + glEditor.getTopAnchor();
-		glEditor.getModel().informHoverables(glx, gly);
-		Hoverable selection = getGlEditor().getModel().trapHoverable(glx, gly, decoration);
-		if (selection == null) {
-			decoration.setX(glx);
-			decoration.setY(gly);
+		if (!started) {
+			xoff = glx;
+			yoff = gly;
+			started = decoration.isHoverCoordinates(glx, gly);
+			return;
 		}
+		decoration.setX(decoration.getX() + glx - xoff);
+		decoration.setY(decoration.getY() + gly - yoff);
+		xoff = glx;
+		yoff = gly;
 		glEditor.doRefresh();
 	}
 }

@@ -41,6 +41,12 @@
                             label="Add Sofa"
                             style="push"
                             toolbarPath="GLEditor"/>
+                      <action
+                            class="org.opencad.ui.editor.DeleteActionDelegate"
+                            id="org.opencad.core.delete"
+                            label="Delete"
+                            style="push"
+                            toolbarPath="GLEditor"/>
      </editorContribution>
   </extension>
   <extension

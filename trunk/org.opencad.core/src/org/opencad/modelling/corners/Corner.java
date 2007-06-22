@@ -6,15 +6,17 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import org.eclipse.opengl.GL;
+import org.opencad.modelling.Model;
 import org.opencad.modelling.Primitive;
 import org.opencad.modelling.PrimitiveTypeRegister;
 import org.opencad.modelling.walls.Wall;
+import org.opencad.ui.editor.Deletable;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Outlineable;
 import org.opencad.ui.editor.RenderStage;
 
-public class Corner extends Primitive implements Outlineable {
+public class Corner extends Primitive implements Outlineable, Deletable {
 	private static final long serialVersionUID = -1332083715502519329L;
 	static {
 		PrimitiveTypeRegister.registerPrimitiveType(Corner.class);
@@ -169,7 +171,7 @@ public class Corner extends Primitive implements Outlineable {
 		if (isHover()) {
 			GL.glColor3d(1d, 0d, 0d);
 		} else if (isSelected()) {
-			GL.glColor3d(0d, 0.5d, 0d);
+			GL.glColor3d(0d, 0.5d, 1d);
 		} else {
 			GL.glColor3d(0d, 0d, 0d);
 		}
@@ -270,5 +272,11 @@ public class Corner extends Primitive implements Outlineable {
 
 	public String getImage() {
 		return "icons/corner.gif";
+	}
+
+	public void delete(Model model) {
+		if (startOf.size() + endOf.size() == 0) {
+			model.removePrimitive(this);
+		}
 	}
 }

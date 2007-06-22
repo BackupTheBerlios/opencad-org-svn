@@ -1,6 +1,7 @@
 package org.opencad.modelling.decorations;
 
 import org.eclipse.opengl.GL;
+import org.opencad.modelling.walls.Wall;
 import org.opencad.ui.editor.RenderStage;
 
 public class Sofa extends Decoration {
@@ -36,6 +37,7 @@ public class Sofa extends Decoration {
 			GL.glColor3d(0d, 0d, 0d);
 		}
 		GL.glTranslated(x, y, 0);
+		GL.glRotated(getRotation(), 0, 0, 1d);
 		GL.glBegin(GL.GL_QUADS);
 		{
 			GL.glVertex2d(0, 0);
@@ -137,6 +139,7 @@ public class Sofa extends Decoration {
 
 	public void realRender(RenderStage stage) {
 		GL.glTranslated(x, y, 0);
+		GL.glRotated(getRotation(), 0, 0, 1d);
 		if (stage == RenderStage.WIRE) {
 			GL.glColor3d(1d, 0.3d, 0d);
 		} else {
@@ -202,6 +205,9 @@ public class Sofa extends Decoration {
 	}
 
 	public boolean isHoverCoordinates(double x, double y) {
+		double[] rot = correctRotation(x, y);
+		x = rot[0];
+		y = rot[1];
 		return x > this.x && this.x + seatWidth + 2 * armWidth > x && y > this.y && this.y + length > y;
 	}
 }

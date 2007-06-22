@@ -39,6 +39,8 @@ public class Model implements EditorRenderable, RealRenderable, Serializable {
 	}
 
 	public void addPrimitive(Primitive o) {
+		if (primitives.contains(o))
+			return;
 		if (o instanceof Hoverable) {
 			hoverables.add((Hoverable) o);
 		}
@@ -84,9 +86,7 @@ public class Model implements EditorRenderable, RealRenderable, Serializable {
 						break;
 					}
 				}
-				if (!excepted
-						&& (selection == null || selection.getZIndex() < hoverable
-								.getZIndex())) {
+				if (!excepted && (selection == null || selection.getZIndex() < hoverable.getZIndex())) {
 					selection = hoverable;
 				}
 			}

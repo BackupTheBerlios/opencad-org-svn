@@ -1,5 +1,6 @@
 package org.opencad.modelling.decorations;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
@@ -60,10 +61,14 @@ public class PlaceDecorationState extends GLEditorState implements MouseListener
 			started = decoration.isHoverCoordinates(glx, gly);
 			return;
 		}
-		decoration.setX(decoration.getX() + glx - xoff);
-		decoration.setY(decoration.getY() + gly - yoff);
-		xoff = glx;
-		yoff = gly;
+		if ((e.stateMask & SWT.SHIFT) > 0) {
+			decoration.setRotation(Math.atan2(gly - decoration.getY(), glx - decoration.getX()) * 180 / Math.PI);
+		} else {
+			decoration.setX(decoration.getX() + glx - xoff);
+			decoration.setY(decoration.getY() + gly - yoff);
+			xoff = glx;
+			yoff = gly;
+		}
 		glEditor.doRefresh();
 	}
 }

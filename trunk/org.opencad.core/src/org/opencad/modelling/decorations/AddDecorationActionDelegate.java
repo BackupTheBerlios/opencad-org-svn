@@ -26,6 +26,8 @@ public class AddDecorationActionDelegate implements IEditorActionDelegate {
 	private Decoration action2feature(IAction action) {
 		if (action.getId().equals("org.opencad.core.addSofaAction")) {
 			return new Sofa();
+		} else if (action.getId().equals("org.opencad.core.addTableAction")) {
+			return new Table();
 		}
 		return null;
 	}

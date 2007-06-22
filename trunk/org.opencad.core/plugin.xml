@@ -14,6 +14,12 @@
      <editorContribution
            id="org.opencad.core.addContribution"
            targetID="org.opencad.core.editors.GLEditor">
+                                 <action
+                            class="org.opencad.modelling.decorations.AddDecorationActionDelegate"
+                            id="org.opencad.core.addTableAction"
+                            label="Add Table"
+                            style="push"
+                            toolbarPath="GLEditor"/>
         <action
               class="org.opencad.modelling.walls.AddWallActionDelegate"
               icon="icons/wall.gif"

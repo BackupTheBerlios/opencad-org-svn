@@ -7,6 +7,8 @@ import org.eclipse.opengl.GL;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.PaintEvent;
@@ -28,26 +30,25 @@ import org.eclipse.ui.part.ViewPart;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.RenderStage;
 
-public class GLView extends ViewPart implements MouseMoveListener,
-		ISelectionListener, ISelectionChangedListener, IPropertyListener {
+public class GLView extends ViewPart implements MouseMoveListener, ISelectionListener, ISelectionChangedListener, IPropertyListener {
 	GLCanvas glCanvas;
 
-	double xrot, zrot, dist;
+	double xrot, zrot, zpos, xpos, ypos;
 
 	double zoomSpeed;
 
 	GLEditor glEditor;
 
-	private int dist_max;
+	private int zmax;
 
 	private int xrot_min;
 
 	private int xrot_max;
 
-	private double spinSpeed;
+	private double spinSpeed, moveSpeed;
 
 	void modifyDistance(double fraction) {
-		dist *= 1 + fraction;
+		zpos *= 1 + fraction;
 	}
 
 	void doZoom(int count) {
@@ -59,7 +60,7 @@ public class GLView extends ViewPart implements MouseMoveListener,
 	@Override
 	public void createPartControl(Composite parent) {
 		GLData data = new GLData();
-        data.depthSize = 1;
+		data.depthSize = 1;
 		data.doubleBuffer = true;
 		glCanvas = new GLCanvas(parent, SWT.NO_BACKGROUND, data);
 		glCanvas.addPaintListener(new PaintListener() {
@@ -87,14 +88,45 @@ public class GLView extends ViewPart implements MouseMoveListener,
 				registerMoveListener(event, false);
 			}
 		});
+		glCanvas.addKeyListener(new KeyListener() {
+
+			public void keyPressed(KeyEvent e) {
+				double x = 0, y = 0;
+				switch (e.character) {
+				case 'a':
+					x = -1;
+					break;
+				case 'd':
+					x = 1;
+					break;
+				case 'w':
+					y = 1;
+					break;
+				case 's':
+					y = -1;
+					break;
+				}
+				double sin = Math.sin(zrot * Math.PI / 180);
+				double cos = Math.cos(zrot * Math.PI / 180);
+				xpos -= moveSpeed * ( + x * cos + y * sin);
+				ypos -= moveSpeed * ( + y * cos - x * sin);
+				doResize();
+				doDraw();
+			}
+
+			public void keyReleased(KeyEvent e) {
+			}
+		});
 		zoomSpeed = 0.1;
+		moveSpeed = 0.5;
 		spinSpeed = 0.5d;
-		dist_max = 100;
-		dist = 20;
+		zmax = 50;
+		zmin = 1.75;
+		zpos = 1.75;
 		zrot = 0;
 		xrot = 0;
 		xrot_min = 5;
-		xrot_max = 85;
+		xrot_max = 89;
 		doInit();
 	}
 
@@ -103,6 +135,8 @@ public class GLView extends ViewPart implements MouseMoveListener,
 	int dragy;
 
 	private boolean disabled;
+
+	private double zmin;
 
 	void registerMoveListener(Event event, boolean add) {
 		if (add) {
@@ -115,8 +149,7 @@ public class GLView extends ViewPart implements MouseMoveListener,
 	}
 
 	void doInit() {
-		selectionChanged(getSite().getPage().getActivePart(), getSite()
-				.getPage().getSelection());
+		selectionChanged(getSite().getPage().getActivePart(), getSite().getPage().getSelection());
 		synchronized (GL.class) {
 			glCanvas.setCurrent();
 			glInit();
@@ -128,9 +161,9 @@ public class GLView extends ViewPart implements MouseMoveListener,
 		GL.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		GL.glEnable(GL.GL_POLYGON_OFFSET_FILL);
 		GL.glPolygonOffset(0.5f, 0.1f);
-//		GL.glEnable(GL.GL_LINE_SMOOTH);
-//		GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
-//		GL.glEnable(GL.GL_BLEND);
+		// GL.glEnable(GL.GL_LINE_SMOOTH);
+		// GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+		// GL.glEnable(GL.GL_BLEND);
 	}
 
 	void doDraw() {
@@ -168,9 +201,9 @@ public class GLView extends ViewPart implements MouseMoveListener,
 			double glY = size.height * px2gl / 2;
 			GL.glFrustum(-glX, +glX, -glY, glY, 0.1d, range);
 			checkBounds();
-			GL.glTranslated(0, 0, -dist);
 			GL.glRotated(-90d + xrot, 1, 0, 0);
 			GL.glRotated(zrot, 0, 0, 1);
+			GL.glTranslated(xpos, ypos, -zpos);
 			disabled = false;
 		} else {
 			disabled = true;
@@ -295,7 +328,8 @@ public class GLView extends ViewPart implements MouseMoveListener,
 	}
 
 	public void checkBounds() {
-		dist = dist > dist_max ? dist_max : dist;
+		zpos = zpos > zmax ? zmax : zpos;
+		zpos = zpos < zmin ? zmin : zpos;
 		xrot = xrot > xrot_max ? xrot_max : xrot;
 		xrot = xrot < xrot_min ? xrot_min : xrot;
 	}
@@ -325,16 +359,14 @@ public class GLView extends ViewPart implements MouseMoveListener,
 		if (editor instanceof GLEditor) {
 			disabled = false;
 			glEditor = (GLEditor) editor;
-			glEditor.getSite().getSelectionProvider()
-					.addSelectionChangedListener(this);
+			glEditor.getSite().getSelectionProvider().addSelectionChangedListener(this);
 			glEditor.addPropertyListener(this);
 			glCanvas.setVisible(true);
 			doDraw();
 		} else {
 			disabled = true;
 			if (glEditor != null) {
-				glEditor.getSite().getSelectionProvider()
-						.removeSelectionChangedListener(this);
+				glEditor.getSite().getSelectionProvider().removeSelectionChangedListener(this);
 				glEditor.removePropertyListener(this);
 			}
 			glEditor = null;

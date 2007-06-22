@@ -52,6 +52,9 @@ public class Window extends WallFeature {
 		case WIRE:
 			GL.glColor3d(0.5d, 0.5d, 0.5d);
 			break;
+		case ALPHA:
+			GL.glColor4d(0.9d, 1d, 1d, 0.5d);
+			break;
 		}
 	}
 
@@ -320,7 +323,7 @@ public class Window extends WallFeature {
 		}
 			break;
 		case ALPHA: {
-			GL.glColor4d(0.9d, 1d, 1d, 0.5d);
+			getColor(stage);
 			GL.glBegin(GL.GL_QUADS);
 			{
 				GL.glVertex3d(tt, cy, gptt);

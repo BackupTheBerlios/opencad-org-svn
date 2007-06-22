@@ -1,7 +1,6 @@
 package org.opencad.modelling.decorations;
 
 import org.eclipse.opengl.GL;
-import org.opencad.modelling.walls.Wall;
 import org.opencad.ui.editor.RenderStage;
 
 public class Sofa extends Decoration {
@@ -14,9 +13,9 @@ public class Sofa extends Decoration {
 
 	private static final double seatHeight = 0.3d;
 
-	private static final double pillowHeight = 0.2d;
+	private static final double pillowHeight = 0.3d;
 
-	private static final double pillowSide = 0.5d;
+	private static final double pillowSide = 0.7d;
 
 	private static final int lengthInPillows = 4;
 
@@ -140,11 +139,7 @@ public class Sofa extends Decoration {
 	public void realRender(RenderStage stage) {
 		GL.glTranslated(x, y, 0);
 		GL.glRotated(getRotation(), 0, 0, 1d);
-		if (stage == RenderStage.WIRE) {
-			GL.glColor3d(1d, 0.3d, 0d);
-		} else {
-			GL.glColor3d(1d, 0.9d, 0.8d);
-		}
+		Table.getColor(stage);
 		drawArm();
 		GL.glTranslated(armWidth, 0, 0);
 		GL.glBegin(GL.GL_QUADS);

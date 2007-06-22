@@ -12,7 +12,7 @@
   <extension
         point="org.eclipse.ui.editorActions">
      <editorContribution
-           id="org.opencad.core.addWallContribution"
+           id="org.opencad.core.addContribution"
            targetID="org.opencad.core.editors.GLEditor">
         <action
               class="org.opencad.modelling.walls.AddWallActionDelegate"
@@ -21,28 +21,26 @@
               label="New Wall"
               style="push"
               toolbarPath="GLEditor"/>
-     </editorContribution>
-     <editorContribution
-           id="org.opencad.core.addWindowContribution"
-           targetID="org.opencad.core.editors.GLEditor">
-        <action
+                      <action
               class="org.opencad.modelling.walls.features.AddFeatureActionDelegate"
               icon="icons/window.gif"
               id="org.opencad.core.addWindowAction"
               label="New Window"
               style="push"
               toolbarPath="GLEditor"/>
-     </editorContribution>
-     <editorContribution
-           id="org.opencad.core.addDoorContribution"
-           targetID="org.opencad.core.editors.GLEditor">
-        <action
+                      <action
               class="org.opencad.modelling.walls.features.AddFeatureActionDelegate"
               icon="icons/door.gif"
               id="org.opencad.core.addDoorAction"
               label="New Door"
               style="push"
               toolbarPath="GLEditor"/>
+                      <action
+                            class="org.opencad.modelling.decorations.AddDecorationActionDelegate"
+                            id="org.opencad.core.addSofaAction"
+                            label="Add Sofa"
+                            style="push"
+                            toolbarPath="GLEditor"/>
      </editorContribution>
   </extension>
   <extension

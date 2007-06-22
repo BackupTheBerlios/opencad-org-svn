@@ -3,8 +3,6 @@ package org.opencad.modelling.walls.features;
 import org.eclipse.opengl.GL;
 import org.opencad.modelling.corners.Corner;
 import org.opencad.modelling.walls.Wall;
-import org.opencad.ui.editor.GLEditor;
-import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.RenderStage;
 
 public class Door extends WallFeature {
@@ -377,10 +375,6 @@ public class Door extends WallFeature {
 			GL.glEnd();
 		}
 		}
-	}
-
-	public GLEditorState getSelectionState(GLEditor editor) {
-		return new SelectFeatureState(editor, this);
 	}
 
 	public String getImage() {

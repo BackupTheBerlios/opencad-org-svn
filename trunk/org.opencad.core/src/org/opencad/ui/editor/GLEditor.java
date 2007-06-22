@@ -201,7 +201,8 @@ public class GLEditor extends EditorPart implements ISelectionChangedListener {
       drawGrid();
     }
     GL.glPopMatrix();
-    model.editorRender();
+	GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_LINE);
+	model.editorRender();
   }
 
   void glInit() {

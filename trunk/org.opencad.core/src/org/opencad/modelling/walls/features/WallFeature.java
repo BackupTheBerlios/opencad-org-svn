@@ -3,6 +3,8 @@ package org.opencad.modelling.walls.features;
 import org.opencad.modelling.Primitive;
 import org.opencad.modelling.corners.Corner;
 import org.opencad.modelling.walls.Wall;
+import org.opencad.ui.editor.GLEditor;
+import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Outlineable;
 
 public abstract class WallFeature extends Primitive implements
@@ -91,6 +93,10 @@ public abstract class WallFeature extends Primitive implements
 			}
 		}
 		return false;
+	}
+	
+	final public GLEditorState getSelectionState(GLEditor editor) {
+		return new SelectFeatureState(editor, this);
 	}
 
 	final public String getText() {

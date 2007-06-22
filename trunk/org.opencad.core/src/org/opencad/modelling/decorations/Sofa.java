@@ -24,7 +24,7 @@ public class Sofa extends Decoration {
 	private static final double length = pillowSide + pillowHeight;
 
 	public String getImage() {
-		return null;
+		return "icons/startof.gif";
 	}
 
 	public void editorRender() {
@@ -194,7 +194,6 @@ public class Sofa extends Decoration {
 	}
 
 	public boolean isHoverCoordinates(double x, double y) {
-		// TODO Auto-generated method stub
-		return false;
+		return x > this.x && this.x + seatWidth + 2 * armWidth > x && y > this.y && this.y + length > y;
 	}
 }

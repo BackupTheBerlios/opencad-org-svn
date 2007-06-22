@@ -21,7 +21,7 @@ public abstract class Decoration extends Primitive implements Outlineable {
 	}
 
 	public GLEditorState getSelectionState(GLEditor editor) {
-		return null;
+		return new SelectDecorationState(editor, this);
 	}
 
 	public double getRotation() {

@@ -47,10 +47,10 @@ public class PlaceDecorationState extends GLEditorState implements MouseListener
 		double gly = ((double) size.height / 2 - e.y) * px2gl + glEditor.getTopAnchor();
 		glEditor.getModel().informHoverables(glx, gly);
 		Hoverable selection = getGlEditor().getModel().trapHoverable(glx, gly, decoration);
-//		if (selection == null) {
-//		}
-		decoration.setX(glx);
-		decoration.setY(gly);
+		if (selection == null) {
+			decoration.setX(glx);
+			decoration.setY(gly);
+		}
 		glEditor.doRefresh();
 	}
 }

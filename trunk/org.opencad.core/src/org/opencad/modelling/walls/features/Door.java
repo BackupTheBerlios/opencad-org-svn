@@ -323,7 +323,8 @@ public class Door extends WallFeature {
 			GL.glVertex3d(0, 0, wz);
 		}
 		GL.glEnd();
-		GL.glTranslated(getWidth() - 6 * thickness, 2 * thickness, getMaxGroundOffset() / 2 - thickness);
+		GL.glTranslated(getWidth() - 6 * thickness, 2 * thickness,
+				getMaxGroundOffset() / 2 - thickness);
 		double t = thickness;
 		switch (stage) {
 		case FILL: {

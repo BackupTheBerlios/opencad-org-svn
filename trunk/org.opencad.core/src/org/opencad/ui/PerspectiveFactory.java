@@ -9,8 +9,8 @@ public class PerspectiveFactory implements IPerspectiveFactory {
 	public void createInitialLayout(IPageLayout layout) {
 		String editorArea = layout.getEditorArea();
 
-		IFolderLayout left = layout.createFolder("left", IPageLayout.LEFT,
-				0.25f, editorArea);
+		IFolderLayout left = layout.createFolder("left",
+				IPageLayout.LEFT, 0.25f, editorArea);
 
 		left.addView(IPageLayout.ID_RES_NAV);
 		left.addView(IPageLayout.ID_OUTLINE);

@@ -44,8 +44,12 @@ public class DragCornerState extends GLEditorState implements
 			Rectangle size = glEditor.getCanvasClientArea();
 			double px2gl = glEditor.px2gl(size);
 
-			corner.setX(corner.getX() + (double) (e.x - startX) * px2gl);
-			corner.setY(corner.getY() - (double) (e.y - startY) * px2gl);
+			corner
+					.setX(corner.getX() + (double) (e.x - startX)
+							* px2gl);
+			corner
+					.setY(corner.getY() - (double) (e.y - startY)
+							* px2gl);
 			glEditor.doRefresh();
 		}
 		startX = e.x;

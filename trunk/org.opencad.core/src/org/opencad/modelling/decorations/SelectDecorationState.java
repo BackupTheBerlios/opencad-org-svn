@@ -9,7 +9,8 @@ public class SelectDecorationState extends GLEditorState {
 
 	Decoration decoration;
 
-	public SelectDecorationState(GLEditor glEditor, Decoration decoration) {
+	public SelectDecorationState(GLEditor glEditor,
+			Decoration decoration) {
 		super(glEditor);
 		this.decoration = decoration;
 	}
@@ -20,7 +21,8 @@ public class SelectDecorationState extends GLEditorState {
 			terminate();
 		} else {
 			super.run();
-			new PlaceDecorationState(glEditor, decoration, false).freshen();
+			new PlaceDecorationState(glEditor, decoration, false)
+					.freshen();
 			started = true;
 		}
 	}

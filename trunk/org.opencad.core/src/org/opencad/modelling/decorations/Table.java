@@ -185,12 +185,14 @@ public class Table extends Decoration {
 			drawBase();
 			break;
 		case ALPHA:
-			GL.glTranslated(innerSide, innerSide, baseHeight + legHeight);
+			GL.glTranslated(innerSide, innerSide, baseHeight
+					+ legHeight);
 			GL.glBegin(GL.GL_QUADS);
 			{
 				GL.glVertex2d(0, 0);
 				GL.glVertex2d(0, length - 2 * innerSide);
-				GL.glVertex2d(width - 2 * innerSide, length - 2 * innerSide);
+				GL.glVertex2d(width - 2 * innerSide, length - 2
+						* innerSide);
 				GL.glVertex2d(width - 2 * innerSide, 0);
 			}
 			GL.glEnd();
@@ -201,7 +203,8 @@ public class Table extends Decoration {
 		double[] rot = correctRotation(x, y);
 		x = rot[0];
 		y = rot[1];
-		return x > this.x && this.x + width > x && y > this.y && this.y + length > y;
+		return x > this.x && this.x + width > x && y > this.y
+				&& this.y + length > y;
 	}
 
 }

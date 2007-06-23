@@ -26,7 +26,8 @@ public class AddFeatureActionDelegate implements IEditorActionDelegate {
 	private WallFeature action2feature(IAction action) {
 		if (action.getId().equals("org.opencad.core.addDoorAction")) {
 			return new Door();
-		} else if (action.getId().equals("org.opencad.core.addWindowAction")) {
+		} else if (action.getId().equals(
+				"org.opencad.core.addWindowAction")) {
 			return new Window();
 		}
 		return null;

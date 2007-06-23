@@ -50,7 +50,8 @@ public class NavigationState extends GLEditorState implements
 		double gly = ((double) size.height / 2 - e.y) * px2gl
 				+ glEditor.getTopAnchor();
 
-		refresh = refresh || glEditor.getModel().informHoverables(glx, gly);
+		refresh = refresh
+				|| glEditor.getModel().informHoverables(glx, gly);
 
 		if (drag) {
 			glEditor.setLeftAnchor(glEditor.getLeftAnchor()
@@ -117,7 +118,8 @@ public class NavigationState extends GLEditorState implements
 					+ glEditor.getLeftAnchor();
 			double gly = ((double) size.height / 2 - e.y) * px2gl
 					+ glEditor.getTopAnchor();
-			Hoverable hoverable = glEditor.getModel().trapHoverable(glx, gly);
+			Hoverable hoverable = glEditor.getModel().trapHoverable(
+					glx, gly);
 			if (hoverable != null && hoverable instanceof Selectable) {
 				glEditor.setSelection((Selectable) hoverable);
 			} else {

@@ -22,11 +22,10 @@ public class Activator extends AbstractUIPlugin {
 	public Activator() {
 		plugin = this;
 	}
-	
+
 	private static void log(int status, String message, Exception e) {
 		getDefault().getLog().log(
-				new Status(status, PLUGIN_ID, Status.OK,
-						message, e));
+				new Status(status, PLUGIN_ID, Status.OK, message, e));
 	}
 
 	public static void info(String message, Exception... e) {

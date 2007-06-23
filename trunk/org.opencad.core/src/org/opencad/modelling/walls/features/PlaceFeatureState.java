@@ -9,7 +9,8 @@ import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Hoverable;
 
-public class PlaceFeatureState extends GLEditorState implements MouseListener, MouseMoveListener {
+public class PlaceFeatureState extends GLEditorState implements
+		MouseListener, MouseMoveListener {
 
 	WallFeature feature;
 
@@ -51,11 +52,14 @@ public class PlaceFeatureState extends GLEditorState implements MouseListener, M
 	public void mouseMove(MouseEvent e) {
 		Rectangle size = glEditor.getCanvasClientArea();
 		double px2gl = glEditor.px2gl(size);
-		double glx = (e.x - (double) size.width / 2) * px2gl + glEditor.getLeftAnchor();
-		double gly = ((double) size.height / 2 - e.y) * px2gl + glEditor.getTopAnchor();
+		double glx = (e.x - (double) size.width / 2) * px2gl
+				+ glEditor.getLeftAnchor();
+		double gly = ((double) size.height / 2 - e.y) * px2gl
+				+ glEditor.getTopAnchor();
 		boolean reset = false;
 		glEditor.getModel().informHoverables(glx, gly);
-		Hoverable selection = getGlEditor().getModel().trapHoverable(glx, gly, feature);
+		Hoverable selection = getGlEditor().getModel().trapHoverable(
+				glx, gly, feature);
 		if (selection == null) {
 			selection = wall;
 		}

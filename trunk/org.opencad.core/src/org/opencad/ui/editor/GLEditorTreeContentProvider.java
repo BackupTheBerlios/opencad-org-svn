@@ -15,8 +15,8 @@ import org.opencad.modelling.Primitive;
 import org.opencad.modelling.PrimitiveTypeRegister;
 import org.opencad.ui.Activator;
 
-public class GLEditorTreeContentProvider implements ITreeContentProvider,
-		ILabelProvider {
+public class GLEditorTreeContentProvider implements
+		ITreeContentProvider, ILabelProvider {
 
 	Model model;
 
@@ -70,7 +70,8 @@ public class GLEditorTreeContentProvider implements ITreeContentProvider,
 	HashSet<ILabelProviderListener> listeners = new HashSet<ILabelProviderListener>(
 			1);
 
-	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+	public void inputChanged(Viewer viewer, Object oldInput,
+			Object newInput) {
 		model = (Model) newInput;
 	}
 
@@ -80,8 +81,8 @@ public class GLEditorTreeContentProvider implements ITreeContentProvider,
 		if (element instanceof ImageProvider) {
 			ImageProvider ip = (ImageProvider) element;
 			if (images.get(ip.getImage()) == null) {
-				ImageDescriptor id = Activator
-						.getImageDescriptor(ip.getImage());
+				ImageDescriptor id = Activator.getImageDescriptor(ip
+						.getImage());
 				images.put(ip.getImage(), id.createImage());
 			}
 			return images.get(ip.getImage());

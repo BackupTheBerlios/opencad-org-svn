@@ -19,7 +19,8 @@ public class Sofa extends Decoration {
 
 	private static final int lengthInPillows = 4;
 
-	private static final double seatWidth = lengthInPillows * pillowSide;
+	private static final double seatWidth = lengthInPillows
+			* pillowSide;
 
 	private static final double length = pillowSide + pillowHeight;
 
@@ -184,7 +185,8 @@ public class Sofa extends Decoration {
 						if (i == 0) {
 							GL.glVertex3d(pillowSide, 0, 0);
 							GL.glVertex3d(pillowSide, 0, pillowHeight);
-							GL.glVertex3d(pillowSide, pillowSide, pillowHeight);
+							GL.glVertex3d(pillowSide, pillowSide,
+									pillowHeight);
 							GL.glVertex3d(pillowSide, pillowSide, 0);
 						}
 					}
@@ -203,6 +205,7 @@ public class Sofa extends Decoration {
 		double[] rot = correctRotation(x, y);
 		x = rot[0];
 		y = rot[1];
-		return x > this.x && this.x + seatWidth + 2 * armWidth > x && y > this.y && this.y + length > y;
+		return x > this.x && this.x + seatWidth + 2 * armWidth > x
+				&& y > this.y && this.y + length > y;
 	}
 }

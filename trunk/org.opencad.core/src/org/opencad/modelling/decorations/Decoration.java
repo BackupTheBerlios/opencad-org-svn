@@ -8,7 +8,8 @@ import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Outlineable;
 
-public abstract class Decoration extends Primitive implements Outlineable, Deletable {
+public abstract class Decoration extends Primitive implements
+		Outlineable, Deletable {
 
 	private double rotation;
 
@@ -59,7 +60,8 @@ public abstract class Decoration extends Primitive implements Outlineable, Delet
 	}
 
 	public String getText() {
-		return String.format("%s @%.2f:%.2f", getClass().getSimpleName(), x, y);
+		return String.format("%s @%.2f:%.2f", getClass()
+				.getSimpleName(), x, y);
 	}
 
 	public void delete(Model model) {
@@ -69,7 +71,8 @@ public abstract class Decoration extends Primitive implements Outlineable, Delet
 	public double[] correctRotation(double x, double y) {
 		double dx = x - this.x;
 		double dy = y - this.y;
-		double angle = Math.atan2(y - this.y, x - this.x) - this.getRotation() / 180 * Math.PI;
+		double angle = Math.atan2(y - this.y, x - this.x)
+				- this.getRotation() / 180 * Math.PI;
 		double modulus = Math.sqrt(dx * dx + dy * dy);
 		x = modulus * Math.cos(angle) + this.x;
 		y = modulus * Math.sin(angle) + this.y;

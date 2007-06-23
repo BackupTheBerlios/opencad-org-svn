@@ -106,7 +106,8 @@ public class NewFileWizardPage extends WizardPage {
 					container = (IContainer) obj;
 				else
 					container = ((IResource) obj).getParent();
-				containerText.setText(container.getFullPath().toString());
+				containerText.setText(container.getFullPath()
+						.toString());
 			}
 		}
 		fileText.setText("untitled.ocm");
@@ -119,8 +120,8 @@ public class NewFileWizardPage extends WizardPage {
 
 	private void handleBrowse() {
 		ContainerSelectionDialog dialog = new ContainerSelectionDialog(
-				getShell(), ResourcesPlugin.getWorkspace().getRoot(), false,
-				"Select new file container");
+				getShell(), ResourcesPlugin.getWorkspace().getRoot(),
+				false, "Select new file container");
 		if (dialog.open() == ContainerSelectionDialog.OK) {
 			Object[] result = dialog.getResult();
 			if (result.length == 1) {

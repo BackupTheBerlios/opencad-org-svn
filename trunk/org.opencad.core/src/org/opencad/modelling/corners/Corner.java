@@ -74,7 +74,8 @@ public class Corner extends Primitive implements Outlineable, Deletable {
 	}
 
 	public boolean isHoverCoordinates(double x, double y) {
-		return Math.abs(this.x - x) < hoverSlack && Math.abs(this.y - y) < hoverSlack;
+		return Math.abs(this.x - x) < hoverSlack
+				&& Math.abs(this.y - y) < hoverSlack;
 	}
 
 	public GLEditorState getSelectionState(GLEditor editor) {
@@ -87,14 +88,16 @@ public class Corner extends Primitive implements Outlineable, Deletable {
 
 	public Double angleStartOf(Wall wall) {
 		if (wall.getEndingCorner() != null) {
-			return posAngle(Math.atan2(wall.getEndingCorner().getY() - y, wall.getEndingCorner().getX() - x));
+			return posAngle(Math.atan2(wall.getEndingCorner().getY()
+					- y, wall.getEndingCorner().getX() - x));
 		}
 		return 0d;
 	}
 
 	public Double angleEndOf(Wall wall) {
 		if (wall.getStartingCorner() != null) {
-			return posAngle(Math.atan2(wall.getStartingCorner().getY() - y, wall.getStartingCorner().getX() - x));
+			return posAngle(Math.atan2(wall.getStartingCorner().getY()
+					- y, wall.getStartingCorner().getX() - x));
 		}
 		return 0d;
 	}
@@ -181,14 +184,22 @@ public class Corner extends Primitive implements Outlineable, Deletable {
 				GL.glLineStipple(1, (short) 0xAAAA);
 				GL.glBegin(GL.GL_LINES);
 				{
-					GL.glVertex2d(x - selectionRadius, y - selectionRadius);
-					GL.glVertex2d(x - selectionRadius, y + selectionRadius);
-					GL.glVertex2d(x + selectionRadius, y - selectionRadius);
-					GL.glVertex2d(x + selectionRadius, y + selectionRadius);
-					GL.glVertex2d(x - selectionRadius, y - selectionRadius);
-					GL.glVertex2d(x + selectionRadius, y - selectionRadius);
-					GL.glVertex2d(x - selectionRadius, y + selectionRadius);
-					GL.glVertex2d(x + selectionRadius, y + selectionRadius);
+					GL.glVertex2d(x - selectionRadius, y
+							- selectionRadius);
+					GL.glVertex2d(x - selectionRadius, y
+							+ selectionRadius);
+					GL.glVertex2d(x + selectionRadius, y
+							- selectionRadius);
+					GL.glVertex2d(x + selectionRadius, y
+							+ selectionRadius);
+					GL.glVertex2d(x - selectionRadius, y
+							- selectionRadius);
+					GL.glVertex2d(x + selectionRadius, y
+							- selectionRadius);
+					GL.glVertex2d(x - selectionRadius, y
+							+ selectionRadius);
+					GL.glVertex2d(x + selectionRadius, y
+							+ selectionRadius);
 				}
 				GL.glEnd();
 			}
@@ -216,7 +227,8 @@ public class Corner extends Primitive implements Outlineable, Deletable {
 
 	public void realRender(RenderStage stage) {
 		Wall.getColor(stage);
-		if (stage == RenderStage.ALPHA) return;
+		if (stage == RenderStage.ALPHA)
+			return;
 		TreeMap<Double, Wall> walls = getWalls();
 		if (walls.size() == 1) {
 			Wall wall = walls.get(walls.firstKey());

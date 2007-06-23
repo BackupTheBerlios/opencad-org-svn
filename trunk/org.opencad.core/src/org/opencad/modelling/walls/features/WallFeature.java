@@ -77,7 +77,7 @@ public abstract class WallFeature extends Primitive implements
 	public int compareTo(WallFeature o) {
 		return startOffset.compareTo(o.startOffset);
 	}
-	
+
 	final public int getZIndex() {
 		return -50;
 	}
@@ -96,7 +96,7 @@ public abstract class WallFeature extends Primitive implements
 		}
 		return false;
 	}
-	
+
 	final public GLEditorState getSelectionState(GLEditor editor) {
 		return new SelectFeatureState(editor, this);
 	}
@@ -105,15 +105,15 @@ public abstract class WallFeature extends Primitive implements
 		return String.format("%s @%.2f", getClass().getSimpleName(),
 				getStartOffset());
 	}
-	
+
 	final public boolean hasChildren() {
 		return false;
 	}
-	
+
 	final public Object[] getChildren() {
 		return null;
 	}
-	
+
 	public void delete(Model model) {
 		if (wall != null) {
 			wall.removeFeature(this);

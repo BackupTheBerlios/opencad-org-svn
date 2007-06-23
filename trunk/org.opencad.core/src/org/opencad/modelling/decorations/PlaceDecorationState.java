@@ -8,11 +8,13 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 
-public class PlaceDecorationState extends GLEditorState implements MouseListener, MouseMoveListener {
+public class PlaceDecorationState extends GLEditorState implements
+		MouseListener, MouseMoveListener {
 
 	Decoration decoration;
 
-	public PlaceDecorationState(GLEditor glEditor, Decoration decoration, boolean delay) {
+	public PlaceDecorationState(GLEditor glEditor,
+			Decoration decoration, boolean delay) {
 		super(glEditor);
 		glEditor.getModel().addPrimitive(decoration);
 		this.decoration = decoration;
@@ -53,8 +55,10 @@ public class PlaceDecorationState extends GLEditorState implements MouseListener
 			return;
 		Rectangle size = glEditor.getCanvasClientArea();
 		double px2gl = glEditor.px2gl(size);
-		double glx = (e.x - (double) size.width / 2) * px2gl + glEditor.getLeftAnchor();
-		double gly = ((double) size.height / 2 - e.y) * px2gl + glEditor.getTopAnchor();
+		double glx = (e.x - (double) size.width / 2) * px2gl
+				+ glEditor.getLeftAnchor();
+		double gly = ((double) size.height / 2 - e.y) * px2gl
+				+ glEditor.getTopAnchor();
 		if (!started) {
 			xoff = glx;
 			yoff = gly;
@@ -62,7 +66,9 @@ public class PlaceDecorationState extends GLEditorState implements MouseListener
 			return;
 		}
 		if ((e.stateMask & SWT.SHIFT) > 0) {
-			decoration.setRotation(Math.atan2(gly - decoration.getY(), glx - decoration.getX()) * 180 / Math.PI);
+			decoration.setRotation(Math.atan2(gly - decoration.getY(),
+					glx - decoration.getX())
+					* 180 / Math.PI);
 		} else {
 			decoration.setX(decoration.getX() + glx - xoff);
 			decoration.setY(decoration.getY() + gly - yoff);

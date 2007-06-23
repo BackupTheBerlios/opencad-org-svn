@@ -29,10 +29,14 @@ public class Wall extends Primitive implements Outlineable, Deletable {
 
 	public boolean addFeature(WallFeature feature) {
 		for (WallFeature aFeature : features) {
-			if (aFeature.getStartOffset() <= feature.getStartOffset() && !(aFeature.getMaxStartOffset() <= feature.getStartOffset())) {
+			if (aFeature.getStartOffset() <= feature.getStartOffset()
+					&& !(aFeature.getMaxStartOffset() <= feature
+							.getStartOffset())) {
 				return false;
 			}
-			if (aFeature.getStartOffset() >= feature.getStartOffset() && !(aFeature.getStartOffset() >= feature.getMaxStartOffset())) {
+			if (aFeature.getStartOffset() >= feature.getStartOffset()
+					&& !(aFeature.getStartOffset() >= feature
+							.getMaxStartOffset())) {
 				return false;
 			}
 		}
@@ -78,7 +82,8 @@ public class Wall extends Primitive implements Outlineable, Deletable {
 	}
 
 	public String toString() {
-		return String.format("(wall %s %s)", startingCorner, endingCorner);
+		return String.format("(wall %s %s)", startingCorner,
+				endingCorner);
 	}
 
 	public static double sqr(double a) {
@@ -86,7 +91,8 @@ public class Wall extends Primitive implements Outlineable, Deletable {
 	}
 
 	int slight_slope(double[] a, double[] b, int ax, int bx) {
-		return (int) (Math.signum(a[ax + 1] - b[bx + 1]) + 3 * Math.signum(a[ax] - b[bx]));
+		return (int) (Math.signum(a[ax + 1] - b[bx + 1]) + 3 * Math
+				.signum(a[ax] - b[bx]));
 	}
 
 	ArrayList<Double> getSegments() {
@@ -100,9 +106,14 @@ public class Wall extends Primitive implements Outlineable, Deletable {
 
 	public void editorRender() {
 		if (getStartingCorner() != null && getEndingCorner() != null) {
-			double[] start_points = getStartingCorner().getStartLimitsOf(this);
-			double[] end_points = getEndingCorner().getEndLimitsOf(this);
-			double[] these_points = new double[] { getStartingCorner().getX(), getStartingCorner().getY(), getEndingCorner().getX(), getEndingCorner().getY() };
+			double[] start_points = getStartingCorner()
+					.getStartLimitsOf(this);
+			double[] end_points = getEndingCorner()
+					.getEndLimitsOf(this);
+			double[] these_points = new double[] {
+					getStartingCorner().getX(),
+					getStartingCorner().getY(),
+					getEndingCorner().getX(), getEndingCorner().getY() };
 			int angle = slight_slope(these_points, these_points, 0, 2);
 			int angle_1 = slight_slope(start_points, end_points, 0, 2);
 			int angle_2 = slight_slope(start_points, end_points, 2, 0);
@@ -136,7 +147,8 @@ public class Wall extends Primitive implements Outlineable, Deletable {
 			double x2 = sx2;
 			double y2 = sy2;
 			boolean odd = true;
-			double rotation = 180 + Math.atan2(ey - sy, ex - sx) * 180 / Math.PI;
+			double rotation = 180 + Math.atan2(ey - sy, ex - sx) * 180
+					/ Math.PI;
 			int segment = 0;
 			boolean old_feature = true;
 			if (isSelected()) {
@@ -160,13 +172,18 @@ public class Wall extends Primitive implements Outlineable, Deletable {
 				double fi = 1 - f;
 				double nx = sx * fi + ex * f;
 				double ny = sy * fi + ey * f;
-				double u1 = ((nx - sx1) * dx1 + (ny - sy1) * dy1) / sqlen1;
-				double u2 = ((nx - sx2) * dx2 + (ny - sy2) * dy2) / sqlen2;
+				double u1 = ((nx - sx1) * dx1 + (ny - sy1) * dy1)
+						/ sqlen1;
+				double u2 = ((nx - sx2) * dx2 + (ny - sy2) * dy2)
+						/ sqlen2;
 				double px1 = sx1 + u1 * dx1;
 				double py1 = sy1 + u1 * dy1;
 				double px2 = sx2 + u2 * dx2;
 				double py2 = sy2 + u2 * dy2;
-				boolean feature_enabled = (sx1 < px1 && px1 < ex1 || sx1 > px1 && px1 > ex1) && (sx2 < px2 && px2 < ex2 || sx2 > px2 && px2 > ex2);
+				boolean feature_enabled = (sx1 < px1 && px1 < ex1 || sx1 > px1
+						&& px1 > ex1)
+						&& (sx2 < px2 && px2 < ex2 || sx2 > px2
+								&& px2 > ex2);
 				if (!feature_enabled) {
 					old_feature = false;
 					odd = !odd;
@@ -212,7 +229,8 @@ public class Wall extends Primitive implements Outlineable, Deletable {
 						{
 							GL.glTranslated(nx, ny, 0);
 							GL.glRotated(rotation, 0d, 0d, 1d);
-							findFeature((segment - 1) / 2).editorRender();
+							findFeature((segment - 1) / 2)
+									.editorRender();
 						}
 						GL.glPopAttrib();
 						GL.glPopMatrix();
@@ -262,9 +280,14 @@ public class Wall extends Primitive implements Outlineable, Deletable {
 
 	public void realRender(RenderStage stage) {
 		if (getStartingCorner() != null && getEndingCorner() != null) {
-			double[] start_points = getStartingCorner().getStartLimitsOf(this);
-			double[] end_points = getEndingCorner().getEndLimitsOf(this);
-			double[] these_points = new double[] { getStartingCorner().getX(), getStartingCorner().getY(), getEndingCorner().getX(), getEndingCorner().getY() };
+			double[] start_points = getStartingCorner()
+					.getStartLimitsOf(this);
+			double[] end_points = getEndingCorner()
+					.getEndLimitsOf(this);
+			double[] these_points = new double[] {
+					getStartingCorner().getX(),
+					getStartingCorner().getY(),
+					getEndingCorner().getX(), getEndingCorner().getY() };
 			int angle = slight_slope(these_points, these_points, 0, 2);
 			int angle_1 = slight_slope(start_points, end_points, 0, 2);
 			int angle_2 = slight_slope(start_points, end_points, 2, 0);
@@ -296,7 +319,8 @@ public class Wall extends Primitive implements Outlineable, Deletable {
 			double y2 = sy2;
 			boolean odd = true;
 			boolean old_feature = true;
-			double rotation = 180 + Math.atan2(ey - sy, ex - sx) * 180 / Math.PI;
+			double rotation = 180 + Math.atan2(ey - sy, ex - sx) * 180
+					/ Math.PI;
 			int segment = 0;
 			getColor(stage);
 			for (Double dist : segments) {
@@ -312,13 +336,18 @@ public class Wall extends Primitive implements Outlineable, Deletable {
 				double fi = 1 - f;
 				double nx = sx * fi + ex * f;
 				double ny = sy * fi + ey * f;
-				double u1 = ((nx - sx1) * dx1 + (ny - sy1) * dy1) / sqlen1;
-				double u2 = ((nx - sx2) * dx2 + (ny - sy2) * dy2) / sqlen2;
+				double u1 = ((nx - sx1) * dx1 + (ny - sy1) * dy1)
+						/ sqlen1;
+				double u2 = ((nx - sx2) * dx2 + (ny - sy2) * dy2)
+						/ sqlen2;
 				double px1 = sx1 + u1 * dx1;
 				double py1 = sy1 + u1 * dy1;
 				double px2 = sx2 + u2 * dx2;
 				double py2 = sy2 + u2 * dy2;
-				boolean feature_enabled = (sx1 < px1 && px1 < ex1 || sx1 > px1 && px1 > ex1) && (sx2 < px2 && px2 < ex2 || sx2 > px2 && px2 > ex2);
+				boolean feature_enabled = (sx1 < px1 && px1 < ex1 || sx1 > px1
+						&& px1 > ex1)
+						&& (sx2 < px2 && px2 < ex2 || sx2 > px2
+								&& px2 > ex2);
 				if (!feature_enabled) {
 					old_feature = false;
 					odd = !odd;
@@ -375,7 +404,8 @@ public class Wall extends Primitive implements Outlineable, Deletable {
 						{
 							GL.glTranslated(nx, ny, 0);
 							GL.glRotated(rotation, 0d, 0d, 1d);
-							findFeature((segment - 1) / 2).realRender(stage);
+							findFeature((segment - 1) / 2).realRender(
+									stage);
 						}
 						GL.glPopMatrix();
 						GL.glPopAttrib();
@@ -452,12 +482,15 @@ public class Wall extends Primitive implements Outlineable, Deletable {
 		double dy = line[3] - line[1];
 		double sqlen = sqr(dx) + sqr(dy);
 		double u = ((x - line[0]) * dx + (y - line[1]) * dy) / sqlen;
-		double[] ret = new double[] { line[0] + u * dx, line[1] + u * dy, u };
+		double[] ret = new double[] { line[0] + u * dx,
+				line[1] + u * dy, u };
 		return ret;
 	}
 
 	public double[] getProjectionOf(double x, double y) {
-		double[] intersection = getIntersectionOf(x, y, getStartingCorner().getX(), getStartingCorner().getY(), getEndingCorner().getX(), getEndingCorner().getY());
+		double[] intersection = getIntersectionOf(x, y,
+				getStartingCorner().getX(), getStartingCorner().getY(),
+				getEndingCorner().getX(), getEndingCorner().getY());
 		if (intersection[2] > 0 && intersection[2] < 1) {
 			return intersection;
 		}
@@ -481,7 +514,10 @@ public class Wall extends Primitive implements Outlineable, Deletable {
 	}
 
 	public double getLength() {
-		return Math.sqrt(sqr(getEndingCorner().getX() - getStartingCorner().getX()) + sqr(getEndingCorner().getY() - getStartingCorner().getY()));
+		return Math.sqrt(sqr(getEndingCorner().getX()
+				- getStartingCorner().getX())
+				+ sqr(getEndingCorner().getY()
+						- getStartingCorner().getY()));
 	}
 
 	public Object[] getChildren() {

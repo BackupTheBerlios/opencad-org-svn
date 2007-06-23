@@ -30,7 +30,9 @@ import org.eclipse.ui.part.ViewPart;
 import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.RenderStage;
 
-public class GLView extends ViewPart implements MouseMoveListener, ISelectionListener, ISelectionChangedListener, IPropertyListener {
+public class GLView extends ViewPart implements MouseMoveListener,
+		ISelectionListener, ISelectionChangedListener,
+		IPropertyListener {
 	GLCanvas glCanvas;
 
 	double xrot, zrot, zpos, xpos, ypos;
@@ -108,8 +110,8 @@ public class GLView extends ViewPart implements MouseMoveListener, ISelectionLis
 				}
 				double sin = Math.sin(zrot * Math.PI / 180);
 				double cos = Math.cos(zrot * Math.PI / 180);
-				xpos -= moveSpeed * ( + x * cos + y * sin);
-				ypos -= moveSpeed * ( + y * cos - x * sin);
+				xpos -= moveSpeed * (+x * cos + y * sin);
+				ypos -= moveSpeed * (+y * cos - x * sin);
 				doResize();
 				doDraw();
 			}
@@ -149,7 +151,8 @@ public class GLView extends ViewPart implements MouseMoveListener, ISelectionLis
 	}
 
 	void doInit() {
-		selectionChanged(getSite().getPage().getActivePart(), getSite().getPage().getSelection());
+		selectionChanged(getSite().getPage().getActivePart(), getSite()
+				.getPage().getSelection());
 		synchronized (GL.class) {
 			glCanvas.setCurrent();
 			glInit();
@@ -315,7 +318,8 @@ public class GLView extends ViewPart implements MouseMoveListener, ISelectionLis
 			glEditor.getModel().realRender(RenderStage.FILL);
 			GL.glEnable(GL.GL_BLEND);
 			{
-				GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+				GL.glBlendFunc(GL.GL_SRC_ALPHA,
+						GL.GL_ONE_MINUS_SRC_ALPHA);
 				glEditor.getModel().realRender(RenderStage.ALPHA);
 			}
 			GL.glDisable(GL.GL_BLEND);
@@ -354,19 +358,22 @@ public class GLView extends ViewPart implements MouseMoveListener, ISelectionLis
 		page.addSelectionListener(this);
 	}
 
-	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+	public void selectionChanged(IWorkbenchPart part,
+			ISelection selection) {
 		IEditorPart editor = getSite().getPage().getActiveEditor();
 		if (editor instanceof GLEditor) {
 			disabled = false;
 			glEditor = (GLEditor) editor;
-			glEditor.getSite().getSelectionProvider().addSelectionChangedListener(this);
+			glEditor.getSite().getSelectionProvider()
+					.addSelectionChangedListener(this);
 			glEditor.addPropertyListener(this);
 			glCanvas.setVisible(true);
 			doDraw();
 		} else {
 			disabled = true;
 			if (glEditor != null) {
-				glEditor.getSite().getSelectionProvider().removeSelectionChangedListener(this);
+				glEditor.getSite().getSelectionProvider()
+						.removeSelectionChangedListener(this);
 				glEditor.removePropertyListener(this);
 			}
 			glEditor = null;

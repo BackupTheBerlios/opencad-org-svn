@@ -10,8 +10,8 @@ import org.opencad.ui.editor.GLEditor;
 import org.opencad.ui.editor.GLEditorState;
 import org.opencad.ui.editor.Hoverable;
 
-public class PickupCornerState extends GLEditorState implements MouseListener,
-		MouseMoveListener {
+public class PickupCornerState extends GLEditorState implements
+		MouseListener, MouseMoveListener {
 
 	public enum CornerType implements CornerSetter {
 		STARTING {
@@ -51,8 +51,8 @@ public class PickupCornerState extends GLEditorState implements MouseListener,
 		return corner;
 	}
 
-	public PickupCornerState(GLEditor glEditor, Wall wall, IAction action,
-			CornerType cornerType) {
+	public PickupCornerState(GLEditor glEditor, Wall wall,
+			IAction action, CornerType cornerType) {
 		super(glEditor);
 		this.wall = wall;
 		this.action = action;
@@ -71,8 +71,8 @@ public class PickupCornerState extends GLEditorState implements MouseListener,
 				+ glEditor.getTopAnchor();
 		glEditor.getModel().informHoverables(glx, gly);
 		if (e.button == 1) {
-			Hoverable hoverable = glEditor.getModel().trapHoverable(glx, gly,
-					babyCorner, wall);
+			Hoverable hoverable = glEditor.getModel().trapHoverable(
+					glx, gly, babyCorner, wall);
 			if (hoverable == null) {
 				hoverable = babyCorner;
 			}

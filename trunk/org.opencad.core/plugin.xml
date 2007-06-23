@@ -15,11 +15,12 @@
            id="org.opencad.core.addContribution"
            targetID="org.opencad.core.editors.GLEditor">
                                  <action
-                            class="org.opencad.modelling.decorations.AddDecorationActionDelegate"
-                            id="org.opencad.core.addTableAction"
-                            label="Add Table"
-                            style="push"
-                            toolbarPath="GLEditor"/>
+                                       class="org.opencad.modelling.decorations.AddDecorationActionDelegate"
+                                       icon="icons/table.gif"
+                                       id="org.opencad.core.addTableAction"
+                                       label="Add Table"
+                                       style="push"
+                                       toolbarPath="GLEditor"/>
         <action
               class="org.opencad.modelling.walls.AddWallActionDelegate"
               icon="icons/wall.gif"
@@ -43,12 +44,14 @@
               toolbarPath="GLEditor"/>
                       <action
                             class="org.opencad.modelling.decorations.AddDecorationActionDelegate"
+                            icon="icons/sofa.gif"
                             id="org.opencad.core.addSofaAction"
                             label="Add Sofa"
                             style="push"
                             toolbarPath="GLEditor"/>
                       <action
                             class="org.opencad.ui.editor.DeleteActionDelegate"
+                            icon="icons/delete.gif"
                             id="org.opencad.core.delete"
                             label="Delete"
                             style="push"

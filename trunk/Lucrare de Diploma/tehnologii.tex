@@ -5,11 +5,11 @@
 \label{section:rcp}
 
 Proiectul Eclipse îşi are începuturile alături de compania IBM de care s-a 
-separat în 2003; astăzi este printre cele mai cunoscute proiecte opensource, 
+separat în 2003; astăzi este printre cele mai cunoscute proiecte open-source, 
 fiind recunoscut ca un foarte popular mediu de dezvoltare de aplicaţii Java şi 
 nu numai.
 
-Binecunoscutul mediu de dezvoltare Eclipse este dezvoltat pe baza Eclipse Rich 
+Bine cunoscutul mediu de dezvoltare Eclipse este dezvoltat pe baza Eclipse Rich 
 Client Platform. Aceasta reprezintă suita minimă de plugin-uri necesare pentru 
 dezvoltarea unei aplicaţii "rich client" \footnote{eng. \textit{client bogat} 
 -- O aplicaţie desktop care beneficiază de un set de elemente de interfaţă 
@@ -29,7 +29,7 @@ Structura de bază a acestei platforme poate fi rezumată după cum am prezentat
 extensii. Construită peste framework-ul OSGi\\
 \hline SWT & Proiectat să ofere acces eficient şi portabil la facilităţile de 
 interfaţă utilizator ale sistemului de operare pe care este implementat\\
-\hline JFace & Un framework de interfaţă utilizator, construit pest SWT, pentru 
+\hline JFace & Un framework de interfaţă utilizator, construit peste SWT, pentru 
 tratarea multor sarcini de programare de interfeţe\\
 \hline Workbench & Construit peste toate componentele anterioare, aduce un 
 mediu de lucru ultra scalabil, cu interfaţă publică ce suportă mai multe 
@@ -91,8 +91,8 @@ La început, proiectul s-a concentrat mai mult pe interfeţe de servicii dar s-a
 dovedit că aplicabilitatea este mult mai largă. Specificaţiile OSGi sunt 
 folosite astăzi în aplicaţii pornind de la telefoane mobile pînă la Eclipse 
 IDE. Alte aplicaţii includ automobile, automatizare industrială, automatizare 
-în construcţii, PDA-uri, super-calculatoare, divertisment, administrarea 
-flotelor şi servre de aplicaţii.
+în construcţii, PDA-uri, supercalculatoare, divertisment, administrarea 
+flotelor şi servere de aplicaţii.
 
 Specificaţia OSGi este creată de membri într-un proces deschis şi publicate 
 fără taxe sub o licenţă specifică. Alianţa OSGi are un program de înscrieri 
@@ -105,7 +105,7 @@ Equinox este o implementare a specificaţiilor în versiunea
 R4, care conţine, printre altele\cite{osgiwiki}:
 
 \begin{itemize}
-  \item Noi capacităţi de modularizare puternince ce oferă încapsulare avansată 
+  \item Noi capacităţi de modularizare puternice ce oferă încapsulare avansată 
   a serviciilor reţea care pot împărţi o singură maşină virtuală\footnote{O 
   maşină virtuală Java reprezintă o aplicaţie ce funcţionează ca un container 
   pentru toate aplicaţiile Java, oferind toate facilităţile unei maşini de 
@@ -134,8 +134,8 @@ Shell-ul şi Controlul. Un shell este abstracţia conceptului de fereastră şi
 reprezintă în general un container pentru controale. Controalele sunt 
 elementele interfeţei utilizator. Butoanele, etichetele, arborii şi tabelele 
 sunt toate controale şi utilizatorii sunt obişnuite cu ele din alte programe 
-ale desktopului. \cite{swt} În principiu orice widget poate fi simplu sau 
-compus (i.e. descendent al clasei Composite) şi întreaga lor ierharhie este 
+ale desktop-ului. \cite{swt} În principiu orice widget poate fi simplu sau 
+compus (i.e. descendent al clasei Composite) şi întreaga lor ierarhie este 
 controlată de relaţiile dintre clasele SWT.
 
 Interacţiunile dintre controale şi utilizator cît şi controlul tranziţiei 
@@ -155,13 +155,13 @@ poziţionate pe ecran. Unele layout-uri asociază anumite date fiecărui control
 pentru a reţine poziţia în care va fi desenat. Poziţionarea manuală a tuturor 
 controalelor este o problemă complexă şi dacă acel algoritm nu este scris 
 eficient, el poate afecta performaneţele întregii aplicaţii. De aceea, SWT 
-oferă nişte seturi predefinite de layout-uri ce serversc cele mai comune cazuri 
+oferă nişte seturi predefinite de layout-uri ce servesc cele mai comune cazuri 
 întîlnite de programatori.
 
 \subsection{JFace}
 JFace este un toolkit pentru interfeţe utilizator ce conţine clase pentru 
 tratarea multora din sarcinile uzuale de programarea interfeţelor utilizator. 
-JFace este independent de sistemul de ferestre atît in interfaţa sa pentru 
+JFace este independent de sistemul de ferestre atît în interfaţa sa pentru 
 programatori cît şi în implementare, şi este proiectat să funcţioneze cu SWT 
 fără a-i ascunde funcţionalitatea.
 
@@ -186,13 +186,13 @@ sistem.
 \begin{table}[htp]
 \caption{Structura JFace \cite{jface-art} \label{table:jfacestruct}}
 \begin{tabular}{|\col{0.13}|\col{0.28}|\col{0.53}|}
-\hline Ferestre & org.eclipse.jface.window & Facilităţi de creerea şi 
+\hline Ferestre & org.eclipse.jface.window & Facilităţi de crearea şi 
 administrarea ferestrelor. Interesantă este clasa ApplicationWindow, care aduce 
 un nou nivel de abstracţie peste conceptul de fereastră şi înglobează o buclă 
 program SWT.\\
 \hline Vizualizări & org.eclipse.jface.viewers & Vizualizări ca şi TreeViewer 
-sau TableViewer, care sunt componente ghidate de model ce folosesc widgeturi 
-SWT şi adaptează conţinutul modelului la conţinutul widgetului.\\
+sau TableViewer, care sunt componente ghidate de model ce folosesc widget-uri 
+SWT şi adaptează conţinutul modelului la conţinutul widget-ului.\\
 \hline Dialog-uri & org.eclipse.jface.dialogs & Diverse dialog-uri des 
 folosite.\\
 \hline Acţiuni & org.eclipse.jface.actions & Un framework de acţiuni IU similar 
@@ -263,7 +263,7 @@ intrare ca fişier text, nici măcar ca intrarea să fie orice fel de fişier.
 \section{OpenGL şi extensia OpenGL pentru SWT}
 
 OpenGL\footnote{abrev. \textit{Open Graphics Library}} este o specificaţie de 
-standard independent de limbaj ce definieşte un API pentru scrierea de 
+standard independent de limbaj ce defineşte un API pentru scrierea de 
 aplicaţii ce produc grafice tridimensionale sau bidimensionale pe calculator. 
 Interfaţa este compusă din peste 250 de apeluri de funcţii ce pot fi folosite 
 pentru a desena scene tridimensionale complexe din primitive simple. OpenGL a 
@@ -276,7 +276,7 @@ pe calculator, ş.a. \cite{oglwiki}
 Java reprezintă una dintre cele mai puternice platforme de dezvoltare de 
 aplicaţii cunoscute în ziua de azi. Dezvoltată iniţial pentru a separa sarcina 
 de dezvoltare de aplicaţii de platforma pe care va rula, astăzi limbajul Java 
-este folosit în numeroase aplicaţii software, începînd de la clienţi destop 
+este folosit în numeroase aplicaţii software, începînd de la clienţi desktop 
 pînă la jocuri pentru telefoane mobile şi aplicaţii web. Un astfel de sistem nu 
 putea să rămînă fără o implementare a OpenGL. În prezent, există două extensii 
 OpenGL pentru Java, JOGL şi LWJGL.
@@ -317,7 +317,7 @@ librării sunt în continuă dezvoltare.
 
 La momentul determinării acestei alegeri, după o testare a tuturor 
 tehnologiilor disponibile, am ajuns la concluzia că funcţionalitatea oferită de 
-varianta Eclipse a legăturii cu OpenGL este atît suficientă ca şi capaciţăţi 
+varianta Eclipse a legăturii cu OpenGL este atît suficientă ca şi capacităţi 
 necesitate de acest proiect cît şi destul de stabilă pentru a oferi o calitate 
 înaltă de producţie.
 
@@ -350,7 +350,7 @@ permite programarea facilă a intefeţelor grafice cu GTK\footnote{abrev.
 similară există pentru PHP, numită PHP-GTK\footnote{\url{http://gtk.php.net/}}.
 
 Din punctul de vedere al graficii tridimensionale, extensii similare există 
-pentru ambele limbaje, oferind funcţionalitate similară cu extensia prezenză în 
+pentru ambele limbaje, oferind funcţionalitate similară cu extensia prezentă în 
 limbajul Java.
 
 La nivel de dezvoltarea de aplicaţii desktop complexe, pentru Python există 
@@ -358,7 +358,7 @@ framework-ul DABO\footnote{\url{http://dabodev.com/} Un framework orientat pe o
 funcţionalitate client similară aplicaţiei Visual FoxPro} bazat pe 
 wxPython\footnote{\url{http://www.wxpython.org/} un framework similar cu 
 wxWidgets (despre care vom discuta ulterior), ce oferă portabilitate pentru 
-codul intefeţei grafice între diverse sisteme de operare}. Apropierea acestor 
+codul interfeţei grafice între diverse sisteme de operare}. Apropierea acestor 
 sisteme de cerinţele noastre nu a fost evidentă, cît şi popularitatea relativă 
 a acestor proiecte a făcut considerarea lor doar trecătoare.
 
@@ -369,7 +369,7 @@ aplicaţii software nu puteau să treacă neobservate autorului. Există o suit�
 impresionantă de aplicaţii desktop dezvoltate exclusiv doar pe baza acestor 
 două limbaje de operare.
 
-Ca şi set de widgeturi interesante pentru noi, menţionăm librăriile GTK, 
+Ca şi set de widget-uri interesante pentru noi, menţionăm librăriile GTK, 
 QT\footnote{\url{http://en.wikipedia.org/wiki/Qt_(toolkit)}} şi bineînţeles 
 .NET Framework\footnote{\url{http://msdn.microsoft.com/netframework/}}.
 
@@ -378,14 +378,14 @@ agreată de autor pentru capacităţile limitate de scalare (sau viteza redusă 
 scalare şi efortul depus pentru scalare), lipsa unei integrări independente de 
 platformă la un nivel superior şi cu o structură coerentă, orientată obiect.
 
-Aceste considerente au cîntărit greu împotriva bibiliotecii GTK, cea mai 
+Aceste considerente au cîntărit greu împotriva bibliotecii GTK, cea mai 
 populară arhitectură open-source de dezvoltare de aplicaţii grafice în C, ce 
 stă la baza sistemului desktop GNOME\footnote{\url{http://www.gnome.org/}, un 
-sistem destkop complet, întîlnit în majoritatea distribuţiilor Linux cît şi a 
+sistem desktop complet, întîlnit în majoritatea distribuţiilor Linux cît şi a 
 majorităţii altor platforme UNIX}.
 
-În contrabalans a stat librăria gtkmm\footnote{\url{http://www.gtkmm.org/}}, o 
-extensie a lui gtk pentru C++. Pînă în ziua de astăzi, o despărţire clară de 
+În contra balans a stat librăria gtkmm\footnote{\url{http://www.gtkmm.org/}}, o 
+extensie a lui GTK pentru C++. Pînă în ziua de astăzi, o despărţire clară de 
 această tehnologie din partea autorului nu există. Unicele considerente 
 împotriva acestei alegeri rămîn dependinţa de limbajul C++ şi lipsa unei 
 portabilităţi între sisteme de operare de o stabilitate apreciabilă.
@@ -418,7 +418,7 @@ la evoluţia sistemelor software moderne.
 
 Cu o structură de clase avansată, .net Framework este printre puţinele soluţii 
 software atît de impresionante care nu au reuşit să-şi găsească un răspuns 
-rezonabil în lumea opensource.
+rezonabil în lumea open-source.
 
 Deşi reprezintă ţelul unui întreg proiect, 
 mono\footnote{\url{http://www.mono-project.com}}, la data la care am făcut 
@@ -438,7 +438,7 @@ dezvolta proiectul de faţă.
 Cu o istorie legendară de realizări, Java reprezintă poate cel mai dezvoltat 
 sistem software existent, cu biblioteci dezvoltate de un număr impresionant de 
 programatori din întreaga lume, cu o serie de tehnologii pentru toate 
-aplicaţiile software cunscute.
+aplicaţiile software cunoscute.
 
 Mai mult, deschiderea perspectivelor software către alte platforme decît cele 
 tradiţionale (i.e. Mac, PC), cu dezvoltarea din ce în ce mai mare a 
@@ -456,7 +456,7 @@ aplicaţiei.
 A urmat SWING, care reprezintă răspunsul dezvoltatorilor Java la problemele 
 utilizatorilor cu platforma AWT. Rămînînd complet în spectrul Java, codul 
 bibliotecii SWING nu interacţionează direct cu sistemul de operare pe care 
-rulează aplicaţia ci alege să-şi deseneze întreaga interfaţă folosind libăria 
+rulează aplicaţia ci alege să-şi deseneze întreaga interfaţă folosind librăria 
 Java 2D\footnote{\url{http://java.sun.com/products/java-media/2D/}}. Pierzînd 
 contactul cu interfaţa nativă, SWING a avut dintotdeauna problema performanţei. 
 Evoluţia tehnologiei a adus progrese semnificative în acest sens. SWING aducea 
@@ -473,7 +473,7 @@ Eclipse a început proiectul SWT pentru dezvoltarea aplicaţiei Eclipse.
 Proiectul dorea să ofere tot ce AWT nu a reuşit să ofere. Printre 
 caractersticile principale ale SWT este că foloseşte un număr mai mare de 
 widget-uri comune decît AWT şi că pentru platformele UNIX foloseşte biblioteca 
-gtk de widget-uri, faţă de biblioteca 
+GTK de widget-uri, faţă de biblioteca 
 motif\footnote{\url{http://www.opengroup.org/motif/}} folosită de AWT, o 
 tehnologie care astăzi a fost lăsată în urmă pentru dezvoltarea de interfeţe 
 grafice în sisteme UNIX/Linux.
@@ -531,7 +531,7 @@ Vom încerca să prezentăm mai jos fiecare din tehnologiile amintite, şi vom
 \subsubsection{AWT}
 
 \begin{quotation}
-AWT este toolkitul original Java. Avantajele principale ale lui AWT vin din
+AWT este toolkit-ul original Java. Avantajele principale ale lui AWT vin din
 faptul că este distribuit alături de orice versiune a tehnologiei Java,
 incluzînd implementări Java pentru browsere web\footnote{n.a. De asemenea,
 pentru tehnologii embeded, telefoane mobile, PDA, etc.}, şi este foarte stabil.
@@ -544,7 +544,7 @@ AWT din partea dezvoltatorilor Java}.
 AWT este un toolkit foarte simplu avînd un set limitat de componente,
 administratori de layout\footnote{Layout Manager -- Un algoritm de aşezare a
 componentelor într-un container. Conceptul este folosit în toate toolkiturile
-Java.} şi evenimente. Aceasta se datoreazaă faptului că Sun Microsystems a decis
+Java.} şi evenimente. Aceasta se datorează faptului că Sun Microsystems a decis
 să folosească principiul celui mai mic divizor comun\footnote{n.a. Alegerea
 componentelor disponibile s-a făcut pe baza componentelor comune existente în
 toate platformele pentru care Java este disponibilă} pentru AWT. Doar
@@ -570,10 +570,10 @@ aplicaţiilor, dat fiind setul redus de componente, este oarecum plictisitor şi
 monoton, nereuşind să impresioneze prin valenţe comerciale.
 
 În \cite{awtswing} vedem cum SWT se aproprie mult mai mult de nevoile
-dezvoltatorilor de astăzi decît AWT, deşi acessta din urmă rămîne soluţia ce
+dezvoltatorilor de astăzi decît AWT, deşi acesta din urmă rămîne soluţia ce
 respectă cel mai bine principiile platformei Java. Tot în \cite{awtswing} vedem
-cum designul SWT porneşte de la premizele AWT şi construişte un sistem care
-încearcă să evite tocmai nejunsurile primului toolkit grafic ce a existat pentru
+cum designul SWT porneşte de la premizele AWT şi construieşte un sistem care
+încearcă să evite tocmai neajunsurile primului toolkit grafic ce a existat pentru
 Java.
 
 \subsubsection{SWING}
@@ -593,7 +593,7 @@ Pentru a învinge variaţiile de comportament dinte diferite sisteme, Swing a
 minimizat dependinţa de controalele native. De fapt, Swing foloseşte controale 
 native doar pentru componentele de nivel înalt, cum ar fi ferestre sau cadre. 
 Cele mai multe componente sunt emulate în cod Java pur. Aceasta înseamnă că 
-Swing este intrisec portabil pe toate sistemele. Implicit, Swing nu arată ca o 
+Swing este intrinsec portabil pe toate sistemele. Implicit, Swing nu arată ca o 
 aplicaţie nativă, ci chiar are mai multe înfăţişări, dintre care unele emulează 
 -- deşi nu chiar exact -- diverse sisteme şi unele oferă un aspect 
 unic\footnote{n.a. Aceste aspecte sunt personalizabile de programator şi de 
@@ -601,7 +601,7 @@ către utilizator, aşa cum se menţionează şi \cite{swtawtswing} la un alt
 paragraf}.
 
 Swing nu poate beneficia de accelerarea hardware a interfeţei grafice şi diverse
-operaţii de intefaţă grafică ale sistemului de operare\footnote{n.a. Cum ar
+operaţii de interfaţă grafică ale sistemului de operare\footnote{n.a. Cum ar
 drag and drop}. Rezultatul este că aplicaţiile Swing pot fi mai încete ca o
 aplicaţie nativă. Sun a lucrat mult asupra performanţei Swing în ultimele
 versiuni (Java 1.4 şi 1.5), şi acest dezavantaj devine mai puţin observabil.
@@ -644,7 +644,7 @@ versiuni mai primitive ale anumitor controale şi atunci SWT vine cu versiuni
 îmbunătăţite şi uneori emulate, oferindu-le un comportament mai apropiat de
 cultura utilizatorilor.
 
-SWT este difeit de AWT în modul în care funcţionează corespondenţi. În SWT,
+SWT este diferit de AWT în modul în care funcţionează corespondenţi. În SWT,
 corespondenţii sunt doar o faţadă pentru controalele native. în AWT,
 corespondenţii pot oferi servicii pentru minimizarea diferenţelor dintre sisteme
 (aici AWT a avut probleme de comportament). Aceasta înseamnă că aplicaţiile SWT

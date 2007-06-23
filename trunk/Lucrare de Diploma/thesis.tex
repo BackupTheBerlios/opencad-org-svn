@@ -4,11 +4,17 @@
 \usepackage{url}
 \usepackage[bookmarks, bookmarksopen=true, bookmarksnumbered=true]{hyperref}
 \usepackage[pdftex]{graphicx}
-\usepackage[bottom=3.5cm,top=4cm,left=4.5cm,right=3cm]{geometry}
-\linespread{1.5}
+\usepackage[bottom=3.1cm,top=3.4cm,left=2.6cm,right=2.6cm]{geometry}
+\usepackage{listings}
+\usepackage{color}
+\definecolor{comment}{rgb}{0.5,0.5,0.5}
+\definecolor{keyword}{rgb}{0.5,0.1,0.0}
+\definecolor{identifier}{rgb}{0.05,0.1,0.5}
+
+\linespread{1.4}
 \addtolength{\parskip}{0.5\baselineskip}
 
-\renewcommand{\title}{OpenCad.org}
+\renewcommand{\title}{PROIECT DE DIPLOMĂ}
 \newcommand{\subtitle}{Proiectarea unei aplicaţii CAD pentru arhitectură}
 \renewcommand{\author}{Silviu-Georgian Aprozeanu}
 \newcommand{\teacher}{prof. dr. ing. Florica Moldoveanu}
@@ -28,22 +34,28 @@
 
 \begin{document}
 	\begin{titlepage}
-\null \vfill
+\begin{center} 
+UNIVERSITATEA ``POLITEHNICA'' DIN BUCUREŞTI
+
+FACULTATEA DE AUTOMATICĂ ŞI CALCULATOARE
+\end{center}
+\vfill
 	\begin{center} 
 {\Huge \title{}}
 	
 {\Large \subtitle{}}
 	\end{center}
 \vfill
-	\begin{flushright}
-		\begin{tabular}{ll}
-Absolvent & \author{} \\
-Profesor îndrumător & \teacher{}
+	\begin{center}
+		\begin{tabular}{l@{\hspace{5mm}}r}
+Coordonator Ştiinţific & Absolvent \\
+\teacher{} & \author{} \\
 		\end{tabular}
-	\end{flushright}
+	\end{center}
 \vskip 2cm
 	\begin{center}
-\small Bucureşti, \today
+\small
+Iunie 2007
 \end{center}
 \end{titlepage}
 \pagenumbering{Roman}
@@ -73,14 +85,32 @@ Profesor îndrumător & \teacher{}
 
 \cleardoublepage
 
-\pagenumbering{Alph}
-\pagestyle{plain}
-
 \listoftables
 
 \listoffigures
 
 \bibliographystyle{acm}
 \bibliography{thesis}
+
+\cleardoublepage
+\pagestyle{plain}
+\input{sursa.tex}
+
+\cleardoublepage
+\pagestyle{empty}
+\null
+\vfill
+\begin{flushright}
+\small
+\begin{tabular}{|lr|}
+\hline
+Autor & Silviu-Georgian Aprozeanu. Toate drepturile rezervate \\
+Titlu & Proiectarea unei aplicaţii CAD pentru arhitectură \\
+Tipărit la & \today \\
+Web & \url{http://opencad.org} \\
+Email & \url{mailto:contact@opencad.org} \\
+\hline
+\end{tabular}
+\end{flushright}
 
 \end{document}

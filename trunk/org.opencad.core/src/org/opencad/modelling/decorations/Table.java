@@ -1,7 +1,6 @@
 package org.opencad.modelling.decorations;
 
 import org.eclipse.opengl.GL;
-import org.opencad.modelling.walls.features.Window;
 import org.opencad.ui.editor.RenderStage;
 
 public class Table extends Decoration {
@@ -19,7 +18,7 @@ public class Table extends Decoration {
 	private static final double legHeight = 0.5d;
 
 	public String getImage() {
-		return "images/startof.gif";
+		return "icons/table.gif";
 	}
 
 	public void editorRender() {

@@ -1,15 +1,19 @@
 package org.opencad.ui.editor;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Rectangle;
-import org.opencad.modelling.Primitive;
-import org.opencad.modelling.walls.features.WallFeature;
 
 public class DeletePrimitiveState extends GLEditorState implements MouseListener {
+	
+	Cursor cursor;
 
 	public DeletePrimitiveState(GLEditor glEditor) {
 		super(glEditor);
+		cursor = new Cursor(glEditor.glCanvas.getDisplay(), SWT.CURSOR_CROSS);
+		glEditor.glCanvas.setCursor(cursor);
 	}
 
 	public void mouseDoubleClick(MouseEvent e) {
@@ -37,6 +41,8 @@ public class DeletePrimitiveState extends GLEditorState implements MouseListener
 	}
 
 	public void mouseUp(MouseEvent e) {
+		glEditor.glCanvas.setCursor(null);
+		cursor.dispose();
 		terminate();
 	}
 }

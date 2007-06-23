@@ -24,7 +24,7 @@ public class Sofa extends Decoration {
 	private static final double length = pillowSide + pillowHeight;
 
 	public String getImage() {
-		return "icons/startof.gif";
+		return "icons/sofa.gif";
 	}
 
 	public void editorRender() {

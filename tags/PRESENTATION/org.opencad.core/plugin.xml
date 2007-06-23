@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+  <extension point="org.eclipse.ui.editors">
+     <editor
+           class="org.opencad.ui.editor.GLEditor"
+           extensions="ocm"
+           icon="icons/overview_obj.gif"
+           id="org.opencad.core.editors.GLEditor"
+           name="OpenGL Editor"/>
+  </extension>
+  <extension
+        point="org.eclipse.ui.editorActions">
+     <editorContribution
+           id="org.opencad.core.addContribution"
+           targetID="org.opencad.core.editors.GLEditor">
+                                 <action
+                                       class="org.opencad.modelling.decorations.AddDecorationActionDelegate"
+                                       icon="icons/table.gif"
+                                       id="org.opencad.core.addTableAction"
+                                       label="Add Table"
+                                       style="push"
+                                       toolbarPath="GLEditor"/>
+        <action
+              class="org.opencad.modelling.walls.AddWallActionDelegate"
+              icon="icons/wall.gif"
+              id="org.opencad.core.addWallAction"
+              label="New Wall"
+              style="push"
+              toolbarPath="GLEditor"/>
+                      <action
+              class="org.opencad.modelling.walls.features.AddFeatureActionDelegate"
+              icon="icons/window.gif"
+              id="org.opencad.core.addWindowAction"
+              label="New Window"
+              style="push"
+              toolbarPath="GLEditor"/>
+                      <action
+              class="org.opencad.modelling.walls.features.AddFeatureActionDelegate"
+              icon="icons/door.gif"
+              id="org.opencad.core.addDoorAction"
+              label="New Door"
+              style="push"
+              toolbarPath="GLEditor"/>
+                      <action
+                            class="org.opencad.modelling.decorations.AddDecorationActionDelegate"
+                            icon="icons/sofa.gif"
+                            id="org.opencad.core.addSofaAction"
+                            label="Add Sofa"
+                            style="push"
+                            toolbarPath="GLEditor"/>
+                      <action
+                            class="org.opencad.ui.editor.DeleteActionDelegate"
+                            icon="icons/delete.gif"
+                            id="org.opencad.core.delete"
+                            label="Delete"
+                            style="push"
+                            toolbarPath="GLEditor"/>
+     </editorContribution>
+  </extension>
+  <extension
+        id="product"
+        point="org.eclipse.core.runtime.products">
+     <product
+           application="org.eclipse.ui.ide.workbench"
+           name="OpenCad.org">
+        <property
+              name="aboutText"
+              value="OpenCad.org&#x0A;Build, not draw&#x0A;&#x0A;Copyright © 2007 Silviu-Georgian Aprozeanu"/>
+        <property
+              name="startupProgressRect"
+              value="0,10,420,10"/>
+        <property
+              name="windowImages"
+              value="icons/oc.gif,icons/application32.gif,icons/application48.gif,icons/application64.gif,icons/application128.gif"/>
+        <property
+              name="aboutImage"
+              value="icons/application250.gif"/>
+     </product>
+  </extension>
+  <extension
+        point="org.eclipse.ui.views">
+     <view
+           allowMultiple="false"
+           category="org.opencad.core.viewCategory"
+           class="org.opencad.ui.view.GLView"
+           id="org.opencad.core.glView"
+           name="3D View"/>
+     <category
+           id="org.opencad.core.viewCategory"
+           name="OpenCad.org"/>
+  </extension>
+  <extension
+        point="org.eclipse.ui.newWizards">
+     <category
+           id="org.opencad.core.category"
+           name="OpenCad.org"/>
+     <wizard
+           canFinishEarly="true"
+           category="org.opencad.core.category"
+           class="org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard"
+           finalPerspective="org.opencad.core.perspective"
+           hasPages="true"
+           icon="icons/new_project.gif"
+           id="org.opencad.core.projectWizard"
+           name="OpenCad.org Project"
+           preferredPerspectives="org.opencad.core.perspective"
+           project="true"/>
+     <wizard
+           category="org.opencad.core.category"
+           class="org.opencad.ui.NewFileWizard"
+           finalPerspective="org.opencad.core.perspective"
+           icon="icons/new_con.gif"
+           id="org.opencad.ui.NewFileWizard"
+           name="New OpenCad.org Model"
+           preferredPerspectives="org.opencad.core.perspective"/>
+  </extension>
+  <extension
+        point="org.eclipse.ui.perspectives">
+     <perspective
+           class="org.opencad.ui.PerspectiveFactory"
+           icon="icons/oc.gif"
+           id="org.opencad.core.perspective"
+           name="Modelling"/>
+  </extension>
+</plugin>
